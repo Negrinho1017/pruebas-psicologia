@@ -16,6 +16,10 @@ export class RetencionDigitosComponent implements OnInit {
   digitosRDI: EnsayoRespuestaModel[] = [new EnsayoRespuestaModel("3 - 1","1 - 3"),
   new EnsayoRespuestaModel("2 - 4","4 - 2"),new EnsayoRespuestaModel("4 - 6","6 - 4"),
   new EnsayoRespuestaModel("5 - 7","7 - 5")];
+  digitosRDS: EnsayoRespuestaModel[] = [new EnsayoRespuestaModel("1 - 2","1 - 2"),
+  new EnsayoRespuestaModel("4 - 2","2 - 4"), new EnsayoRespuestaModel("3 - 1 - 6","1 - 3 - 6"),
+  new EnsayoRespuestaModel("0 - 9 - 4","0 - 4 - 9"), new EnsayoRespuestaModel("8 - 7 - 9 - 2",
+  "2 - 7 - 8 - 9"), new EnsayoRespuestaModel("4 - 8 - 7 - 1","1 - 4 - 7 - 8")];
   numero: number;
 
   public pasarDeNumeroDeReactivo(i: number){

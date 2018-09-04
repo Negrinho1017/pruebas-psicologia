@@ -110,19 +110,17 @@
           <th>1</th>
           <th>Puntuación del reactivo</th>
         </tr>
-        <tr>
-          <td>16-90</td>
-          <td>1</td>
-          <td>
-            2-3-1<br> 5-2-2
-          </td>
-          <td>
-            1-2-3<br> 2-2-5
-          </td>
-          <td><input type="radio" id="p1" name="pointsA"><br>
-            <input type="radio" id="p1" name="pointsB"></td>
-          <td><input type="radio" id="p2" name="pointsA"><br>
-            <input type="radio" id="p1" name="pointsB"></td>
+        <tr *ngFor="let item of digitosRDS; let i = index">
+          <td><p *ngIf="i==0">16-90</p></td>
+          <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
+            <td>
+              {{item.ensayo}}
+            </td>
+            <td>
+             {{item.respuesta}}
+            </td>
+          <td><input type="radio" id="p1" name="{{item.ensayo}}">
+          <td><input type="radio" id="p2" name="{{item.ensayo}}">
           <td></td>
         </tr>
       </table>
