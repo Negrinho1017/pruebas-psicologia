@@ -1,0 +1,52 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+*/bin/*
+backend/src/main/resources/static*
+backend/logs/*
+
+#GIT IGNORE ANGULAR
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+*node_modules*
+*jacoco*
+*.vscode*
+/.metadata/
+/bin/
+frontend/coverage
+*.log
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.fdx
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.frq
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.fnm
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.prx
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.tis
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.fdt
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.nrm
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments.gen
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_7.tii
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_8
+.sonarlint/modules/backend/issues/index.pb
+

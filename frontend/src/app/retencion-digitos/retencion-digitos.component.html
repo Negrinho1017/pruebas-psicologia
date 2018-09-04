@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b>Inicio:</b> <br> Edades de 16 a 90 años: <br>
+        <b>Orden directo:</b> reactivo 1. <br>
+        <b>Orden inverso:</b> reactivo muestra, <br> después del reactivo 1<br>
+        <b>Secuencia:</b> reactivo muestra, <br> después del reactivo 1
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b>Discontinuación:</b> <br>
+        <b>Orden directo:</b> después de obtener 0<br> en dos ensayos de un reactivo<br>
+        <b>Orden inverso:</b> después de obtener 0<br> en dos ensayos de un reactivo<br>
+        <b>Secuencia:</b> después de obtener 0<br> en dos ensayos de un reactivo
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b>Puntuación:</b> <br> Otorgue 0 o 1 punto para cada ensayo<br>
+        <b>RDD, RDI, RDS</b><br> Puntuación natural total para orden directo, orden inverso<br> y secuencia, respectivamente<br>
+        <b>MRDD, MRDI, MRDS</b><br> Número de digitos recordado en el último ensayo con puntuación 1<br> en orden directo,
+        orden inverso y secuencia, respectivamente
+      </p>
+    </td>
+  </table>
+  <br>
+  <div class="tab">
+    <label class="radio-inline">
+      <input type="radio" (click)="this.selectedRetencionDeDigitos=1" name="tipoRetencionDeDigitos">RDD
+    </label>
+    <label class="radio-inline">
+      <input type="radio" (click)="this.selectedRetencionDeDigitos=2" name="tipoRetencionDeDigitos">RDI
+    </label>
+    <label class="radio-inline">
+      <input type="radio" (click)="this.selectedRetencionDeDigitos=3" name="tipoRetencionDeDigitos">RDS
+    </label>
+  </div>
+
+  <div id="rdd" class="tabcontent" *ngIf="this.selectedRetencionDeDigitos==1">
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Reactivo</th>
+          <th>Ensayo</th>
+          <th>0</th>
+          <th>1</th>
+          <th>Puntuación del reactivo</th>
+        </tr>
+        <tr *ngFor="let item of digitosRDD; let i = index">
+          <td>16-90</td>
+          <td><p *ngIf="i%2==0">{{(i+1)/2+0.5}}<p></td>
+          <td>
+            {{item}}
+          </td>
+          <td><input type="radio" id="p1" name="points"><br>
+          <td><input type="radio" id="p2" name="points">
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="rdi" class="tabcontent" *ngIf="this.selectedRetencionDeDigitos==2">
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Reactivo</th>
+          <th>Ensayo</th>
+          <th>Respuesta correcta</th>
+          <th>0</th>
+          <th>1</th>
+          <th>Puntuación del reactivo</th>
+        </tr>
+        <tr>
+          <td>16-90</td>
+          <td>1</td>
+          <td>
+            7-1<br> 3-4
+          </td>
+          <td>
+            1-7<br> 4-3
+          </td>
+          <td><input type="radio" id="p1" name="pointsA"><br>
+            <input type="radio" id="p1" name="pointsB"></td>
+          <td><input type="radio" id="p2" name="pointsA"><br>
+            <input type="radio" id="p1" name="pointsB"></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="rds" class="tabcontent" *ngIf="this.selectedRetencionDeDigitos==3">
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Reactivo</th>
+          <th>Ensayo</th>
+          <th>Respuesta correcta</th>
+          <th>0</th>
+          <th>1</th>
+          <th>Puntuación del reactivo</th>
+        </tr>
+        <tr>
+          <td>16-90</td>
+          <td>1</td>
+          <td>
+            2-3-1<br> 5-2-2
+          </td>
+          <td>
+            1-2-3<br> 2-2-5
+          </td>
+          <td><input type="radio" id="p1" name="pointsA"><br>
+            <input type="radio" id="p1" name="pointsB"></td>
+          <td><input type="radio" id="p2" name="pointsA"><br>
+            <input type="radio" id="p1" name="pointsB"></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+</body>
+
+</html>
