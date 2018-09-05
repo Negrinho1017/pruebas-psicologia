@@ -6,13 +6,15 @@ import { SemejanzasComponent } from './semejanzas/semejanzas.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RetencionDigitosComponent } from './retencion-digitos/retencion-digitos.component';
 import { MatricesComponent } from './matrices/matrices.component';
+import { VocabularioComponent } from './vocabulario/vocabulario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SemejanzasComponent,
     RetencionDigitosComponent,
-    MatricesComponent
+    MatricesComponent,
+    VocabularioComponent
   ],
   imports: [
     BrowserModule,
