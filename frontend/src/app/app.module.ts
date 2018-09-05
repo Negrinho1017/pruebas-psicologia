@@ -7,6 +7,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RetencionDigitosComponent } from './retencion-digitos/retencion-digitos.component';
 import { MatricesComponent } from './matrices/matrices.component';
 import { VocabularioComponent } from './vocabulario/vocabulario.component';
+import { AritmeticaComponent } from './aritmetica/aritmetica.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { VocabularioComponent } from './vocabulario/vocabulario.component';
     SemejanzasComponent,
     RetencionDigitosComponent,
     MatricesComponent,
-    VocabularioComponent
+    VocabularioComponent,
+    AritmeticaComponent
   ],
   imports: [
     BrowserModule,
