@@ -8,6 +8,7 @@ import { RetencionDigitosComponent } from './retencion-digitos/retencion-digitos
 import { MatricesComponent } from './matrices/matrices.component';
 import { VocabularioComponent } from './vocabulario/vocabulario.component';
 import { AritmeticaComponent } from './aritmetica/aritmetica.component';
+import { CronometroComponent } from './cronometro/cronometro.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AritmeticaComponent } from './aritmetica/aritmetica.component';
     RetencionDigitosComponent,
     MatricesComponent,
     VocabularioComponent,
-    AritmeticaComponent
+    AritmeticaComponent,
+    CronometroComponent
   ],
   imports: [
     BrowserModule,
