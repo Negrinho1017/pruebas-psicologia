@@ -6,6 +6,7 @@ import { MatricesComponent } from '../app/matrices/matrices.component'
 import { VocabularioComponent } from '../app/vocabulario/vocabulario.component'
 import { AritmeticaComponent } from '../app/aritmetica/aritmetica.component'
 import { BusquedaSimbolosComponent } from '../app/busqueda-simbolos/busqueda-simbolos.component'
+import { RompecabezasVisualComponent } from '../app/rompecabezas-visual/rompecabezas-visual.component'
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes =[
@@ -14,7 +15,8 @@ const routes: Routes =[
   { path: 'matrices', component: MatricesComponent },
   { path: 'vocabulario', component: VocabularioComponent },
   { path: 'aritmetica', component: AritmeticaComponent },
-  { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent}
+  { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent},
+  { path: 'rompecabezas-visual', component: RompecabezasVisualComponent}
 ]
 
 @NgModule({

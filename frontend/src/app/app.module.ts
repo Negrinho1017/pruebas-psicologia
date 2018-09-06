@@ -10,6 +10,7 @@ import { VocabularioComponent } from './vocabulario/vocabulario.component';
 import { AritmeticaComponent } from './aritmetica/aritmetica.component';
 import { CronometroComponent } from './cronometro/cronometro.component';
 import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos.component';
+import { RompecabezasVisualComponent } from './rompecabezas-visual/rompecabezas-visual.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos
     VocabularioComponent,
     AritmeticaComponent,
     CronometroComponent,
-    BusquedaSimbolosComponent
+    BusquedaSimbolosComponent,
+    RompecabezasVisualComponent
   ],
   imports: [
     BrowserModule,
