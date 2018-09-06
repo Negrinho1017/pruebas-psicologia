@@ -10,6 +10,7 @@ import { RompecabezasVisualComponent } from '../app/rompecabezas-visual/rompecab
 import { InformacionComponent } from '../app/informacion/informacion.component'
 import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
+import { ClavesComponent } from './claves/claves.component'
 
 const routes: Routes =[
   { path: 'semejanzas', component: SemejanzasComponent }, 
@@ -20,7 +21,8 @@ const routes: Routes =[
   { path: 'aritmetica', component: AritmeticaComponent },
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent },
-  { path: 'informacion', component: InformacionComponent }
+  { path: 'informacion', component: InformacionComponent },
+  { path: 'claves', component: ClavesComponent }
 ]
 
 @NgModule({

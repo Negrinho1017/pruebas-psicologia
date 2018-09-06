@@ -13,6 +13,7 @@ import { CronometroComponent } from './cronometro/cronometro.component';
 import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos.component';
 import { RompecabezasVisualComponent } from './rompecabezas-visual/rompecabezas-visual.component';
 import { InformacionComponent } from './informacion/informacion.component';
+import { ClavesComponent } from './claves/claves.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { InformacionComponent } from './informacion/informacion.component';
     CronometroComponent,
     BusquedaSimbolosComponent,
     RompecabezasVisualComponent,
-    InformacionComponent
+    InformacionComponent,
+    ClavesComponent
   ],
   imports: [
     BrowserModule,
