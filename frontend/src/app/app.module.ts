@@ -9,6 +9,7 @@ import { MatricesComponent } from './matrices/matrices.component';
 import { VocabularioComponent } from './vocabulario/vocabulario.component';
 import { AritmeticaComponent } from './aritmetica/aritmetica.component';
 import { CronometroComponent } from './cronometro/cronometro.component';
+import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CronometroComponent } from './cronometro/cronometro.component';
     MatricesComponent,
     VocabularioComponent,
     AritmeticaComponent,
-    CronometroComponent
+    CronometroComponent,
+    BusquedaSimbolosComponent
   ],
   imports: [
     BrowserModule,

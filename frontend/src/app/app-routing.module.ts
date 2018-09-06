@@ -5,6 +5,7 @@ import { RetencionDigitosComponent } from '../app/retencion-digitos/retencion-di
 import { MatricesComponent } from '../app/matrices/matrices.component'
 import { VocabularioComponent } from '../app/vocabulario/vocabulario.component'
 import { AritmeticaComponent } from '../app/aritmetica/aritmetica.component'
+import { BusquedaSimbolosComponent } from '../app/busqueda-simbolos/busqueda-simbolos.component'
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes =[
@@ -12,7 +13,8 @@ const routes: Routes =[
   { path: 'retencion-digitos', component: RetencionDigitosComponent },
   { path: 'matrices', component: MatricesComponent },
   { path: 'vocabulario', component: VocabularioComponent },
-  { path: 'aritmetica', component: AritmeticaComponent }
+  { path: 'aritmetica', component: AritmeticaComponent },
+  { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent}
 ]
 
 @NgModule({

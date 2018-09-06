@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cronometro.component.css']
 })
 export class CronometroComponent implements OnInit {
-  name = 'Angular 6';
   timeLeft: number = 60;
   timeCounter: number = 0;
   interval;
