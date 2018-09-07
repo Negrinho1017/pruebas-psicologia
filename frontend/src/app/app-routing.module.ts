@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SemejanzasComponent } from '../app/semejanzas/semejanzas.component'
 import { RetencionDigitosComponent } from '../app/retencion-digitos/retencion-digitos.component'
 import { RouterModule, Routes } from '@angular/router';
+import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
 
 const routes: Routes =[
   { path: 'semejanzas', component: SemejanzasComponent },
-  { path: 'retencion-digitos', component: RetencionDigitosComponent }
+  { path: 'retencion-digitos', component: RetencionDigitosComponent }  
+  { path: 'diseno-cubos', component: DisenoCubosComponent}
 ]
 
 @NgModule({
