@@ -1,6 +1,6 @@
 <div class="btn-group">
-    <button class="btn btn-outline-dark" (click)='startTimeCounter()'><i class="glyphicon glyphicon-play"></i></button>
-    <button class="btn btn-outline-dark" (click)='pauseTimer()'><i class="glyphicon glyphicon-pause"></i></button>
-    <button class="btn btn-outline-dark" (click)='resetTimeCounter()'><i class="glyphicon glyphicon-stop"></i></button>
+    <button title="Reproducir" class="btn btn-outline-dark btn-sm" (click)='startTimeCounter()'><i class="glyphicon glyphicon-play"></i></button>
+    <button title="Pausar" class="btn btn-outline-dark btn-sm" (click)='pauseTimer()'><i class="glyphicon glyphicon-pause"></i></button>
+    <button title="Rebobinar" class="btn btn-outline-dark btn-sm" (click)='resetTimeCounter()'><i class="glyphicon glyphicon-stop"></i></button>
 </div>
 <p><b>Tiempo (en segundos):</b> {{timeCounter}}</p>
