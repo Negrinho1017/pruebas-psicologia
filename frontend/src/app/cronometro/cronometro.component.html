@@ -1,3 +1,6 @@
-<span class="glyphicon glyphicon-play" id="play" (click)='startTimeCounter()'></span>
-<span class="glyphicon glyphicon-stop" (click)='pauseTimer()'></span>
-<p>{{timeCounter}}</p> 
+<div class="btn-group">
+    <button class="btn btn-outline-dark" (click)='startTimeCounter()'><i class="glyphicon glyphicon-play"></i></button>
+    <button class="btn btn-outline-dark" (click)='pauseTimer()'><i class="glyphicon glyphicon-pause"></i></button>
+    <button class="btn btn-outline-dark" (click)='resetTimeCounter()'><i class="glyphicon glyphicon-stop"></i></button>
+</div>
+<p><b>Tiempo (en segundos):</b> {{timeCounter}}</p>

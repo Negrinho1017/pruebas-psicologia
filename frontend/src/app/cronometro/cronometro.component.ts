@@ -40,6 +40,12 @@ export class CronometroComponent implements OnInit {
     clearInterval(this.interval);
     this.estaContando = false;
   }
+
+  resetTimeCounter() {
+    this.timeCounter = 0;
+    this.pauseTimer();
+  }
+
   constructor() { }
 
   ngOnInit() {
