@@ -4,13 +4,14 @@
     <td>
       <p>
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        <b> Inicio:</b> <br> Edades de 16 a 90 años: <br> Reactivo muestra, después reactivo 4
+        <b> Inicio:</b> <br> Reactivo 5
       </p>
     </td>
     <td>
       <p>
         <i class="fa fa-refresh"></i>
-        <b> Inversión:</b> <br> Si obtiene una puntuación de 0 o 1 en el reactivo 4 o 5<br> aplique los reactivos anteriores
+        <b> Inversión:</b> <br> Si obtiene una puntuación de 0 o 1 en el reactivo 5 o 6<br>
+        aplique los reactivos anteriores
         en orden inverso hasta<br> obtener dos puntuaciones perfectas consecutivas
       </p>
     </td>
@@ -23,7 +24,10 @@
     <td>
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
-        <b> Puntuación:</b> <br> Otorgue 0, 1 o 2 puntos<br> Vease el manual de aplicación para<br> respuestas de muestra
+        <b> Puntuación:</b> <br> 
+        <b>Reactivos 1 al 3: </b>Otorgue 0, 1 punto<br>
+        <b>Reactivos 4 al 30: </b>Otorgue 0, 1 o 2 puntos<br>
+        Vease el manual de aplicación para respuestas de muestra
       </p>
     </td>
   </table>
@@ -32,20 +36,21 @@
       <tr>
         <th></th>
         <th>Reactivo</th>
-        <th>Puntuación</th>
+        <th>Respuesta</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
       </tr>
       <tr *ngFor="let item of reactivos; let i = index">
-        <td><p *ngIf="i==0 || i==4">16-90</p></td>
+        <td><p *ngIf="i==4">16-90</p></td>
         <td>{{item}}</td>
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
+          <!--<textarea></textarea>-->
         </td>
         <td><input type="radio" id="p1" name="{{item}}"></td>
         <td><input type="radio" id="p2" name="{{item}}"></td>
-        <td><input type="radio" id="p3" name="{{item}}"></td>
+        <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}"></td>
       </tr>
     </table>
   </div>

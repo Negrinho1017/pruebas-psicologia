@@ -6,13 +6,27 @@ import { SemejanzasComponent } from './semejanzas/semejanzas.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RetencionDigitosComponent } from './retencion-digitos/retencion-digitos.component';
 import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
+import { MatricesComponent } from './matrices/matrices.component';
+import { VocabularioComponent } from './vocabulario/vocabulario.component';
+import { AritmeticaComponent } from './aritmetica/aritmetica.component';
+import { CronometroComponent } from './cronometro/cronometro.component';
+import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos.component';
+import { RompecabezasVisualComponent } from './rompecabezas-visual/rompecabezas-visual.component';
+import { InformacionComponent } from './informacion/informacion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SemejanzasComponent,
     RetencionDigitosComponent,
-    DisenoCubosComponent
+    DisenoCubosComponent,
+    MatricesComponent,
+    VocabularioComponent,
+    AritmeticaComponent,
+    CronometroComponent,
+    BusquedaSimbolosComponent,
+    RompecabezasVisualComponent,
+    InformacionComponent
   ],
   imports: [
     BrowserModule,
