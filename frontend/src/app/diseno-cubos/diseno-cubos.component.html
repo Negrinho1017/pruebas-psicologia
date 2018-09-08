@@ -1,4 +1,5 @@
 <html>
+
 <body>
   <table>
     <td>
@@ -23,7 +24,8 @@
     <td>
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
-        <b>Puntuación:</b> <br> Otorgue 0, 1 o 2 puntos<br> Vease el manual de aplicación para<br> respuestas de muestra
+        <b>Puntuación:</b> <br> Otorgue 0, 1 o 2 puntos<br> Vease el manual de aplicación para<br> respuestas de
+        muestra
       </p>
     </td>
   </table>
@@ -32,21 +34,27 @@
       <tr>
         <th></th>
         <th>Reactivo</th>
-        <th>Puntuación</th>
-        <th>0</th>
-        <th>1</th>
-        <th>2</th>
+        <th>Diseño</th>
+        <th>Forma de presentación</th>
+        <th>Tiempo límite</th>
+        <th>Tiempo empleado</th>
+        <th>Diseño realizado</th>
       </tr>
-      <tr *ngFor="let item of reactivos">
-        <td><p *ngIf="item == 'Dos - Siete' || item == 'Caballo - Tigre'">16-90</p></td>
+      <tr *ngFor="let item of imagenesCubos; let i = index">
+        <td></td>
+        <td>{{i+1}}</td>
         <td>{{item}}</td>
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
-          <!--<textarea></textarea>-->
+          <p *ngIf="i < 4">Modelo y dibujo</p>
+          <p *ngIf="i >= 4">Dibujo</p>
         </td>
-        <td><input type="radio" id="p1" name="{{item}}"></td>
-        <td><input type="radio" id="p2" name="{{item}}"></td>
-        <td><input type="radio" id="p3" name="{{item}}"></td>
+        <td>
+          <p *ngIf="i < 4">30''</p>
+          <p *ngIf="i >= 4 && i < 10">60''</p>
+          <p *ngIf="i >= 10">120''</p>
+        </td>
+        <td><app-cronometro></app-cronometro></td>
+        <td></td>
       </tr>
     </table>
   </div>

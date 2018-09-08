@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./diseno-cubos.component.css']
 })
 export class DisenoCubosComponent implements OnInit {
-
+  imagenesCubos: any[] = ["Cubo1", "Cubo2", "Cubo3", "Cubo4", "Cubo5", "Hola", 
+  "", "","", "", "", "", "", "", ""];
   constructor() { }
 
   ngOnInit() {
