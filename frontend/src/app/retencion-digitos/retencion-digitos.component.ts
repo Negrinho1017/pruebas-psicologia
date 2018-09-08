@@ -20,11 +20,9 @@ export class RetencionDigitosComponent implements OnInit {
   new EnsayoRespuestaModel("4 - 2","2 - 4"), new EnsayoRespuestaModel("3 - 1 - 6","1 - 3 - 6"),
   new EnsayoRespuestaModel("0 - 9 - 4","0 - 4 - 9"), new EnsayoRespuestaModel("8 - 7 - 9 - 2",
   "2 - 7 - 8 - 9"), new EnsayoRespuestaModel("4 - 8 - 7 - 1","1 - 4 - 7 - 8")];
-  numero: number;
-
-  public pasarDeNumeroDeReactivo(i: number){
-    this.numero = i/2 + 0.5;
-  }
+  puntuacionRDD: number = 0;
+  puntuacionRDI: number = 0;
+  puntuacionRDS: number = 0;
   constructor() { }
 
   ngOnInit() {

@@ -42,6 +42,9 @@
     <label class="radio-inline">
       <input type="radio" (click)="this.selectedRetencionDeDigitos=3" name="tipoRetencionDeDigitos">RDS
     </label>
+    <label class="radio-inline">
+        <input type="radio" (click)="this.selectedRetencionDeDigitos=4" name="tipoRetencionDeDigitos">Ver puntuación total
+    </label>
   </div>
 
   <div id="rdd" class="tabcontent" *ngIf="this.selectedRetencionDeDigitos==1">
@@ -66,6 +69,8 @@
           <td></td>
         </tr>
       </table>
+      <p id="puntuacion">Puntuación natural total para RDD: <br>
+      <b>{{this.puntuacionRDD}}</b></p>
     </div>
   </div>
 
@@ -95,6 +100,8 @@
           <td></td>
         </tr>
       </table>
+      <p id="puntuacion">Puntuación natural total para RDI: <br>
+      <b>{{this.puntuacionRDI}}</b></p>
     </div>
   </div>
 
@@ -124,26 +131,14 @@
           <td></td>
         </tr>
       </table>
+      <p id="puntuacion">Puntuación natural total para RDS: <br>
+      <b>{{this.puntuacionRDS}}</b></p>
     </div>
   </div>
-  <script>
-    function openCity(evt, cityName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(cityName).style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-  </script>
+  <p id="puntuacionTotal" *ngIf="this.selectedRetencionDeDigitos==4">
+    Puntuación natural total para Retención de dígitos: <br>
+    <b>{{this.puntuacionRDD}}</b>
+  </p>
 </body>
 
 </html>
