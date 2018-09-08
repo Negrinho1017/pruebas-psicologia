@@ -18,3 +18,12 @@ table {
   #txtRespuesta {
     width: 100%;
   }
+
+  #puntuacion {
+    width: 25%;
+    border: 3px solid black;
+    padding: 1%;
+    right: 0px;
+    position: absolute;
+    margin: 1%;
+  }

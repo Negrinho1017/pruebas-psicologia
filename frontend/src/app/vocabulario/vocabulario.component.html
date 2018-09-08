@@ -53,10 +53,17 @@
         <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}"></td>
       </tr>
     </table>
-    <p id="puntuacion">Puntuación natural total para Vocabulario: <br>
-      <b>{{this.puntuacion}}</b>
-    </p>
   </div>
+  <table>
+      <td>
+        * Si el examinado no obtiene una puntuación perfecta, brindar retroalimentación<br>
+        correctiva indicada en el manual de aplicación.
+      </td>
+      <td>
+        Puntuación natural total para Vocabulario: <br>
+        <b>{{this.puntuacion}}</b>
+      </td>
+  </table>
 </body>
 
 </html>

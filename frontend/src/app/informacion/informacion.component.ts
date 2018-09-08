@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./informacion.component.css']
 })
 export class InformacionComponent implements OnInit {
-  reactivos: String[] = ["1. Lunes", "2. Forma", "3. Termómetro", "4. Segundos", "5. Agua", "6. Brasil"];
+  reactivos: String[] = ["*1. Lunes", "*2. Forma", "+3. Termómetro", "+4. Segundos", "5. Agua", "*6. Brasil"];
+  puntuacion: number = 0;
   constructor() { }
 
   ngOnInit() {

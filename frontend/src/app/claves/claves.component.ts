@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./claves.component.css']
 })
 export class ClavesComponent implements OnInit {
-
+  puntuacion: number = 0;
   constructor() { }
 
   ngOnInit() {
