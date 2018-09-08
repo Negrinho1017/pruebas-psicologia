@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VocabularioComponent implements OnInit {
   reactivos: String[] = ["1. Libro", "2. Avión", "3. Canasta", "4. Manzana", "5. Finalizar", "6. Cama"];
+  puntuacion: number = 0;
   constructor() { }
 
   ngOnInit() {
