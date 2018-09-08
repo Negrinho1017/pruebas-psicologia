@@ -44,9 +44,9 @@
       </tr>
       <tr *ngFor="let item of respuestasCorrectas; let i = index">
         <td><p *ngIf="i==5">16-90</p></td>
-        <td>{{i+1}}</td>
+        <td>{{item.ensayo}}</td>
         <td><app-cronometro></app-cronometro></td>
-        <td>{{item}}</td>
+        <td>{{item.respuesta}}</td>
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
           <!--<textarea></textarea>-->
@@ -56,6 +56,17 @@
       </tr>
     </table>
   </div>
+  <table>
+      <td>
+        * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
+        como se sugiere en el manual de aplicación.<br>
+        + Si el examinado da la respuesta en horas, solicitar el equivalente en minutos.
+      </td>
+      <td>
+        Puntuación natural total para Aritmética: <br>
+        <b>{{this.puntuacion}}</b>
+      </td>
+  </table>
 </body>
 
 </html>
