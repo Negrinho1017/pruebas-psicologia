@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./busqueda-simbolos.component.css']
 })
 export class BusquedaSimbolosComponent implements OnInit {
-
+  puntuacion: number = 0;
   constructor() { }
 
   ngOnInit() {
