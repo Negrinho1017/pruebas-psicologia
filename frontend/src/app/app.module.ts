@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { SemejanzasComponent } from './semejanzas/semejanzas.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -14,6 +13,9 @@ import { BusquedaSimbolosComponent } from './busqueda-simbolos/busqueda-simbolos
 import { RompecabezasVisualComponent } from './rompecabezas-visual/rompecabezas-visual.component';
 import { InformacionComponent } from './informacion/informacion.component';
 import { ClavesComponent } from './claves/claves.component';
+import { VocabularioService } from './vocabulario/vocabulario.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http'
 
 @NgModule({
   declarations: [
@@ -32,9 +34,11 @@ import { ClavesComponent } from './claves/claves.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [VocabularioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
