@@ -42,8 +42,8 @@
       </tr>
       <tr *ngFor="let item of imagenesCubos; let i = index">
         <td></td>
-        <td>{{i+1}}</td>
-        <td>{{item}}</td>
+        <td>{{i}}</td>
+        <td> <img src='/src/assets/{{item}}' alt='image' style="width:125px;"> </td>
         <td>
           <p *ngIf="i < 4">Modelo y dibujo</p>
           <p *ngIf="i >= 4">Dibujo</p>
