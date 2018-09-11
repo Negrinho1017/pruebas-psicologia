@@ -5,9 +5,15 @@ import java.util.Calendar;
 
 public class FechaUtil {
 	public static Calendar convertirDeStringACalendar(String fecha) throws ParseException {	
+		
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		cal.setTime(sdf.parse(fecha));
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			cal.setTime(sdf.parse(fecha));
+		}	
+		catch(Exception e){
+			System.out.println("Error imprimiendo fecha: "+e.getMessage());
+		}
 		return cal;
 	}
 }
