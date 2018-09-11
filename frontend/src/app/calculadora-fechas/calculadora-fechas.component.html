@@ -1,0 +1,11 @@
+<label class="checkbox-inline">
+Fecha de nacimiento: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaNacimiento" 
+(ngModelChange)="validarFechas()"></label>
+<label class="checkbox-inline">Fecha de evaluación: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaEvaluacion"
+(ngModelChange)="validarFechas()"></label>
+
+
+<label class="checkbox-inline">
+<p *ngIf="this.fechas">Edad del evaluado: Años: {{this.edad.anios}}, Meses: {{this.edad.meses}},
+   Dias: {{this.edad.dias}}
+</p></label>

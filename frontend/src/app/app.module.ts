@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SemejanzasComponent } from './semejanzas/semejanzas.component';
@@ -15,7 +16,8 @@ import { InformacionComponent } from './informacion/informacion.component';
 import { ClavesComponent } from './claves/claves.component';
 import { VocabularioService } from './vocabulario/vocabulario.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fechas.component'
 
 @NgModule({
   declarations: [
@@ -30,13 +32,15 @@ import { HttpModule } from '@angular/http'
     BusquedaSimbolosComponent,
     RompecabezasVisualComponent,
     InformacionComponent,
-    ClavesComponent
+    ClavesComponent,
+    CalculadoraFechasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [VocabularioService],
   bootstrap: [AppComponent]
