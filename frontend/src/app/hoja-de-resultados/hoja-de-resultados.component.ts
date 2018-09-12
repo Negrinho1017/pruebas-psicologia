@@ -16,18 +16,19 @@ export class HojaDeResultadosComponent implements OnInit {
   ngOnInit() {
   }
 
-  chart = new Chart({
+  graficaComprensionVerbal = new Chart({
     chart: {
       type: 'line'
     },
     title: {
-      text: 'Perfil de puntuaciones escalares de las subpruebas'
+      text: 'Comprensión verbal'
     },
     credits: {
       enabled: false
     },
     series: [
       {
+        color: 'black',
         name: "Comprensión verbal",
         data: [{
           name: 'Semejanzas',
@@ -41,7 +42,23 @@ export class HojaDeResultadosComponent implements OnInit {
           name: 'Información',
           y: this.puntuacionesNaturales[8]
         }]
-      }, {
+      }
+    ]
+  });
+
+  graficaRazonamientoPerceptual = new Chart({
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Razonamiento perceptual'
+    },
+    credits: {
+      enabled: false
+    },
+    series: [
+      {
+        color: 'black',
         name: "Razonamiento perceptual",
         data: [{
           name: 'Diseño de cubos',
@@ -55,8 +72,23 @@ export class HojaDeResultadosComponent implements OnInit {
           name: 'Rompecabezas visual',
           y: this.puntuacionesNaturales[7]
         }]
-      },
+      }
+    ]
+  });
+
+  graficaMemoriaDeTrabajo = new Chart({
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Memoria de trabajo'
+    },
+    credits: {
+      enabled: false
+    },
+    series: [
       {
+        color: 'black',
         name: "Memoria de trabajo",
         data: [{
           name: 'Retención de dígitos',
@@ -64,10 +96,25 @@ export class HojaDeResultadosComponent implements OnInit {
         },
         {
           name: 'Aritmética',
-          y: this.puntuacionesNaturales[5]
-        }]
-      },
+          y: this.puntuacionesNaturales[5],
+        }],
+      }
+    ]
+  });
+
+  graficaVelocidadProcesamiento = new Chart({
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Velocidad de procesamiento'
+    },
+    credits: {
+      enabled: false
+    },
+    series: [
       {
+        color: 'black',
         name: "Velocidad de procesamiento",
         data: [{
           name: 'Búsqueda de símbolos',

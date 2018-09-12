@@ -4,20 +4,24 @@ table {
     width: 100%;
 }
 
-td, th {
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-}
-th {
     background-color: black;
     color: white;
 }
 
 .puntuacionEcalarDesactivada{
-    background: black; 
+    background: black;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
 .puntuacionEcalarActivada{
     background: white; 
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
