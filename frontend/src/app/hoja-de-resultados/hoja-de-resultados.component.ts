@@ -21,7 +21,7 @@ export class HojaDeResultadosComponent implements OnInit {
       type: 'line'
     },
     title: {
-      text: 'Comprensión verbal'
+      text: 'Perfil de puntuaciones escalares de las subpruebas'
     },
     credits: {
       enabled: false
@@ -30,16 +30,52 @@ export class HojaDeResultadosComponent implements OnInit {
       {
         name: "Comprensión verbal",
         data: [{
-          name: 'SE',
+          name: 'Semejanzas',
           y: this.puntuacionesNaturales[1]
         },
         {
-          name: 'VB',
+          name: 'Vocabulario',
           y: this.puntuacionesNaturales[4]
         },
         {
-          name: 'IN',
+          name: 'Información',
           y: this.puntuacionesNaturales[8]
+        }]
+      }, {
+        name: "Razonamiento perceptual",
+        data: [{
+          name: 'Diseño de cubos',
+          y: this.puntuacionesNaturales[0]
+        },
+        {
+          name: 'Matrices',
+          y: this.puntuacionesNaturales[3]
+        },
+        {
+          name: 'Rompecabezas visual',
+          y: this.puntuacionesNaturales[7]
+        }]
+      },
+      {
+        name: "Memoria de trabajo",
+        data: [{
+          name: 'Retención de dígitos',
+          y: this.puntuacionesNaturales[2]
+        },
+        {
+          name: 'Aritmética',
+          y: this.puntuacionesNaturales[5]
+        }]
+      },
+      {
+        name: "Velocidad de procesamiento",
+        data: [{
+          name: 'Búsqueda de símbolos',
+          y: this.puntuacionesNaturales[6]
+        },
+        {
+          name: 'Claves',
+          y: this.puntuacionesNaturales[9]
         }]
       }
     ]
