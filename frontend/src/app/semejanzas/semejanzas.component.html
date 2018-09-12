@@ -49,9 +49,6 @@
       </tr>
     </table>
   </div>
-    <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" 
-    *ngIf="this.reactivosCalificados.length==19"value="Obtener puntuación natural" 
-    (click)="calificarSubprueba(this.subprueba)">
   <table>
       <td>
         * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
@@ -59,7 +56,7 @@
       </td>
       <td>
         Puntuación natural total para semejanzas: <br>
-        <b>{{this.puntuacion}}</b>
+        <b>{{this.subprueba.puntuacionNatural}}</b>
       </td>
   </table>
 </body>

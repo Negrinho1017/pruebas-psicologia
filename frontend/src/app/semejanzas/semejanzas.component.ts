@@ -26,14 +26,15 @@ export class SemejanzasComponent implements OnInit {
     this.reactivoActual.puntuacion=puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
     this.subprueba.reactivos=this.reactivosCalificados;
+    this.calificarSubprueba(this.subprueba);
   }
 
   calificarSubprueba(subprueba: Subprueba){
-    if(this.puntuacion==0){
       for (let reactivo of subprueba.reactivos) {
         this.puntuacion = this.puntuacion + reactivo.puntuacion;
-      }
-    }   
+      } 
+      this.subprueba.puntuacionNatural=this.puntuacion;
+      this.puntuacion = 0; 
   }
   ngOnInit() {
   }
