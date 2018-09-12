@@ -19,6 +19,7 @@ export class SemejanzasComponent implements OnInit {
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
+  hayDiscontinuacion: boolean = false;
   constructor() { }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo){
@@ -26,6 +27,11 @@ export class SemejanzasComponent implements OnInit {
     this.reactivoActual.puntuacion=puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
     this.subprueba.reactivos=this.reactivosCalificados;
+    if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
+      && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
+      && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
+        this.hayDiscontinuacion = true;
+      }
     this.calificarSubprueba(this.subprueba);
   }
 
