@@ -18,3 +18,7 @@ table {
   #txtRespuesta {
     width: 100%;
   }
+
+  #btnPrueba:hover {
+    color: white;
+}

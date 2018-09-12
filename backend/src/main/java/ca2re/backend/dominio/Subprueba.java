@@ -8,7 +8,8 @@ public class Subprueba {
 	private int puntuacionNatural;
 	private int puntuacionEscalar;
 	private boolean esOpcional;
-
+	
+	public Subprueba() {}
 	public Subprueba(String nombre, List<Reactivo> reactivos, int puntuacionNatural, int puntuacionEscalar,
 			boolean esOpcional) {
 		super();

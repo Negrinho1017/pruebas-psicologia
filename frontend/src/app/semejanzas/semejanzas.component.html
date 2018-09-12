@@ -43,12 +43,15 @@
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
         </td>
-        <td><input type="radio" id="p1" name="{{item}}"></td>
-        <td><input type="radio" id="p2" name="{{item}}"></td>
-        <td><input type="radio" id="p3" name="{{item}}"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
+        <td><input type="radio" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"></td>
       </tr>
     </table>
   </div>
+    <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" 
+    *ngIf="this.reactivosCalificados.length==19"value="Obtener puntuación natural" 
+    (click)="calificarSubprueba(this.subprueba)">
   <table>
       <td>
         * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>

@@ -3,7 +3,8 @@ package ca2re.backend.dominio;
 public class Reactivo {
 	private int puntuacion;
 	private String respuesta;
-
+	
+	public Reactivo() {}
 	public Reactivo(int puntuacion, String respuesta) {
 		super();
 		this.puntuacion = puntuacion;
