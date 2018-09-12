@@ -18,7 +18,8 @@ import { VocabularioService } from './vocabulario/vocabulario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fechas.component';
-import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
+import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultad
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    ChartModule
   ],
   providers: [VocabularioService],
   bootstrap: [AppComponent]
