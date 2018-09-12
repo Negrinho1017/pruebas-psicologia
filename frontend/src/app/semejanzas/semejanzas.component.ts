@@ -15,7 +15,6 @@ export class SemejanzasComponent implements OnInit {
   "17. Permitir - Restreingir","18. Enemigo - Amigo"];
   puntuacionReactivo: number = 0;
   puntuacion: number = 0;
-  //el = document.getElementById('p1');
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -42,6 +41,7 @@ export class SemejanzasComponent implements OnInit {
       this.subprueba.puntuacionNatural=this.puntuacion;
       this.puntuacion = 0; 
   }
+  
   ngOnInit() {
   }
 

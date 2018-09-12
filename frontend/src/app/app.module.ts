@@ -17,7 +17,8 @@ import { ClavesComponent } from './claves/claves.component';
 import { VocabularioService } from './vocabulario/vocabulario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fechas.component'
+import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fechas.component';
+import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fec
     RompecabezasVisualComponent,
     InformacionComponent,
     ClavesComponent,
-    CalculadoraFechasComponent
+    CalculadoraFechasComponent,
+    HojaDeResultadosComponent
   ],
   imports: [
     BrowserModule,
