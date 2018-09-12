@@ -4,13 +4,17 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca2re.backend.dominio.CalificadorPrueba;
 import ca2re.backend.dominio.EdadPersona;
+import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.util.CalculadoraDeEdad;
 import ca2re.backend.util.FechaUtil;
 

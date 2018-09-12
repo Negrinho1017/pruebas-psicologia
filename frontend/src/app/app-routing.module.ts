@@ -11,6 +11,7 @@ import { InformacionComponent } from '../app/informacion/informacion.component'
 import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
 import { ClavesComponent } from './claves/claves.component'
+import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
 
 const routes: Routes =[
   { path: 'semejanzas', component: SemejanzasComponent }, 
@@ -22,7 +23,8 @@ const routes: Routes =[
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent },
   { path: 'informacion', component: InformacionComponent },
-  { path: 'claves', component: ClavesComponent }
+  { path: 'claves', component: ClavesComponent },
+  { path: 'hoja-resultados', component: HojaDeResultadosComponent }
 ]
 
 @NgModule({
