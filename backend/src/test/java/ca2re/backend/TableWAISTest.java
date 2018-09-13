@@ -90,4 +90,16 @@ public class TableWAISTest {
 		assertEquals(pruebaWais.getTipoPrueba(),"WAIS");
 		assertEquals(pruebaWais.getNombreExaminador(), "Carlos");
 	}
+	
+	@Test
+	public void getPruebaAndresJulianCarvajalActualizada() {	
+		Prueba pruebaWais = pruebaWaisDAO.obtenerPruebaPorIdEvaluado("1038414958").get(0);
+		pruebaWais.setTipoPrueba("WISC");
+		pruebaWais.setEdadEvaluado(new EdadPersona(10, 10, 10));
+		pruebaWais.setEvaluado(new Persona("Julián Carrasquilla", Calendar.getInstance(), "1038414958"));
+		Prueba pruebaWisc = pruebaWaisDAO.actualizarPrueba(pruebaWais, "1038414958");
+		assertEquals(pruebaWisc.getTipoPrueba(),"WISC");
+		assertEquals(pruebaWisc.getEdadEvaluado().getAnios(),10);
+		assertEquals(pruebaWisc.getEvaluado().getNombreCompleto(),"Julián Carrasquilla");
+	}
 }

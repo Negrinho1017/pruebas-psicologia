@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import static org.springframework.data.mongodb.core.query.Query.query;
 import org.springframework.data.mongodb.core.query.Query;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
+import org.springframework.data.mongodb.core.query.Update;
+import static org.springframework.data.mongodb.core.query.Update.update;
 
 import ca2re.backend.dominio.Prueba;
 
@@ -43,5 +45,22 @@ public class PruebaWaisDAO {
 	public List<Prueba> obtenerPruebaPorIdEvaluado(String id) {
 		Query pruebaPorNombre = query(where("evaluado.id").is(id));
 		return mongoOperations.find(pruebaPorNombre, Prueba.class, COLLECTION_PRUEBA_WAIS);
+	}
+	
+	public Prueba actualizarPrueba(Prueba prueba, String id) {
+		Query query = query(where("evaluado.id").is(id));
+        Update actualizacionTipoPrueba = update("tipoPrueba", prueba.getTipoPrueba());
+        Update actualizacionRamaDelConocimiento = update("ramaDelConocimiento", prueba.getRamaDelConocimiento());
+        Update actualizacionNombreExamindor = update("nombreExaminador", prueba.getNombreExaminador());
+        Update actualizacionEvaluado = update("evaluado", prueba.getEvaluado());
+        Update actualizacionFechaEvaluacion = update("fechaEvaluacion", prueba.getFechaEvaluacion());
+        Update actualizacionEdadEvaluado = update("edadEvaluado", prueba.getEdadEvaluado());
+        mongoOperations.updateFirst(query, actualizacionTipoPrueba, Prueba.class, COLLECTION_PRUEBA_WAIS);
+        mongoOperations.updateFirst(query, actualizacionRamaDelConocimiento, Prueba.class, COLLECTION_PRUEBA_WAIS);
+        mongoOperations.updateFirst(query, actualizacionNombreExamindor, Prueba.class, COLLECTION_PRUEBA_WAIS);
+        mongoOperations.updateFirst(query, actualizacionEvaluado, Prueba.class, COLLECTION_PRUEBA_WAIS);
+        mongoOperations.updateFirst(query, actualizacionFechaEvaluacion, Prueba.class, COLLECTION_PRUEBA_WAIS);
+        mongoOperations.updateFirst(query, actualizacionEdadEvaluado, Prueba.class, COLLECTION_PRUEBA_WAIS);
+		return obtenerPruebaPorIdEvaluado(id).get(0);
 	}
 }
