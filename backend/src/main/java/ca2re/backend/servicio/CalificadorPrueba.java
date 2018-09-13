@@ -1,6 +1,9 @@
-package ca2re.backend.dominio;
+package ca2re.backend.servicio;
 
 import java.util.List;
+
+import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.dominio.Subprueba;
 
 public class CalificadorPrueba {
 	

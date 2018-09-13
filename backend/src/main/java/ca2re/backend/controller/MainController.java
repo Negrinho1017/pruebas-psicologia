@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ca2re.backend.dominio.CalificadorPrueba;
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.servicio.CalificadorPrueba;
 import ca2re.backend.util.CalculadoraDeEdad;
 import ca2re.backend.util.FechaUtil;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/")
 public class MainController {
 	public String[] reactivos = {"1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",
@@ -26,14 +27,12 @@ public class MainController {
 	
 	@RequestMapping(value = "/reactivos-vocabulario", method = RequestMethod.GET)
 	@ResponseBody
-	@CrossOrigin
 	public String[] mostrarReactivosVocabulario() {
 		return reactivos;
 	}
 	
 	@RequestMapping(value = "/edad", method = RequestMethod.GET)
 	@ResponseBody
-	@CrossOrigin
 	public EdadPersona obtenerEdadPersona(@RequestParam String fechaNacimiento, @RequestParam String fechaEvaluacion) throws ParseException {
 		Calendar fechaNacimientoConvertida = FechaUtil.convertirDeStringACalendar(fechaNacimiento);
 		Calendar fechaEvaluacionConvertida = FechaUtil.convertirDeStringACalendar(fechaEvaluacion);

@@ -21,6 +21,7 @@ public class RamaDelConocimiento {
 		this.intervaloConfianza = intervaloConfianza;
 	}
 
+	public RamaDelConocimiento() {}
 	public String getNombre() {
 		return nombre;
 	}

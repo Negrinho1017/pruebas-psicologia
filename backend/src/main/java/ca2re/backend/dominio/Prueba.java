@@ -4,15 +4,18 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Prueba {
+	private String tipoPrueba;
 	private List<RamaDelConocimiento> ramaDelConocimiento;
 	private String nombreExaminador;
 	private Persona evaluado;
 	private Calendar fechaEvaluacion;
 	private EdadPersona edadEvaluado;
 
+	public Prueba() {}
 	public Prueba(List<RamaDelConocimiento> ramasDelConocimiento, String nombreExaminador, Persona evaluado,
-			Calendar fechaEvaluacion, EdadPersona edadEvaluado) {
+			Calendar fechaEvaluacion, EdadPersona edadEvaluado, String tipoPrueba) {
 		super();
+		this.tipoPrueba = tipoPrueba;
 		this.ramaDelConocimiento = ramasDelConocimiento;
 		this.nombreExaminador = nombreExaminador;
 		this.evaluado = evaluado;
@@ -58,6 +61,14 @@ public class Prueba {
 
 	public void setRamaDelConocimiento(List<RamaDelConocimiento> ramaDelConocimiento) {
 		this.ramaDelConocimiento = ramaDelConocimiento;
+	}
+
+	public String getTipoPrueba() {
+		return tipoPrueba;
+	}
+
+	public void setTipoPrueba(String tipoPrueba) {
+		this.tipoPrueba = tipoPrueba;
 	}
 
 }
