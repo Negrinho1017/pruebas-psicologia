@@ -39,7 +39,7 @@ public class TableWAISTest {
 	}
 	
 	@Test
-	public void test() {	
+	public void crearPruebaTest() {	
 		RamaDelConocimiento ramaDelConocimiento = new RamaDelConocimiento();
 		Subprueba subprueba1 = new Subprueba();
 		Subprueba subprueba2 = new Subprueba();
@@ -69,11 +69,25 @@ public class TableWAISTest {
 		ramaDelConocimiento.setIntervaloConfianza("81-110");
 		List<RamaDelConocimiento> ramasDelConocimiento = new ArrayList<>();
 		ramasDelConocimiento.add(ramaDelConocimiento);
-		Persona persona = new Persona("Andrés Julián Carvajal", Calendar.getInstance());
-		Prueba prueba = new Prueba(ramasDelConocimiento, "Carlos", null,
+		Persona persona = new Persona("Andrés Julián Carvajal", Calendar.getInstance(),"1038414958");
+		Prueba prueba = new Prueba(ramasDelConocimiento, "Carlos", persona,
 				Calendar.getInstance(), new EdadPersona(0, 0, 0), "WAIS");
 		pruebaWaisDAO.guardarPruebaWais(prueba);
 		
 	}
-
+	
+	@Test
+	public void getPruebaTest() {	
+		List<Prueba> pruebasWais = pruebaWaisDAO.obtenerTodasLasPruebasWais();
+		assertEquals(pruebasWais.get(0).getTipoPrueba(),"WAIS");
+		assertEquals(pruebasWais.size(),1);
+		assertEquals(pruebasWais.get(0).getNombreExaminador(), "Carlos");
+	}
+	
+	@Test
+	public void getPruebaAndresJulianCarvajal() {	
+		Prueba pruebaWais = pruebaWaisDAO.obtenerPruebaPorIdEvaluado("1038414958").get(0);
+		assertEquals(pruebaWais.getTipoPrueba(),"WAIS");
+		assertEquals(pruebaWais.getNombreExaminador(), "Carlos");
+	}
 }
