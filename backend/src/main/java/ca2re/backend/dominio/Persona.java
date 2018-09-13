@@ -1,13 +1,11 @@
 package ca2re.backend.dominio;
 
-import java.util.Calendar;
-
 public class Persona {
 	private String id;
 	private String nombreCompleto;
-	private Calendar fechaDeNacimiento;
+	private String fechaDeNacimiento;
 
-	public Persona(String nombreCompleto, Calendar fechaDeNacimiento, String id) {
+	public Persona(String id, String nombreCompleto, String fechaDeNacimiento) {
 		super();
 		this.nombreCompleto = nombreCompleto;
 		this.fechaDeNacimiento = fechaDeNacimiento;
@@ -22,11 +20,11 @@ public class Persona {
 		this.nombreCompleto = nombreCompleto;
 	}
 
-	public Calendar getFechaDeNacimiento() {
+	public String getFechaDeNacimiento() {
 		return fechaDeNacimiento;
 	}
 
-	public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
+	public void setFechaDeNacimiento(String fechaDeNacimiento) {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
 

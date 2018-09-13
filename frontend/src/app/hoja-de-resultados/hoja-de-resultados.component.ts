@@ -10,6 +10,9 @@ export class HojaDeResultadosComponent implements OnInit {
   subpruebas: String[] = ["Diseño con cubos", "Semejanzas", "Retención de dígitos", "Matrices",
     "Vocabulario", "Aritmética", "Búsqueda de símbolos", "Rompecabezas visual", "Información",
     "Claves"]
+  nombreEvaluado: String;
+  idEvaluado: String;
+  nombreExaminador: String;
   puntuacionesNaturales: number[] = [5, 4, 6, 7, 12, 15, 7, 8, 9, 11];
   constructor() { }
 
@@ -127,5 +130,4 @@ export class HojaDeResultadosComponent implements OnInit {
       }
     ]
   });
-
 }

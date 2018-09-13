@@ -69,9 +69,9 @@ public class TableWAISTest {
 		ramaDelConocimiento.setIntervaloConfianza("81-110");
 		List<RamaDelConocimiento> ramasDelConocimiento = new ArrayList<>();
 		ramasDelConocimiento.add(ramaDelConocimiento);
-		Persona persona = new Persona("Andrés Julián Carvajal", Calendar.getInstance(),"1038414958");
+		Persona persona = new Persona("Andrés Julián Carvajal", "11/11/2007","1038414958");
 		Prueba prueba = new Prueba(ramasDelConocimiento, "Carlos", persona,
-				Calendar.getInstance(), new EdadPersona(0, 0, 0), "WAIS");
+				"12/11/1994", new EdadPersona(0, 0, 0), "WAIS");
 		pruebaWaisDAO.guardarPruebaWais(prueba);
 		
 	}
@@ -96,7 +96,7 @@ public class TableWAISTest {
 		Prueba pruebaWais = pruebaWaisDAO.obtenerPruebaPorIdEvaluado("1038414958").get(0);
 		pruebaWais.setTipoPrueba("WISC");
 		pruebaWais.setEdadEvaluado(new EdadPersona(10, 10, 10));
-		pruebaWais.setEvaluado(new Persona("Julián Carrasquilla", Calendar.getInstance(), "1038414958"));
+		pruebaWais.setEvaluado(new Persona("Julián Carrasquilla", "12/11/1995", "1038414958"));
 		Prueba pruebaWisc = pruebaWaisDAO.actualizarPrueba(pruebaWais, "1038414958");
 		assertEquals(pruebaWisc.getTipoPrueba(),"WISC");
 		assertEquals(pruebaWisc.getEdadEvaluado().getAnios(),10);

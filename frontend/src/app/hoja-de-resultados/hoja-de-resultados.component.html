@@ -1,8 +1,9 @@
-<input type="text" placeholder="Nombre del evaluado..."><br>
-<input type="text" placeholder="Identificación..."><br>
-<input type="text" placeholder="Nombre del examinador..."><br>
+<input type="text" placeholder="Nombre del evaluado..."[(ngModel)]="this.nombreEvaluado"><br>
+<input type="text" placeholder="Identificación..."[(ngModel)]="this.idEvaluado"><br>
+<input type="text" placeholder="Nombre del examinador..."[(ngModel)]="this.nombreExaminador"><br>
 <app-calculadora-fechas></app-calculadora-fechas><br>
-<input type="button" id="btnPrueba" class="btn btn-outline-dark btn-lg" value="Insertar">
+<input type="button" id="btnPrueba" class="btn btn-outline-dark btn-lg" value="Insertar"
+(click)="imprimir()">
 <div class="table-responsive"> 
   <table class="table">
     <tr>

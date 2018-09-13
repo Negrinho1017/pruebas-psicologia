@@ -8,12 +8,12 @@ public class Prueba {
 	private List<RamaDelConocimiento> ramaDelConocimiento;
 	private String nombreExaminador;
 	private Persona evaluado;
-	private Calendar fechaEvaluacion;
+	private String fechaEvaluacion;
 	private EdadPersona edadEvaluado;
 
 	public Prueba() {}
 	public Prueba(List<RamaDelConocimiento> ramasDelConocimiento, String nombreExaminador, Persona evaluado,
-			Calendar fechaEvaluacion, EdadPersona edadEvaluado, String tipoPrueba) {
+			String fechaEvaluacion, EdadPersona edadEvaluado, String tipoPrueba) {
 		super();
 		this.tipoPrueba = tipoPrueba;
 		this.ramaDelConocimiento = ramasDelConocimiento;
@@ -39,11 +39,11 @@ public class Prueba {
 		this.evaluado = evaluado;
 	}
 
-	public Calendar getFechaEvaluacion() {
+	public String getFechaEvaluacion() {
 		return fechaEvaluacion;
 	}
 
-	public void setFechaEvaluacion(Calendar fechaEvaluacion) {
+	public void setFechaEvaluacion(String fechaEvaluacion) {
 		this.fechaEvaluacion = fechaEvaluacion;
 	}
 

@@ -3,6 +3,7 @@ package ca2re.backend.configuracion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -20,7 +21,7 @@ public class Configuracion {
 	private int mongoPuerto;
 	
 	@Value("${nombreDB}") 
-	private String nombreDB;
+	private String nombreDB;	
 	
 	@Bean
 	public CalificadorPrueba crearCalificadorPrueba() {
@@ -32,6 +33,7 @@ public class Configuracion {
 		return new MongoClient(mongoHost, mongoPuerto);
 	}
 	
+	@Primary
 	@Bean
 	public MongoOperations crearMongoTemplate() {		
 		return new MongoTemplate(crearMongoClient(), nombreDB);

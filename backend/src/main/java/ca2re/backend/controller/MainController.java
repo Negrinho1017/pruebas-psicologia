@@ -3,6 +3,7 @@ package ca2re.backend.controller;
 import java.text.ParseException;
 import java.util.Calendar;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.dominio.EdadPersona;
+import ca2re.backend.dominio.Persona;
+import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.servicio.CalificadorPrueba;
 import ca2re.backend.util.CalculadoraDeEdad;
 import ca2re.backend.util.FechaUtil;
@@ -24,7 +28,8 @@ import ca2re.backend.util.FechaUtil;
 public class MainController {
 	public String[] reactivos = {"1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",
 			"*7. Guante"};
-	
+	@Autowired
+	PruebaWaisDAO pruebaWaisDAO;
 	@RequestMapping(value = "/reactivos-vocabulario", method = RequestMethod.GET)
 	@ResponseBody
 	public String[] mostrarReactivosVocabulario() {
@@ -43,5 +48,11 @@ public class MainController {
 	@ResponseBody
 	public String hola() {
 		return "hola";
+	}
+	
+	@RequestMapping(value = "/creacion-prueba", method = RequestMethod.POST)
+	@ResponseBody
+	public Prueba crearPrueba(@RequestBody Prueba prueba) {
+		return pruebaWaisDAO.guardarPruebaWais(prueba);
 	}
 }
