@@ -1,49 +1,46 @@
-<input type="text" placeholder="Nombre del evaluado..."[(ngModel)]="this.nombreEvaluado"><br>
-<input type="text" placeholder="Identificación..."[(ngModel)]="this.idEvaluado"><br>
-<input type="text" placeholder="Nombre del examinador..."[(ngModel)]="this.nombreExaminador"><br>
-<div>
-  <label class="checkbox-inline">
-    Fecha de nacimiento: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaNacimiento" 
-    (ngModelChange)="validarFechas()">
-  </label>
-  <label class="checkbox-inline">
-    Fecha de evaluación: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaEvaluacion"
-    (ngModelChange)="validarFechas()">
-  </label>
+<body class = "cuerpo">  
+  <input type="text" class="datosPrueba form-control" placeholder="Nombre del evaluado" [(ngModel)]="this.nombreEvaluado"><br>
+  <input type="text" class="datosPrueba form-control" placeholder="Identificación" [(ngModel)]="this.idEvaluado"><br>
+  <input type="text" class="datosPrueba form-control" placeholder="Nombre del examinador" [(ngModel)]="this.nombreExaminador"><br>
+  <div>
+    <label class="checkbox-inline">
+      Fecha de nacimiento: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaNacimiento" (ngModelChange)="validarFechas()">
+    </label>
+    <label class="checkbox-inline">
+      Fecha de evaluación: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaEvaluacion" (ngModelChange)="validarFechas()">
+    </label>
 
-  <label class="checkbox-inline">
-    <p *ngIf="this.fechas" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses: {{this.edad.meses}},
-      Días: {{this.edad.dias}}</b>
-    </p>
-  </label>
-</div>
-<input type="button" id="btnPrueba" class="btn btn-outline-dark btn-lg" value="Insertar"
-(click)="inicializarPrueba()">
-<div class="table-responsive"> 
-  <table class="table">
-    <tr>
-      <th>Subprueba</th>
-      <th>Puntuación <br>
-      natural</th>
-      <th colspan="5">Puntuación escalar</th>
-    </tr>
-    <tr *ngFor="let item of subpruebas; let i = index">
-      <td class="puntuacionEcalarActivada">{{item}}</td>
-      <td class="puntuacionEcalarActivada"></td>
-      <td class="puntuacionEcalarDesactivada"
-      [ngClass]="{'puntuacionEcalarActivada': (i==1 || i==4 || i==8)}"></td>
-      <td class="puntuacionEcalarDesactivada"
-      [ngClass]="{'puntuacionEcalarActivada': (i==0 || i==3 || i==7)}"></td>
-      <td class="puntuacionEcalarDesactivada"
-      [ngClass]="{'puntuacionEcalarActivada': (i==2 || i==5)}"></td>
-      <td class="puntuacionEcalarDesactivada"
-      [ngClass]="{'puntuacionEcalarActivada': (i==6 || i==9)}"></td>
-      <td class="puntuacionEcalarActivada"></td>
-    </tr>
-    <tr>
-  </table>
-</div>
-<div [chart]="graficaComprensionVerbal" class="col-sm-6 col-md-3 col-xs-12"></div>
-<div [chart]="graficaRazonamientoPerceptual" class="col-sm-6 col-md-3 col-xs-12"></div>
-<div [chart]="graficaMemoriaDeTrabajo" class="col-sm-6 col-md-3 col-xs-12"></div>
-<div [chart]="graficaVelocidadProcesamiento" class="col-sm-6 col-md-3 col-xs-12"></div>
+    <label class="checkbox-inline">
+      <p *ngIf="this.fechas" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses: {{this.edad.meses}},
+          Días: {{this.edad.dias}}</b>
+      </p>
+    </label>
+  </div>
+  <input type="button" id="btnPrueba" class="btn btn-outline-dark btn-lg" value="Insertar" (click)="inicializarPrueba()">
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Subprueba</th>
+        <th>Puntuación <br>
+          natural</th>
+        <th colspan="5">Puntuación escalar</th>
+      </tr>
+      <tr *ngFor="let item of subpruebas; let i = index">
+        <td class="puntuacionEcalarActivada">{{item}}</td>
+        <td class="puntuacionEcalarActivada"></td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==1 || i==4 || i==8)}"></td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==0 || i==3 || i==7)}"></td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==2 || i==5)}"></td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==6 || i==9)}"></td>
+        <td class="puntuacionEcalarActivada"></td>
+      </tr>
+      <tr>
+    </table>
+  </div>
+  <div>
+    <div [chart]="graficaComprensionVerbal" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+    <div [chart]="graficaRazonamientoPerceptual" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+    <div [chart]="graficaMemoriaDeTrabajo" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+    <div [chart]="graficaVelocidadProcesamiento" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+  </div>
+</body>
