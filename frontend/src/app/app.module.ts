@@ -17,7 +17,6 @@ import { ClavesComponent } from './claves/claves.component';
 import { VocabularioService } from './vocabulario/vocabulario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { CalculadoraFechasComponent } from './calculadora-fechas/calculadora-fechas.component';
 import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component';
 import { ChartModule } from 'angular-highcharts';
 
@@ -35,7 +34,6 @@ import { ChartModule } from 'angular-highcharts';
     RompecabezasVisualComponent,
     InformacionComponent,
     ClavesComponent,
-    CalculadoraFechasComponent,
     HojaDeResultadosComponent
   ],
   imports: [
