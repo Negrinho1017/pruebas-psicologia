@@ -1,6 +1,5 @@
 <html>
-
-<body>
+<body class = "cuerpo">
   <table>
     <td>
       <p>
@@ -29,21 +28,19 @@
       </p>
     </td>
   </table>
+
   <div class="table-responsive">
     <table class="table">
-      <tr>
-        <th></th>
+      <tr>        
         <th>Reactivo</th>
         <th>Diseño</th>
         <th>Forma de presentación</th>
         <th>Tiempo límite</th>
         <th>Tiempo empleado</th>
         <th>Diseño realizado</th>
-        <th>Puntuación</th>
-        <th></th>
+        <th>Puntuación</th>        
       </tr>
-      <tr *ngFor="let item of imagenesCubos; let i = index">
-        <td></td>
+      <tr *ngFor="let item of imagenesCubos; let i = index">        
         <td>{{i}}</td>
         <td> <img src='/src/assets/{{item}}' alt='image' style="width:125px;"> </td>
         <td>
@@ -96,14 +93,8 @@
           </table>
         </td>
         <td>
-          <table>
-            <tr>
-              
-            </tr>
-          </table>
-        </td>
-        
-        <td></td>
+          Puntos          
+        </td>                
       </tr>
     </table>
   </div>

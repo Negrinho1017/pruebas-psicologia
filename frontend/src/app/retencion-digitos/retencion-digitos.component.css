@@ -37,3 +37,8 @@ table {
     position: absolute;
     margin: 2%;
   }
+
+  .cuerpo {
+    margin-left: 25px;
+    margin-right: 25px;       
+  }
