@@ -5,6 +5,7 @@ public class Persona {
 	private String nombreCompleto;
 	private String fechaDeNacimiento;
 
+	public Persona() {}
 	public Persona(String id, String nombreCompleto, String fechaDeNacimiento) {
 		super();
 		this.nombreCompleto = nombreCompleto;

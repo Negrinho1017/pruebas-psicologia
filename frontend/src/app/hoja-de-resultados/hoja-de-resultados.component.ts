@@ -3,6 +3,9 @@ import { Chart } from 'angular-highcharts';
 import { DatePipe } from '@angular/common';
 import { HojaDeResultadosService } from './hoja-de-resultados.service';
 import { EdadPersona } from '../model/EdadPersona';
+import { Prueba } from '../model/Prueba';
+import { Persona } from '../model/Persona';
+import swal from 'sweetalert'
 
 @Component({
   selector: 'app-hoja-de-resultados',
@@ -21,9 +24,13 @@ export class HojaDeResultadosComponent implements OnInit {
   idEvaluado: String;
   nombreExaminador: String;
   puntuacionesNaturales: number[] = [5, 4, 6, 7, 12, 15, 7, 8, 9, 11];
+  prueba: Prueba;
+  evaluado: Persona;
   constructor( private hojaDeResultadosService: HojaDeResultadosService ) { }
 
   ngOnInit() {
+    this.evaluado = new Persona();
+    this.prueba = new Prueba();
   }
 
   graficaComprensionVerbal = new Chart({
@@ -153,4 +160,29 @@ export class HojaDeResultadosComponent implements OnInit {
     }
   }
 
+  inicializarPrueba(){
+    //this.mensajeConfirmacion("Seguro que desea continuar");
+    this.evaluado.fechaDeNacimiento = this.fechaNacimiento;
+    this.evaluado.id = this.idEvaluado;
+    this.evaluado.nombreCompleto = this.nombreEvaluado;
+    this.prueba.edadEvaluado = this.edad;
+    this.prueba.evaluado = this.evaluado;
+    this.prueba.nombreExaminador = this.nombreExaminador;
+    this.prueba.fechaEvaluacion = this.fechaEvaluacion;
+    this.prueba.tipoPrueba = "WAIS";
+    this.hojaDeResultadosService.crearPrueba(this.prueba);
+  }
+
+
+  mensajeConfirmacion(mensaje: string) {
+    swal({
+      title: 'Error!',
+      text: mensaje,
+      buttons: {
+        cancel: true,
+        confirm: true,
+      }
+    });
+  }
+  
 }

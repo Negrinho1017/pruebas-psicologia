@@ -4,7 +4,8 @@ public class EdadPersona {
 	int dias;
 	int meses;
 	int anios;
-
+	
+	public EdadPersona() {}
 	public EdadPersona(int dias, int meses, int anios) {
 		super();
 		this.dias = dias;

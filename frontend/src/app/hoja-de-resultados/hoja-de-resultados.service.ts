@@ -4,8 +4,10 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/';
 import { EdadPersona } from '../model/EdadPersona';
 import { Prueba } from '../model/Prueba';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +26,15 @@ export class HojaDeResultadosService {
     }));  
   }
   
-  public crearPrueba(prueba: Prueba): Observable<Prueba> {
-    return this.http.post<Prueba>(this.url + '/creacion-prueba', prueba);
+
+  crearPrueba(prueba: Prueba) {
+    return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions).subscribe(result => {
+        console.log(result);
+      }, error => console.log('There was an error: '));
   }
+    /*return this._http.post(this.url + '/creacion-prueba', prueba, this.options);  
+  }*/
+  /*public crearPrueba(prueba: Prueba): Observable<Prueba> {
+    return this.http.post<Prueba>(this.url + '/creacion-prueba', prueba);
+  }*/
 }
