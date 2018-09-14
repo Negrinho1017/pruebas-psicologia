@@ -13,7 +13,6 @@ export class HojaDeResultadosComponent implements OnInit {
   subpruebas: String[] = ["Diseño con cubos", "Semejanzas", "Retención de dígitos", "Matrices",
     "Vocabulario", "Aritmética", "Búsqueda de símbolos", "Rompecabezas visual", "Información",
     "Claves"];
-  
   fechaNacimiento: String;
   fechaEvaluacion: String;
   edad: EdadPersona;
