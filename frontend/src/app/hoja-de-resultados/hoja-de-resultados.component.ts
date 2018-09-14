@@ -162,17 +162,40 @@ export class HojaDeResultadosComponent implements OnInit {
 
   inicializarPrueba(){
     //this.mensajeConfirmacion("Seguro que desea continuar");
-    this.evaluado.fechaDeNacimiento = this.fechaNacimiento;
-    this.evaluado.id = this.idEvaluado;
-    this.evaluado.nombreCompleto = this.nombreEvaluado;
-    this.prueba.edadEvaluado = this.edad;
-    this.prueba.evaluado = this.evaluado;
-    this.prueba.nombreExaminador = this.nombreExaminador;
-    this.prueba.fechaEvaluacion = this.fechaEvaluacion;
-    this.prueba.tipoPrueba = "WAIS";
-    this.hojaDeResultadosService.crearPrueba(this.prueba);
+    if(this.datosValidados()){
+      this.evaluado.fechaDeNacimiento = this.fechaNacimiento;
+      this.evaluado.id = this.idEvaluado;
+      this.evaluado.nombreCompleto = this.nombreEvaluado;
+      this.prueba.edadEvaluado = this.edad;
+      this.prueba.evaluado = this.evaluado;
+      this.prueba.nombreExaminador = this.nombreExaminador;
+      this.prueba.fechaEvaluacion = this.fechaEvaluacion;
+      this.prueba.tipoPrueba = "WAIS";
+      this.hojaDeResultadosService.crearPrueba(this.prueba);
+    } 
   }
 
+  datosValidados(): boolean{
+    if(this.fechaEvaluacion == undefined){
+      this.mensajeError("Falta la fecha de evaluación");
+      return false;
+    } else if(this.nombreExaminador == undefined){
+      this.mensajeError("Falta el nombre del examinador");
+      return false;
+    } else if(this.nombreEvaluado == undefined){
+      this.mensajeError("Falta el nombre del evalaudo");
+      return false;
+    } else if(this.idEvaluado == undefined){
+      this.mensajeError("Falta la identificación");
+      return false;
+    } else if(this.fechaNacimiento == undefined){
+      this.mensajeError("Falta la fecha de nacimiento");
+      return false;
+    } else{
+      this.mensajeExito("Prueba inicializada satisfactoriamente")
+      return true;
+    }
+  }
 
   mensajeConfirmacion(mensaje: string) {
     swal({
@@ -182,6 +205,22 @@ export class HojaDeResultadosComponent implements OnInit {
         cancel: true,
         confirm: true,
       }
+    });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
+  }
+
+  mensajeExito(mensaje: string) {
+    swal({
+      title: 'Excelente!',
+      icon: "success",
+      text: mensaje,
     });
   }
   
