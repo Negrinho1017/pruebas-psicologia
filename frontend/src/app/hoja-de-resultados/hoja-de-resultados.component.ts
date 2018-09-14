@@ -6,6 +6,7 @@ import { EdadPersona } from '../model/EdadPersona';
 import { Prueba } from '../model/Prueba';
 import { Persona } from '../model/Persona';
 import swal from 'sweetalert'
+import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
 
 @Component({
   selector: 'app-hoja-de-resultados',
@@ -171,6 +172,7 @@ export class HojaDeResultadosComponent implements OnInit {
       this.prueba.nombreExaminador = this.nombreExaminador;
       this.prueba.fechaEvaluacion = this.fechaEvaluacion;
       this.prueba.tipoPrueba = "WAIS";
+      this.llenarRamasDelConocimiento();
       this.hojaDeResultadosService.crearPrueba(this.prueba);
     } 
   }
@@ -195,6 +197,18 @@ export class HojaDeResultadosComponent implements OnInit {
       this.mensajeExito("Prueba inicializada satisfactoriamente")
       return true;
     }
+  }
+
+  llenarRamasDelConocimiento(){
+    this.prueba.ramaDelConocimiento = [];
+    this.prueba.ramaDelConocimiento[0] = new RamaDelConocimiento();
+    this.prueba.ramaDelConocimiento[1] = new RamaDelConocimiento();;
+    this.prueba.ramaDelConocimiento[2] = new RamaDelConocimiento();;
+    this.prueba.ramaDelConocimiento[3] = new RamaDelConocimiento();;
+    this.prueba.ramaDelConocimiento[0].nombre = "Comprensión verbal";
+    this.prueba.ramaDelConocimiento[1].nombre = "Razonamiento perceptual";
+    this.prueba.ramaDelConocimiento[2].nombre = "Memoria de trabajo";
+    this.prueba.ramaDelConocimiento[3].nombre = "Velocidad de procesamiento";
   }
 
   mensajeConfirmacion(mensaje: string) {
