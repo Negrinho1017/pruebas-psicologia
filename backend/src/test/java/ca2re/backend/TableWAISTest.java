@@ -21,12 +21,12 @@ import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
-import ca2re.backend.dominio.TablaWAIS;
+import ca2re.backend.dominio.TablaCalificacionWAIS;
 import ca2re.backend.persistencia.PruebaWaisDAO;
 
 public class TableWAISTest {
 	
-	TablaWAIS tabla;
+	TablaCalificacionWAIS tabla;
 	MongoOperations mongoOperation;
 	PruebaWaisDAO pruebaWaisDAO;
 	
@@ -34,7 +34,7 @@ public class TableWAISTest {
 	public void setup(){
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		mongoOperation = new MongoTemplate(mongo, "pruebas_psicologia_db");
-		tabla = new TablaWAIS();
+		tabla = new TablaCalificacionWAIS();
 		pruebaWaisDAO = new PruebaWaisDAO(mongoOperation);
 	}
 	

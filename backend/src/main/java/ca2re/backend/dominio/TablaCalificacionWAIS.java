@@ -1,6 +1,6 @@
 package ca2re.backend.dominio;
 
-public class TablaWAIS {
+public class TablaCalificacionWAIS {
 	private String rangoDeEdad;
 	
 	private String disenioCubosC;	
