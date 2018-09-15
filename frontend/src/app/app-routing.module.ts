@@ -12,8 +12,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
 import { ClavesComponent } from './claves/claves.component'
 import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
+import { Globals } from './globals';
 
 const routes: Routes =[
+  //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
   { path: 'semejanzas', component: SemejanzasComponent }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent},
   { path: 'retencion-digitos', component: RetencionDigitosComponent },
@@ -32,6 +34,7 @@ const routes: Routes =[
     CommonModule, RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  declarations: []
+  declarations: [],
+  providers: [ Globals ]
 })
 export class AppRoutingModule { }

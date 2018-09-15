@@ -7,6 +7,9 @@ import { Prueba } from '../model/Prueba';
 import { Persona } from '../model/Persona';
 import swal from 'sweetalert'
 import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-hoja-de-resultados',
@@ -27,7 +30,10 @@ export class HojaDeResultadosComponent implements OnInit {
   puntuacionesNaturales: number[] = [5, 4, 6, 7, 12, 15, 7, 8, 9, 11];
   prueba: Prueba;
   evaluado: Persona;
-  constructor( private hojaDeResultadosService: HojaDeResultadosService ) { }
+
+  constructor( private hojaDeResultadosService: HojaDeResultadosService,
+    private router: Router, private globals: Globals) { 
+    }
 
   ngOnInit() {
     this.evaluado = new Persona();
@@ -236,6 +242,12 @@ export class HojaDeResultadosComponent implements OnInit {
       icon: "success",
       text: mensaje,
     });
+  }
+
+  siguiente(){
+    this.globals.idEvaluado = this.idEvaluado;
+    //this.router.navigate(['/semejanzas', this.idEvaluado]);
+    this.router.navigate(['/semejanzas']);
   }
   
 }

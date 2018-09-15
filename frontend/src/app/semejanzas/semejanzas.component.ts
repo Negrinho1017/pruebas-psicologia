@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Reactivo } from '../model/Reactivo';
 import { Subprueba } from '../model/Subprueba';
+import { Globals } from '../globals';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-semejanzas',
@@ -19,7 +21,7 @@ export class SemejanzasComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
-  constructor() { }
+  constructor( private globals: Globals ) { }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo){
     this.reactivoActual = new Reactivo();
@@ -43,6 +45,7 @@ export class SemejanzasComponent implements OnInit {
   }
   
   ngOnInit() {
+    console.log(this.globals.idEvaluado)
   }
 
 }
