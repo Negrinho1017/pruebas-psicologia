@@ -247,7 +247,6 @@ export class HojaDeResultadosComponent implements OnInit {
   siguiente(){
     this.globals.idEvaluado = this.idEvaluado;
     //this.router.navigate(['/semejanzas', this.idEvaluado]);
-    this.router.navigate(['/semejanzas']);
+    //this.router.navigate(['/semejanzas']);
   }
-  
 }

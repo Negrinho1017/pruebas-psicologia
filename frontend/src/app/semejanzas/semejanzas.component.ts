@@ -3,6 +3,7 @@ import { Reactivo } from '../model/Reactivo';
 import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
 import { Alert } from 'selenium-webdriver';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-semejanzas',
@@ -21,7 +22,7 @@ export class SemejanzasComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
-  constructor( private globals: Globals ) { }
+  constructor( private globals: Globals, private route: ActivatedRoute ) { }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo){
     this.reactivoActual = new Reactivo();
@@ -45,7 +46,8 @@ export class SemejanzasComponent implements OnInit {
   }
   
   ngOnInit() {
-    console.log(this.globals.idEvaluado)
+    //console.log(this.route.snapshot.paramMap.get('idEvaluado'))
+    //console.log(this.globals.idEvaluado)
   }
 
 }

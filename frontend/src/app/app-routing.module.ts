@@ -15,8 +15,8 @@ import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultad
 import { Globals } from './globals';
 
 const routes: Routes =[
-  //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
-  { path: 'semejanzas', component: SemejanzasComponent }, 
+  { path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
+  //{ path: 'semejanzas', component: SemejanzasComponent }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent},
   { path: 'retencion-digitos', component: RetencionDigitosComponent },
   { path: 'matrices', component: MatricesComponent },
