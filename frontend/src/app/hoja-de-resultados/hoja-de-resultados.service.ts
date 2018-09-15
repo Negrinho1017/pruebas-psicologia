@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/';
 import { EdadPersona } from '../model/EdadPersona';
 import { Prueba } from '../model/Prueba';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subprueba } from '../model/Subprueba';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -32,9 +33,10 @@ export class HojaDeResultadosService {
         console.log(result);
       }, error => console.log('There was an error: '));
   }
-    /*return this._http.post(this.url + '/creacion-prueba', prueba, this.options);  
-  }*/
-  /*public crearPrueba(prueba: Prueba): Observable<Prueba> {
-    return this.http.post<Prueba>(this.url + '/creacion-prueba', prueba);
-  }*/
+
+  crearSubprueba(subprueba: Subprueba, idEvaluado: String) {
+    return this.http.put(this.url + '/creacion-subprueba/'+idEvaluado, subprueba, httpOptions).subscribe(result => {
+        console.log(result);
+      }, error => console.log('Error enviando la solicitud'));
+  }
 }

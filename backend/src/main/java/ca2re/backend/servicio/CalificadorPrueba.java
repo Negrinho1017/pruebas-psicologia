@@ -17,7 +17,7 @@ public class CalificadorPrueba {
 		for(Reactivo reactivo : reactivos) {
 			puntuacionNatural+=reactivo.getPuntuacion();
 		}
-		return new Subprueba(subprueba.getNombre(), reactivos, puntuacionNatural, subprueba.getPuntuacionEscalar(),
+		return new Subprueba(1, subprueba.getNombre(), reactivos, puntuacionNatural, subprueba.getPuntuacionEscalar(),
 			false);
 	}
 }

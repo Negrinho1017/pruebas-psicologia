@@ -12,11 +12,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
 import { ClavesComponent } from './claves/claves.component'
 import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
+import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component'
 import { Globals } from './globals';
 
 const routes: Routes =[
-  { path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
-  //{ path: 'semejanzas', component: SemejanzasComponent }, 
+  //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
+  { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
+  { path: 'semejanzas', component: SemejanzasComponent }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent},
   { path: 'retencion-digitos', component: RetencionDigitosComponent },
   { path: 'matrices', component: MatricesComponent },

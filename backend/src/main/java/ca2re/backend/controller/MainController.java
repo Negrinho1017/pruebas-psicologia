@@ -1,9 +1,7 @@
 package ca2re.backend.controller;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Persona;
 import ca2re.backend.dominio.Prueba;
-import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.servicio.CalificadorPrueba;
 import ca2re.backend.util.CalculadoraDeEdad;
 import ca2re.backend.util.FechaUtil;
@@ -33,7 +31,12 @@ public class MainController {
 	public String[] reactivos = {"1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",
 			"*7. Guante"};
 	@Autowired
+	public
 	PruebaWaisDAO pruebaWaisDAO;
+	
+	@Autowired
+	AdministradorPruebas administradorPruebas;
+	
 	@RequestMapping(value = "/reactivos-vocabulario", method = RequestMethod.GET)
 	@ResponseBody
 	public String[] mostrarReactivosVocabulario() {
@@ -70,16 +73,7 @@ public class MainController {
 	@ResponseBody
 	public Prueba ingresarReactivo(@RequestBody Subprueba subprueba,
 			@PathVariable(value = "idEvaluado") String idEvaluado) {
-		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
-		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
-		if(ramasDelConocimiento.get(0).getSubpruebas()==null) {
-			ramasDelConocimiento.get(0).setSubpruebas(
-					new ArrayList<Subprueba>());
-		}
-		List<Subprueba> subpruebas = ramasDelConocimiento.get(0).getSubpruebas();
-		subpruebas.add(subprueba);
-		ramasDelConocimiento.get(0).setSubpruebas(subpruebas);
-		prueba.setRamaDelConocimiento(ramasDelConocimiento);
+		Prueba prueba = administradorPruebas.ingresarSubprueba(this, subprueba, idEvaluado);
 		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
 	}
 	

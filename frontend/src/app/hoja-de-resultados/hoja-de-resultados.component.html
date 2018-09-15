@@ -1,22 +1,4 @@
 <body class = "cuerpo">  
-  <input type="text" class="datosPrueba form-control" placeholder="Nombre del evaluado" [(ngModel)]="this.nombreEvaluado"><br>
-  <input type="text" class="datosPrueba form-control" placeholder="Identificación" [(ngModel)]="this.idEvaluado"><br>
-  <input type="text" class="datosPrueba form-control" placeholder="Nombre del examinador" [(ngModel)]="this.nombreExaminador"><br>
-  <div>
-    <label class="checkbox-inline">
-      Fecha de nacimiento: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaNacimiento" (ngModelChange)="validarFechas()">
-    </label>
-    <label class="checkbox-inline">
-      Fecha de evaluación: <input type="date" placeholder="dd/mm/yyyy" [(ngModel)]="fechaEvaluacion" (ngModelChange)="validarFechas()">
-    </label>
-
-    <label class="checkbox-inline">
-      <p *ngIf="this.fechas" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses: {{this.edad.meses}},
-          Días: {{this.edad.dias}}</b>
-      </p>
-    </label>
-  </div>
-  <input type="button" id="btnPrueba" class="btn btn-outline-dark btn-lg" value="Insertar" (click)="inicializarPrueba()">
   <div class="table-responsive">
     <table class="table">
       <tr>

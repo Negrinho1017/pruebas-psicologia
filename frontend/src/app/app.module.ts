@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component';
 import { ChartModule } from 'angular-highcharts';
+import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ChartModule } from 'angular-highcharts';
     RompecabezasVisualComponent,
     InformacionComponent,
     ClavesComponent,
-    HojaDeResultadosComponent
+    HojaDeResultadosComponent,
+    IngresoDeDatosComponent
   ],
   imports: [
     BrowserModule,

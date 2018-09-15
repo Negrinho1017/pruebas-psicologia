@@ -3,6 +3,7 @@ package ca2re.backend.dominio;
 import java.util.List;
 
 public class Subprueba {
+	private int numeroSubprueba;
 	private String nombre;
 	private List<Reactivo> reactivos;
 	private int puntuacionNatural;
@@ -10,9 +11,10 @@ public class Subprueba {
 	private boolean esOpcional;
 	
 	public Subprueba() {}
-	public Subprueba(String nombre, List<Reactivo> reactivos, int puntuacionNatural, int puntuacionEscalar,
+	public Subprueba(int numeroSubprueba, String nombre, List<Reactivo> reactivos, int puntuacionNatural, int puntuacionEscalar,
 			boolean esOpcional) {
 		super();
+		this.numeroSubprueba = numeroSubprueba;
 		this.nombre = nombre;
 		this.reactivos = reactivos;
 		this.puntuacionNatural = puntuacionNatural;
@@ -58,6 +60,12 @@ public class Subprueba {
 
 	public void setEsOpcional(boolean esOpcional) {
 		this.esOpcional = esOpcional;
+	}
+	public int getNumeroSubprueba() {
+		return numeroSubprueba;
+	}
+	public void setNumeroSubprueba(int numeroSubprueba) {
+		this.numeroSubprueba = numeroSubprueba;
 	}
 
 }
