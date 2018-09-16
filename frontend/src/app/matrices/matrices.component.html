@@ -42,14 +42,17 @@
         </td>
         <td>{{i+1}}</td>
         <td><b>{{item}}</b></td>
-        <td><input type="radio" name={{i}}></td>
-        <td><input type="radio" name={{i}}></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
-      <b>{{this.puntuacion}}</b>
+      <b>{{this.subprueba.puntuacionNatural}}</b>
     </p>
   </div>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>
 </body>
 
 </html>
