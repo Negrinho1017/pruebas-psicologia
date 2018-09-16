@@ -28,16 +28,7 @@ export class MatricesComponent implements OnInit {
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
-    //this.reactivoActual = new Reactivo();
-    //this.reactivoActual.puntuacion=puntuacionReactivo;
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
-    //this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
-    //this.subprueba.reactivos=this.reactivosCalificados;
-    /*if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
-        this.hayDiscontinuacion = true;
-      }*/
     this.calificarSubprueba();
   }
 
