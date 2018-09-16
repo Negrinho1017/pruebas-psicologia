@@ -23,6 +23,7 @@ export class HojaDeResultadosComponent implements OnInit {
   prueba: Prueba;
   puntuacionesNaturales: number[] = [];
   puntajeSemejanzas: number;
+  puntajeRetencionDigitos: number;
   puntuacionesComprensionVerbal: number[];
   puntuacionesRazonamientoPerceptual: number[];
   puntuacionesMemoriaDeTrabajo: number[];
@@ -50,7 +51,8 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural,
       this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]*/
       this.puntajeSemejanzas = this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
-      this.puntuacionesNaturales = [5, this.puntajeSemejanzas, 6, 7, 12, 15, 7, 8, 9, 11];
+      this.puntajeRetencionDigitos = this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
+      this.puntuacionesNaturales = [5, this.puntajeSemejanzas, this.puntajeRetencionDigitos, 7, 12, 15, 7, 8, 9, 11];
       this.graficar();
       /*this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],

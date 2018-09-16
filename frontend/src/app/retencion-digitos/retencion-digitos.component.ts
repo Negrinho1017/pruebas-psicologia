@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EnsayoRespuestaModel } from '../model/EnsayoRespuestaModel';
 import { Reactivo } from '../model/Reactivo';
 import { Subprueba } from '../model/Subprueba';
+import { Globals } from '../globals';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 
 @Component({
   selector: 'app-retencion-digitos',
@@ -40,7 +43,9 @@ export class RetencionDigitosComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean;
-  constructor() { }
+  constructor( private globals: Globals, private route: ActivatedRoute,
+    private hojaDeResultadosService: HojaDeResultadosService,
+    private router: Router ) { }
 
   ngOnInit() {
     this.construirRespuestasRDI();
@@ -70,15 +75,12 @@ export class RetencionDigitosComponent implements OnInit {
       this.reactivosRDS[numeroReactivo] = (this.reactivoActual);
       this.obtenerResultadoRDS(this.reactivosRDS);
     }
-
-    //this.subprueba.reactivos=this.reactivosCalificados;
-    //this.subprueba.numeroSubprueba = 2;
+    
     /*if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
       && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
       && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
         this.hayDiscontinuacion = true;
       }*/
-    //this.calificarSubprueba(this.subprueba);
   }
 
   obtenerResultadoRDD(reactivos: Reactivo[]){
@@ -110,12 +112,13 @@ export class RetencionDigitosComponent implements OnInit {
     this.selectedRetencionDeDigitos = 4;
   }
 
-  /*calificarSubprueba(subprueba: Subprueba){
-    for (let reactivo of subprueba.reactivos) {
-      this.puntuacionRDD = this.puntuacionRDD + reactivo.puntuacion;
-    } 
-    //this.subprueba.puntuacionNatural=this.puntuacionRDD;
-    //this.puntuacion = 0; 
-  }*/
+  finalizarSubprueba(){
+    this.subprueba.reactivos = this.reactivosRDD.concat(this.reactivosRDI).concat(this.reactivosRDS);
+    this.subprueba.numeroSubprueba = 3;
+    this.subprueba.puntuacionNatural = this.puntuacion;
+    this.subprueba.nombre="Retención de dígitos";
+    this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+    this.router.navigate(['/matrices']);
+  }
 
 }

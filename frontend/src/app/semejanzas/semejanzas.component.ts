@@ -54,6 +54,7 @@ export class SemejanzasComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.subprueba.nombre = "Semejanzas";
     this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
     this.router.navigate(['/retencion-digitos']);
   }
