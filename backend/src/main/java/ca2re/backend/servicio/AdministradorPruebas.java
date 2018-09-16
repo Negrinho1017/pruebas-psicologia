@@ -15,13 +15,14 @@ public class AdministradorPruebas {
 	public Prueba ingresarSubprueba(MainController mainController, Subprueba subprueba, String idEvaluado) {
 		Prueba prueba = mainController.pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
-		if(ramasDelConocimiento.get(0).getSubpruebas()==null) {
-			ramasDelConocimiento.get(0).setSubpruebas(
+		int ramaDelConocimiento = buscarRamaDelConocimiento(subprueba.getNumeroSubprueba());
+		if(ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas()==null) {
+			ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(
 					new ArrayList<Subprueba>());
 		}
-		List<Subprueba> subpruebas = ramasDelConocimiento.get(0).getSubpruebas();
+		List<Subprueba> subpruebas = ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas();
 		subpruebas.add(subprueba);
-		ramasDelConocimiento.get(0).setSubpruebas(subpruebas);
+		ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(subpruebas);
 		prueba.setRamaDelConocimiento(ramasDelConocimiento);
 		return prueba;
 	}

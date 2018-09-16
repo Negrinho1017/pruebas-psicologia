@@ -31,6 +31,7 @@ export class SemejanzasComponent implements OnInit {
     this.reactivoActual.puntuacion=puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
     this.subprueba.reactivos=this.reactivosCalificados;
+    this.subprueba.numeroSubprueba = 2;
     if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
       && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
       && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
