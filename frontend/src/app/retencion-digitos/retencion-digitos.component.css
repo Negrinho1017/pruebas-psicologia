@@ -29,16 +29,8 @@ table {
     margin: 1%;
   }
 
-  #puntuacionTotal {
-    width: 25%;
-    border: 3px solid black;
-    padding: 1%;
-    left: 0px;
-    position: absolute;
-    margin: 2%;
-  }
-
   .cuerpo {
     margin-left: 25px;
     margin-right: 25px;       
   }
+
