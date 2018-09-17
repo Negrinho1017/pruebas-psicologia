@@ -29,7 +29,10 @@
     </td>
     <td>
       Puntuación natural total para Claves: <br>
-      <b>{{this.puntuacion}}</b>
+      <input type="text" id="txtRespuesta" [(ngModel)]="puntuacion" pattern="[0-9]*">
     </td>
   </table>
 </body>
+<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>
