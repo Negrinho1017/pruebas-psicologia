@@ -62,36 +62,19 @@ export class RetencionDigitosComponent implements OnInit {
     }
   }
 
-  /*calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
-    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
-    this.calificarSubprueba();
-  }*/
-
   calificarReactivo(puntuacionReactivo: number, numeroReactivo, numeroRD: number){
-    //this.reactivoActual = new Reactivo();
-    //this.reactivoActual.puntuacion=puntuacionReactivo;
-    
     if(numeroRD == 1){
       this.listaCalificacionesRDD[numeroReactivo] = (puntuacionReactivo); 
-      //this.reactivosRDD[numeroReactivo] = (this.reactivoActual);
       this.obtenerResultadoRDD();
     }
     else if(numeroRD == 2){
       this.listaCalificacionesRDI[numeroReactivo] = (puntuacionReactivo); 
-      //this.reactivosRDI[numeroReactivo] = (this.reactivoActual);
       this.obtenerResultadoRDI();
     }
     else if(numeroRD == 3){
       this.listaCalificacionesRDS[numeroReactivo] = (puntuacionReactivo); 
-      //this.reactivosRDS[numeroReactivo] = (this.reactivoActual);
       this.obtenerResultadoRDS();
     }
-    
-    /*if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
-        this.hayDiscontinuacion = true;
-      }*/
   }
 
   obtenerResultadoRDD(){
