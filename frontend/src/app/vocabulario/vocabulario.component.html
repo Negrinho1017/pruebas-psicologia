@@ -46,11 +46,10 @@
         <td>{{item}}</td>
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
-          <!--<textarea></textarea>-->
         </td>
-        <td><input type="radio" id="p1" name="{{item}}"></td>
-        <td><input type="radio" id="p2" name="{{item}}"></td>
-        <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
+        <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"></td>
       </tr>
     </table>
   </div>
@@ -61,9 +60,11 @@
       </td>
       <td>
         Puntuación natural total para Vocabulario: <br>
-        <b>{{this.puntuacion}}</b>
+        <b>{{this.subprueba.puntuacionNatural}}</b>
       </td>
   </table>
 </body>
-
+<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>
 </html>
