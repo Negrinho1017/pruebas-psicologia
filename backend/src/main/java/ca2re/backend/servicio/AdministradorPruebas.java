@@ -55,5 +55,4 @@ public class AdministradorPruebas {
 		return numeroSubprueba == Subpruebas.SEMEJANZAS.getValue() || numeroSubprueba == Subpruebas.VOCABULARIO.getValue()
 				|| numeroSubprueba == Subpruebas.INFORMACION.getValue() || numeroSubprueba == Subpruebas.COMPRENSION.getValue();
 	}
-
 }

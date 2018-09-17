@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { DatePipe } from '@angular/common';
 import { HojaDeResultadosService } from './hoja-de-resultados.service';
-import { EdadPersona } from '../model/EdadPersona';
 import { Prueba } from '../model/Prueba';
-import { Persona } from '../model/Persona';
-import swal from 'sweetalert'
-import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { Globals } from '../globals';
 
 @Component({
