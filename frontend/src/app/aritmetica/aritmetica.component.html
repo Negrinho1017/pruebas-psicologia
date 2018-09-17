@@ -42,17 +42,17 @@
         <th>0</th>
         <th>1</th>
       </tr>
-      <tr *ngFor="let item of respuestasCorrectas; let i = index">
+      <tr *ngFor="let item of reactivos; let i = index">
         <td><p *ngIf="i==5">16-90</p></td>
-        <td>{{item.ensayo}}</td>
+        <td>{{item}}</td>
         <td><app-cronometro></app-cronometro></td>
-        <td>{{item.respuesta}}</td>
+        <td>{{respuestasCorrectas[i]}}</td>
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
           <!--<textarea></textarea>-->
         </td>
-        <td><input type="radio" id="p1" name="{{item}}"></td>
-        <td><input type="radio" id="p2" name="{{item}}"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
       </tr>
     </table>
   </div>
@@ -64,8 +64,11 @@
       </td>
       <td>
         Puntuación natural total para Aritmética: <br>
-        <b>{{this.puntuacion}}</b>
+        <b>{{this.subprueba.puntuacionNatural}}</b>
       </td>
   </table>
 </body>
+<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>
 </html>

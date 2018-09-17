@@ -22,13 +22,18 @@ export class HojaDeResultadosComponent implements OnInit {
     "Claves"];
   prueba: Prueba;
   puntuacionesNaturales: number[] = [];
+
   puntajeSemejanzas: number;
   puntajeRetencionDigitos: number;
   puntajeMatrices: number;
+  puntajeVocabulario: number;
+  puntajeAritmetica: number;
+
   puntuacionesComprensionVerbal: number[];
   puntuacionesRazonamientoPerceptual: number[];
   puntuacionesMemoriaDeTrabajo: number[];
   puntuacionesVelocidadDeProcesamiento: number[];
+
   graficaComprensionVerbal: Chart;
   graficaRazonamientoPerceptual: Chart;
   graficaMemoriaDeTrabajo: Chart;
@@ -54,8 +59,10 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntajeMatrices = this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
       this.puntajeSemejanzas = this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
       this.puntajeRetencionDigitos = this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
+      this.puntajeVocabulario = this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
+      this.puntajeAritmetica = this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural;
       this.puntuacionesNaturales = [5, this.puntajeSemejanzas, this.puntajeRetencionDigitos,
-         this.puntajeMatrices, 12, 15, 7, 8, 9, 11];
+         this.puntajeMatrices, this.puntajeVocabulario, this.puntajeAritmetica, 7, 8, 9, 11];
       this.graficar();
       /*this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],
