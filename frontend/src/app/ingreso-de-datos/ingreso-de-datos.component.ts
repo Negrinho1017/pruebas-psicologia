@@ -129,6 +129,6 @@ export class IngresoDeDatosComponent implements OnInit {
   siguiente(){
     this.globals.idEvaluado = this.idEvaluado;
     //this.router.navigate(['/semejanzas', this.idEvaluado]);
-    this.router.navigate(['/semejanzas']);
+    this.router.navigate(['/diseno-cubos']);
   }
 }

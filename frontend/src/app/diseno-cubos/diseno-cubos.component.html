@@ -96,26 +96,26 @@
         <td>
           <table>
             <tr>
-              <td>0. <input type="radio" id="p1" name="{{i}}"></td>
-              <td *ngIf="i < 5">1. <input type="radio" id="p2" name="{{i}}"></td>
-              <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}"></td>
+              <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)"></td>
+              <td *ngIf="i < 5">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)"></td>
+              <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)"></td>
               <td *ngIf="i > 4">
                 <h6 *ngIf="i > 10">76-120</h6><h6 *ngIf="i > 8 && i < 11">31-60</h6>
-                4. <input type="radio" id="p1" name="{{i}}">
+                4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)">
               </td>
             </tr>
             <tr *ngIf="i > 8">
               <td>
                   <h6 *ngIf="i > 10">61-75</h6><h6 *ngIf="i > 8 && i < 11">21-30</h6>
-                5. <input type="radio" id="p2" name="{{i}}">
+                5. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(5,i)">
               </td>
               <td>
                   <h6 *ngIf="i > 10">31-60</h6><h6 *ngIf="i > 8 && i < 11">11-20</h6>
-                6. <input type="radio" id="p3" name="{{i}}">
+                6. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(6,i)">
               </td>
               <td>
                   <h6 *ngIf="i > 10">1-30</h6><h6 *ngIf="i > 8 && i < 11">1-10</h6>
-                7. <input type="radio" id="p3" name="{{i}}">
+                7. <input type="radio" id="p3" name="{{i}}"  (click)="calificarReactivo(7,i)">
               </td>
             </tr>
           </table>
@@ -123,6 +123,11 @@
       </tr>
     </table>
   </div>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+  <p id="puntuacion">Puntuación natural total para RDI: <br>
+    <b>{{this.subprueba.puntuacionNatural}}</b></p>
 </body>
 
 </html>

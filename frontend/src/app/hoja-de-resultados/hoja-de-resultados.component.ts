@@ -44,7 +44,7 @@ export class HojaDeResultadosComponent implements OnInit {
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
-      /*this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural,
+      this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural,
       this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural,
       this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural]
       this.puntuacionesRazonamientoPerceptual = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural,
@@ -53,8 +53,8 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural,
       this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural];
       this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]*/
-      this.puntajeMatrices = this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
+      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]
+      /*this.puntajeMatrices = this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
       this.puntajeSemejanzas = this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
       this.puntajeRetencionDigitos = this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
       this.puntajeVocabulario = this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
@@ -65,14 +65,15 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntajeClaves = this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
       this.puntuacionesNaturales = [5, this.puntajeSemejanzas, this.puntajeRetencionDigitos,
          this.puntajeMatrices, this.puntajeVocabulario, this.puntajeAritmetica, this.puntajeBusquedaSimbolos,
-          this.puntajeRompecabezasVisual, this.puntajeInformacion, this.puntajeClaves];
-      this.graficar();
-      /*this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
+          this.puntajeRompecabezasVisual, this.puntajeInformacion, this.puntajeClaves];*/
+      
+      this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],
       this.puntuacionesRazonamientoPerceptual[1], this.puntuacionesComprensionVerbal[1],
       this.puntuacionesMemoriaDeTrabajo[1], this.puntuacionesVelocidadDeProcesamiento[0],
       this.puntuacionesRazonamientoPerceptual[2], this.puntuacionesComprensionVerbal[2],
-      this.puntuacionesMemoriaDeTrabajo[1]];*/
+      this.puntuacionesMemoriaDeTrabajo[1]];
+      this.graficar();
     });
   }
 
