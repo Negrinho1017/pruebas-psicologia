@@ -38,11 +38,16 @@
     <td>
       <app-cronometro></app-cronometro>
     </td>
-    <td><input type="text" id="txtRespuesta"></td>
-    <td><input type="text" id="txtRespuesta"></td>
+    <td><input type="text" id="txtRespuesta" [(ngModel)]="correctas" (ngModelChange)="calcularPuntuacion()"
+       pattern="[0-9]*"></td>
+    <td><input type="text" id="txtRespuesta" [(ngModel)]="incorrectas" (ngModelChange)="calcularPuntuacion()"
+       pattern="[0-9]*"></td>
     <td>
       <b>{{this.puntuacion}}</b>
     </td>
   </tr>
 </table>
 </body>
+<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>

@@ -33,12 +33,6 @@ export class VocabularioComponent implements OnInit {
     this.subprueba.numeroSubprueba = 5;
   }
 
-  /*obtenerReactivosVocabulario() {
-    this.vocabularioService.obtenerReactivosVocabulario().subscribe(res => {
-      this.reactivos = res;
-    });
-  }*/
-
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();

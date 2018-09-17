@@ -28,6 +28,7 @@ export class HojaDeResultadosComponent implements OnInit {
   puntajeMatrices: number;
   puntajeVocabulario: number;
   puntajeAritmetica: number;
+  puntajeBusquedaSimbolos: number;
 
   puntuacionesComprensionVerbal: number[];
   puntuacionesRazonamientoPerceptual: number[];
@@ -61,8 +62,10 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntajeRetencionDigitos = this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
       this.puntajeVocabulario = this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
       this.puntajeAritmetica = this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural;
+      this.puntajeBusquedaSimbolos = this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
       this.puntuacionesNaturales = [5, this.puntajeSemejanzas, this.puntajeRetencionDigitos,
-         this.puntajeMatrices, this.puntajeVocabulario, this.puntajeAritmetica, 7, 8, 9, 11];
+         this.puntajeMatrices, this.puntajeVocabulario, this.puntajeAritmetica, this.puntajeBusquedaSimbolos,
+          8, 9, 11];
       this.graficar();
       /*this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],
