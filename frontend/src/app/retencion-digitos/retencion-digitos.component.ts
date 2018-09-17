@@ -33,13 +33,15 @@ export class RetencionDigitosComponent implements OnInit {
   "2 - 2 - 3 - 4 - 5 - 6","2 - 5 - 6 - 6 - 7 - 7 - 8","2 - 3 - 4 - 4 - 5 - 5 - 8",
   "2 - 4 - 5 - 5 - 5 - 7 - 7 - 8","0 - 3 - 4 - 4 - 7 - 8 - 9 - 9",
   "0 - 0 - 1 - 1 - 1 - 2 - 3 - 5 - 5","1 - 2 - 2 - 4 - 4 - 6 - 7 - 8 - 9"]
+  listaCalificacionesRDD: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  listaCalificacionesRDI: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  listaCalificacionesRDS: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  listaCalificaciones: number[] = [];
   puntuacionRDD: number = 0;
   puntuacionRDI: number = 0;
   puntuacionRDS: number = 0;
   puntuacion: number = 0;
-  reactivosRDD: Reactivo[] = [];
-  reactivosRDI: Reactivo[] = [];
-  reactivosRDS: Reactivo[] = [];
+  reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean;
@@ -60,20 +62,29 @@ export class RetencionDigitosComponent implements OnInit {
     }
   }
 
+  /*calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
+    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
+    this.calificarSubprueba();
+  }*/
+
   calificarReactivo(puntuacionReactivo: number, numeroReactivo, numeroRD: number){
-    this.reactivoActual = new Reactivo();
-    this.reactivoActual.puntuacion=puntuacionReactivo;
+    //this.reactivoActual = new Reactivo();
+    //this.reactivoActual.puntuacion=puntuacionReactivo;
+    
     if(numeroRD == 1){
-      this.reactivosRDD[numeroReactivo] = (this.reactivoActual);
-      this.obtenerResultadoRDD(this.reactivosRDD);
+      this.listaCalificacionesRDD[numeroReactivo] = (puntuacionReactivo); 
+      //this.reactivosRDD[numeroReactivo] = (this.reactivoActual);
+      this.obtenerResultadoRDD();
     }
     else if(numeroRD == 2){
-      this.reactivosRDI[numeroReactivo] = (this.reactivoActual);
-      this.obtenerResultadoRDI(this.reactivosRDI);
+      this.listaCalificacionesRDI[numeroReactivo] = (puntuacionReactivo); 
+      //this.reactivosRDI[numeroReactivo] = (this.reactivoActual);
+      this.obtenerResultadoRDI();
     }
     else if(numeroRD == 3){
-      this.reactivosRDS[numeroReactivo] = (this.reactivoActual);
-      this.obtenerResultadoRDS(this.reactivosRDS);
+      this.listaCalificacionesRDS[numeroReactivo] = (puntuacionReactivo); 
+      //this.reactivosRDS[numeroReactivo] = (this.reactivoActual);
+      this.obtenerResultadoRDS();
     }
     
     /*if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
@@ -83,25 +94,36 @@ export class RetencionDigitosComponent implements OnInit {
       }*/
   }
 
-  obtenerResultadoRDD(reactivos: Reactivo[]){
-    for (let reactivo of reactivos) {
-      this.puntuacion = this.puntuacion + reactivo.puntuacion;
+  obtenerResultadoRDD(){
+    for (let puntuacionReactivo of this.listaCalificacionesRDD) {
+      this.puntuacion = this.puntuacion + puntuacionReactivo;
     } 
     this.puntuacionRDD = this.puntuacion;
     this.puntuacion = 0;
   }
 
-  obtenerResultadoRDI(reactivos: Reactivo[]){
-    for (let reactivo of reactivos) {
-      this.puntuacion = this.puntuacion + reactivo.puntuacion;
+  crearReactivos(){
+    var i = 0;
+    this.listaCalificaciones = this.listaCalificacionesRDD.concat(this.listaCalificacionesRDI).concat(this.listaCalificacionesRDS)
+    for (let calificacionReactivo of this.listaCalificaciones) {
+      this.reactivoActual = new Reactivo();
+      this.reactivoActual.puntuacion=calificacionReactivo;
+      this.reactivosCalificados[i] = (this.reactivoActual);
+      i++;
+    }
+  }
+
+  obtenerResultadoRDI(){
+    for (let puntuacionReactivo of this.listaCalificacionesRDI) {
+      this.puntuacion = this.puntuacion + puntuacionReactivo;
     } 
     this.puntuacionRDI = this.puntuacion;
     this.puntuacion = 0;
   }
 
-  obtenerResultadoRDS(reactivos: Reactivo[]){
-    for (let reactivo of reactivos) {
-      this.puntuacion = this.puntuacion + reactivo.puntuacion;
+  obtenerResultadoRDS(){
+    for (let puntuacionReactivo of this.listaCalificacionesRDS) {
+      this.puntuacion = this.puntuacion + puntuacionReactivo;
     } 
     this.puntuacionRDS = this.puntuacion;
     this.puntuacion = 0;
@@ -113,7 +135,8 @@ export class RetencionDigitosComponent implements OnInit {
   }
 
   finalizarSubprueba(){
-    this.subprueba.reactivos = this.reactivosRDD.concat(this.reactivosRDI).concat(this.reactivosRDS);
+    this.crearReactivos();
+    this.subprueba.reactivos = this.reactivosCalificados;
     this.subprueba.numeroSubprueba = 3;
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.subprueba.nombre="Retención de dígitos";
