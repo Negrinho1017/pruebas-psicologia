@@ -53,20 +53,7 @@ export class HojaDeResultadosComponent implements OnInit {
       this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural,
       this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural];
       this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]
-      /*this.puntajeMatrices = this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
-      this.puntajeSemejanzas = this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
-      this.puntajeRetencionDigitos = this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
-      this.puntajeVocabulario = this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
-      this.puntajeAritmetica = this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural;
-      this.puntajeBusquedaSimbolos = this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
-      this.puntajeRompecabezasVisual = this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionNatural;
-      this.puntajeInformacion = this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural;
-      this.puntajeClaves = this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
-      this.puntuacionesNaturales = [5, this.puntajeSemejanzas, this.puntajeRetencionDigitos,
-         this.puntajeMatrices, this.puntajeVocabulario, this.puntajeAritmetica, this.puntajeBusquedaSimbolos,
-          this.puntajeRompecabezasVisual, this.puntajeInformacion, this.puntajeClaves];*/
-      
+      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]    
       this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],
       this.puntuacionesRazonamientoPerceptual[1], this.puntuacionesComprensionVerbal[1],
