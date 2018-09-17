@@ -1,5 +1,6 @@
 <html>
-<body class = "cuerpo">
+
+<body class="cuerpo">
   <table>
     <td>
       <p>
@@ -31,16 +32,16 @@
 
   <div class="table-responsive">
     <table class="table">
-      <tr>        
+      <tr>
         <th>Reactivo</th>
         <th>Diseño</th>
         <th>Forma de presentación</th>
         <th>Tiempo límite</th>
         <th>Tiempo empleado</th>
         <th>Diseño realizado</th>
-        <th>Puntuación</th>        
+        <th>Puntuación</th>
       </tr>
-      <tr *ngFor="let item of imagenesCubos; let i = index">        
+      <tr *ngFor="let item of imagenesCubos; let i = index">
         <td>{{i}}</td>
         <td> <img src='/src/assets/{{item}}' alt='image' style="width:125px;"> </td>
         <td>
@@ -93,8 +94,32 @@
           </table>
         </td>
         <td>
-          Puntos          
-        </td>                
+          <table>
+            <tr>
+              <td>0. <input type="radio" id="p1" name="{{i}}"></td>
+              <td *ngIf="i < 5">1. <input type="radio" id="p2" name="{{i}}"></td>
+              <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}"></td>
+              <td *ngIf="i > 4">
+                <h6 *ngIf="i > 10">76-120</h6><h6 *ngIf="i > 8 && i < 11">31-60</h6>
+                4. <input type="radio" id="p1" name="{{i}}">
+              </td>
+            </tr>
+            <tr *ngIf="i > 8">
+              <td>
+                  <h6 *ngIf="i > 10">61-75</h6><h6 *ngIf="i > 8 && i < 11">21-30</h6>
+                5. <input type="radio" id="p2" name="{{i}}">
+              </td>
+              <td>
+                  <h6 *ngIf="i > 10">31-60</h6><h6 *ngIf="i > 8 && i < 11">11-20</h6>
+                6. <input type="radio" id="p3" name="{{i}}">
+              </td>
+              <td>
+                  <h6 *ngIf="i > 10">1-30</h6><h6 *ngIf="i > 8 && i < 11">1-10</h6>
+                7. <input type="radio" id="p3" name="{{i}}">
+              </td>
+            </tr>
+          </table>
+        </td>
       </tr>
     </table>
   </div>
