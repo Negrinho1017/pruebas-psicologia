@@ -51,6 +51,7 @@ export class MatricesComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.subprueba.reactivos = this.reactivosCalificados;
     this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
     this.router.navigate(['/vocabulario']);
   }

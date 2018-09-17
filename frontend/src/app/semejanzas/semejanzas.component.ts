@@ -19,6 +19,7 @@ export class SemejanzasComponent implements OnInit {
   puntuacionReactivo: number = 0;
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
+  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
@@ -26,35 +27,37 @@ export class SemejanzasComponent implements OnInit {
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router ) { }
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo){
-    this.reactivoActual = new Reactivo();
-    this.reactivoActual.puntuacion=puntuacionReactivo;
-    this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
-    this.subprueba.reactivos=this.reactivosCalificados;
-    this.subprueba.numeroSubprueba = 2;
-    if(this.reactivosCalificados[numeroReactivo].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-1].puntuacion == 0
-      && this.reactivosCalificados[numeroReactivo-2].puntuacion == 0){
-        this.hayDiscontinuacion = true;
-      }
-    this.calificarSubprueba(this.subprueba);
+
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
+    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
+    this.calificarSubprueba();
   }
 
-  calificarSubprueba(subprueba: Subprueba){
-      for (let reactivo of subprueba.reactivos) {
-        this.puntuacion = this.puntuacion + reactivo.puntuacion;
-      } 
-      this.subprueba.puntuacionNatural=this.puntuacion;
-      this.puntuacion = 0; 
+  calificarSubprueba(){
+    for (let calificacionReactivo of this.listaCalificaciones) {
+      this.puntuacion = this.puntuacion + calificacionReactivo;
+    } 
+    this.subprueba.puntuacionNatural=this.puntuacion;
+    this.crearReactivos();
+    this.puntuacion = 0; 
+}
+  crearReactivos(){
+    var i = 0;
+    for (let calificacionReactivo of this.listaCalificaciones) {
+      this.reactivoActual = new Reactivo();
+      this.reactivoActual.puntuacion=calificacionReactivo;
+      this.reactivosCalificados[i] = (this.reactivoActual);
+      i++;
+    }
   }
   
   ngOnInit() {
-    //console.log(this.route.snapshot.paramMap.get('idEvaluado'))
-    //console.log(this.globals.idEvaluado)
+    this.subprueba.nombre = "Semejanzas";
+    this.subprueba.numeroSubprueba = 2;
   }
 
   finalizarSubprueba(){
-    this.subprueba.nombre = "Semejanzas";
+    this.subprueba.reactivos = this.reactivosCalificados;
     this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
     this.router.navigate(['/retencion-digitos']);
   }
