@@ -50,8 +50,8 @@
           <p *ngIf="i>6">30''</p></td>
         <td><app-cronometro></app-cronometro></td>
         <td>{{item}}</td>
-        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
-        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
+        <td><input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)"></td>
+        <td><input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Rompecabezas visual: <br>
