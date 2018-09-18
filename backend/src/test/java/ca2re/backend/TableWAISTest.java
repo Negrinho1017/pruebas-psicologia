@@ -22,7 +22,9 @@ import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
+import ca2re.backend.persistencia.CalificacionWaisDAO;
 import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.servicio.AdministradorPruebas;
 
 public class TableWAISTest {
 	

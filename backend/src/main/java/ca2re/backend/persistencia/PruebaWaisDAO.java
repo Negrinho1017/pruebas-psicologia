@@ -17,6 +17,7 @@ public class PruebaWaisDAO {
 	
 	private static final String COLLECTION_PRUEBA_WISC = "prueba_wisc";
 	private static final String COLLECTION_PRUEBA_WAIS = "prueba_wais";
+	
 	@Autowired
 	private static MongoOperations mongoOperations;
 	

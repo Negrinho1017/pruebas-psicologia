@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.servicio.CalificadorPrueba;
 
 @SpringBootTest(classes = BackendApplication.class)
@@ -22,6 +23,9 @@ public class CalificadorPruebaTest {
 	
 	@Autowired
 	CalificadorPrueba calificadorPrueba;
+	
+	@Autowired
+	AdministradorPruebas administradorPruebas;
 	
 	@Test
 	public void calificarReactivo() {
@@ -45,5 +49,17 @@ public class CalificadorPruebaTest {
 		reactivos.add(reactivo5);
 		Subprueba subprueba = new Subprueba();
 		assertEquals(6,calificadorPrueba.calificarSubprueba(reactivos, subprueba).getPuntuacionNatural());
+	}
+	
+	@Test
+	public void getPuntuacionesEscalares() {	
+		int calificacionDisenioCubos = administradorPruebas.obtenerPuntuacionEscalarDisenioCubos("20:0-24:11", 43);
+		int calificacionSemejanzas = administradorPruebas.obtenerPuntuacionEscalarSemejanzas("20:0-24:11", 25);
+		int calificacionSemejanzas2 = administradorPruebas.obtenerPuntuacionEscalarSemejanzas("20:0-24:11", 18);
+		int calificacionRetencionDigitos = administradorPruebas.obtenerPuntuacionRetencionDigitos("20:0-24:11", 27);
+		assertEquals(9, calificacionDisenioCubos);
+		assertEquals(13, calificacionSemejanzas);
+		assertEquals(10, calificacionRetencionDigitos);
+		assertEquals(8,calificacionSemejanzas2);
 	}
 }

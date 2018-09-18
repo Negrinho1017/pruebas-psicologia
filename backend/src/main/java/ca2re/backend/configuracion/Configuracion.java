@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.MongoClient;
 
+import ca2re.backend.persistencia.CalificacionWaisDAO;
 import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.servicio.CalificadorPrueba;
@@ -43,6 +44,11 @@ public class Configuracion {
 	@Bean
 	public PruebaWaisDAO crearPruebaWaisDAO(MongoOperations mongoOperations) {
 		return new PruebaWaisDAO(mongoOperations);
+	}
+	
+	@Bean
+	public CalificacionWaisDAO crearCalificacionWaisDAO(MongoOperations mongoOperations) {
+		return new CalificacionWaisDAO(mongoOperations);
 	}
 	
 	@Bean
