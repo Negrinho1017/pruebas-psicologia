@@ -62,4 +62,14 @@ public class CalificadorPruebaTest {
 		assertEquals(10, calificacionRetencionDigitos);
 		assertEquals(9,calificacionSemejanzas2);
 	}
+	
+	@Test
+	public void getPuntuacionesCompuestas() {	
+		int puntuacionCompuesta = administradorPruebas.obtenerPuntuacionCompuesta("ICV", 24);
+		String intervaloConfianza = administradorPruebas.obtenerIntervaloConfianza("ICV", 24);
+		double percentil = administradorPruebas.obtenerPercentil("ICV", 24);
+		assertEquals(88, puntuacionCompuesta);
+		assertEquals(21, percentil, 0);
+		assertEquals("83-95", intervaloConfianza);
+	}
 }

@@ -119,4 +119,16 @@ public class AdministradorPruebas {
 		String[] rangosClaves =  calificacionWaisDAO.obtenerClavesPorIdEdad(idEdad);
 		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);		
 	}
+	
+	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
+		return calificacionWaisDAO.obtenerPuntuacionCompuesta(id)[puntuacionTotal];	
+	}
+	
+	public double obtenerPercentil(String id, int puntuacionTotal) {
+		return calificacionWaisDAO.obtenerPercentil(id)[puntuacionTotal];	
+	}
+	
+	public String obtenerIntervaloConfianza(String id, int puntuacionTotal) {
+		return calificacionWaisDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];	
+	}
 }
