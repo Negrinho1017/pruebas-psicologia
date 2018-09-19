@@ -12,24 +12,32 @@ import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.persistencia.CalificacionWaisDAO;
+import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.util.CalculadorDePuntuacionEscalar;
 
 public class AdministradorPruebas {
 	
 	@Autowired
-	CalificacionWaisDAO calificacionWaisDAO;
+	private CalificacionWaisDAO calificacionWaisDAO;
 	
-	public Prueba ingresarSubprueba(MainController mainController, Subprueba subprueba, String idEvaluado) {
-		Prueba prueba = mainController.pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+	@Autowired
+	private PruebaWaisDAO pruebaWaisDAO;
+	
+	public Prueba ingresarSubprueba(Subprueba subprueba, String idEvaluado) {
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
 		int ramaDelConocimiento = buscarRamaDelConocimiento(subprueba.getNumeroSubprueba());
 		if(ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas()==null) {
 			ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(
 					new ArrayList<Subprueba>());
+			ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacion(0);
 		}
 		List<Subprueba> subpruebas = ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas();
 		subpruebas.add(subprueba);
 		ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(subpruebas);
+		ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacion(
+				ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacion()+subprueba.getPuntuacionEscalar());
+		System.out.println(ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacion());
 		prueba.setRamaDelConocimiento(ramasDelConocimiento);
 		return prueba;
 	}

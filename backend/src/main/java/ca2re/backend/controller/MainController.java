@@ -31,8 +31,7 @@ public class MainController {
 	public String[] reactivos = {"1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",
 			"*7. Guante"};
 	@Autowired
-	public
-	PruebaWaisDAO pruebaWaisDAO;
+	public PruebaWaisDAO pruebaWaisDAO;
 	
 	@Autowired
 	AdministradorPruebas administradorPruebas;
@@ -73,7 +72,7 @@ public class MainController {
 	@ResponseBody
 	public Prueba ingresarReactivo(@RequestBody Subprueba subprueba,
 			@PathVariable(value = "idEvaluado") String idEvaluado) {
-		Prueba prueba = administradorPruebas.ingresarSubprueba(this, subprueba, idEvaluado);
+		Prueba prueba = administradorPruebas.ingresarSubprueba(subprueba, idEvaluado);
 		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
 	}
 	
