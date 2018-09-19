@@ -48,8 +48,10 @@
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
         </td>
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
-        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
-        <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "i < 3 && habilitarReactivo(i)"></td>
+        <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
       </tr>
     </table>
   </div>

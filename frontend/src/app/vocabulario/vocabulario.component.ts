@@ -20,7 +20,10 @@ export class VocabularioComponent implements OnInit {
   "20. Abominable","21. Agudo","22. Tangible","23. Compasión","24. Plagiar","25. confiar","26. Renuente",
   "27. Osado","28. Mitigar","29. Pragmático","30. Diatriba"];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [0,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false, 
+    false, false, false, false, false, false, false, false, false, false, false, false, 
+    false, false, false, false, false, false, false, false, false, false, false, false];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -37,6 +40,24 @@ export class VocabularioComponent implements OnInit {
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 5 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo-1] < 2)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }
+    if(numeroReactivo == 2 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] < 2)){
+      this.habilitaReactivo[numeroReactivo -1] = false;
+      this.listaCalificaciones[numeroReactivo - 1] = 0;
+    }
+    if(numeroReactivo == 1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
+      this.habilitaReactivo[numeroReactivo -1] = false;
+      this.listaCalificaciones[numeroReactivo - 1] = 0;
+    }
   }
 
   calificarSubprueba(){
@@ -55,6 +76,10 @@ export class VocabularioComponent implements OnInit {
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
     }
+  }
+
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
   }
 
   finalizarSubprueba(){

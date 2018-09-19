@@ -14,7 +14,9 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
 export class DisenoCubosComponent implements OnInit {
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0];
+  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false, 
+  false, false, false, false, false, false];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
@@ -56,9 +58,28 @@ export class DisenoCubosComponent implements OnInit {
     }
   }
 
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
+  }
+
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
-    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
+    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }  
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 6 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }
+    if((numeroReactivo == 3 || numeroReactivo == 2) 
+        && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
+      this.habilitaReactivo[numeroReactivo -1] = false;            
+      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    }
   }
 
   calificarSubprueba(){
@@ -78,7 +99,6 @@ export class DisenoCubosComponent implements OnInit {
       i++;
     }
   }
-
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;

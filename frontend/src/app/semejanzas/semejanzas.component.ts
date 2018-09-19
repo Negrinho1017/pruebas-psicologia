@@ -19,10 +19,11 @@ export class SemejanzasComponent implements OnInit {
   "17. Permitir - Restreingir","18. Enemigo - Amigo"];
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false, 
+    false, false, false, false, false, false];
   subprueba: Subprueba = new Subprueba();
-  reactivoActual: Reactivo;
-  hayDiscontinuacion: boolean = false;
+  reactivoActual: Reactivo;  
   constructor( private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
@@ -31,6 +32,24 @@ export class SemejanzasComponent implements OnInit {
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 5 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo-1] < 2)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }
+    if( numeroReactivo == 2 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo+1] < 2)){
+      this.habilitaReactivo[numeroReactivo -1] = false;            
+      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    }
+  }
+
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
   }
 
   calificarSubprueba(){
