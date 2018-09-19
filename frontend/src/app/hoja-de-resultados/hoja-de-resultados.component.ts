@@ -36,6 +36,12 @@ export class HojaDeResultadosComponent implements OnInit {
   graficaRazonamientoPerceptual: Chart;
   graficaMemoriaDeTrabajo: Chart;
   graficaVelocidadProcesamiento: Chart;
+
+  comprensionVerbal: number;
+  razonamientoPerceptual: number;
+  memoriaDeTrabajo: number;
+  velocidadDeProcesamiento: number;
+  CITotal: number;
   constructor( private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { 
     }
@@ -71,6 +77,13 @@ export class HojaDeResultadosComponent implements OnInit {
       this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural,
       this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural,
       this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural];
+
+      this.comprensionVerbal = this.prueba.ramaDelConocimiento[0].puntuacionTotal;
+      this.razonamientoPerceptual = this.prueba.ramaDelConocimiento[1].puntuacionTotal;
+      this.memoriaDeTrabajo = this.prueba.ramaDelConocimiento[2].puntuacionTotal;
+      this.velocidadDeProcesamiento = this.prueba.ramaDelConocimiento[3].puntuacionTotal;
+      this.CITotal = this.comprensionVerbal + this.razonamientoPerceptual + this.memoriaDeTrabajo
+      + this.velocidadDeProcesamiento;
 
       this.graficar();
     });

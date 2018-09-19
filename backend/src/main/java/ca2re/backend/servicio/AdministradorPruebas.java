@@ -30,14 +30,13 @@ public class AdministradorPruebas {
 		if(ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas()==null) {
 			ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(
 					new ArrayList<Subprueba>());
-			ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacion(0);
+			ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacionTotal(0);
 		}
 		List<Subprueba> subpruebas = ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas();
 		subpruebas.add(subprueba);
 		ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(subpruebas);
-		ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacion(
-				ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacion()+subprueba.getPuntuacionEscalar());
-		System.out.println(ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacion());
+		ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacionTotal(
+				ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacionTotal()+subprueba.getPuntuacionEscalar());
 		prueba.setRamaDelConocimiento(ramasDelConocimiento);
 		return prueba;
 	}

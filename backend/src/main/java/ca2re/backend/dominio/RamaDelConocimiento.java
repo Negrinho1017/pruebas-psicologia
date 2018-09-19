@@ -38,11 +38,11 @@ public class RamaDelConocimiento {
 		this.subpruebas = subpruebas;
 	}
 
-	public int getPuntuacion() {
+	public int getPuntuacionTotal() {
 		return puntuacionTotal;
 	}
 
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacionTotal(int puntuacion) {
 		this.puntuacionTotal = puntuacion;
 	}
 
