@@ -65,8 +65,7 @@ public class AdministradorPruebas {
 	
 	public int obtenerPuntuacionEscalarDisenioCubos(String idEdad, int puntuacionNatural) {
 		String[] rangosDisenioCubos =  calificacionWaisDAO.obtenerDisenioDeCubosPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosDisenioCubos, puntuacionNatural);
-		
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosDisenioCubos, puntuacionNatural);		
 	}
 	
 	public int obtenerPuntuacionEscalarSemejanzas(String idEdad, int puntuacionNatural) {
@@ -74,10 +73,43 @@ public class AdministradorPruebas {
 		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosSemejanzas, puntuacionNatural);
 	}
 	
-	public int obtenerPuntuacionRetencionDigitos(String idEdad, int puntuacionNatural) {
+	public int obtenerPuntuacionEscalarRetencionDigitos(String idEdad, int puntuacionNatural) {
 		String[] rangosRetencionDigitos =  calificacionWaisDAO.obtenerRetencionDigitosPorIdEdad(idEdad);
 		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosRetencionDigitos, puntuacionNatural);		
 	}
 	
-	//Faltan las otras
+	public int obtenerPuntuacionEscalarMatrices(String idEdad, int puntuacionNatural) {
+		String[] rangosMatrices =  calificacionWaisDAO.obtenerMatricesPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosMatrices, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarVocabulario(String idEdad, int puntuacionNatural) {
+		String[] rangosVocabulario =  calificacionWaisDAO.obtenerVocabularioPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosVocabulario, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarAritmetica(String idEdad, int puntuacionNatural) {
+		String[] rangosAritmetica =  calificacionWaisDAO.obtenerAritmeticaPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosAritmetica, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarBusquedaSimbolos(String idEdad, int puntuacionNatural) {
+		String[] rangosBusquedaSimbolos =  calificacionWaisDAO.obtenerBusquedaDeSimbolosPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosBusquedaSimbolos, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarRompecabezasVisual(String idEdad, int puntuacionNatural) {
+		String[] rangosRompecabezasVisual =  calificacionWaisDAO.obtenerRompecabezasVisualPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosRompecabezasVisual, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarInformacion(String idEdad, int puntuacionNatural) {
+		String[] rangosInformacion =  calificacionWaisDAO.obtenerInformacionPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosInformacion, puntuacionNatural);		
+	}
+	
+	public int obtenerPuntuacionEscalarClaves(String idEdad, int puntuacionNatural) {
+		String[] rangosClaves =  calificacionWaisDAO.obtenerClavesPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);		
+	}
 }

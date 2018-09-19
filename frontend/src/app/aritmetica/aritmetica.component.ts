@@ -5,6 +5,7 @@ import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { Router } from '@angular/router';
+import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-aritmetica',
@@ -25,7 +26,7 @@ export class AritmeticaComponent implements OnInit {
   hayDiscontinuacion: boolean = false;
   puntuacion: number = 0;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Aritmética";
@@ -58,8 +59,12 @@ export class AritmeticaComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-    this.router.navigate(['/busqueda-simbolos']);
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarAritmetica("20:0-24:11",this.subprueba.puntuacionNatural)
+    .subscribe(res => {
+      this.subprueba.puntuacionEscalar = res;
+      this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.router.navigate(['/busqueda-simbolos']);
+    }); 
   }
 
 }

@@ -10,11 +10,19 @@
       <tr *ngFor="let item of subpruebas; let i = index">
         <td class="puntuacionEcalarActivada">{{item}}</td>
         <td class="puntuacionEcalarActivada">{{this.puntuacionesNaturales[i]}}</td>
-        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==1 || i==4 || i==8)}"></td>
-        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==0 || i==3 || i==7)}"></td>
-        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==2 || i==5)}"></td>
-        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==6 || i==9)}"></td>
-        <td class="puntuacionEcalarActivada"></td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==1 || i==4 || i==8)}">
+          <p *ngIf="i==1 || i==4 || i==8">{{this.puntuacionesEscalares[i]}}</p>
+        </td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==0 || i==3 || i==7)}">
+          <p *ngIf="i==0 || i==3 || i==7">{{this.puntuacionesEscalares[i]}}</p>
+        </td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==2 || i==5)}">
+          <p *ngIf="i==2 || i==5">{{this.puntuacionesEscalares[i]}}</p>
+        </td>
+        <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==6 || i==9)}">
+          <p *ngIf="i==6 || i==9">{{this.puntuacionesEscalares[i]}}</p>
+        </td>
+        <td class="puntuacionEcalarActivada">{{this.puntuacionesEscalares[i]}}</td>
       </tr>
       <tr>
     </table>

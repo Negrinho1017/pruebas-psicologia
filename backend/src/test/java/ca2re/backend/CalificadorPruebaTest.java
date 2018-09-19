@@ -56,10 +56,10 @@ public class CalificadorPruebaTest {
 		int calificacionDisenioCubos = administradorPruebas.obtenerPuntuacionEscalarDisenioCubos("20:0-24:11", 43);
 		int calificacionSemejanzas = administradorPruebas.obtenerPuntuacionEscalarSemejanzas("20:0-24:11", 25);
 		int calificacionSemejanzas2 = administradorPruebas.obtenerPuntuacionEscalarSemejanzas("20:0-24:11", 18);
-		int calificacionRetencionDigitos = administradorPruebas.obtenerPuntuacionRetencionDigitos("20:0-24:11", 27);
+		int calificacionRetencionDigitos = administradorPruebas.obtenerPuntuacionEscalarRetencionDigitos("20:0-24:11", 27);
 		assertEquals(9, calificacionDisenioCubos);
 		assertEquals(13, calificacionSemejanzas);
 		assertEquals(10, calificacionRetencionDigitos);
-		assertEquals(8,calificacionSemejanzas2);
+		assertEquals(9,calificacionSemejanzas2);
 	}
 }

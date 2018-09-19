@@ -4,6 +4,7 @@ import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { Router } from '@angular/router';
+import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-diseno-cubos',
@@ -17,6 +18,7 @@ export class DisenoCubosComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  puntuacionEscalar: any;
   contador: number[][] = [
     [0, 0],
     [0, 0],
@@ -38,7 +40,7 @@ export class DisenoCubosComponent implements OnInit {
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png",
     "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
@@ -77,10 +79,16 @@ export class DisenoCubosComponent implements OnInit {
     }
   }
 
+
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-    this.router.navigate(['/semejanzas']);
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos("20:0-24:11",this.subprueba.puntuacionNatural)
+    .subscribe(res => {
+      this.subprueba.puntuacionEscalar = res;
+      this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.router.navigate(['/semejanzas']);
+    });
+    
   }
 
 }

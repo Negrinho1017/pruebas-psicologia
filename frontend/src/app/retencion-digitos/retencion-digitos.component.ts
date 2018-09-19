@@ -5,6 +5,7 @@ import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
+import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-retencion-digitos',
@@ -47,7 +48,7 @@ export class RetencionDigitosComponent implements OnInit {
   hayDiscontinuacion: boolean;
   constructor( private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.construirRespuestasRDI();
@@ -123,8 +124,13 @@ export class RetencionDigitosComponent implements OnInit {
     this.subprueba.numeroSubprueba = 3;
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.subprueba.nombre="Retención de dígitos";
-    this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-    this.router.navigate(['/matrices']);
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDigitos("20:0-24:11",this.subprueba.puntuacionNatural)
+    .subscribe(res => {
+      this.subprueba.puntuacionEscalar = res;
+      this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.router.navigate(['/matrices']);
+    });
+    
   }
 
 }

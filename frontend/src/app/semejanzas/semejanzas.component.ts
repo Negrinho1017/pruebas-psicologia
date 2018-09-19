@@ -4,6 +4,7 @@ import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
+import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-semejanzas',
@@ -24,7 +25,7 @@ export class SemejanzasComponent implements OnInit {
   hayDiscontinuacion: boolean = false;
   constructor( private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
@@ -57,8 +58,13 @@ export class SemejanzasComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-    this.router.navigate(['/retencion-digitos']);
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas("20:0-24:11",this.subprueba.puntuacionNatural)
+    .subscribe(res => {
+      this.subprueba.puntuacionEscalar = res;
+      this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.router.navigate(['/retencion-digitos']);
+    });
+    
   }
 
 }

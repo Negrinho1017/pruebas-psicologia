@@ -15,7 +15,7 @@ export class HojaDeResultadosComponent implements OnInit {
     "Vocabulario", "Aritmética", "Búsqueda de símbolos", "Rompecabezas visual", "Información",
     "Claves"];
   prueba: Prueba;
-  puntuacionesNaturales: number[] = [];
+  puntuacionesEscalares: number[] = [];
 
   puntajeSemejanzas: number;
   puntajeRetencionDigitos: number;
@@ -26,7 +26,7 @@ export class HojaDeResultadosComponent implements OnInit {
   puntajeRompecabezasVisual: number;
   puntajeInformacion: number;
   puntajeClaves: number;
-
+  puntuacionesNaturales: number[] = [];
   puntuacionesComprensionVerbal: number[];
   puntuacionesRazonamientoPerceptual: number[];
   puntuacionesMemoriaDeTrabajo: number[];
@@ -44,22 +44,34 @@ export class HojaDeResultadosComponent implements OnInit {
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
-      this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural]
-      this.puntuacionesRazonamientoPerceptual = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural];
-      this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural];
-      this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural,
-      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural]    
-      this.puntuacionesNaturales = [this.puntuacionesRazonamientoPerceptual[0],
+      this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionEscalar]
+      this.puntuacionesRazonamientoPerceptual = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionEscalar];
+      this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionEscalar];
+      this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionEscalar]    
+      this.puntuacionesEscalares = [this.puntuacionesRazonamientoPerceptual[0],
       this.puntuacionesComprensionVerbal[0], this.puntuacionesMemoriaDeTrabajo[0],
       this.puntuacionesRazonamientoPerceptual[1], this.puntuacionesComprensionVerbal[1],
       this.puntuacionesMemoriaDeTrabajo[1], this.puntuacionesVelocidadDeProcesamiento[0],
       this.puntuacionesRazonamientoPerceptual[2], this.puntuacionesComprensionVerbal[2],
-      this.puntuacionesMemoriaDeTrabajo[1]];
+      this.puntuacionesVelocidadDeProcesamiento[1]];
+
+      this.puntuacionesNaturales = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural,
+      this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural];
+
       this.graficar();
     });
   }
@@ -81,15 +93,15 @@ export class HojaDeResultadosComponent implements OnInit {
           name: "Comprensión verbal",
           data: [{
             name: 'Semejanzas',
-            y: this.puntuacionesNaturales[1]
+            y: this.puntuacionesEscalares[1]
           },
           {
             name: 'Vocabulario',
-            y: this.puntuacionesNaturales[4]
+            y: this.puntuacionesEscalares[4]
           },
           {
             name: 'Información',
-            y: this.puntuacionesNaturales[8]
+            y: this.puntuacionesEscalares[8]
           }]
         }
       ]
@@ -111,15 +123,15 @@ export class HojaDeResultadosComponent implements OnInit {
           name: "Razonamiento perceptual",
           data: [{
             name: 'Diseño de cubos',
-            y: this.puntuacionesNaturales[0]
+            y: this.puntuacionesEscalares[0]
           },
           {
             name: 'Matrices',
-            y: this.puntuacionesNaturales[3]
+            y: this.puntuacionesEscalares[3]
           },
           {
             name: 'Rompecabezas visual',
-            y: this.puntuacionesNaturales[7]
+            y: this.puntuacionesEscalares[7]
           }]
         }
       ]
@@ -141,11 +153,11 @@ export class HojaDeResultadosComponent implements OnInit {
           name: "Memoria de trabajo",
           data: [{
             name: 'Retención de dígitos',
-            y: this.puntuacionesNaturales[2]
+            y: this.puntuacionesEscalares[2]
           },
           {
             name: 'Aritmética',
-            y: this.puntuacionesNaturales[5],
+            y: this.puntuacionesEscalares[5],
           }],
         }
       ]
@@ -167,11 +179,11 @@ export class HojaDeResultadosComponent implements OnInit {
           name: "Velocidad de procesamiento",
           data: [{
             name: 'Búsqueda de símbolos',
-            y: this.puntuacionesNaturales[6]
+            y: this.puntuacionesEscalares[6]
           },
           {
             name: 'Claves',
-            y: this.puntuacionesNaturales[9]
+            y: this.puntuacionesEscalares[9]
           }]
         }
       ]
