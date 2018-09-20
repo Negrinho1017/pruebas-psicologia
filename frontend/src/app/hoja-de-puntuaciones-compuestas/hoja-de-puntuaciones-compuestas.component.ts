@@ -17,22 +17,62 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   indices: String[] = ["ICV", "IRP", "IMT", "IVP", "CIT"];
   grafica: Chart;
   puntuacionesCompuestas: PuntuacionCompuesta[] = [];
+
+  puntuacionCompuestaICV: PuntuacionCompuesta = new PuntuacionCompuesta();
+  puntuacionCompuestaIRP: PuntuacionCompuesta = new PuntuacionCompuesta();
+  puntuacionCompuestaIMT: PuntuacionCompuesta = new PuntuacionCompuesta();
+  puntuacionCompuestaIVP: PuntuacionCompuesta = new PuntuacionCompuesta();
+  puntuacionCompuestaCIT: PuntuacionCompuesta = new PuntuacionCompuesta();
   constructor(private router: Router, private globals: Globals,
     private hojaDePuntuacionesCompuestasService: HojaDePuntuacionesCompuestasService) { }
 
   ngOnInit() {
     var i = 0;
+    this.obtenerPuntuacionCompuestaICV(this.puntuacionesEscalares[0]);
+    this.obtenerPuntuacionCompuestaIRP(this.puntuacionesEscalares[1]);
+    this.obtenerPuntuacionCompuestaIMT(this.puntuacionesEscalares[2]);
+    this.obtenerPuntuacionCompuestaIVP(this.puntuacionesEscalares[3]);
+    this.obtenerPuntuacionCompuestaCIT(this.puntuacionesEscalares[4]);
     //this.puntuacionesEscalares[4] = this.globals.CITotal;
-    for (let puntuacion of this.puntuacionesEscalares) {
-      this.obtenerPuntuacionCompuesta("ICV", puntuacion,i);
-      i++;
-    }
   }
 
-  obtenerPuntuacionCompuesta(idIndice: String, puntuacionTotal: number, posicion: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta(idIndice, puntuacionTotal)
+  obtenerPuntuacionCompuestaICV(puntuacionTotal: number) {
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
       .subscribe(res => {
-        this.puntuacionesCompuestas[posicion] = res;
+        this.puntuacionCompuestaICV = res;
+        this.puntuacionesCompuestas[0] = this.puntuacionCompuestaICV;
+      });
+  }
+
+  obtenerPuntuacionCompuestaIRP(puntuacionTotal: number) {
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+      .subscribe(res => {
+        this.puntuacionCompuestaIVP = res;
+        this.puntuacionesCompuestas[1] = this.puntuacionCompuestaIVP;
+      });
+  }
+
+  obtenerPuntuacionCompuestaIMT(puntuacionTotal: number) {
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+      .subscribe(res => {
+        this.puntuacionCompuestaIMT = res;
+        this.puntuacionesCompuestas[2] = this.puntuacionCompuestaIMT;
+      });
+  }
+
+  obtenerPuntuacionCompuestaIVP(puntuacionTotal: number) {
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+      .subscribe(res => {
+        this.puntuacionCompuestaIVP = res;
+        this.puntuacionesCompuestas[3] = this.puntuacionCompuestaIVP;
+      });
+  }
+
+  obtenerPuntuacionCompuestaCIT(puntuacionTotal: number) {
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+      .subscribe(res => {
+        this.puntuacionCompuestaCIT = res;
+        this.puntuacionesCompuestas[4] = this.puntuacionCompuestaCIT;
         this.graficar();
       });
   }

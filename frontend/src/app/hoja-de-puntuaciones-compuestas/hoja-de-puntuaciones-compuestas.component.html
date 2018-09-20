@@ -7,8 +7,8 @@
     <th>Rango percentil</th>
     <th>Intervalo de confianza</th>
   </tr>
-  <tr *ngFor="let item of ramasDelConocimiento; let i = index">
-    <td>{{item}}</td>
+  <tr *ngFor="let item of puntuacionesCompuestas; let i = index">
+    <td>{{ramasDelConocimiento[i]}}</td>
     <td>{{puntuacionesEscalares[i]}}</td>
     <td>{{indices[i]}}</td>
     <td>{{puntuacionesCompuestas[i].puntuacion}}</td>
