@@ -51,8 +51,10 @@
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
           <!--<textarea></textarea>-->
         </td>
-        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"></td>
-        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"
+          [disabled]="habilitarReactivo(i)"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
       </tr>
     </table>
   </div>
