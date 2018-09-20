@@ -44,14 +44,18 @@
         <th>1</th>
       </tr>
       <tr *ngFor="let item of respuestasCorrectas; let i = index">
-        <td><p *ngIf="i==4">16-90</p></td>
-        <td>{{i+1}}</td>
-        <td><p *ngIf="i<=6">20''</p>
-          <p *ngIf="i>6">30''</p></td>
+        <td><p *ngIf="i==6">16-90</p></td>
+        <td><p *ngIf="i>1">{{i-1}}</p>
+          <p *ngIf="i==0">M.</p>
+          <p *ngIf="i==1">P.</p></td>
+        <td><p *ngIf="i<=8 && i>1">20''</p>
+          <p *ngIf="i>8">30''</p></td>
         <td><app-cronometro></app-cronometro></td>
         <td>{{item}}</td>
-        <td><input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)"></td>
-        <td><input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)"></td>
+        <td><input *ngIf="i>1" type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)"
+          [disabled]="habilitarReactivo(i)"></td>
+        <td><input *ngIf="i>1" type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Rompecabezas visual: <br>

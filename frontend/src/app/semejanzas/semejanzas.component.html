@@ -44,11 +44,11 @@
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
         </td>
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
         <td><input type="radio" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>

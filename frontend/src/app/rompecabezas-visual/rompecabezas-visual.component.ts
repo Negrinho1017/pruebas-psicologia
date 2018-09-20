@@ -12,11 +12,14 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./rompecabezas-visual.component.css']
 })
 export class RompecabezasVisualComponent implements OnInit {
-  respuestasCorrectas: String[] = ["2, 3, 5","1, 2, 5","1, 4, 6","2, 3, 6","3, 5, 6","1, 3, 6","2, 5, 6","1, 3, 4",
+  respuestasCorrectas: String[] = ["1, 2, 6","1, 3, 6","2, 3, 5","1, 2, 5","1, 4, 6","2, 3, 6","3, 5, 6","1, 3, 6","2, 5, 6","1, 3, 4",
 "1, 3, 6","1, 2, 5", "1, 2, 5", "1, 4, 5","3, 4, 6","2, 3, 4","1, 2, 6","3, 4, 6","1, 2, 6", "2, 3, 5",
 "1, 5, 6","2, 3, 5","1 ,3 ,4","1, 5, 6","3, 4, 6","3, 4, 5","1, 2, 3","3, 4, 6"];
 puntuacion: number = 0;
-listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+listaCalificaciones: number[] = [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+habilitaReactivo: boolean[] = [true, true, true, true, true, true, false, false, false, 
+  false, false, false, false, false, false, false, false, false, false, false, false,
+  false, false, false, false, false, false];
 reactivosCalificados: Reactivo[] = [];
 subprueba: Subprueba = new Subprueba();
 reactivoActual: Reactivo;
@@ -32,6 +35,25 @@ hayDiscontinuacion: boolean = false;
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }
+    if( (numeroReactivo == 4 || numeroReactivo == 3) 
+        && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
+      this.habilitaReactivo[numeroReactivo -1] = false;            
+      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    }
+  }
+
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
   }
 
   calificarSubprueba(){
