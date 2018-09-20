@@ -13,6 +13,7 @@ import { DisenoCubosComponent } from './diseno-cubos/diseno-cubos.component';
 import { ClavesComponent } from './claves/claves.component'
 import { HojaDeResultadosComponent } from './hoja-de-resultados/hoja-de-resultados.component'
 import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component'
+import { HojaDePuntuacionesCompuestasComponent } from './hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component'
 import { Globals } from './globals';
 
 const routes: Routes =[
@@ -28,7 +29,8 @@ const routes: Routes =[
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent },
   { path: 'informacion', component: InformacionComponent },
   { path: 'claves', component: ClavesComponent },
-  { path: 'hoja-resultados', component: HojaDeResultadosComponent }
+  { path: 'hoja-resultados', component: HojaDeResultadosComponent },
+  { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent }
 ]
 
 @NgModule({

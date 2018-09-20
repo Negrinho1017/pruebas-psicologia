@@ -43,7 +43,7 @@ export class HojaDeResultadosComponent implements OnInit {
   velocidadDeProcesamiento: number;
   CITotal: number;
   constructor( private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private globals: Globals) { 
+    private router: Router, private globals: Globals ) { 
     }
 
   ngOnInit() {
@@ -84,7 +84,7 @@ export class HojaDeResultadosComponent implements OnInit {
       this.velocidadDeProcesamiento = this.prueba.ramaDelConocimiento[3].puntuacionTotal;
       this.CITotal = this.comprensionVerbal + this.razonamientoPerceptual + this.memoriaDeTrabajo
       + this.velocidadDeProcesamiento;
-
+      this.globals.CITotal = this.CITotal;
       this.graficar();
     });
   }

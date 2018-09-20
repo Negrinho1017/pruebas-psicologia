@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <th>Escala</th>
+    <th>Suma de puntuaciones escalares</th>
+    <th>Índice</th>
+    <th>Puntuación compuesta</th>
+    <th>Rango percentil</th>
+    <th>Intervalo de confianza</th>
+  </tr>
+  <tr *ngFor="let item of ramasDelConocimiento; let i = index">
+    <td>{{item}}</td>
+    <td>{{puntuacionesEscalares[i]}}</td>
+    <td>{{indices[i]}}</td>
+    <td>{{puntuacionesCompuestas[i].puntuacion}}</td>
+    <td>{{puntuacionesCompuestas[i].rangoPercentil}}</td>
+    <td>{{puntuacionesCompuestas[i].intervaloConfianza}}</td>
+  </tr>
+</table>
+<div>
+  <div [chart]="grafica"></div>
+</div>

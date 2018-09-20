@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca2re.backend.dominio.PuntuacionCompuesta;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
@@ -17,10 +18,13 @@ public class PuntuacionCompuestaController {
 	@Autowired
 	AdministradorPruebas administradorPruebas;
 	
-	@RequestMapping(value = "/puntuacion", method = RequestMethod.GET)
+	@RequestMapping(value = "/componentes-puntuacion", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionCompuesta(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
-		return administradorPruebas.obtenerPuntuacionCompuesta(idIndice, puntuacionTotal);
+	public PuntuacionCompuesta obtenerPuntuacionCompuesta(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
+		int puntuacion = administradorPruebas.obtenerPuntuacionCompuesta(idIndice, puntuacionTotal);
+		String intervaloConfianza = administradorPruebas.obtenerIntervaloConfianza(idIndice, puntuacionTotal);
+		double percentil = administradorPruebas.obtenerPercentil(idIndice, puntuacionTotal);
+		return new PuntuacionCompuesta(puntuacion, percentil, intervaloConfianza);
 	}
 	
 	@RequestMapping(value = "/rango-percentil", method = RequestMethod.GET)
