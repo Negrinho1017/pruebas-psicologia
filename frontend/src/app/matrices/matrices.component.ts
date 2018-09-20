@@ -12,9 +12,12 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./matrices.component.css']
 })
 export class MatricesComponent implements OnInit {
-  respuestasCorrectas: number[] = [3,2,1,5,3,4,4,5,1,5,2,3,1,1,5,2,3,2,1,4,5,1,4,2,3,4];
+  respuestasCorrectas: number[] = [5,4,3,2,1,5,3,4,4,5,1,5,2,3,1,1,5,2,3,2,1,4,5,1,4,2,3,4];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false, 
+    false, false, false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -30,6 +33,24 @@ export class MatricesComponent implements OnInit {
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 6 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }
+    if( numeroReactivo == 3 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
+      this.habilitaReactivo[numeroReactivo -1] = false;            
+      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    }
+  }
+
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
   }
 
   calificarSubprueba(){

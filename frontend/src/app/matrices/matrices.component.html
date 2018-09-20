@@ -38,12 +38,17 @@
       </tr>
       <tr *ngFor="let item of respuestasCorrectas; let i = index">
         <td>
-          <p *ngIf="i==3">16-90</p>
+          <p *ngIf="i==5">16-90</p>
         </td>
-        <td>{{i+1}}</td>
+        <td><p *ngIf="i>1">{{i-1}}</p>
+          <p *ngIf="i==0">MA.</p>
+          <p *ngIf="i==1">MB.</p>
+        </td>
         <td><b>{{item}}</b></td>
-        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"></td>
-        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
+          [disabled]="habilitarReactivo(i)"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
