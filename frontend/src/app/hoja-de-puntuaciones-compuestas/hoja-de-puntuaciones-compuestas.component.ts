@@ -13,7 +13,7 @@ import { PuntuacionCompuesta } from '../model/PuntuacionCompuesta';
 export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   ramasDelConocimiento: String[] = ["Comprensión verbal", "Razonamiento perceptual", "Memoria de trabajo",
     "Velocidad de procesamiento", "CI Total"];
-  puntuacionesEscalares: number[] = [24, 18, 22, 16, 20];
+  puntuacionesEscalares: number[] = [24, 18, 22, 16, 80];
   indices: String[] = ["ICV", "IRP", "IMT", "IVP", "CIT"];
   grafica: Chart;
   puntuacionesCompuestas: PuntuacionCompuesta[] = [];
@@ -69,7 +69,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   obtenerPuntuacionCompuestaCIT(puntuacionTotal: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("CIT", puntuacionTotal)
       .subscribe(res => {
         this.puntuacionCompuestaCIT = res;
         this.puntuacionesCompuestas[4] = this.puntuacionCompuestaCIT;
@@ -91,7 +91,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       series: [
         {
           color: 'black',
-          name: "Puntuaciones compuestas",
+          name: "Puntuación compuesta",
           data: [{
             name: 'Comprensión verbal',
             y: this.puntuacionesCompuestas[0].puntuacion
