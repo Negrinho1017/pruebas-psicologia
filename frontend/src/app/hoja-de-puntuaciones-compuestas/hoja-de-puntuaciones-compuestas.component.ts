@@ -45,7 +45,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   obtenerPuntuacionCompuestaIRP(puntuacionTotal: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("IRP", puntuacionTotal)
       .subscribe(res => {
         this.puntuacionCompuestaIVP = res;
         this.puntuacionesCompuestas[1] = this.puntuacionCompuestaIVP;
@@ -53,7 +53,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   obtenerPuntuacionCompuestaIMT(puntuacionTotal: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("IMT", puntuacionTotal)
       .subscribe(res => {
         this.puntuacionCompuestaIMT = res;
         this.puntuacionesCompuestas[2] = this.puntuacionCompuestaIMT;
@@ -61,7 +61,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   obtenerPuntuacionCompuestaIVP(puntuacionTotal: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("ICV", puntuacionTotal)
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("IVP", puntuacionTotal)
       .subscribe(res => {
         this.puntuacionCompuestaIVP = res;
         this.puntuacionesCompuestas[3] = this.puntuacionCompuestaIVP;

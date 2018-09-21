@@ -78,15 +78,15 @@ export class DisenoCubosComponent implements OnInit {
       this.listaCalificaciones[numeroReactivo - 3] = 0;
       this.siguienteReactivo = 4;
     }
-    else if((numeroReactivo == 3 || numeroReactivo == 2) {
-      if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+    else if((numeroReactivo == 3 || numeroReactivo == 2)) {
+      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
         this.habilitaReactivo[numeroReactivo -1] = false;            
         this.listaCalificaciones[numeroReactivo - 1] = 0;            
         this.siguienteReactivo = numeroReactivo -1;
-      } 
+      }
       else {
         this.siguienteReactivo = 7;
-      }     
+      }  
     }
     else{
       if(numeroReactivo == 4){
