@@ -202,4 +202,8 @@ export class HojaDeResultadosComponent implements OnInit {
       ]
     });
   }
+
+  siguiente(){
+    this.router.navigate(['/hoja-puntuaciones-compuestas']);
+  }
 }

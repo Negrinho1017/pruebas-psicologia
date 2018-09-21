@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HojaDePuntuacionesCompuestasService } from './hoja-de-puntuaciones-compuestas.service';
 import { Chart } from 'angular-highcharts';
 import { PuntuacionCompuesta } from '../model/PuntuacionCompuesta';
+import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
+import { Prueba } from '../model/Prueba';
 
 @Component({
   selector: 'app-hoja-de-puntuaciones-compuestas',
@@ -16,6 +18,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   puntuacionesEscalares: number[] = [24, 18, 22, 16, 80];
   indices: String[] = ["ICV", "IRP", "IMT", "IVP", "CIT"];
   grafica: Chart;
+  prueba: Prueba = new Prueba();
   puntuacionesCompuestas: PuntuacionCompuesta[] = [];
 
   puntuacionCompuestaICV: PuntuacionCompuesta = new PuntuacionCompuesta();
@@ -24,15 +27,19 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   puntuacionCompuestaIVP: PuntuacionCompuesta = new PuntuacionCompuesta();
   puntuacionCompuestaCIT: PuntuacionCompuesta = new PuntuacionCompuesta();
   constructor(private router: Router, private globals: Globals,
-    private hojaDePuntuacionesCompuestasService: HojaDePuntuacionesCompuestasService) { }
+    private hojaDePuntuacionesCompuestasService: HojaDePuntuacionesCompuestasService,
+    private hojaDeResultadosService: HojaDeResultadosService ) { }
 
   ngOnInit() {
-    var i = 0;
-    this.obtenerPuntuacionCompuestaICV(this.puntuacionesEscalares[0]);
-    this.obtenerPuntuacionCompuestaIRP(this.puntuacionesEscalares[1]);
-    this.obtenerPuntuacionCompuestaIMT(this.puntuacionesEscalares[2]);
-    this.obtenerPuntuacionCompuestaIVP(this.puntuacionesEscalares[3]);
-    this.obtenerPuntuacionCompuestaCIT(this.puntuacionesEscalares[4]);
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.prueba = res;
+      this.obtenerPuntuacionCompuestaICV(this.prueba.ramaDelConocimiento[0].puntuacionTotal);
+      this.obtenerPuntuacionCompuestaIRP(this.prueba.ramaDelConocimiento[1].puntuacionTotal);
+      this.obtenerPuntuacionCompuestaIMT(this.prueba.ramaDelConocimiento[2].puntuacionTotal);
+      this.obtenerPuntuacionCompuestaIVP(this.prueba.ramaDelConocimiento[3].puntuacionTotal);
+      this.obtenerPuntuacionCompuestaCIT(this.globals.CITotal);
+    });
     //this.puntuacionesEscalares[4] = this.globals.CITotal;
   }
 
@@ -116,5 +123,4 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       ]
     });
   }
-
 }

@@ -28,11 +28,21 @@
     <table>
       <tr>
         <th></th>
-        <th><h6>Comprensión verbal</h6></th>
-        <th><h6>Razonamiento perceptual</h6></th>
-        <th><h6>Memoria de trabajo</h6></th>
-        <th><h6>Velocidad de procesamiento</h6></th>
-        <th><h6>CI Total</h6></th>
+        <th>
+          <h6>Comprensión verbal</h6>
+        </th>
+        <th>
+          <h6>Razonamiento perceptual</h6>
+        </th>
+        <th>
+          <h6>Memoria de trabajo</h6>
+        </th>
+        <th>
+          <h6>Velocidad de procesamiento</h6>
+        </th>
+        <th>
+          <h6>CI Total</h6>
+        </th>
       </tr>
       <tr>
         <td class="puntuacionEcalarActivada">Suma de puntuaciones escalares</td>
@@ -50,4 +60,8 @@
     <div [chart]="graficaMemoriaDeTrabajo" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
     <div [chart]="graficaVelocidadProcesamiento" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
   </div>
+  <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="siguiente()" id="btnPrueba"> Ver
+    puntuaciones compuestas
+    <span class="glyphicon glyphicon-arrow-right"></span>
+  </button>
 </body>
