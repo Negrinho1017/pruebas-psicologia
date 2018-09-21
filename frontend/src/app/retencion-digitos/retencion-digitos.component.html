@@ -49,8 +49,10 @@
           <td>
             {{item}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)"><br>
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)"
+            [disabled] = "habilitarReactivo(i)"><br>
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)"
+            [disabled] = "habilitarReactivo(i)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDD: <br>

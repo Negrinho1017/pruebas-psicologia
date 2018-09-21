@@ -46,9 +46,9 @@
         </td>
         <td><b>{{item}}</b></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" *ngIf="i>=2"></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)" *ngIf="i>=2"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
