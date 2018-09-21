@@ -89,8 +89,6 @@ export class RetencionDigitosComponent implements OnInit {
       }
     }      
   }    
-  
-
 
   obtenerResultadoRDD(){
     for (let puntuacionReactivo of this.listaCalificacionesRDD) {
