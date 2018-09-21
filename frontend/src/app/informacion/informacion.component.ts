@@ -18,7 +18,10 @@ export class InformacionComponent implements OnInit {
   "18. Hervir","19. Órgano","20. Lengua","21. Catalina","*22. Vasos sanguíneos","23. Sherlock Holmes",
   "*24. Minutos","25. Alicia","*26. Circunferencia"];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  habilitaReactivo: boolean[] = [true, true, false, false, false, false, false, false, false, 
+    false, false, false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -34,6 +37,20 @@ export class InformacionComponent implements OnInit {
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+  }
+
+  aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+    if(numeroReactivo == 3 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+      this.habilitaReactivo[numeroReactivo -2] = false;
+      this.habilitaReactivo[numeroReactivo - 3] = false;
+      this.listaCalificaciones[numeroReactivo - 2] = 0;
+      this.listaCalificaciones[numeroReactivo - 3] = 0;
+    }    
+  }
+
+  habilitarReactivo(i): boolean {
+    return this.habilitaReactivo[i];
   }
 
   calificarSubprueba(){
@@ -43,7 +60,8 @@ export class InformacionComponent implements OnInit {
     this.subprueba.puntuacionNatural=this.puntuacion;
     this.crearReactivos();
     this.puntuacion = 0; 
-}
+  }
+
   crearReactivos(){
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
@@ -64,5 +82,4 @@ export class InformacionComponent implements OnInit {
     });
     
   }
-
 }
