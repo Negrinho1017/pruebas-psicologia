@@ -5,4 +5,5 @@ import { Injectable } from "@angular/core";
 export class Globals {
     idEvaluado: String;
     CITotal: number;
+    puntuacionesCompuestas: number[];
 }

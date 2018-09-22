@@ -85,6 +85,7 @@ export class HojaDeResultadosComponent implements OnInit {
       this.CITotal = this.comprensionVerbal + this.razonamientoPerceptual + this.memoriaDeTrabajo
       + this.velocidadDeProcesamiento;
       this.globals.CITotal = this.CITotal;
+      this.hojaDeResultadosService.ingresarPuntuacionCompuesta(this.globals.idEvaluado);
       this.graficar();
     });
   }

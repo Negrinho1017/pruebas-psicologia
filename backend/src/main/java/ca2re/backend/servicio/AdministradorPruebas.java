@@ -41,6 +41,33 @@ public class AdministradorPruebas {
 		return prueba;
 	}
 	
+	public Prueba ingresarPuntuacionCompuesta(String idEvaluado) {
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
+		List<RamaDelConocimiento> ramasDelConocimientoActualizadas = new ArrayList<>();
+		int contador = 0;
+		for(RamaDelConocimiento ramaDelConocimiento : ramasDelConocimiento) {
+			ramaDelConocimiento.setIntervaloConfianza(obtenerIntervaloConfianza(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+			ramaDelConocimiento.setRangoPercentil(obtenerPercentil(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+			ramaDelConocimiento.setPuntuacionCompuesta(obtenerPuntuacionCompuesta(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+			ramasDelConocimientoActualizadas.add(ramaDelConocimiento);
+			contador++;
+		}
+		prueba.setRamaDelConocimiento(ramasDelConocimientoActualizadas);
+		return prueba;
+	}
+	public String buscarIdIndice(int ramaDelConocimiento) {
+		if(ramaDelConocimiento == RamasDelConocimiento.COMPRENSION_VERBAL.getValue()) {
+			return "ICV";
+		} else if(ramaDelConocimiento == RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue()) {
+			return "IRP";
+		} else if(ramaDelConocimiento == RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue()) {
+			return "IMT";
+		} else {
+			return "IVP";
+		}
+	}
+	
 	public int buscarRamaDelConocimiento(int numeroSubprueba) {
 		if(esSubpruebaDeComprensionVerbal(numeroSubprueba)) {
 			return RamasDelConocimiento.COMPRENSION_VERBAL.getValue();

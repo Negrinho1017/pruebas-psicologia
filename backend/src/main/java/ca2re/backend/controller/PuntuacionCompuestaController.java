@@ -1,13 +1,18 @@
 package ca2re.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.PuntuacionCompuesta;
+import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
@@ -18,6 +23,9 @@ public class PuntuacionCompuestaController {
 	@Autowired
 	AdministradorPruebas administradorPruebas;
 	
+	@Autowired
+	public PruebaWaisDAO pruebaWaisDAO;
+	
 	@RequestMapping(value = "/componentes-puntuacion", method = RequestMethod.GET)
 	@ResponseBody
 	public PuntuacionCompuesta obtenerPuntuacionCompuesta(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
@@ -27,15 +35,10 @@ public class PuntuacionCompuestaController {
 		return new PuntuacionCompuesta(puntuacion, percentil, intervaloConfianza);
 	}
 	
-	@RequestMapping(value = "/rango-percentil", method = RequestMethod.GET)
+	@RequestMapping(value = "/ingreso-puntuacion-compuesta/{idEvaluado}", method = RequestMethod.PUT)
 	@ResponseBody
-	public double obtenerRangoPercentil(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
-		return administradorPruebas.obtenerPercentil(idIndice, puntuacionTotal);
-	}
-	
-	@RequestMapping(value = "/intervalo-confianza", method = RequestMethod.GET)
-	@ResponseBody
-	public String obtenerIntervaloConfianza(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
-		return administradorPruebas.obtenerIntervaloConfianza(idIndice, puntuacionTotal);
+	public Prueba ingresarPuntuacionCompuesta(@PathVariable(value = "idEvaluado") String idEvaluado) {
+		Prueba prueba = administradorPruebas.ingresarPuntuacionCompuesta(idEvaluado);
+		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
 	}
 }

@@ -7,11 +7,11 @@ public class RamaDelConocimiento {
 	private List<Subprueba> subpruebas;
 	private int puntuacionTotal;
 	private int puntuacionCompuesta;
-	private int rangoPercentil;
+	private double rangoPercentil;
 	private String intervaloConfianza;
 
 	public RamaDelConocimiento(String nombre, List<Subprueba> subpruebas, int puntuacionTotal, int puntuacionCompuesta,
-			int rangoPercentil, String intervaloConfianza) {
+			double rangoPercentil, String intervaloConfianza) {
 		super();
 		this.nombre = nombre;
 		this.subpruebas = subpruebas;
@@ -54,11 +54,11 @@ public class RamaDelConocimiento {
 		this.puntuacionCompuesta = puntuacionCompuesta;
 	}
 
-	public int getRangoPercentil() {
+	public double getRangoPercentil() {
 		return rangoPercentil;
 	}
 
-	public void setRangoPercentil(int rangoPercentil) {
+	public void setRangoPercentil(double rangoPercentil) {
 		this.rangoPercentil = rangoPercentil;
 	}
 

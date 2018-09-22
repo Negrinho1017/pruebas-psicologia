@@ -31,6 +31,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
     private hojaDeResultadosService: HojaDeResultadosService ) { }
 
   ngOnInit() {
+    this.globals.puntuacionesCompuestas = [];
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
@@ -40,7 +41,6 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       this.obtenerPuntuacionCompuestaIVP(this.prueba.ramaDelConocimiento[3].puntuacionTotal);
       this.obtenerPuntuacionCompuestaCIT(this.globals.CITotal);
     });
-    //this.puntuacionesEscalares[4] = this.globals.CITotal;
   }
 
   obtenerPuntuacionCompuestaICV(puntuacionTotal: number) {
@@ -48,14 +48,16 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       .subscribe(res => {
         this.puntuacionCompuestaICV = res;
         this.puntuacionesCompuestas[0] = this.puntuacionCompuestaICV;
+        this.globals.puntuacionesCompuestas[0] = this.puntuacionCompuestaICV.puntuacion;
       });
   }
 
   obtenerPuntuacionCompuestaIRP(puntuacionTotal: number) {
     this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("IRP", puntuacionTotal)
       .subscribe(res => {
-        this.puntuacionCompuestaIVP = res;
-        this.puntuacionesCompuestas[1] = this.puntuacionCompuestaIVP;
+        this.puntuacionCompuestaIRP = res;
+        this.puntuacionesCompuestas[1] = this.puntuacionCompuestaIRP;
+        this.globals.puntuacionesCompuestas[1] = this.puntuacionCompuestaIRP.puntuacion;
       });
   }
 
@@ -64,6 +66,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       .subscribe(res => {
         this.puntuacionCompuestaIMT = res;
         this.puntuacionesCompuestas[2] = this.puntuacionCompuestaIMT;
+        this.globals.puntuacionesCompuestas[2] = this.puntuacionCompuestaIMT.puntuacion;
       });
   }
 
@@ -72,6 +75,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       .subscribe(res => {
         this.puntuacionCompuestaIVP = res;
         this.puntuacionesCompuestas[3] = this.puntuacionCompuestaIVP;
+        this.globals.puntuacionesCompuestas[3] = this.puntuacionCompuestaIVP.puntuacion;
       });
   }
 
@@ -80,6 +84,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       .subscribe(res => {
         this.puntuacionCompuestaCIT = res;
         this.puntuacionesCompuestas[4] = this.puntuacionCompuestaCIT;
+        this.globals.puntuacionesCompuestas[4] = this.puntuacionCompuestaCIT.puntuacion;
         this.graficar();
       });
   }
@@ -101,23 +106,23 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
           name: "Puntuación compuesta",
           data: [{
             name: 'Comprensión verbal',
-            y: this.puntuacionesCompuestas[0].puntuacion
+            y: this.globals.puntuacionesCompuestas[0]
           },
           {
             name: 'Razonamiento perceptual',
-            y: this.puntuacionesCompuestas[1].puntuacion
+            y: this.globals.puntuacionesCompuestas[1]
           },
           {
             name: 'Memoria de trabajo',
-            y: this.puntuacionesCompuestas[2].puntuacion
+            y: this.globals.puntuacionesCompuestas[2]
           },
           {
             name: 'Velocidad de procesamiento',
-            y: this.puntuacionesCompuestas[3].puntuacion
+            y: this.globals.puntuacionesCompuestas[3]
           },
           {
             name: 'CI Total',
-            y: this.puntuacionesCompuestas[4].puntuacion
+            y: this.globals.puntuacionesCompuestas[4]
           }]
         }
       ]

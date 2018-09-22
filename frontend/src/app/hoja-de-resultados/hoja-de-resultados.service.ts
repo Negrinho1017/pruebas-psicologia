@@ -46,4 +46,10 @@ export class HojaDeResultadosService {
         console.log(result);
       }, error => console.log('Error enviando la solicitud'));
   }
+
+  ingresarPuntuacionCompuesta(idEvaluado: String) {
+    return this.http.put(this.url + '/puntuacion-compuesta/ingreso-puntuacion-compuesta/'+idEvaluado, httpOptions).subscribe(result => {
+        console.log(result);
+      }, error => console.log('Error enviando la solicitud'));
+  }
 }
