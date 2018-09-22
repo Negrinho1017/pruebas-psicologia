@@ -50,9 +50,9 @@
             {{item}}
           </td>
           <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)"
-            [disabled] = "habilitarReactivo(i)"><br>
+            [disabled] = "habilitarReactivo(i, 1)"><br>
           <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)"
-            [disabled] = "habilitarReactivo(i)">
+            [disabled] = "habilitarReactivo(i, 1)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDD: <br>
@@ -84,8 +84,10 @@
           <td>
            {{respuestasRDI[i]}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" 
+            [disabled] = "habilitarReactivo(i, 2)">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)"
+            [disabled] = "habilitarReactivo(i, 2)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>
@@ -117,8 +119,10 @@
             <td>
              {{respuestasRDS[i]}}
             </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)"
+            [disabled] = "habilitarReactivo(i, 3)">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)"
+            [disabled] = "habilitarReactivo(i, 3)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDS: <br>

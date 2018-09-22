@@ -41,7 +41,7 @@
         <th>Diseño realizado</th>
         <th>Puntuación</th>
       </tr>
-      <tr *ngFor="let item of imagenesCubos; let i = index">
+      <tr *ngFor="let item of imagenesCubos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}">
         <td><p *ngIf="i>=1">{{i}}</p><p *ngIf="i==0">M.</p></td>
         <td> <img src='/src/assets/{{item}}' alt='image' style="width:125px;"> </td>
         <td>
@@ -98,7 +98,8 @@
             <tr>
               <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled] = "habilitarReactivo(i)"></td>
               <td *ngIf="i < 5">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled] = "habilitarReactivo(i)" ></td>
-              <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)" [disabled] = "habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
+              <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)" 
+                [disabled] = "habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
               <td *ngIf="i > 4">
                 <h6 *ngIf="i > 10">76-120</h6><h6 *ngIf="i > 8 && i < 11">31-60</h6>
                 4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)">

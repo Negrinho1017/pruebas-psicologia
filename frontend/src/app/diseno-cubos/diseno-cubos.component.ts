@@ -11,7 +11,9 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   templateUrl: './diseno-cubos.component.html',
   styleUrls: ['./diseno-cubos.component.css']
 })
-export class DisenoCubosComponent implements OnInit {
+export class DisenoCubosComponent implements OnInit {  
+  numeroReactivoActual = 5;
+  siguienteReactivo = 5;  
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0];
@@ -64,8 +66,8 @@ export class DisenoCubosComponent implements OnInit {
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
-    this.calificarSubprueba();
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+    this.calificarSubprueba();
   }  
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
@@ -74,12 +76,29 @@ export class DisenoCubosComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.siguienteReactivo = 4;
     }
-    if((numeroReactivo == 3 || numeroReactivo == 2) 
-        && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
-      this.habilitaReactivo[numeroReactivo -1] = false;            
-      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    else if((numeroReactivo == 3 || numeroReactivo == 2) {
+      if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+        this.habilitaReactivo[numeroReactivo -1] = false;            
+        this.listaCalificaciones[numeroReactivo - 1] = 0;            
+        this.siguienteReactivo = numeroReactivo -1;
+      } 
+      else {
+        this.siguienteReactivo = 7;
+      }     
     }
+    else{
+      if(numeroReactivo == 4){
+        this.siguienteReactivo = 3;
+      }
+      else if(numeroReactivo == 1){
+        this.siguienteReactivo == 7;
+      }
+      else{
+        this.siguienteReactivo = numeroReactivo+1;
+      }
+    }  
   }
 
   calificarSubprueba(){
@@ -107,8 +126,10 @@ export class DisenoCubosComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.router.navigate(['/semejanzas']);
-    });
-    
+    });    
   }
-
+  
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;   
+  }
 }

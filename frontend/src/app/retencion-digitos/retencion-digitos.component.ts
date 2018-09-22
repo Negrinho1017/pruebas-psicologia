@@ -39,6 +39,10 @@ export class RetencionDigitosComponent implements OnInit {
   listaCalificacionesRDS: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   habilitaReactivoRDD: boolean[] = [false, false, false, false, false, false, false, false, false
    ,false, false, false, false, false, false, false, false, false];
+  habilitaReactivoRDI: boolean[] = [false, false, false, false, false, false, false, false, false
+    ,false, false, false, false, false, false, false, false, false];
+  habilitaReactivoRDS: boolean[] = [false, false, false, false, false, false, false, false, false
+      ,false, false, false, false, false, false, false, false, false];
   listaCalificaciones: number[] = [];
   puntuacionRDD: number = 0;
   puntuacionRDI: number = 0;
@@ -74,22 +78,42 @@ export class RetencionDigitosComponent implements OnInit {
     else if(numeroRD == 2){
       this.listaCalificacionesRDI[numeroReactivo] = (puntuacionReactivo); 
       this.obtenerResultadoRDI();
+      this.descontinuarRDI(puntuacionReactivo,numeroReactivo);   
     }
     else if(numeroRD == 3){
       this.listaCalificacionesRDS[numeroReactivo] = (puntuacionReactivo); 
       this.obtenerResultadoRDS();
+      this.descontinuarRDS(puntuacionReactivo,numeroReactivo);   
     }    
   }
 
   descontinuarRDD(puntuacionReactivo: number, numeroReactivo: number): void {
-    let desHabilitar: boolean = puntuacionReactivo == 0 && this.listaCalificacionesRDD[numeroReactivo-1] == 0;
+    let deshabilitar: boolean = puntuacionReactivo == 0 && this.listaCalificacionesRDD[numeroReactivo-1] == 0;
     if(numeroReactivo % 2 == 1 ){      
       for (let contador = numeroReactivo+1; contador < this.habilitaReactivoRDD.length; contador++) {        
-        this.habilitaReactivoRDD[contador]=desHabilitar;
+        this.habilitaReactivoRDD[contador]=deshabilitar;
       }
     }      
   }    
 
+  descontinuarRDI(puntuacionReactivo: number, numeroReactivo: number): void {
+    let deshabilitar: boolean = puntuacionReactivo == 0 && this.listaCalificacionesRDI[numeroReactivo-1] == 0;
+    if(numeroReactivo % 2 == 1 ){      
+      for (let contador = numeroReactivo+1; contador < this.habilitaReactivoRDI.length; contador++) {        
+        this.habilitaReactivoRDI[contador]=deshabilitar;
+      }
+    }      
+  }
+
+  descontinuarRDS(puntuacionReactivo: number, numeroReactivo: number): void {
+    let deshabilitar: boolean = puntuacionReactivo == 0 && this.listaCalificacionesRDS[numeroReactivo-1] == 0;
+    if(numeroReactivo % 2 == 1 ){      
+      for (let contador = numeroReactivo+1; contador < this.habilitaReactivoRDS.length; contador++) {        
+        this.habilitaReactivoRDS[contador]=deshabilitar;
+      }
+    }      
+  }
+  
   obtenerResultadoRDD(){
     for (let puntuacionReactivo of this.listaCalificacionesRDD) {
       this.puntuacion = this.puntuacion + puntuacionReactivo;
@@ -145,8 +169,22 @@ export class RetencionDigitosComponent implements OnInit {
     
   }
 
-  habilitarReactivo(i): boolean {
-    return this.habilitaReactivoRDD[i];
+  habilitarReactivo(i, numeroPrueba): boolean {
+    let activar: boolean = false;
+    switch (numeroPrueba) {
+      case 1:
+        activar = this.habilitaReactivoRDD[i];    
+        break;
+      case 2:
+        activar = this.habilitaReactivoRDI[i];    
+        break;
+      case 3:
+        activar = this.habilitaReactivoRDS[i];    
+        break;
+      default:
+        break;
+    }
+    return activar;
   }
 
 }
