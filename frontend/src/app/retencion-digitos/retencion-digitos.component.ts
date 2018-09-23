@@ -13,6 +13,7 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./retencion-digitos.component.css']
 })
 export class RetencionDigitosComponent implements OnInit {
+  siguienteReactivo: number = 0;
   selectedRetencionDeDigitos: number;
   digitosRDD: String[] = ["9 - 7","6 - 3","5 - 8 - 2","6 - 9 - 4","7 - 2 - 8 - 6","6 - 4 - 3 - 9"
   ,"4 - 2 - 7 - 3 - 1","7 - 5 - 8 - 3 - 6","3 - 9 - 2 - 4 - 8 - 7",
@@ -74,6 +75,7 @@ export class RetencionDigitosComponent implements OnInit {
       this.listaCalificacionesRDD[numeroReactivo] = (puntuacionReactivo); 
       this.obtenerResultadoRDD();   
       this.descontinuarRDD(puntuacionReactivo,numeroReactivo);   
+      this.siguienteReactivo = numeroReactivo + 1;
     }
     else if(numeroRD == 2){
       this.listaCalificacionesRDI[numeroReactivo] = (puntuacionReactivo); 
@@ -154,7 +156,7 @@ export class RetencionDigitosComponent implements OnInit {
     this.selectedRetencionDeDigitos = 4;
   }
 
-  finalizarSubprueba(){
+  finalizarSubprueba(){    
     this.crearReactivos();
     this.subprueba.reactivos = this.reactivosCalificados;
     this.subprueba.numeroSubprueba = 3;
@@ -165,8 +167,7 @@ export class RetencionDigitosComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.router.navigate(['/matrices']);
-    });
-    
+    });    
   }
 
   habilitarReactivo(i, numeroPrueba): boolean {
@@ -187,4 +188,7 @@ export class RetencionDigitosComponent implements OnInit {
     return activar;
   }
 
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;   
+  }
 }

@@ -33,4 +33,7 @@ table {
     margin-left: 25px;
     margin-right: 25px;       
   }
-
+  
+  .positive {
+    background-color: #cfd2f0;
+  }

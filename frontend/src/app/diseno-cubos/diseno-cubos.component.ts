@@ -93,12 +93,12 @@ export class DisenoCubosComponent implements OnInit {
         this.siguienteReactivo = 3;
       }
       else if(numeroReactivo == 1){
-        this.siguienteReactivo == 7;
+        this.siguienteReactivo = 7;        
       }
       else{
         this.siguienteReactivo = numeroReactivo+1;
       }
-    }  
+    }      
   }
 
   calificarSubprueba(){

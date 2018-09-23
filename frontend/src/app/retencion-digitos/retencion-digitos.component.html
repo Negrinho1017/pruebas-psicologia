@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <body class = "cuerpo">
   <table>
     <td>
@@ -43,7 +42,8 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDD; let i = index">
+        <tr *ngFor="let item of digitosRDD; let i = index" 
+            [ngClass]="{'positive' : i == getReactivoSiguiente()}">
           <td><p *ngIf="i==0">16-90</p></td>
           <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
           <td>
@@ -58,7 +58,7 @@
       <p id="puntuacion">Puntuación natural total para RDD: <br>
       <b>{{this.puntuacionRDD}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=2"
+    <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=2; this.siguienteReactivo = 0;"
       id="btnPrueba"> Ir a retención de dígitos de orden inverso
       <span class="glyphicon glyphicon-arrow-right"></span> 
     </button>
@@ -75,7 +75,8 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDI; let i = index">
+        <tr *ngFor="let item of digitosRDI; let i = index" 
+            [ngClass]="{'positive' : i == getReactivoSiguiente()}">
           <td><p *ngIf="i==0">16-90</p></td>
           <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
           <td>
@@ -93,7 +94,7 @@
       <p id="puntuacion">Puntuación natural total para RDI: <br>
       <b>{{this.puntuacionRDI}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=3"
+    <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=3; this.siguienteReactivo = 0;"
       id="btnPrueba"> Ir a retención de dígitos en secuencia
       <span class="glyphicon glyphicon-arrow-right"></span> 
     </button>
@@ -110,7 +111,8 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDS; let i = index">
+        <tr *ngFor="let item of digitosRDS; let i = index"
+            [ngClass]="{'positive' : i == getReactivoSiguiente()}">
           <td><p *ngIf="i==0">16-90</p></td>
           <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
             <td>
