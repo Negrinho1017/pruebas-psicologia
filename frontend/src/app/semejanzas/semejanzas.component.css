@@ -26,4 +26,8 @@ table {
 
   #btnPrueba:hover {
     color: white;
-}
+  }
+
+  .positive {
+    background-color: #cfd2f0;
+  }

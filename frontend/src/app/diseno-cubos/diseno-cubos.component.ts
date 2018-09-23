@@ -11,8 +11,8 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   templateUrl: './diseno-cubos.component.html',
   styleUrls: ['./diseno-cubos.component.css']
 })
-export class DisenoCubosComponent implements OnInit {  
-  numeroReactivoActual = 5;
+export class DisenoCubosComponent implements OnInit {   
+  numeroReactivoActual = 5; 
   siguienteReactivo = 5;  
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
@@ -131,5 +131,5 @@ export class DisenoCubosComponent implements OnInit {
   
   getReactivoSiguiente(): number {
     return this.siguienteReactivo;   
-  }
+  }  
 }

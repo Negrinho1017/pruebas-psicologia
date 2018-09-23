@@ -74,8 +74,7 @@ export class RetencionDigitosComponent implements OnInit {
     if(numeroRD == 1){
       this.listaCalificacionesRDD[numeroReactivo] = (puntuacionReactivo); 
       this.obtenerResultadoRDD();   
-      this.descontinuarRDD(puntuacionReactivo,numeroReactivo);   
-      this.siguienteReactivo = numeroReactivo + 1;
+      this.descontinuarRDD(puntuacionReactivo,numeroReactivo);         
     }
     else if(numeroRD == 2){
       this.listaCalificacionesRDI[numeroReactivo] = (puntuacionReactivo); 
@@ -87,6 +86,7 @@ export class RetencionDigitosComponent implements OnInit {
       this.obtenerResultadoRDS();
       this.descontinuarRDS(puntuacionReactivo,numeroReactivo);   
     }    
+    this.siguienteReactivo = numeroReactivo + 1;
   }
 
   descontinuarRDD(puntuacionReactivo: number, numeroReactivo: number): void {

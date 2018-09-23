@@ -12,6 +12,7 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./semejanzas.component.css']
 })
 export class SemejanzasComponent implements OnInit {
+  siguienteReactivo = 4;  
   reactivos: String[] = ["M. Dos - Siete", "1. Tenedor - Cuchara", "2. Amarillo - Verde",
   "3. Zanahoria - Brócoli", "*4. Caballo - Tigre", "*5. Piano - Tambor", "6. Barco - Automóvil", "7. Nariz - Lengua",
   "8. Comida - Gasolina", "9. Capullo - Bebé", "10. Ancla - Cerca", "11. Insignia - Corona", "12. Música - Marea",
@@ -41,10 +42,27 @@ export class SemejanzasComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.siguienteReactivo = 3;
     }
-    if( numeroReactivo == 2 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo+1] < 2)){
-      this.habilitaReactivo[numeroReactivo -1] = false;            
-      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    else if( numeroReactivo == 2){
+      if(puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo+1] < 2){
+        this.habilitaReactivo[numeroReactivo -1] = false;            
+        this.listaCalificaciones[numeroReactivo - 1] = 0; 
+        this.siguienteReactivo = numeroReactivo-1;
+      } else {
+        this.siguienteReactivo = 6;
+      }
+    }
+    else{
+      if(numeroReactivo == 3){
+        this.siguienteReactivo = 2;
+      }   
+      else if(numeroReactivo == 1){
+        this.siguienteReactivo = 6;
+      }         
+      else {
+        this.siguienteReactivo = numeroReactivo+1;
+      }
     }
   }
 
@@ -86,4 +104,7 @@ export class SemejanzasComponent implements OnInit {
     
   }
 
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;   
+  }
 }

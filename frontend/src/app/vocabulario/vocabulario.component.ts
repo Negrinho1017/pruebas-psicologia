@@ -20,7 +20,7 @@ export class VocabularioComponent implements OnInit {
   "20. Abominable","21. Agudo","22. Tangible","23. Compasión","24. Plagiar","25. confiar","26. Renuente",
   "27. Osado","28. Mitigar","29. Pragmático","30. Diatriba"];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  listaCalificaciones: number[] = [1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false, 
     false, false, false, false, false, false, false, false, false, false, false, false, 
     false, false, false, false, false, false, false, false, false, false, false, false];
