@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Reactivo } from '../model/Reactivo';
 import { Subprueba } from '../model/Subprueba';
 import { Globals } from '../globals';
@@ -12,6 +12,7 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./diseno-cubos.component.css']
 })
 export class DisenoCubosComponent implements OnInit {   
+  navIsFixed: boolean;
   numeroReactivoActual = 5; 
   siguienteReactivo = 5;  
   puntuacion: number = 0;
@@ -46,6 +47,18 @@ export class DisenoCubosComponent implements OnInit {
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
+    @HostListener("window:scroll", [])
+    onWindowScroll() {
+        if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
+            this.navIsFixed = true;
+        } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) { this.navIsFixed = false; } } 
+        scrollToTop() { (function smoothscroll() { var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothscroll);
+                window.scrollTo(0, currentScroll - (currentScroll / 5));
+            }
+        })();
+    }
+
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
@@ -77,26 +90,32 @@ export class DisenoCubosComponent implements OnInit {
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
       this.siguienteReactivo = 4;
+      this.scrollPorId("checksreactivo4"); 
     }
     else if((numeroReactivo == 3 || numeroReactivo == 2)) {
       if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
         this.habilitaReactivo[numeroReactivo -1] = false;            
         this.listaCalificaciones[numeroReactivo - 1] = 0;            
         this.siguienteReactivo = numeroReactivo -1;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo); 
       }
       else {
         this.siguienteReactivo = 7;
+        this.scrollPorId("checksreactivo7"); 
       }  
     }
     else{
       if(numeroReactivo == 4){
         this.siguienteReactivo = 3;
+        this.scrollPorId("checksreactivo3"); 
       }
       else if(numeroReactivo == 1){
-        this.siguienteReactivo = 7;        
+        this.siguienteReactivo = 7; 
+        this.scrollPorId("checksreactivo7");        
       }
       else{
         this.siguienteReactivo = numeroReactivo+1;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       }
     }      
   }
@@ -132,4 +151,10 @@ export class DisenoCubosComponent implements OnInit {
   getReactivoSiguiente(): number {
     return this.siguienteReactivo;   
   }  
+  
+  //Para hacer scroll a un elemento segun el id
+  scrollPorId(id) {    
+    let el = document.getElementById(id);  
+    el.scrollIntoView({block: "center", behavior: "smooth"});
+  }
 }
