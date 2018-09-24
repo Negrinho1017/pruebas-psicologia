@@ -1,4 +1,5 @@
 package ca2re.backend.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,22 +20,23 @@ import ca2re.backend.servicio.AdministradorPruebas;
 @CrossOrigin
 @RequestMapping(value = "/puntuacion-compuesta")
 public class PuntuacionCompuestaController {
-	
+
 	@Autowired
 	AdministradorPruebas administradorPruebas;
-	
+
 	@Autowired
 	public PruebaWaisDAO pruebaWaisDAO;
-	
+
 	@RequestMapping(value = "/componentes-puntuacion", method = RequestMethod.GET)
 	@ResponseBody
-	public PuntuacionCompuesta obtenerPuntuacionCompuesta(@RequestParam String idIndice, @RequestParam int puntuacionTotal) {
+	public PuntuacionCompuesta obtenerPuntuacionCompuesta(@RequestParam String idIndice,
+			@RequestParam int puntuacionTotal) {
 		int puntuacion = administradorPruebas.obtenerPuntuacionCompuesta(idIndice, puntuacionTotal);
 		String intervaloConfianza = administradorPruebas.obtenerIntervaloConfianza(idIndice, puntuacionTotal);
 		double percentil = administradorPruebas.obtenerPercentil(idIndice, puntuacionTotal);
 		return new PuntuacionCompuesta(puntuacion, percentil, intervaloConfianza);
 	}
-	
+
 	@RequestMapping(value = "/ingreso-puntuacion-compuesta/{idEvaluado}", method = RequestMethod.PUT)
 	@ResponseBody
 	public Prueba ingresarPuntuacionCompuesta(@PathVariable(value = "idEvaluado") String idEvaluado) {
