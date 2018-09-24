@@ -11,6 +11,7 @@ import { InformacionComponent } from '../app/wais/informacion/informacion.compon
 import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './wais/diseno-cubos/diseno-cubos.component';
 import { ClavesComponent } from './wais/claves/claves.component'
+import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component'
 import { HojaDeResultadosComponent } from './wais/hoja-de-resultados/hoja-de-resultados.component'
 import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component'
 import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component'
@@ -30,7 +31,8 @@ const routes: Routes =[
   { path: 'informacion', component: InformacionComponent },
   { path: 'claves', component: ClavesComponent },
   { path: 'hoja-resultados', component: HojaDeResultadosComponent },
-  { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent }
+  { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent },
+  { path: 'numeros-letras', component: NumerosLetrasComponent }
 ]
 
 @NgModule({

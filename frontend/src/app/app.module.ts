@@ -21,6 +21,7 @@ import { HojaDeResultadosComponent } from './wais/hoja-de-resultados/hoja-de-res
 import { ChartModule } from 'angular-highcharts';
 import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component';
 import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component';
+import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuacion
     ClavesComponent,
     HojaDeResultadosComponent,
     IngresoDeDatosComponent,
-    HojaDePuntuacionesCompuestasComponent
+    HojaDePuntuacionesCompuestasComponent,
+    NumerosLetrasComponent
   ],
   imports: [
     BrowserModule,

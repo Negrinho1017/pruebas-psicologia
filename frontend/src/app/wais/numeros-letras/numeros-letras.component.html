@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<body class="cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br> Edades de 16 a 90 años: <br>
+        <b>Orden directo:</b> reactivo 1. <br>
+        <b>Orden inverso:</b> reactivo muestra A, reactivo práctica A <br>
+        después reactivo 1<br>
+        <b>Edades de 70 a 90 años:</b> No se aplique
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br>
+        Después de puntuaciones 0 en<br>los 3 ensayos de un reactivo
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br> Otorgue 0 o 1 punto para cada ensayo<br>
+        <b>CNL</b><br>Cantidad de números y letras recordados en el último ensayo<br>con puntuación 1
+      </p>
+    </td>
+  </table>
+  <br>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Reactivo</th>
+        <th>Ensayo</th>
+        <th>Respuesta correcta</th>
+        <th>0</th>
+        <th>1</th>
+      </tr>
+      <tr *ngFor="let item of primerosReactivos; let i = index">
+        <td>
+          <p *ngIf="i==0 || i==1 || i==2">16-69</p>
+        </td>
+        <td>
+          <p *ngIf="(i-2)%3==0"><b>{{((i-2)+1)/3+0.6666666666666667}}</b></p>
+          <p *ngIf="i==0"><b>MA</b></p>
+          <p *ngIf="i==1"><b>PA</b></p>
+        </td>
+        <td>
+          {{item}}
+        </td>
+        <td>
+          {{primerasRespuestas[i]}}
+        </td>
+        <td><input type="radio" id="p1" name="{{item}}"><br>
+        <td><input type="radio" id="p2" name="{{item}}">
+      </tr>
+    </table>
+    <p id="puntuacion">Puntuación natural total para Sucesión de números y letras: <br>
+      <b>{{this.puntuacionRDD}}</b></p>
+  </div>
+  <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=2; this.siguienteReactivo=0; window.scroll(0,0);"
+    id="btnPrueba"> Ir a retención de dígitos de orden inverso
+    <span class="glyphicon glyphicon-arrow-right"></span>
+  </button>
+</body>
+
+</html>
