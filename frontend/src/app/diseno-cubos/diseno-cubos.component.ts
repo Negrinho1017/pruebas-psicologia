@@ -12,8 +12,7 @@ import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escal
   styleUrls: ['./diseno-cubos.component.css']
 })
 export class DisenoCubosComponent implements OnInit {   
-  navIsFixed: boolean;
-  numeroReactivoActual = 5; 
+  navIsFixed: boolean;  
   siguienteReactivo = 5;  
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
@@ -151,10 +150,9 @@ export class DisenoCubosComponent implements OnInit {
   getReactivoSiguiente(): number {
     return this.siguienteReactivo;   
   }  
-  
-  //Para hacer scroll a un elemento segun el id
+    
   scrollPorId(id) {    
     let el = document.getElementById(id);  
-    el.scrollIntoView({block: "center", behavior: "smooth"});
+    el.scrollIntoView({block: "center", behavior: "smooth"});    
   }
 }
