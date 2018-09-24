@@ -4,7 +4,7 @@ import { EdadPersona } from '../model/EdadPersona';
 import { Prueba } from '../model/Prueba';
 import { Persona } from '../model/Persona';
 import { Router } from '@angular/router';
-import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
+import { HojaDeResultadosService } from '../wais/hoja-de-resultados/hoja-de-resultados.service';
 import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert'

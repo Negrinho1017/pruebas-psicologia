@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/';
-import { EdadPersona } from '../model/EdadPersona';
-import { Prueba } from '../model/Prueba';
+import { EdadPersona } from '../../model/EdadPersona';
+import { Prueba } from '../../model/Prueba';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subprueba } from '../model/Subprueba';
+import { Subprueba } from '../../model/Subprueba';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

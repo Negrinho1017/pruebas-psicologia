@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HojaDeResultadosService } from './hoja-de-resultados.service';
-import { Prueba } from '../model/Prueba';
+import { Prueba } from '../../model/Prueba';
 import { Router } from '@angular/router';
-import { Globals } from '../globals';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-hoja-de-resultados',

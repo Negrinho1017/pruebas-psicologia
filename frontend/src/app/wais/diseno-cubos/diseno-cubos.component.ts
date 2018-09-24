@@ -1,10 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Reactivo } from '../model/Reactivo';
-import { Subprueba } from '../model/Subprueba';
-import { Globals } from '../globals';
+import { Reactivo } from '../../model/Reactivo';
+import { Subprueba } from '../../model/Subprueba';
+import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { Router } from '@angular/router';
-import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
+import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-diseno-cubos',

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { EnsayoRespuestaModel } from '../model/EnsayoRespuestaModel';
-import { Reactivo } from '../model/Reactivo';
-import { Subprueba } from '../model/Subprueba';
-import { Globals } from '../globals';
+import { Reactivo } from '../../model/Reactivo';
+import { Subprueba } from '../../model/Subprueba';
+import { Globals } from '../../globals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
-import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
+import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-retencion-digitos',

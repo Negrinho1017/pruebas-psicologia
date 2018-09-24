@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Subprueba } from '../model/Subprueba';
+import { Subprueba } from '../../model/Subprueba';
 import { Router } from '@angular/router';
-import { Globals } from '../globals';
+import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
-import { PuntuacionEscalarService } from '../puntuacion-escalar/puntuacion-escalar.service';
+import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-busqueda-simbolos',

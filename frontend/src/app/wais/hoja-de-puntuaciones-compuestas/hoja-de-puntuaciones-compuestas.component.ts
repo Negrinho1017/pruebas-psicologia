@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Globals } from '../globals';
+import { Globals } from '../../globals';
 import { Router } from '@angular/router';
 import { HojaDePuntuacionesCompuestasService } from './hoja-de-puntuaciones-compuestas.service';
 import { Chart } from 'angular-highcharts';
-import { PuntuacionCompuesta } from '../model/PuntuacionCompuesta';
+import { PuntuacionCompuesta } from '../../model/PuntuacionCompuesta';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
-import { Prueba } from '../model/Prueba';
+import { Prueba } from '../../model/Prueba';
 
 @Component({
   selector: 'app-hoja-de-puntuaciones-compuestas',
