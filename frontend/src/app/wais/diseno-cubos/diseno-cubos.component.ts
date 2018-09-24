@@ -11,14 +11,15 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   templateUrl: './diseno-cubos.component.html',
   styleUrls: ['./diseno-cubos.component.css']
 })
-export class DisenoCubosComponent implements OnInit {   
-  navIsFixed: boolean;  
-  siguienteReactivo = 5;  
+export class DisenoCubosComponent implements OnInit {
+  navIsFixed: boolean;
+  anteriorReactivo = 5;
+  siguienteReactivo = 5;
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0];
-  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false, 
-  false, false, false, false, false, false];
+  listaCalificaciones: number[] = [0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false,
+    false, false, false, false, false, false];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
@@ -43,20 +44,23 @@ export class DisenoCubosComponent implements OnInit {
 
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png",
     "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
-  constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+  constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
-    @HostListener("window:scroll", [])
-    onWindowScroll() {
-        if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
-            this.navIsFixed = true;
-        } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) { this.navIsFixed = false; } } 
-        scrollToTop() { (function smoothscroll() { var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
-                window.requestAnimationFrame(smoothscroll);
-                window.scrollTo(0, currentScroll - (currentScroll / 5));
-            }
-        })();
-    }
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) { this.navIsFixed = false; }
+  }
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
 
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
@@ -72,87 +76,97 @@ export class DisenoCubosComponent implements OnInit {
     }
   }
 
-  habilitarReactivo(i): boolean {
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
     return this.habilitaReactivo[i];
   }
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
     this.calificarSubprueba();
-  }  
+  }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if(numeroReactivo == 6 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
-      this.habilitaReactivo[numeroReactivo -2] = false;
+    if (numeroReactivo == 6 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+      this.habilitaReactivo[numeroReactivo - 2] = false;
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = 4;
-      this.scrollPorId("checksreactivo4"); 
+      this.scrollPorId("checksreactivo4");
     }
-    else if((numeroReactivo == 3 || numeroReactivo == 2)) {
-      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
-        this.habilitaReactivo[numeroReactivo -1] = false;            
-        this.listaCalificaciones[numeroReactivo - 1] = 0;            
-        this.siguienteReactivo = numeroReactivo -1;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo); 
+    else if ((numeroReactivo == 3 || numeroReactivo == 2)) {
+      if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+        this.habilitaReactivo[numeroReactivo - 1] = false;
+        this.listaCalificaciones[numeroReactivo - 1] = 0;
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = numeroReactivo - 1;
+        this.scrollPorId("checksreactivo" + this.siguienteReactivo);
       }
       else {
+        this.anteriorReactivo = numeroReactivo;
         this.siguienteReactivo = 7;
-        this.scrollPorId("checksreactivo7"); 
-      }  
+        this.scrollPorId("checksreactivo7");
+      }
     }
-    else{
-      if(numeroReactivo == 4){
+    else {
+      if (numeroReactivo == 4) {
+        this.anteriorReactivo = numeroReactivo;
         this.siguienteReactivo = 3;
-        this.scrollPorId("checksreactivo3"); 
+        this.scrollPorId("checksreactivo3");
       }
-      else if(numeroReactivo == 1){
-        this.siguienteReactivo = 7; 
-        this.scrollPorId("checksreactivo7");        
+      else if (numeroReactivo == 1) {
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = 7;
+        this.scrollPorId("checksreactivo7");
       }
-      else{
-        this.siguienteReactivo = numeroReactivo+1;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+      else {
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = numeroReactivo + 1;
+        this.scrollPorId("checksreactivo" + this.siguienteReactivo);
       }
-    }      
+    }
   }
 
-  calificarSubprueba(){
+  calificarSubprueba() {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
-    } 
-    this.subprueba.puntuacionNatural=this.puntuacion;
+    }
+    this.subprueba.puntuacionNatural = this.puntuacion;
     this.crearReactivos();
-    this.puntuacion = 0; 
-}
-  crearReactivos(){
+    this.puntuacion = 0;
+  }
+  crearReactivos() {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.reactivoActual = new Reactivo();
-      this.reactivoActual.puntuacion=calificacionReactivo;
+      this.reactivoActual.puntuacion = calificacionReactivo;
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
     }
   }
 
-  finalizarSubprueba(){
+  finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos("20:0-24:11",this.subprueba.puntuacionNatural)
-    .subscribe(res => {
-      this.subprueba.puntuacionEscalar = res;
-      this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate(['/semejanzas']);
-    });    
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos("20:0-24:11", this.subprueba.puntuacionNatural)
+      .subscribe(res => {
+        this.subprueba.puntuacionEscalar = res;
+        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.router.navigate(['/semejanzas']);
+      });
   }
-  
+
   getReactivoSiguiente(): number {
-    return this.siguienteReactivo;   
-  }  
-    
-  scrollPorId(id) {    
-    let el = document.getElementById(id);  
-    el.scrollIntoView({block: "center", behavior: "smooth"});    
+    return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 }
