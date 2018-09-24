@@ -29,4 +29,5 @@ public class PuntuacionCompuesta {
 	public void setIntervaloConfianza(String intervaloConfianza) {
 		this.intervaloConfianza = intervaloConfianza;
 	}
+	
 }
