@@ -1,4 +1,4 @@
 export class Reactivo {
     puntuacion: number;
-    respuesta: String;
+    respuesta: String;    
 }
