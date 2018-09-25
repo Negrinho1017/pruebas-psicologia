@@ -14,7 +14,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 export class DisenoCubosComponent implements OnInit {
   navIsFixed: boolean;
   anteriorReactivo = 5;
-  siguienteReactivo = 5;
+  siguienteReactivo = 5;  
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -64,7 +64,7 @@ export class DisenoCubosComponent implements OnInit {
 
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
-    this.subprueba.numeroSubprueba = 1;
+    this.subprueba.numeroSubprueba = 1;    
   }
 
   cambiarImg(i, posicion): void {
@@ -121,16 +121,31 @@ export class DisenoCubosComponent implements OnInit {
         this.scrollPorId("checksreactivo3");
       }
       else if (numeroReactivo == 1) {
-        this.anteriorReactivo = numeroReactivo;
-        this.siguienteReactivo = 7;
-        this.scrollPorId("checksreactivo7");
+        if((puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2)){
+          this.anteriorReactivo = numeroReactivo;
+          this.mensajeError("Se ha descontinuado la subprueba");
+        }
+        else{
+          this.anteriorReactivo = numeroReactivo;
+          this.siguienteReactivo = 7;
+          this.scrollPorId("checksreactivo7");
+        }
       }
-      else {
+      else {        
         this.anteriorReactivo = numeroReactivo;
         this.siguienteReactivo = numeroReactivo + 1;
         this.scrollPorId("checksreactivo" + this.siguienteReactivo);
       }
     }
+  }
+
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 && this.listaCalificaciones[numeroReactivo - 1] == 0;
+    if(discontinua){
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
   }
 
   calificarSubprueba() {
@@ -158,6 +173,7 @@ export class DisenoCubosComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.router.navigate(['/semejanzas']);
+        this.scrollToTop();
       });
   }
 
@@ -168,5 +184,13 @@ export class DisenoCubosComponent implements OnInit {
   scrollPorId(id) {
     let el = document.getElementById(id);
     el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 }

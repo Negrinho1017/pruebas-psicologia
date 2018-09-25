@@ -31,9 +31,12 @@ export class SemejanzasComponent implements OnInit {
 
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
+    this.reactivoActual.respuesta = 
+      (document.getElementById("txtRespuesta"+numeroReactivo) as HTMLInputElement).value;
+    this.reactivoActual.puntuacion = puntuacionReactivo;
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
-    this.calificarSubprueba();
+    this.calificarSubprueba();    
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
