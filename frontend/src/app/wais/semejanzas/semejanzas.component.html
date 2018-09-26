@@ -43,14 +43,14 @@
         <td><p *ngIf="i==0 || i==4">16-90</p></td>
         <td>{{item}}</td>
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta{{i}}">
+          <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui...">
         </td>
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,txtRespuesta)"
           [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,txtRespuesta)"
           [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
         <td><input type="radio" id="p3" name="{{item}}" (click)="calificarReactivo(2,i,txtRespuesta)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)" *ngIf="i>0"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>

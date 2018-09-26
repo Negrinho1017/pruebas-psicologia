@@ -17,13 +17,13 @@ export class DisenoCubosComponent implements OnInit {
   siguienteReactivo = 5;  
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  listaCalificaciones: number[] = [0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false,
     false, false, false, false, false, false];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
-  puntuacionEscalar: any;  
+  puntuacionEscalar: any;
   posicionCubos: number[][] = [
     [0, 0],
     [0, 0],
@@ -41,6 +41,7 @@ export class DisenoCubosComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
+  
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png",
     "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
@@ -85,8 +86,8 @@ export class DisenoCubosComponent implements OnInit {
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
-    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
@@ -97,47 +98,43 @@ export class DisenoCubosComponent implements OnInit {
       this.listaCalificaciones[numeroReactivo - 3] = 0;
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = 4;
-      this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+      this.scrollPorId("checksreactivo" + this.siguienteReactivo);
     }
     else if ((numeroReactivo == 3 || numeroReactivo == 2)) {
       if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
         this.habilitaReactivo[numeroReactivo - 1] = false;
         this.listaCalificaciones[numeroReactivo - 1] = 0;
-        this.anteriorReactivo = numeroReactivo;
-        this.siguienteReactivo = numeroReactivo - 1;
-        this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
       }
       else {
-        this.anteriorReactivo = numeroReactivo;
-        this.siguienteReactivo = 7;
-        this.scrollPorId("checksreactivo7");
+        this.cambiarFoco(numeroReactivo, 7);
       }
     }
     else {
       if (numeroReactivo == 4) {
-        this.anteriorReactivo = numeroReactivo;
-        this.siguienteReactivo = 3;
-        this.scrollPorId("checksreactivo3");
+        this.cambiarFoco(numeroReactivo, 3);        
       }
       else if (numeroReactivo == 1) {
         if((puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2)){
           this.anteriorReactivo = numeroReactivo;
           this.mensajeError("Se ha descontinuado la subprueba");
         }
-        else{
-          this.anteriorReactivo = numeroReactivo;
-          this.siguienteReactivo = 7;
-          this.scrollPorId("checksreactivo7");
+        else{          
+          this.cambiarFoco(numeroReactivo, 7);
         }
       }
       else {        
         if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
-          this.anteriorReactivo = numeroReactivo;
-          this.siguienteReactivo = numeroReactivo + 1;
-          this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+          this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
         }
       }
     }
+  }
+
+  cambiarFoco(numeroReactivo: number, siguienteR: number){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = siguienteR;
+    this.scrollPorId("checksreactivo" + siguienteR);
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {

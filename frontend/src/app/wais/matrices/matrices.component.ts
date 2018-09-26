@@ -34,8 +34,8 @@ export class MatricesComponent implements OnInit {
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
-    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
@@ -48,7 +48,7 @@ export class MatricesComponent implements OnInit {
       this.siguienteReactivo = 4;
       this.scrollPorId("checksreactivo"+this.siguienteReactivo);
     }
-    else if( numeroReactivo == 3  || numeroReactivo == 2){
+    else if( numeroReactivo == 3){
       if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
         this.habilitaReactivo[numeroReactivo -1] = false;            
         this.listaCalificaciones[numeroReactivo - 1] = 0;
@@ -68,7 +68,7 @@ export class MatricesComponent implements OnInit {
         this.siguienteReactivo = 3;
         this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       }
-      else if (numeroReactivo == 1) {
+      else if (numeroReactivo == 2) {
         if((puntuacionReactivo == 0  || this.listaCalificaciones[numeroReactivo + 1] == 0)){
           this.anteriorReactivo = numeroReactivo;
           this.mensajeError("Se ha descontinuado la subprueba");

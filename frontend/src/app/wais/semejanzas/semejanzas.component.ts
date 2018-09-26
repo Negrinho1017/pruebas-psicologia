@@ -11,8 +11,9 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   templateUrl: './semejanzas.component.html',
   styleUrls: ['./semejanzas.component.css']
 })
-export class SemejanzasComponent implements OnInit {
+export class SemejanzasComponent implements OnInit {  
   siguienteReactivo = 4;
+  anteriorReactivo = 4;
   reactivos: String[] = ["M. Dos - Siete", "1. Tenedor - Cuchara", "2. Amarillo - Verde",
     "3. Zanahoria - Brócoli", "*4. Caballo - Tigre", "*5. Piano - Tambor", "6. Barco - Automóvil", "7. Nariz - Lengua",
     "8. Comida - Gasolina", "9. Capullo - Bebé", "10. Ancla - Cerca", "11. Insignia - Corona", "12. Música - Marea",
@@ -30,15 +31,15 @@ export class SemejanzasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {    
     this.reactivoActual = new Reactivo();
     this.reactivoActual.respuesta =
       (document.getElementById("txtRespuesta" + numeroReactivo) as HTMLInputElement).value;
     this.reactivoActual.puntuacion = puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = this.reactivoActual;
-    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
-    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+    this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;
     this.calificarSubprueba();
+    this.aplicarInversion(puntuacionReactivo, numeroReactivo);
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
@@ -47,58 +48,68 @@ export class SemejanzasComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.siguienteReactivo = 3;
-      this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+      this.cambiarFoco(numeroReactivo, 3);
     }
     else if (numeroReactivo == 2) {
       if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
         this.habilitaReactivo[numeroReactivo - 1] = false;
         this.listaCalificaciones[numeroReactivo - 1] = 0;
-        this.siguienteReactivo = numeroReactivo - 1;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
       } else {
-        this.siguienteReactivo = 6;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        this.cambiarFoco(numeroReactivo, 6);
       }
     }
     else {
       if (numeroReactivo == 3) {
-        this.siguienteReactivo = 2;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        this.cambiarFoco(numeroReactivo, 2);
       }
       else if (numeroReactivo == 1) {
-        this.siguienteReactivo = 6;
-        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
-      }
-      else {
-        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){          
-          this.siguienteReactivo = numeroReactivo + 1;
-          this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        if(puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2){          
+          this.anteriorReactivo = numeroReactivo;
+          this.mensajeError("Se ha descontinuado la subprueba");
         }
+        else{
+          this.cambiarFoco(numeroReactivo, 6);
+        }
+      }
+      else {        
+        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){              
+          this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
+        }               
       }
     }
   }
 
-  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    let discontinua: boolean = puntuacionReactivo == 0 
+  cambiarFoco(numeroReactivo: number, siguienteR: number){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = siguienteR;
+    this.scrollPorId("checksreactivo" + siguienteR);
+  }
+
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {    
+    let discontinua: boolean = (puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
-      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+      && this.listaCalificaciones[numeroReactivo - 2] == 0);
     if(discontinua){
-      //this.anteriorReactivo = numeroReactivo;
+      this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
       this.mensajeError("Se ha descontinuado la subprueba");
-    }
+    }    
     return discontinua;
   }
 
-  habilitarReactivo(i): boolean {
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
     return this.habilitaReactivo[i];
   }
 
-  calificarSubprueba() {
+  calificarSubprueba() {    
     for (let calificacionReactivo of this.listaCalificaciones) {
-      this.puntuacion = this.puntuacion + calificacionReactivo;
-    }
+      this.puntuacion = this.puntuacion + calificacionReactivo;      
+    }            
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.puntuacion = 0;
   }  
