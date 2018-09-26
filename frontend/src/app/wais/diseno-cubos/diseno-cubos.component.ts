@@ -23,8 +23,8 @@ export class DisenoCubosComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
-  puntuacionEscalar: any;
-  contador: number[][] = [
+  puntuacionEscalar: any;  
+  posicionCubos: number[][] = [
     [0, 0],
     [0, 0],
     [0, 0],
@@ -41,7 +41,6 @@ export class DisenoCubosComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png",
     "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
@@ -66,15 +65,15 @@ export class DisenoCubosComponent implements OnInit {
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;    
   }
-
-  cambiarImg(i, posicion): void {
-    if (this.contador[i][posicion] == 5) {
-      this.contador[i][posicion] = 0;
+    
+  cambiarImg(i, posicion): void {    
+    if (this.posicionCubos[i][posicion] == 5) {
+      this.posicionCubos[i][posicion] = 0;
     }
     else {
-      this.contador[i][posicion] = this.contador[i][posicion] + 1;
+      this.posicionCubos[i][posicion] = this.posicionCubos[i][posicion] + 1;
     }
-  }
+  }   
 
   habilitarReactivo(i): boolean {    
     return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
@@ -98,7 +97,7 @@ export class DisenoCubosComponent implements OnInit {
       this.listaCalificaciones[numeroReactivo - 3] = 0;
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = 4;
-      this.scrollPorId("checksreactivo4");
+      this.scrollPorId("checksreactivo"+this.siguienteReactivo);
     }
     else if ((numeroReactivo == 3 || numeroReactivo == 2)) {
       if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
@@ -132,9 +131,11 @@ export class DisenoCubosComponent implements OnInit {
         }
       }
       else {        
-        this.anteriorReactivo = numeroReactivo;
-        this.siguienteReactivo = numeroReactivo + 1;
-        this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+          this.anteriorReactivo = numeroReactivo;
+          this.siguienteReactivo = numeroReactivo + 1;
+          this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+        }
       }
     }
   }
@@ -143,6 +144,7 @@ export class DisenoCubosComponent implements OnInit {
     let discontinua: boolean = puntuacionReactivo == 0 && this.listaCalificaciones[numeroReactivo - 1] == 0;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
       this.mensajeError("Se ha descontinuado la subprueba");
     }
     return discontinua;
@@ -156,6 +158,7 @@ export class DisenoCubosComponent implements OnInit {
     this.crearReactivos();
     this.puntuacion = 0;
   }
+
   crearReactivos() {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {

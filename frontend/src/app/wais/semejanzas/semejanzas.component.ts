@@ -48,27 +48,47 @@ export class SemejanzasComponent implements OnInit {
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
       this.siguienteReactivo = 3;
+      this.scrollPorId("checksreactivo"+this.siguienteReactivo);
     }
     else if (numeroReactivo == 2) {
       if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
         this.habilitaReactivo[numeroReactivo - 1] = false;
         this.listaCalificaciones[numeroReactivo - 1] = 0;
         this.siguienteReactivo = numeroReactivo - 1;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       } else {
         this.siguienteReactivo = 6;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       }
     }
     else {
       if (numeroReactivo == 3) {
         this.siguienteReactivo = 2;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       }
       else if (numeroReactivo == 1) {
         this.siguienteReactivo = 6;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
       }
       else {
-        this.siguienteReactivo = numeroReactivo + 1;
+        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){          
+          this.siguienteReactivo = numeroReactivo + 1;
+          this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        }
       }
     }
+  }
+
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+    if(discontinua){
+      //this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
   }
 
   habilitarReactivo(i): boolean {
@@ -101,5 +121,18 @@ export class SemejanzasComponent implements OnInit {
 
   getReactivoSiguiente(): number {
     return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 }
