@@ -41,7 +41,9 @@
         <th>1</th>
         <th>2</th>
       </tr>
-      <tr *ngFor="let item of reactivos; let i = index">
+      <tr *ngFor="let item of reactivos; let i = index"
+          [ngClass]="{'positive' : i == getReactivoSiguiente()}"          
+          id = "checksreactivo{{i}}">
         <td><p *ngIf="i==4">16-90</p></td>
         <td>{{item}}</td>
         <td>
@@ -50,13 +52,13 @@
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"
           [disabled]="habilitarReactivo(i)"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "i < 3 && habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "i < 3 && checkear(i)"></td>
         <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)"></td>
       </tr>
     </table>
   </div>
-  <table>
+  <table id= "checksreactivo30">
       <td>
         * Si el examinado no obtiene una puntuación perfecta, brindar retroalimentación<br>
         correctiva indicada en el manual de aplicación.

@@ -96,23 +96,14 @@ export class DisenoCubosComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.anteriorReactivo = numeroReactivo;
-      this.siguienteReactivo = 4;
-      this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+      this.cambiarFoco(numeroReactivo, 4);
     }
-    else if ((numeroReactivo == 3 || numeroReactivo == 2)) {
-      if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
-        this.habilitaReactivo[numeroReactivo - 1] = false;
-        this.listaCalificaciones[numeroReactivo - 1] = 0;
-        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
-      }
-      else {
-        this.cambiarFoco(numeroReactivo, 7);
-      }
+    else if (numeroReactivo == 3 || numeroReactivo == 2) {
+      this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else {
       if (numeroReactivo == 4) {
-        this.cambiarFoco(numeroReactivo, 3);        
+        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);       
       }
       else if (numeroReactivo == 1) {
         if((puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2)){
@@ -131,6 +122,17 @@ export class DisenoCubosComponent implements OnInit {
     }
   }
 
+  private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+      this.habilitaReactivo[numeroReactivo - 1] = false;
+      this.listaCalificaciones[numeroReactivo - 1] = 0;
+      this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
+    }
+    else {
+      this.cambiarFoco(numeroReactivo, 7);
+    }
+  }
+
   cambiarFoco(numeroReactivo: number, siguienteR: number){
     this.anteriorReactivo = numeroReactivo;
     this.siguienteReactivo = siguienteR;
@@ -138,7 +140,9 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    let discontinua: boolean = puntuacionReactivo == 0 && this.listaCalificaciones[numeroReactivo - 1] == 0;
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && numeroReactivo > 7;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

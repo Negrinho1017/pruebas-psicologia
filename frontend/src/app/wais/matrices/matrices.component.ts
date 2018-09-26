@@ -92,7 +92,7 @@ export class MatricesComponent implements OnInit {
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
-      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+      && this.listaCalificaciones[numeroReactivo - 2] == 0;      
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
