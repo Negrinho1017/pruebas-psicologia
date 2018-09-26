@@ -22,6 +22,7 @@ import { ChartModule } from 'angular-highcharts';
 import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component';
 import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component';
 import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component';
+import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.com
     HojaDeResultadosComponent,
     IngresoDeDatosComponent,
     HojaDePuntuacionesCompuestasComponent,
-    NumerosLetrasComponent
+    NumerosLetrasComponent,
+    PaginaPrincipalComponent
   ],
   imports: [
     BrowserModule,

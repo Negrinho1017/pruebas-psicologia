@@ -1,0 +1,9 @@
+
+.boton-pagina-principal{
+    width: 250px;
+    height: 150px;
+    border-color: black;    
+    margin: 30px;    
+    font-family: 'Franklin Gothic Medium';
+    font-size: larger;
+}

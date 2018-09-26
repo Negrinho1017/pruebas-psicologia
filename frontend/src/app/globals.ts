@@ -5,4 +5,6 @@ export class Globals {
     idEvaluado: String;
     CITotal: number;
     CITCompuesta: number;
+    mostrarNavBar: Boolean = false;
+    idPrueba: number = 0;
 }
