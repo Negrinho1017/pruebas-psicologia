@@ -12,6 +12,8 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./matrices.component.css']
 })
 export class MatricesComponent implements OnInit {
+  siguienteReactivo = 5;
+  anteriorReactivo = 5;
   respuestasCorrectas: number[] = [5,4,3,2,1,5,3,4,4,5,1,5,2,3,1,1,5,2,3,2,1,4,5,1,4,2,3,4];
   puntuacion: number = 0;
   listaCalificaciones: number[] = [0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -42,14 +44,68 @@ export class MatricesComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = 4;
+      this.scrollPorId("checksreactivo"+this.siguienteReactivo);
     }
-    if( numeroReactivo == 3 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
-      this.habilitaReactivo[numeroReactivo -1] = false;            
-      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    else if( numeroReactivo == 3  || numeroReactivo == 2){
+      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+        this.habilitaReactivo[numeroReactivo -1] = false;            
+        this.listaCalificaciones[numeroReactivo - 1] = 0;
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = numeroReactivo - 1;
+        this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+      }
+      else {
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = 7;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+      }
     }
+    else {
+      if (numeroReactivo == 4) {
+        this.anteriorReactivo = numeroReactivo;
+        this.siguienteReactivo = 3;
+        this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+      }
+      else if (numeroReactivo == 1) {
+        if((puntuacionReactivo == 0  || this.listaCalificaciones[numeroReactivo + 1] == 0)){
+          this.anteriorReactivo = numeroReactivo;
+          this.mensajeError("Se ha descontinuado la subprueba");
+        }
+        else{
+          this.anteriorReactivo = numeroReactivo;
+          this.siguienteReactivo = 7;
+          this.scrollPorId("checksreactivo"+this.siguienteReactivo);
+        }
+      }
+      else {        
+        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+          this.anteriorReactivo = numeroReactivo;
+          this.siguienteReactivo = numeroReactivo + 1;
+          this.scrollPorId("checksreactivo" + this.siguienteReactivo);
+        }
+      }
+    }  
   }
 
-  habilitarReactivo(i): boolean {
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+    if(discontinua){
+      this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
+  }
+
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
     return this.habilitaReactivo[i];
   }
 
@@ -82,4 +138,20 @@ export class MatricesComponent implements OnInit {
     
   }
 
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
+  }
 }
