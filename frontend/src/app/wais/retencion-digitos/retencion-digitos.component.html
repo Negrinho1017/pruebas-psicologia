@@ -57,7 +57,7 @@
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDD: <br>
-      <b>{{this.puntuacionRDD}}</b></p>
+      <b id = "checksreactivo{{i}}">{{this.puntuacionRDD}}</b></p>
     </div>
     <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(2)"
       id="btnPrueba"> Ir a retención de dígitos de orden inverso
@@ -94,7 +94,7 @@
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>
-      <b>{{this.puntuacionRDI}}</b></p>
+      <b id = "checksreactivo{{i}}">{{this.puntuacionRDI}}</b></p>
     </div>
     <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(3)"
       id="btnPrueba"> Ir a retención de dígitos en secuencia
@@ -142,7 +142,7 @@
     <table>
     <p id="puntuacion">
       Puntuación natural total para Retención de dígitos: <br>
-      <b>{{this.puntuacion}}</b>
+      <b id = "checksreactivo{{i}}">{{this.puntuacion}}</b>
     </p>
     <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()"
       id="btnPrueba" > Siguiente

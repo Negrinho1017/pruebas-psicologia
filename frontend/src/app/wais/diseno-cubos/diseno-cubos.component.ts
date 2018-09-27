@@ -86,8 +86,8 @@ export class DisenoCubosComponent implements OnInit {
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
-    this.calificarSubprueba();
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+    this.calificarSubprueba();
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {

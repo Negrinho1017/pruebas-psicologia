@@ -38,8 +38,8 @@ export class SemejanzasComponent implements OnInit {
     this.reactivoActual.puntuacion = puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = this.reactivoActual;
     this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;
-    this.calificarSubprueba();
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
+    this.calificarSubprueba();
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {

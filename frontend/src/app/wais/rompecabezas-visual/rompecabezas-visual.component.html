@@ -43,7 +43,9 @@
         <th>0</th>
         <th>1</th>
       </tr>
-      <tr *ngFor="let item of respuestasCorrectas; let i = index">
+      <tr *ngFor="let item of respuestasCorrectas; let i = index"
+          [ngClass]="{'positive' : i == getReactivoSiguiente()}"
+          id = "checksreactivo{{i}}">
         <td><p *ngIf="i==6">16-90</p></td>
         <td><p *ngIf="i>1">{{i-1}}</p>
           <p *ngIf="i==0">M.</p>
@@ -55,11 +57,11 @@
         <td><input *ngIf="i>1" type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)"
           [disabled]="habilitarReactivo(i)"></td>
         <td><input *ngIf="i>1" type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Rompecabezas visual: <br>
-      <b>{{this.subprueba.puntuacionNatural}}</b>
+      <b id = "checksreactivo28">{{this.subprueba.puntuacionNatural}}</b>
     </p>
   </div>
 </body>

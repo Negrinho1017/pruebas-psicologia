@@ -13,6 +13,8 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./aritmetica.component.css']
 })
 export class AritmeticaComponent implements OnInit {
+  siguienteReactivo: number = 6;
+  anteriorReactivo: number = 6;
   respuestasCorrectas: String[] = ["3","Cuenta hasta 3","Cuenta hasta 10","6","9","2","8","5","5","5","17",
   "3","200","38","140","30","47","186","49 1/2","600","51","96","23.100"];
   reactivos: String [] = ["M. Pelotas","*1. Flores","*2. Manzanas","3. Bates","4. Pájaros","5. Correas","6. Cobijas",
@@ -47,17 +49,58 @@ export class AritmeticaComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.cambiarFoco(numeroReactivo, 5);
     }
-    if((numeroReactivo == 4 || numeroReactivo == 3 || numeroReactivo == 2) && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0)){
-      this.habilitaReactivo[numeroReactivo -1] = false;            
-      this.listaCalificaciones[numeroReactivo - 1] = 0;            
+    else if(numeroReactivo == 4 || numeroReactivo == 3 || numeroReactivo == 2){
+      this.reversarInversion(puntuacionReactivo, numeroReactivo);
+    }
+    else if(numeroReactivo == 1){
+      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+        this.anteriorReactivo = numeroReactivo;
+        this.mensajeError("Se ha descontinuado la subprueba");
+      }
+      else{
+        this.cambiarFoco(numeroReactivo, 8);
+      }
+    }
+    else if(numeroReactivo == 5){
+      this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
+    }
+    else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);      
     }
   }
 
-  habilitarReactivo(i): boolean {
-    return this.habilitaReactivo[i];
+  private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
+      this.habilitaReactivo[numeroReactivo - 1] = false;
+      this.listaCalificaciones[numeroReactivo - 1] = 0;
+      this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
+    }
+    else {
+      this.cambiarFoco(numeroReactivo, 8);
+    }
   }
 
+  cambiarFoco(numeroReactivo: number, siguienteR: number){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = siguienteR;
+    this.scrollPorId("checksreactivo" + siguienteR);
+  }
+
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && this.listaCalificaciones[numeroReactivo - 2] == 0
+      && numeroReactivo > 9;
+    if(discontinua){
+      this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
+  }
+  
   calificarSubprueba(){
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
@@ -85,6 +128,31 @@ export class AritmeticaComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.router.navigate(['/busqueda-simbolos']);
     }); 
+  }
+
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
+    return this.habilitaReactivo[i];
+  }
+
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 
 }

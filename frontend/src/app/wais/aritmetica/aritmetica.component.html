@@ -42,8 +42,10 @@
         <th>0</th>
         <th>1</th>
       </tr>
-      <tr *ngFor="let item of reactivos; let i = index">
-        <td><p *ngIf="i==5">16-90</p></td>
+      <tr *ngFor="let item of reactivos; let i = index"
+          [ngClass]="{'positive' : i == getReactivoSiguiente()}"
+          id = "checksreactivo{{i}}">
+        <td><p *ngIf="i==6">16-90</p></td>
         <td>{{item}}</td>
         <td><app-cronometro></app-cronometro></td>
         <td>{{respuestasCorrectas[i]}}</td>
@@ -54,7 +56,7 @@
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"
           [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "habilitarReactivo(i)" *ngIf="i>0"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>
@@ -66,7 +68,7 @@
       </td>
       <td>
         Puntuación natural total para Aritmética: <br>
-        <b>{{this.subprueba.puntuacionNatural}}</b>
+        <b id = "checksreactivo23">{{this.subprueba.puntuacionNatural}}</b>
       </td>
   </table>
 </body>

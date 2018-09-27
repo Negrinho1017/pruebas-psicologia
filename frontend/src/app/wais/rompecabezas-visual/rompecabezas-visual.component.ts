@@ -12,6 +12,8 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./rompecabezas-visual.component.css']
 })
 export class RompecabezasVisualComponent implements OnInit {
+  siguienteReactivo: number = 6;
+  anteriorReactivo: number = 6;
   respuestasCorrectas: String[] = ["1, 2, 6","1, 3, 6","2, 3, 5","1, 2, 5","1, 4, 6","2, 3, 6","3, 5, 6","1, 3, 6","2, 5, 6","1, 3, 4",
 "1, 3, 6","1, 2, 5", "1, 2, 5", "1, 4, 5","3, 4, 6","2, 3, 4","1, 2, 6","3, 4, 6","1, 2, 6", "2, 3, 5",
 "1, 5, 6","2, 3, 5","1 ,3 ,4","1, 5, 6","3, 4, 6","3, 4, 5","1, 2, 3","3, 4, 6"];
@@ -38,6 +40,7 @@ hayDiscontinuacion: boolean = false;
     this.calificarSubprueba();
   }
 
+  /*
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if(numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
       this.habilitaReactivo[numeroReactivo -2] = false;
@@ -50,13 +53,68 @@ hayDiscontinuacion: boolean = false;
       this.habilitaReactivo[numeroReactivo -1] = false;            
       this.listaCalificaciones[numeroReactivo - 1] = 0;            
     }
-  }
+  }  
+*/
 
-  habilitarReactivo(i): boolean {
-    return this.habilitaReactivo[i];
+aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
+  if(numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+    this.habilitaReactivo[numeroReactivo -2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 5);
   }
+  else if(numeroReactivo == 4 || numeroReactivo == 3){
+    this.reversarInversion(puntuacionReactivo, numeroReactivo);
+  }
+  else if(numeroReactivo == 2){
+    if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    else{
+      this.cambiarFoco(numeroReactivo, 8);
+    }
+  }
+  else if(numeroReactivo == 5){
+    this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
+  }
+  else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+    this.cambiarFoco(numeroReactivo, numeroReactivo + 1);      
+  }
+}
 
-  calificarSubprueba(){
+private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
+  if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
+    this.habilitaReactivo[numeroReactivo - 1] = false;
+    this.listaCalificaciones[numeroReactivo - 1] = 0;
+    this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
+  }
+  else {
+    this.cambiarFoco(numeroReactivo, 8);
+  }
+}
+
+cambiarFoco(numeroReactivo: number, siguienteR: number){
+  this.anteriorReactivo = numeroReactivo;
+  this.siguienteReactivo = siguienteR;
+  this.scrollPorId("checksreactivo" + siguienteR);
+}
+
+discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+  let discontinua: boolean = puntuacionReactivo == 0 
+    && this.listaCalificaciones[numeroReactivo - 1] == 0
+    && this.listaCalificaciones[numeroReactivo - 2] == 0
+    && numeroReactivo > 9;
+  if(discontinua){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = numeroReactivo;
+    this.mensajeError("Se ha descontinuado la subprueba");
+  }
+  return discontinua;
+}
+
+calificarSubprueba(){
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
     } 
@@ -83,6 +141,31 @@ hayDiscontinuacion: boolean = false;
       this.router.navigate(['/informacion']);
     });
     
+  }
+
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
+    return this.habilitaReactivo[i];
+  }
+
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 
 }
