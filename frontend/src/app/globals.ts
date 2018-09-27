@@ -7,4 +7,9 @@ export class Globals {
     CITCompuesta: number;
     mostrarNavBar: Boolean = false;
     idPrueba: number = 0;
+    retencionDigitos: number;
+    aritmetica: number;
+    busquedaSimbolos: number;
+    claves: number;
+    indices: number[] = [];
 }

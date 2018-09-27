@@ -41,6 +41,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
         this.puntuacionesCompuestas[i] = ramaDelConocimiento.puntuacionCompuesta;
         i++;
       }    
+      this.globals.indices = this.puntuacionesCompuestas;
       this.obtenerPuntuacionCompuestaCIT(this.globals.CITotal);
     });
   }

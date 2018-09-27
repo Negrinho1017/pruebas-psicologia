@@ -17,6 +17,7 @@ import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.com
 import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component'
 import { Globals } from './globals';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
+import { AnalisisComponent } from './wais/analisis/analisis.component'
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
@@ -34,7 +35,8 @@ const routes: Routes =[
   { path: 'hoja-resultados', component: HojaDeResultadosComponent },
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent },
   { path: 'numeros-letras', component: NumerosLetrasComponent },
-  {path: 'pagina-principal', component: PaginaPrincipalComponent}
+  { path: 'pagina-principal', component: PaginaPrincipalComponent },
+  { path: 'analisis', component: AnalisisComponent }
 ]
 
 @NgModule({

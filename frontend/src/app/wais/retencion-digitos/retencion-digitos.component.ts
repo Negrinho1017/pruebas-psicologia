@@ -149,6 +149,7 @@ export class RetencionDigitosComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.retencionDigitos = this.subprueba.puntuacionEscalar;
         this.router.navigate(['/matrices']);
       });
   }  

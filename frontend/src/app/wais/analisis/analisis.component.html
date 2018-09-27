@@ -1,0 +1,32 @@
+<body class="cuerpo">
+  <h1>
+    <b>Análisis</b>
+  </h1>
+  <h3>
+    Comparación de discrepancias
+  </h3>
+  <table>
+    <tr>
+      <th>Comparación</th>
+      <th colspan="2">Puntuación 1</th>
+      <th></th>
+      <th colspan="2">Puntuación 2</th>
+      <th></th>
+      <th>Diferencia</th>
+      <th>Valor crítico</th>
+      <th>Diferencia significativa</th>
+    </tr>
+    <tr *ngFor="let item of comparaciones; let i = index">
+      <td>{{item}}</td>
+      <td>{{p1[i]}}</td>
+      <td>{{this.puntuacion1[i]}}</td>
+      <td>-</td>
+      <td>{{p2[i]}}</td>
+      <td>{{this.puntuacion2[i]}}</td>
+      <td>=</td>
+      <td>{{this.diferencia[i]}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</body>

@@ -23,6 +23,7 @@ import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.com
 import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component';
 import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
+import { AnalisisComponent } from './wais/analisis/analisis.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
     IngresoDeDatosComponent,
     HojaDePuntuacionesCompuestasComponent,
     NumerosLetrasComponent,
-    PaginaPrincipalComponent
+    PaginaPrincipalComponent,
+    AnalisisComponent
   ],
   imports: [
     BrowserModule,

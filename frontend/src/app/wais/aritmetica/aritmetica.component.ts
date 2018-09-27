@@ -126,6 +126,7 @@ export class AritmeticaComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.globals.aritmetica = this.subprueba.puntuacionEscalar;
       this.router.navigate(['/busqueda-simbolos']);
     }); 
   }

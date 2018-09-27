@@ -33,6 +33,7 @@ export class BusquedaSimbolosComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.router.navigate(['/rompecabezas-visual']);
     });
     
