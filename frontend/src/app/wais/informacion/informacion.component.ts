@@ -12,6 +12,8 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./informacion.component.css']
 })
 export class InformacionComponent implements OnInit {
+  siguienteReactivo: number = 2;
+  anteriorReactivo: number = 2;
   reactivos: String[] = ["*1. Lunes", "*2. Forma", "+3. Termómetro", "+4. Segundos", "5. Agua",
   "*6. Brasil","7. Emiliano Zapata","8. Italia","9. El quijote de la mancha","10. Cleopatra","11. Sahara",
   "12. Línea","13. Olimpiadas","14. Revolución mexicana","15. La malinche","16. Relatividad","17. Gandhi",
@@ -46,11 +48,42 @@ export class InformacionComponent implements OnInit {
       this.habilitaReactivo[numeroReactivo - 3] = false;
       this.listaCalificaciones[numeroReactivo - 2] = 0;
       this.listaCalificaciones[numeroReactivo - 3] = 0;
+      this.cambiarFoco(numeroReactivo, 1);
     }    
+    else if(numeroReactivo == 0){
+      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
+        this.anteriorReactivo = numeroReactivo;
+        this.mensajeError("Se ha descontinuado la subprueba");
+      }
+      else{
+        this.cambiarFoco(numeroReactivo, 4);
+      }
+    }
+    else if(numeroReactivo == 1){
+      this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
+    }
+    else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);      
+    }
+  }  
+
+  cambiarFoco(numeroReactivo: number, siguienteR: number){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = siguienteR;
+    this.scrollPorId("checksreactivo" + siguienteR);
   }
 
-  habilitarReactivo(i): boolean {
-    return this.habilitaReactivo[i];
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && this.listaCalificaciones[numeroReactivo - 2] == 0
+      && numeroReactivo > 4;
+    if(discontinua){
+      this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
   }
 
   calificarSubprueba(){
@@ -80,5 +113,30 @@ export class InformacionComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.router.navigate(['/claves']);
     });    
+  }
+
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
+    return this.habilitaReactivo[i];
+  }
+
+  getReactivoSiguiente(): number {
+    return this.siguienteReactivo;
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 }
