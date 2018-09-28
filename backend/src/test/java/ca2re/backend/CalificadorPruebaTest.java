@@ -72,4 +72,20 @@ public class CalificadorPruebaTest {
 		assertEquals(21, percentil, 0);
 		assertEquals("83-95", intervaloConfianza);
 	}
+	
+	@Test
+	public void getValoresCriticos() {	
+		double valorCriticoICV_IRP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IRP();
+		double valorCriticoICV_IMT = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IMT();
+		double valorCriticoICV_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IVP();
+		double valorCriticoIRP_IMT = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIRP_IMT();
+		double valorCriticoIRP_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIRP_IVP();
+		double valorCriticoIMT_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIMT_IVP();
+		assertEquals(11.76, valorCriticoICV_IRP,0);
+		assertEquals(12.82, valorCriticoICV_IMT,0);
+		assertEquals(12.82, valorCriticoICV_IVP,0);
+		assertEquals(13.48, valorCriticoIRP_IMT,0);
+		assertEquals(13.48, valorCriticoIRP_IVP,0);
+		assertEquals(14.41, valorCriticoIMT_IVP,0);
+	}
 }

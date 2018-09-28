@@ -9,6 +9,7 @@ import ca2re.backend.controller.MainController;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.persistencia.CalificacionWaisDAO;
@@ -164,5 +165,9 @@ public class AdministradorPruebas {
 
 	public String obtenerIntervaloConfianza(String id, int puntuacionTotal) {
 		return calificacionWaisDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];
+	}
+	
+	public ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad) {
+		return calificacionWaisDAO.obtenerValoresCriticos(idRangoEdad);
 	}
 }

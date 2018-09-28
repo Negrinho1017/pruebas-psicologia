@@ -9,11 +9,12 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
+import ca2re.backend.dominio.ValorCriticoWAIS;
 
 public class CalificacionWaisDAO {
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
 	private static final String COLLECTION_CONVERSION_PUNTUACION_COMPUESTA = "conversion_puntuacion_compuesta_wais";
-
+	private static final String COLLECTION_VALORES_CRITICOS = "valores_criticos_wais";
 	@Autowired
 	private static MongoOperations mongoOperations;
 
@@ -101,6 +102,12 @@ public class CalificacionWaisDAO {
 		return mongoOperations
 				.find(intervaloConfianza, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA)
 				.get(0).getIntervaloConfianza();
+	}
+	
+	public ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad) {
+		Query valoresCriticos = query(where("idRangoEdad").is(idRangoEdad));
+		return mongoOperations
+				.find(valoresCriticos, ValorCriticoWAIS.class, COLLECTION_VALORES_CRITICOS).get(0);
 	}
 
 }

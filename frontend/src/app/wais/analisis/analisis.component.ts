@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Globals } from '../../globals';
+import { ValorCriticoWAIS } from '../../model/ValorCriticoWAIS';
+import { AnalisisService } from './analisis.service';
 
 @Component({
   selector: 'app-analisis',
@@ -15,7 +17,12 @@ export class AnalisisComponent implements OnInit {
   puntuacion1: number[] = [];
   puntuacion2: number[] = [];
   diferencia: number[] = [];
-  constructor( private router: Router, private globals: Globals ) { }
+  valorCriticoRD_AR: number = 2.14;
+  valorCriticoBS_CL: number = 2.66;
+  valoresCriticos: number[] = [];
+  valorCriticoWAIS: ValorCriticoWAIS = new ValorCriticoWAIS();
+  constructor( private router: Router, private globals: Globals,
+    private analisisService: AnalisisService ) { }
 
   ngOnInit() {
     var i = 0
@@ -66,6 +73,14 @@ export class AnalisisComponent implements OnInit {
     this.puntuacion1[2]-this.puntuacion2[2], this.puntuacion1[3]-this.puntuacion2[3],
     this.puntuacion1[4]-this.puntuacion2[4], this.puntuacion1[5]-this.puntuacion2[5],
     this.puntuacion1[6]-this.puntuacion2[6], this.puntuacion1[7]-this.puntuacion2[7]];
+    this.analisisService.obtenerValorCritico(1)
+    .subscribe(res => {
+      this.valorCriticoWAIS = res;
+      this.valoresCriticos=[this.valorCriticoWAIS.valorCriticoICV_IRP, this.valorCriticoWAIS.valorCriticoICV_IMT,
+      this.valorCriticoWAIS.valorCriticoICV_IVP, this.valorCriticoWAIS.valorCriticoIRP_IMT,
+      this.valorCriticoWAIS.valorCriticoIRP_IVP, this.valorCriticoWAIS.valorCriticoIMT_IVP, this.valorCriticoRD_AR,
+      this.valorCriticoBS_CL];
+    });
   }
 
 }
