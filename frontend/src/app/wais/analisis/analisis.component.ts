@@ -20,6 +20,7 @@ export class AnalisisComponent implements OnInit {
   valorCriticoRD_AR: number = 2.14;
   valorCriticoBS_CL: number = 2.66;
   valoresCriticos: number[] = [];
+  hayDiferenciasSignificativas: String[] = [];
   valorCriticoWAIS: ValorCriticoWAIS = new ValorCriticoWAIS();
   constructor( private router: Router, private globals: Globals,
     private analisisService: AnalisisService ) { }
@@ -80,6 +81,15 @@ export class AnalisisComponent implements OnInit {
       this.valorCriticoWAIS.valorCriticoICV_IVP, this.valorCriticoWAIS.valorCriticoIRP_IMT,
       this.valorCriticoWAIS.valorCriticoIRP_IVP, this.valorCriticoWAIS.valorCriticoIMT_IVP, this.valorCriticoRD_AR,
       this.valorCriticoBS_CL];
+      var i = 0;
+      for(let valorCritico of this.valoresCriticos){
+        if(Math.abs(this.diferencia[i])>valorCritico){
+          this.hayDiferenciasSignificativas[i] = "S"
+        }else{
+          this.hayDiferenciasSignificativas[i] = "N"
+        }
+        i++;
+      } 
     });
   }
 
