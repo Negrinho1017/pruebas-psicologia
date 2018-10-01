@@ -93,4 +93,6 @@ export class AnalisisComponent implements OnInit {
     });
   }
 
+  
+
 }

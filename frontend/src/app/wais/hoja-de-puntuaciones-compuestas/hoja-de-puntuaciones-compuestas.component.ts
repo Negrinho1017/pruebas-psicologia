@@ -97,4 +97,8 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       ]
     });
   }
+
+  finalizarSubprueba(){
+    this.router.navigate(['/analisis']);
+  }
 }
