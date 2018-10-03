@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.util.CalculadoraDeEdad;
+import ca2re.backend.util.Operaciones;
 import ca2re.backend.util.CalculadorDePuntuacionEscalar;
 
 public class UtilTest {
@@ -75,5 +76,14 @@ public class UtilTest {
 		assertEquals(4, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 38));
 		assertEquals(2, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 18));
 		assertEquals(1, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 1));
+	}
+	
+	@Test
+	public void calcularSiElValorEstaEnElRango() {
+		int valor = 44;
+		assertTrue(Operaciones.elValorEstaEnElRango(40, 50, valor));
+		assertFalse(Operaciones.elValorEstaEnElRango(50, 60, valor));
+		assertTrue(Operaciones.elValorEstaEnElRango(44, 60, valor));
+		assertTrue(Operaciones.elValorEstaEnElRango(40, 44, valor));
 	}
 }

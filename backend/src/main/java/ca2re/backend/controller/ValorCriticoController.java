@@ -20,8 +20,8 @@ public class ValorCriticoController {
 
 	@RequestMapping(value = "/valores-criticos", method = RequestMethod.GET)
 	@ResponseBody
-	public ValorCriticoWAIS obtenerValoresCriticos(@RequestParam int idRangoEdad) {
-		return administradorPruebas.obtenerValoresCriticos(idRangoEdad);
+	public ValorCriticoWAIS obtenerValoresCriticos(@RequestParam int edad) {
+		return administradorPruebas.obtenerValoresCriticos(edad);
 	}
 
 }

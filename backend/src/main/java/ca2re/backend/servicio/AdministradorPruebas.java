@@ -15,6 +15,7 @@ import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.persistencia.CalificacionWaisDAO;
 import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.util.CalculadorDePuntuacionEscalar;
+import ca2re.backend.util.CalculadoraDeEdad;
 
 public class AdministradorPruebas {
 
@@ -167,7 +168,8 @@ public class AdministradorPruebas {
 		return calificacionWaisDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];
 	}
 	
-	public ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad) {
+	public ValorCriticoWAIS obtenerValoresCriticos(int edad) {
+		int idRangoEdad = CalculadoraDeEdad.obtenerRangoEdad(edad);
 		return calificacionWaisDAO.obtenerValoresCriticos(idRangoEdad);
 	}
 }

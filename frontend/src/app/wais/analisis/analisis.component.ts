@@ -74,7 +74,7 @@ export class AnalisisComponent implements OnInit {
     this.puntuacion1[2]-this.puntuacion2[2], this.puntuacion1[3]-this.puntuacion2[3],
     this.puntuacion1[4]-this.puntuacion2[4], this.puntuacion1[5]-this.puntuacion2[5],
     this.puntuacion1[6]-this.puntuacion2[6], this.puntuacion1[7]-this.puntuacion2[7]];
-    this.analisisService.obtenerValorCritico(1)
+    this.analisisService.obtenerValorCritico(this.globals.edad)
     .subscribe(res => {
       this.valorCriticoWAIS = res;
       this.valoresCriticos=[this.valorCriticoWAIS.valorCriticoICV_IRP, this.valorCriticoWAIS.valorCriticoICV_IMT,

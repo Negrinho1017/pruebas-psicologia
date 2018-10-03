@@ -38,6 +38,7 @@ export class IngresoDeDatosComponent implements OnInit {
     const fechaEvaluacion = new DatePipe('en-US').transform(this.fechaEvaluacion, 'dd/MM/yyyy');
     this.hojaDeResultadosService.obtenerEdadEvaluado(fechaNacimiento,fechaEvaluacion).subscribe(res => {
       this.edad = res;
+      this.globals.edad = this.edad.anios;
       this.fechas = true;
     });
   }
