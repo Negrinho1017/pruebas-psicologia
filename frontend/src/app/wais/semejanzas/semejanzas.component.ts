@@ -31,7 +31,7 @@ export class SemejanzasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {    
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.reactivoActual = new Reactivo();
     this.reactivoActual.respuesta =
       (document.getElementById("txtRespuesta" + numeroReactivo) as HTMLInputElement).value;
