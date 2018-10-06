@@ -24,6 +24,7 @@ import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuacion
 import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { AnalisisComponent } from './wais/analisis/analisis.component';
+import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AnalisisComponent } from './wais/analisis/analisis.component';
     HojaDePuntuacionesCompuestasComponent,
     NumerosLetrasComponent,
     PaginaPrincipalComponent,
-    AnalisisComponent
+    AnalisisComponent,
+    SubpruebasOpcionalesComponent
   ],
   imports: [
     BrowserModule,

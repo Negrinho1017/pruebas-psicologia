@@ -24,6 +24,7 @@ export class IngresoDeDatosComponent implements OnInit {
   nombreExaminador: String;
   prueba: Prueba;
   evaluado: Persona;
+  editarPrueba: boolean = false;
   
   constructor( private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals ) { }
