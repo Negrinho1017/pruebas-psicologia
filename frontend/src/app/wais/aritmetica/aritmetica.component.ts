@@ -128,6 +128,7 @@ export class AritmeticaComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.aritmetica = this.subprueba.puntuacionEscalar;
       this.router.navigate([this.globals.rutas[6]]);
+      this.scrollToTop();
     }); 
   }
 
@@ -156,4 +157,12 @@ export class AritmeticaComponent implements OnInit {
     });
   }
 
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
 }

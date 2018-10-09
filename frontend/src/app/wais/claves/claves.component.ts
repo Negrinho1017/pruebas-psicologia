@@ -29,7 +29,17 @@ export class ClavesComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.claves = this.subprueba.puntuacionEscalar;
       this.router.navigate(['/hoja-resultados']);
+      this.scrollToTop();
     });
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
   }
 
 }
