@@ -13,4 +13,5 @@ export class Globals {
     claves: number;
     indices: number[] = [];
     edad: number;
+    rutas: String[] = [];
 }

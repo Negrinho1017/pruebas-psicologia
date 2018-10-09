@@ -138,7 +138,7 @@ calificarSubprueba(){
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate(['/informacion']);
+      this.router.navigate([this.globals.rutas[8]]);
     });
     
   }

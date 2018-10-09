@@ -111,7 +111,7 @@ export class InformacionComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate(['/claves']);
+      this.router.navigate([this.globals.rutas[9]]);
     });    
   }
 

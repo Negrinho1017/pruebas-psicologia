@@ -169,7 +169,7 @@ export class DisenoCubosComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate(['/semejanzas']);
+        this.router.navigate([this.globals.rutas[1]]);
         this.scrollToTop();
       });
   }

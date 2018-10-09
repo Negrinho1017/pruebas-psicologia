@@ -30,6 +30,8 @@ export class IngresoDeDatosComponent implements OnInit {
     private router: Router, private globals: Globals ) { }
 
   ngOnInit() {
+    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
+    "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
     this.evaluado = new Persona();
     this.prueba = new Prueba();
   }
@@ -132,6 +134,6 @@ export class IngresoDeDatosComponent implements OnInit {
     this.globals.idEvaluado = this.idEvaluado;
     this.globals.mostrarNavBar = true;
     //this.router.navigate(['/semejanzas', this.idEvaluado]);
-    this.router.navigate(['/diseno-cubos']);
+    this.router.navigate([this.globals.rutas[0]]);
   }
 }

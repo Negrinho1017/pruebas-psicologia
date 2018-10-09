@@ -133,7 +133,7 @@ export class MatricesComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate(['/vocabulario']);
+      this.router.navigate([this.globals.rutas[4]]);
     });
     
   }
