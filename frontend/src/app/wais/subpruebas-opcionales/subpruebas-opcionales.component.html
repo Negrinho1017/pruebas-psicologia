@@ -6,7 +6,16 @@
   </tr>
   <tr *ngFor="let item of listaSubpruebas; let i = index">
     <td>{{item}}</td>
-    <td><input type="radio"></td>
+    <td><input type="checkbox" [checked]="pruebasAEvaluar[i]" id="pruebacheck{{i}}"
+      (click)="metodoPrueba(i)"></td>
   </tr>
 </table>
+<!--<input list="ramas" [(ngModel)]="this.selectedRama">
+<datalist id="ramas">
+  <option value="Comprensión verbal">
+  <option value="Razonamiento perceptual">
+  <option value="Memoria de trabajo">
+  <option value="Velocidad de procesamiento">
+</datalist>
+<input type="submit" (click)="mostrarRama()">-->
 </body>
