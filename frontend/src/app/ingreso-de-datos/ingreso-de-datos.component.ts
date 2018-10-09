@@ -52,6 +52,11 @@ export class IngresoDeDatosComponent implements OnInit {
     }
   }
 
+  edicionDePrueba(){
+    this.editarPrueba = true;
+    this.globals.datosSeleccionados = false;
+  }
+
   inicializarPrueba(){
     //this.mensajeConfirmacion("Seguro que desea continuar");
     if(this.datosValidados()){

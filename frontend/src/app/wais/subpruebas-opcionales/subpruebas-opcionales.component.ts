@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-subpruebas-opcionales',
@@ -15,7 +16,7 @@ export class SubpruebasOpcionalesComponent implements OnInit {
   contadorMT: number = 0;
   contadorVP: number = 0;
   cambiosGuardados: boolean = false;
-  constructor() { }
+  constructor( private globals: Globals ) { }
   
   ngOnInit() {
   }
@@ -29,6 +30,8 @@ export class SubpruebasOpcionalesComponent implements OnInit {
     if(this.contarCV() && this.contarRP() && this.contarMT() && this.contarVP()){
       this.mensajeExito("Cambios guardados correctamente")
       this.cambiosGuardados = true;
+      this.globals.datosSeleccionados = true;
+      console.log(this.pruebasAEvaluar)
     } else{
       this.pruebasAEvaluar= [true,true,true,true,true,true,true,true,true,true,false,false,false,false,false];
       this.cambiosGuardados = false;
@@ -55,7 +58,6 @@ export class SubpruebasOpcionalesComponent implements OnInit {
     if(this.pruebasAEvaluar[7]) this.contadorRP++;
     if(this.pruebasAEvaluar[11]) this.contadorRP++;
     if(this.pruebasAEvaluar[14]) this.contadorRP++;
-    console.log(this.contadorRP);
     if(this.contadorRP != 3){
       this.mensajeError("Cantidad de pruebas seleccionadas para razonamiento perceptual incorrectas");
       this.contadorRP = 0;
