@@ -31,7 +31,7 @@ export class SubpruebasOpcionalesComponent implements OnInit {
       this.mensajeExito("Cambios guardados correctamente")
       this.cambiosGuardados = true;
       this.globals.datosSeleccionados = true;
-      console.log(this.pruebasAEvaluar)
+      this.cambiarRutas();
     } else{
       this.pruebasAEvaluar= [true,true,true,true,true,true,true,true,true,true,false,false,false,false,false];
       this.cambiosGuardados = false;
@@ -92,7 +92,22 @@ export class SubpruebasOpcionalesComponent implements OnInit {
     this.contadorVP = 0;
     return true;
   }
+
+  cambiarRutas(){
+    var i = 0;
+    for (let vaSerEvaluada of this.pruebasAEvaluar) {
+      if(!vaSerEvaluada && (i==2 || i==5)){
+        this.cambiarRuta(i);
+      }
+      i++;
+    } 
+  }
   
+  cambiarRuta(posicion: number){
+    if(!this.pruebasAEvaluar[posicion]){
+      this.globals.rutas[posicion]="/numeros-letras"
+    }
+  }
 
   mensajeError(mensaje: string) {
     swal({

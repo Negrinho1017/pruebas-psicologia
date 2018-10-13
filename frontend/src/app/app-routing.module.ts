@@ -18,9 +18,11 @@ import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuacion
 import { Globals } from './globals';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { AnalisisComponent } from './wais/analisis/analisis.component'
+import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component'
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
+  { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent },
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
   { path: 'semejanzas', component: SemejanzasComponent }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent},

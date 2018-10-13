@@ -118,12 +118,20 @@ export class NumerosLetrasComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         alert("idEvaluado: "+this.globals.idEvaluado);
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[1]]);
+        this.navegar();
         console.log(this.subprueba.puntuacionEscalar);
         this.scrollToTop();
       });
   }
 
+  navegar(){
+    if(this.globals.rutas[2] == "/numeros-letras"){
+      this.router.navigate([this.globals.rutas[3]]);
+    }
+    if(this.globals.rutas[5] == "/numeros-letras"){
+      this.router.navigate([this.globals.rutas[6]]);
+    }
+  }
   scrollToTop() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
