@@ -28,19 +28,12 @@ import ca2re.backend.util.FechaUtil;
 @CrossOrigin
 @RequestMapping(value = "/")
 public class MainController {
-	public String[] reactivos = {"1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",
-			"*7. Guante"};
+	
 	@Autowired
 	public PruebaWaisDAO pruebaWaisDAO;
 	
 	@Autowired
-	AdministradorPruebas administradorPruebas;
-	
-	@RequestMapping(value = "/reactivos-vocabulario", method = RequestMethod.GET)
-	@ResponseBody
-	public String[] mostrarReactivosVocabulario() {
-		return reactivos;
-	}
+	AdministradorPruebas administradorPruebas;	
 	
 	@RequestMapping(value = "/edad", method = RequestMethod.GET)
 	@ResponseBody

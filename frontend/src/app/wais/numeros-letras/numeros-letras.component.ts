@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Subprueba } from 'src/app/model/Subprueba';
+import { Reactivo } from 'src/app/model/Reactivo';
+import { Router } from '@angular/router';
+import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
+import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-numeros-letras',
@@ -6,6 +12,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./numeros-letras.component.css']
 })
 export class NumerosLetrasComponent implements OnInit {
+  anteriorReactivo = 2;
+  siguienteReactivo = 2;  
+  puntuacion: number = 0;
+  reactivosCalificados: Reactivo[] = [];
+  listaCalificaciones: number[] = 
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false,
+    false, false, false, false, false, false];
+  subprueba: Subprueba = new Subprueba();
+  reactivoActual: Reactivo;
   primerosReactivos: String[] = ["C - 1","A - 4","2 - B","D - 1","4 - C","E - 5","3 - A","C - 1"];
   primerasRespuestas: String [] = ["1 - C","4 - A","2 - B","1 - D","4 - C","5 - E","3 - A","1 - C"];
   reactivos: String[] = ["2 - B - 1","D - 5 - A","2 - B - 4","5 - C - A","3 - 2 - A","F - E - 1",
@@ -24,10 +43,95 @@ export class NumerosLetrasComponent implements OnInit {
   "2 - 3 - 7 - 9 - J - N - X, J - N - X - 2 - 3 - 7 - 9","1 - 4 - 8 - D - M - Q - R, D - M - Q - R - 1 - 4 - 8",
   "2 - 6 - 7 - 9 - A - N - P - S, A - N - P - S - 2 - 6 - 7 - 9",
   "1 - 3 - 4 - 9 - K - R - U - X, K - R - U - X - 1 - 3 - 4 - 9",
-  "2 - 6 - 7 - 9 - A - F - M - Y - T, A - F - M - T - 2 - 6 - 7 - 9"];
-  constructor() { }
+  "2 - 6 - 7 - 9 - A - F - M - Y - T,  A - F - M - T - 2 - 6 - 7 - 9"];  
+  
+  constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.subprueba.nombre = "Sucesión de números y letras";
+    this.subprueba.numeroSubprueba = 11;
+  }
+
+  habilitarReactivo(i): boolean {    
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  }
+
+  checkear(i): boolean {
+    return this.habilitaReactivo[i];
+  }
+
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
+    this.reactivoActual = new Reactivo();
+    this.reactivoActual.puntuacion = puntuacionReactivo;
+    this.reactivosCalificados[numeroReactivo] = this.reactivoActual;
+    this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;    
+    const siguienteR: number = numeroReactivo == 7 ? 10 : numeroReactivo+1;
+    this.cambiarFoco(numeroReactivo, siguienteR);          
+    this.calificarSubprueba();
+  }    
+
+  cambiarFoco(numeroReactivo: number, siguienteR: number){
+    this.anteriorReactivo = numeroReactivo;
+    this.siguienteReactivo = siguienteR;
+    this.scrollPorId("checksreactivo" + siguienteR);
+  }
+
+  discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    let discontinua: boolean = puntuacionReactivo == 0 
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && numeroReactivo > 7;
+    if(discontinua){
+      this.anteriorReactivo = numeroReactivo;
+      this.siguienteReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    return discontinua;
+  }
+
+  calificarSubprueba() {
+    for (let calificacionReactivo of this.listaCalificaciones) {
+      this.puntuacion = this.puntuacion + calificacionReactivo;
+    }
+    this.subprueba.puntuacionNatural = this.puntuacion;    
+    this.puntuacion = 0;
+  } 
+
+  finalizarSubprueba() {
+    this.subprueba.reactivos = this.reactivosCalificados;
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos("20:0-24:11", this.subprueba.puntuacionNatural)
+      .subscribe(res => {
+        this.subprueba.puntuacionEscalar = res;
+        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.router.navigate([this.globals.rutas[1]]);
+        this.scrollToTop();
+      });
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
+
+  getReactivoSiguiente(): number {    
+    return this.siguienteReactivo;    
+  }
+
+  scrollPorId(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Discontinación',
+      icon: "warning",
+      text: mensaje,
+    });
   }
 
 }

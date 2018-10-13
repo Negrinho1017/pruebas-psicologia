@@ -65,6 +65,7 @@ export class DisenoCubosComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;    
+    
   }
     
   cambiarImg(i, posicion): void {    
