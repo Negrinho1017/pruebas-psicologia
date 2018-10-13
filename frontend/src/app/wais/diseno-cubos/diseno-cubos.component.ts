@@ -85,7 +85,11 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
-    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
+    this.reactivoActual = new Reactivo();
+    this.reactivoActual.respuesta = this.convertirVectorAString(numeroReactivo);
+    this.reactivoActual.puntuacion = puntuacionReactivo;
+    this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);
+    this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
     this.calificarSubprueba();
   }
@@ -155,20 +159,9 @@ export class DisenoCubosComponent implements OnInit {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
     }
-    this.subprueba.puntuacionNatural = this.puntuacion;
-    this.crearReactivos();
+    this.subprueba.puntuacionNatural = this.puntuacion;    
     this.puntuacion = 0;
-  }
-
-  crearReactivos() {
-    var i = 0;
-    for (let calificacionReactivo of this.listaCalificaciones) {
-      this.reactivoActual = new Reactivo();
-      this.reactivoActual.puntuacion = calificacionReactivo;
-      this.reactivosCalificados[i] = (this.reactivoActual);
-      i++;
-    }
-  }
+  } 
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
@@ -176,7 +169,7 @@ export class DisenoCubosComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate(['/semejanzas']);
+        this.router.navigate([this.globals.rutas[1]]);
         this.scrollToTop();
       });
   }
@@ -196,5 +189,13 @@ export class DisenoCubosComponent implements OnInit {
       icon: "warning",
       text: mensaje,
     });
+  }
+
+  convertirVectorAString(numReactivo: number): String {
+    let respuesta: String = "";
+    for (let posicionCubo of this.posicionCubos[numReactivo]) {
+      respuesta = respuesta.concat(posicionCubo.toString());      
+    }
+    return respuesta;
   }
 }

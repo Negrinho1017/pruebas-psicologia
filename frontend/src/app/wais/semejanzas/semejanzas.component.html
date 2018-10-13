@@ -43,7 +43,7 @@
         <td><p *ngIf="i==0 || i==4">16-90</p></td>
         <td>{{item}}</td>
         <td>
-          <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui...">
+          <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui..." class="form-control">
         </td>
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,txtRespuesta)"
           [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>

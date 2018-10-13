@@ -34,9 +34,18 @@ export class BusquedaSimbolosComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
-      this.router.navigate(['/rompecabezas-visual']);
+      this.router.navigate([this.globals.rutas[7]]);
+      this.scrollToTop();
     });
-    
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
   }
 
 }

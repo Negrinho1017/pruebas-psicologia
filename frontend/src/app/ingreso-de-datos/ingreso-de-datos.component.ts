@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { HojaDeResultadosService } from '../wais/hoja-de-resultados/hoja-de-resultados.service';
 import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
 import { DatePipe } from '@angular/common';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
 import { FormsModule, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Component({
@@ -27,11 +27,14 @@ export class IngresoDeDatosComponent implements OnInit {
   evaluado: Persona;
   ingresoDatosForm: FormGroup;
   fechaInvalida: Boolean;
+  editarPrueba = false;
 
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
 
   ngOnInit() {
+    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
+    "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
     this.ingresoDatosForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),
@@ -73,14 +76,19 @@ export class IngresoDeDatosComponent implements OnInit {
     const fechaEvaluacion = new DatePipe('en-US').transform(this.ingresoDatosForm.controls['fechaEvaluacion'].value, 'dd/MM/yyyy');
     this.hojaDeResultadosService.obtenerEdadEvaluado(fechaNacimiento, fechaEvaluacion).subscribe(res => {
       this.edad = res;
+      this.globals.edad = this.edad.anios;
       this.fechas = true;
     });
   }
 
   get f() { return this.ingresoDatosForm.controls; }
 
+  edicionDePrueba() {
+    this.editarPrueba = true;
+    this.globals.datosSeleccionados = false;
+  }
+
   inicializarPrueba() {
-    //this.mensajeConfirmacion("Seguro que desea continuar");
     if (this.ingresoDatosForm.valid) {
       this.evaluado.fechaDeNacimiento = this.ingresoDatosForm.controls['fechaNacimiento'].value;
       this.evaluado.id = this.ingresoDatosForm.controls['identificacion'].value;
@@ -94,7 +102,6 @@ export class IngresoDeDatosComponent implements OnInit {
       this.hojaDeResultadosService.crearPrueba(this.prueba);
       this.siguiente();
     }
-
   }
 
   llenarRamasDelConocimiento() {
@@ -139,6 +146,6 @@ export class IngresoDeDatosComponent implements OnInit {
   siguiente() {
     this.globals.idEvaluado = this.idEvaluado;
     this.globals.mostrarNavBar = true;
-    this.router.navigate(['/diseno-cubos']);
+    this.router.navigate([this.globals.rutas[0]]);
   }
 }

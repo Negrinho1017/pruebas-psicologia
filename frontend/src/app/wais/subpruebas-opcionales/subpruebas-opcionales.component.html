@@ -1,0 +1,15 @@
+<body class="cuerpo">
+  <div *ngIf="!globals.datosSeleccionados">
+    <table>
+      <tr>
+        <th>Subprueba</th>
+        <th>Seleccionar</th>
+      </tr>
+      <tr *ngFor="let item of listaSubpruebas; let i = index">
+        <td>{{item}}</td>
+        <td><input type="checkbox" [checked]="pruebasAEvaluar[i]" id="pruebacheck{{i}}" (click)="seleccionarSubprueba(i)"></td>
+      </tr>
+    </table>
+    <input type="button" (click)="guardarCambios()" class="btn btn-dark" id="btnPrueba" value="Guardar">
+  </div>
+</body>

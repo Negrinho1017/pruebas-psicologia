@@ -133,7 +133,8 @@ export class MatricesComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate(['/vocabulario']);
+      this.router.navigate([this.globals.rutas[4]]);
+      this.scrollToTop();
     });
     
   }
@@ -153,5 +154,14 @@ export class MatricesComponent implements OnInit {
       icon: "warning",
       text: mensaje,
     });
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
   }
 }

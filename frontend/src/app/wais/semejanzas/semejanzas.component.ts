@@ -31,7 +31,7 @@ export class SemejanzasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {    
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.reactivoActual = new Reactivo();
     this.reactivoActual.respuesta =
       (document.getElementById("txtRespuesta" + numeroReactivo) as HTMLInputElement).value;
@@ -126,7 +126,8 @@ export class SemejanzasComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate(['/retencion-digitos']);
+        this.router.navigate([this.globals.rutas[2]]);
+        this.scrollToTop();
       });
 
   }
@@ -146,5 +147,14 @@ export class SemejanzasComponent implements OnInit {
       icon: "warning",
       text: mensaje,
     });
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
   }
 }

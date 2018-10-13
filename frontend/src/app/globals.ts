@@ -12,4 +12,7 @@ export class Globals {
     busquedaSimbolos: number;
     claves: number;
     indices: number[] = [];
+    edad: number;
+    rutas: String[] = [];
+    datosSeleccionados: boolean;
 }

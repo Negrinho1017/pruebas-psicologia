@@ -150,8 +150,9 @@ export class RetencionDigitosComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.retencionDigitos = this.subprueba.puntuacionEscalar;
-        this.router.navigate(['/matrices']);
-      });
+        this.router.navigate([this.globals.rutas[3]]);
+        this.scrollToTop();
+      });      
   }  
 
   cambiarRD(num: number): void{
@@ -180,5 +181,14 @@ export class RetencionDigitosComponent implements OnInit {
       icon: "warning",
       text: mensaje,
     });
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
   }
 }
