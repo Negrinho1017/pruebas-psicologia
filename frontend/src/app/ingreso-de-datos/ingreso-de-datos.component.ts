@@ -8,6 +8,7 @@ import { HojaDeResultadosService } from '../wais/hoja-de-resultados/hoja-de-resu
 import { RamaDelConocimiento } from '../model/RamaDelConocimiento';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert'
+import { FormsModule, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-ingreso-de-datos',
@@ -18,76 +19,85 @@ export class IngresoDeDatosComponent implements OnInit {
   fechaNacimiento: String;
   fechaEvaluacion: String;
   edad: EdadPersona;
-  fechas: boolean = false;
+  fechas = false;
   nombreEvaluado: String;
   idEvaluado: String;
   nombreExaminador: String;
   prueba: Prueba;
   evaluado: Persona;
-  
-  constructor( private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private globals: Globals ) { }
+  ingresoDatosForm: FormGroup;
+  fechaInvalida: Boolean;
+
+  constructor(private hojaDeResultadosService: HojaDeResultadosService,
+    private router: Router, private globals: Globals) { }
 
   ngOnInit() {
+    this.ingresoDatosForm = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      identificacion: new FormControl('', [Validators.required]),
+      nombreExaminador: new FormControl('', [Validators.required]),
+      fechaNacimiento: new FormControl('', [Validators.required]),
+      fechaEvaluacion: new FormControl('', [Validators.required]),
+    });
     this.evaluado = new Persona();
     this.prueba = new Prueba();
+
+    this.ingresoDatosForm.get('fechaEvaluacion').setValidators([this.fechaFinalEsMayor('fechaNacimiento'), Validators.required]);
+    this.ingresoDatosForm.get('fechaEvaluacion').valueChanges.subscribe(() => {
+      if (this.ingresoDatosForm.get('fechaEvaluacion').hasError('invalidDate')) {
+        this.fechaInvalida = true;
+      } else {
+        this.fechaInvalida = false;
+        this.calcularEdad();
+      }
+    });
   }
 
-  calcularEdad(){
-    const fechaNacimiento = new DatePipe('en-US').transform(this.fechaNacimiento, 'dd/MM/yyyy');
-    const fechaEvaluacion = new DatePipe('en-US').transform(this.fechaEvaluacion, 'dd/MM/yyyy');
-    this.hojaDeResultadosService.obtenerEdadEvaluado(fechaNacimiento,fechaEvaluacion).subscribe(res => {
+  fechaFinalEsMayor(field: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const group = control.parent;
+      const fieldToCompare = group.get(field);
+      const laterThan = this.compararFechas(fieldToCompare.value, control.value);
+      return laterThan ? { 'invalidDate': { value: control.value } } : null;
+    };
+  }
+
+  compararFechas(date1: string, date2: string): boolean {
+    const dateOne = new Date(date1);
+    const dateTwo = new Date(date2);
+    return dateOne.getTime() > dateTwo.getTime();
+  }
+
+  calcularEdad() {
+    const fechaNacimiento = new DatePipe('en-US').transform(this.ingresoDatosForm.controls['fechaNacimiento'].value, 'dd/MM/yyyy');
+    const fechaEvaluacion = new DatePipe('en-US').transform(this.ingresoDatosForm.controls['fechaEvaluacion'].value, 'dd/MM/yyyy');
+    this.hojaDeResultadosService.obtenerEdadEvaluado(fechaNacimiento, fechaEvaluacion).subscribe(res => {
       this.edad = res;
       this.fechas = true;
     });
   }
 
-  validarFechas(){
-    if(this.fechaNacimiento != undefined && this.fechaEvaluacion != undefined){
-      this.calcularEdad();
-    }
-  }
+  get f() { return this.ingresoDatosForm.controls; }
 
-  inicializarPrueba(){
+  inicializarPrueba() {
     //this.mensajeConfirmacion("Seguro que desea continuar");
-    if(this.datosValidados()){
-      this.evaluado.fechaDeNacimiento = this.fechaNacimiento;
-      this.evaluado.id = this.idEvaluado;
-      this.evaluado.nombreCompleto = this.nombreEvaluado;
+    if (this.ingresoDatosForm.valid) {
+      this.evaluado.fechaDeNacimiento = this.ingresoDatosForm.controls['fechaNacimiento'].value;
+      this.evaluado.id = this.ingresoDatosForm.controls['identificacion'].value;
+      this.evaluado.nombreCompleto = this.ingresoDatosForm.controls['nombre'].value;
       this.prueba.edadEvaluado = this.edad;
       this.prueba.evaluado = this.evaluado;
-      this.prueba.nombreExaminador = this.nombreExaminador;
-      this.prueba.fechaEvaluacion = this.fechaEvaluacion;
+      this.prueba.nombreExaminador = this.ingresoDatosForm.controls['nombreExaminador'].value;
+      this.prueba.fechaEvaluacion = this.ingresoDatosForm.controls['fechaEvaluacion'].value;
       this.prueba.tipoPrueba = "WAIS";
       this.llenarRamasDelConocimiento();
       this.hojaDeResultadosService.crearPrueba(this.prueba);
       this.siguiente();
-    } 
-  }
-
-  datosValidados(): boolean{
-    if(this.fechaEvaluacion == undefined){
-      this.mensajeError("Falta la fecha de evaluación");
-      return false;
-    } else if(this.nombreExaminador == undefined){
-      this.mensajeError("Falta el nombre del examinador");
-      return false;
-    } else if(this.nombreEvaluado == undefined){
-      this.mensajeError("Falta el nombre del evalaudo");
-      return false;
-    } else if(this.idEvaluado == undefined){
-      this.mensajeError("Falta la identificación");
-      return false;
-    } else if(this.fechaNacimiento == undefined){
-      this.mensajeError("Falta la fecha de nacimiento");
-      return false;
-    } else{
-      this.mensajeExito("Prueba inicializada satisfactoriamente")
-      return true;
     }
+
   }
 
-  llenarRamasDelConocimiento(){
+  llenarRamasDelConocimiento() {
     this.prueba.ramaDelConocimiento = [];
     this.prueba.ramaDelConocimiento[0] = new RamaDelConocimiento();
     this.prueba.ramaDelConocimiento[1] = new RamaDelConocimiento();;
@@ -126,10 +136,9 @@ export class IngresoDeDatosComponent implements OnInit {
     });
   }
 
-  siguiente(){
+  siguiente() {
     this.globals.idEvaluado = this.idEvaluado;
     this.globals.mostrarNavBar = true;
-    //this.router.navigate(['/semejanzas', this.idEvaluado]);
     this.router.navigate(['/diseno-cubos']);
   }
 }

@@ -29,7 +29,7 @@ export class VocabularioComponent implements OnInit {
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
-  hayDiscontinuacion: boolean = false;
+  hayDiscontinuacion: boolean = false;  
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -39,8 +39,13 @@ export class VocabularioComponent implements OnInit {
     this.subprueba.numeroSubprueba = 5;
   }
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
-    this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {    
+    this.reactivoActual = new Reactivo();
+    this.reactivoActual.respuesta =
+      (document.getElementById("txtRespuesta" + numeroReactivo) as HTMLInputElement).value;
+    this.reactivoActual.puntuacion = puntuacionReactivo;
+    this.reactivosCalificados[numeroReactivo] = this.reactivoActual;
+    this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
     this.calificarSubprueba();
   }
@@ -111,19 +116,9 @@ export class VocabularioComponent implements OnInit {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
     }
-    this.subprueba.puntuacionNatural = this.puntuacion;
-    this.crearReactivos();
+    this.subprueba.puntuacionNatural = this.puntuacion;    
     this.puntuacion = 0;
-  }
-  crearReactivos() {
-    var i = 0;
-    for (let calificacionReactivo of this.listaCalificaciones) {
-      this.reactivoActual = new Reactivo();
-      this.reactivoActual.puntuacion = calificacionReactivo;
-      this.reactivosCalificados[i] = (this.reactivoActual);
-      i++;
-    }
-  }
+  }  
 
   habilitarReactivo(i): boolean {
     return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
