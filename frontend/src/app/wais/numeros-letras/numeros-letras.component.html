@@ -55,10 +55,8 @@
         <td>
           {{primerasRespuestas[i]}}
         </td>
-        <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" 
-          (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"><br>
-        <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" 
-          (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)">
+        <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"><br>
+        <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)">
       </tr>
     </table>
     <table class="table">
@@ -85,17 +83,15 @@
         <td>
           {{respuestas[i]}}
         </td>
-        <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" 
-          (click)="calificarReactivo(0,i+8)" [disabled]="habilitarReactivo(i+8)"><br>
-        <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" 
-          (click)="calificarReactivo(1,i+8)" [disabled]="habilitarReactivo(i+8)">
+        <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i+8)" [disabled]="habilitarReactivo(i+8)"><br>
+        <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i+8)" [disabled]="habilitarReactivo(i+8)">
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Sucesión de números y letras: <br>
       <b id="checksreactivo35">{{this.subprueba.puntuacionNatural}}</b></p>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="this.selectedRetencionDeDigitos=2; this.siguienteReactivo=0; window.scroll(0,0);"
-    id="btnPrueba"> Ir a retención de dígitos de orden inverso
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba"> 
+    Siguiente
     <span class="glyphicon glyphicon-arrow-right"></span>
   </button>
 </body>

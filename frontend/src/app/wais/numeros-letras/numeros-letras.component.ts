@@ -113,11 +113,13 @@ export class NumerosLetrasComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos("20:0-24:11", this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarClaves("20:0-24:11", this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
+        alert("idEvaluado: "+this.globals.idEvaluado);
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.router.navigate([this.globals.rutas[1]]);
+        console.log(this.subprueba.puntuacionEscalar);
         this.scrollToTop();
       });
   }
