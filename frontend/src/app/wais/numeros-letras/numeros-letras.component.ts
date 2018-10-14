@@ -66,9 +66,11 @@ export class NumerosLetrasComponent implements OnInit {
     this.reactivoActual.puntuacion = puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = this.reactivoActual;
     this.listaCalificaciones[numeroReactivo] = puntuacionReactivo;    
-    const siguienteR: number = numeroReactivo == 7 ? 10 : numeroReactivo+1;
-    this.cambiarFoco(numeroReactivo, siguienteR);          
+    const siguienteR: number = numeroReactivo == 7 ? 10 : numeroReactivo+1;    
     this.calificarSubprueba();
+    if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
+      this.cambiarFoco(numeroReactivo, siguienteR);          
+    }
   }    
 
   cambiarFoco(numeroReactivo: number, siguienteR: number){
@@ -80,7 +82,19 @@ export class NumerosLetrasComponent implements OnInit {
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
-      && numeroReactivo > 7;
+      && this.listaCalificaciones[numeroReactivo - 2] == 0
+      && numeroReactivo > 3;      
+
+    if(numeroReactivo == 10){
+      discontinua = puntuacionReactivo == 0 
+        && this.listaCalificaciones[numeroReactivo - 3] == 0
+        && this.listaCalificaciones[numeroReactivo - 4] == 0;      
+    }else if (numeroReactivo == 11){
+      discontinua = puntuacionReactivo == 0 
+        && this.listaCalificaciones[numeroReactivo - 1] == 0
+        && this.listaCalificaciones[numeroReactivo - 4] == 0;      
+    }    
+
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
