@@ -104,4 +104,13 @@ export class PuntuacionEscalarService {
       return ("Error!!")
     }));  
   }
+
+  obtenerPuntuacionEscalarNumerosLetras(idEdad: String, puntuacionNatural: number) {
+    return this._http.get(this.url + '/puntuacion-escalar/numeros-letras?idEdad='
+    +idEdad+'&puntuacionNatural='+puntuacionNatural, this.options).
+    pipe(map((response:Response)=>response.json()),
+    catchError( error => {
+      return ("Error!!")
+    }));  
+  }
 }

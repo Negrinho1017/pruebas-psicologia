@@ -82,6 +82,12 @@ public class CalificacionWaisDAO {
 		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
 				.getClavesCN();
 	}
+	
+	public String[] obtenerNumerosLetrasPorIdEdad(String idEdad) {
+		Query pruebaPorId = query(where("idEdad").is(idEdad));
+		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
+				.getSusecionNumeroLetrasLN();
+	}
 
 	public int[] obtenerPuntuacionCompuesta(String idIndice) {
 		Query puntuacionCompuesta = query(where("idIndice").is(idIndice));

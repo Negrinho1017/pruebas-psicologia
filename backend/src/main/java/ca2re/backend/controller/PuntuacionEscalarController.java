@@ -83,5 +83,10 @@ public class PuntuacionEscalarController {
 	public int obtenerPuntuacionEscalarClaves(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
 		return administradorPruebas.obtenerPuntuacionEscalarClaves(idEdad, puntuacionNatural);
 	}
-
+	
+	@RequestMapping(value = "/numeros-letras", method = RequestMethod.GET)
+	@ResponseBody
+	public int obtenerPuntuacionEscalarNumerosLetras(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(idEdad, puntuacionNatural);
+	}
 }

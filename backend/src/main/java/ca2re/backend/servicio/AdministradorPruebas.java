@@ -155,7 +155,12 @@ public class AdministradorPruebas {
 		String[] rangosClaves = calificacionWaisDAO.obtenerClavesPorIdEdad(idEdad);
 		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);
 	}
-
+	
+	public int obtenerPuntuacionEscalarNumerosLetras(String idEdad, int puntuacionNatural) {		
+		String[] rangosNumerosLetras = calificacionWaisDAO.obtenerNumerosLetrasPorIdEdad(idEdad);
+		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosNumerosLetras, puntuacionNatural);
+	}
+	
 	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
 		return calificacionWaisDAO.obtenerPuntuacionCompuesta(id)[puntuacionTotal];
 	}
