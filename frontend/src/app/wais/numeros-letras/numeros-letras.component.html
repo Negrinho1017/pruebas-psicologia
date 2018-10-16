@@ -70,7 +70,7 @@
       </tr>
       <tr *ngFor="let item of reactivos; let i = index" [ngClass]="{'positive' : i+8 == getReactivoSiguiente()}" id="checksreactivo{{i+8}}">
         <td>
-          <p *ngIf="i==0 || i==1 || i==2">16-69</p>
+          <p *ngIf="i<3">16-69</p>
         </td>
         <td>
           <p *ngIf="i%3==0 && i>2"><b>{{((i+1)/3+0.6666666666666667)+1}}</b></p>
@@ -83,17 +83,16 @@
         <td>
           {{respuestas[i]}}
         </td>
-        <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i+8)" [disabled]="habilitarReactivo(i+8)"><br>
-        <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i+8)" [disabled]="habilitarReactivo(i+8)">
+        <td><input *ngIf="i>2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i+8)" [disabled]="habilitarReactivo(i+8)"><br>
+        <td><input *ngIf="i>2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i+8)" [disabled]="habilitarReactivo(i+8)">
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Sucesión de números y letras: <br>
       <b id="checksreactivo35">{{this.subprueba.puntuacionNatural}}</b></p>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba"> 
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     Siguiente
     <span class="glyphicon glyphicon-arrow-right"></span>
   </button>
 </body>
-
 </html>
