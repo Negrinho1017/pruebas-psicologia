@@ -1,7 +1,6 @@
 package ca2re.backend.controller;
 
 import java.text.ParseException;
-import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.servicio.AdministradorPruebas;
-import ca2re.backend.util.CalculadoraDeEdad;
-import ca2re.backend.util.FechaUtil;
 
 @RestController
 @CrossOrigin

@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 import ca2re.backend.dominio.EdadPersona;
-import ca2re.backend.util.CalculadoraDeEdad;
+import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.Operaciones;
 import ca2re.backend.util.CalculadorDePuntuacionEscalar;
 
@@ -24,10 +24,10 @@ public class UtilTest {
 		fechaEvaluacion.set(2018, Calendar.SEPTEMBER, 10);
 		EdadPersona edadPersona = new EdadPersona(14, 4, 22);
 		assertEquals(edadPersona.getAnios(),
-				CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
-		assertEquals(edadPersona.getDias(), CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
+				EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
+		assertEquals(edadPersona.getDias(), EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
 		assertEquals(edadPersona.getMeses(),
-				CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
+				EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
 	}
 
 	@Test
@@ -36,9 +36,9 @@ public class UtilTest {
 		Calendar fechaNacimiento = Calendar.getInstance();
 		fechaNacimiento.set(1995, Calendar.JULY, 22);
 		fechaEvaluacion.set(2018, Calendar.SEPTEMBER, 10);
-		assertEquals(23, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
-		assertEquals(18, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
-		assertEquals(1, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
+		assertEquals(23, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
+		assertEquals(18, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
+		assertEquals(1, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
 	}
 
 	@Test
@@ -47,9 +47,9 @@ public class UtilTest {
 		Calendar fechaNacimiento = Calendar.getInstance();
 		fechaNacimiento.set(1994, Calendar.NOVEMBER, 12);
 		fechaEvaluacion.set(2018, Calendar.SEPTEMBER, 10);
-		assertEquals(23, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
-		assertEquals(28, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
-		assertEquals(9, CalculadoraDeEdad.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
+		assertEquals(23, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getAnios());
+		assertEquals(28, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getDias());
+		assertEquals(9, EdadUtil.calcularEdad(fechaEvaluacion, fechaNacimiento).getMeses());
 	}
 	
 	@Test

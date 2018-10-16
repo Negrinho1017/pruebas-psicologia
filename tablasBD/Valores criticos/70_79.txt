@@ -1,0 +1,9 @@
+{
+    "idRangoEdad" : 8,
+    "valorCriticoICV_IRP" : 10.18,
+    "valorCriticoICV_IMT" : 9.74,
+    "valorCriticoICV_IVP" : 12.12,
+    "valorCriticoIRP_IMT" : 10.6,
+    "valorCriticoIRP_IVP" : 12.82,
+    "valorCriticoIMT_IVP" : 12.47
+}

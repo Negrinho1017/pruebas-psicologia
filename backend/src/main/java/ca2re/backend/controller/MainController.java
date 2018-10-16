@@ -21,7 +21,7 @@ import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.servicio.CalificadorPrueba;
-import ca2re.backend.util.CalculadoraDeEdad;
+import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;
 
 @RestController
@@ -40,7 +40,7 @@ public class MainController {
 	public EdadPersona obtenerEdadPersona(@RequestParam String fechaNacimiento, @RequestParam String fechaEvaluacion) throws ParseException {
 		Calendar fechaNacimientoConvertida = FechaUtil.convertirDeStringACalendar(fechaNacimiento);
 		Calendar fechaEvaluacionConvertida = FechaUtil.convertirDeStringACalendar(fechaEvaluacion);
-		return CalculadoraDeEdad.calcularEdad(fechaEvaluacionConvertida, fechaNacimientoConvertida);
+		return EdadUtil.calcularEdad(fechaEvaluacionConvertida, fechaNacimientoConvertida);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

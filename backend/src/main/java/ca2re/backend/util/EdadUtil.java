@@ -5,7 +5,7 @@ import java.util.Calendar;
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.constantes.IdsRangoEdad;
 
-public class CalculadoraDeEdad {
+public class EdadUtil {
 
 	public static EdadPersona calcularEdad(Calendar fechaActual, Calendar fechaNacimiento) {
 		int dias = fechaActual.get(Calendar.DAY_OF_MONTH) - fechaNacimiento.get(Calendar.DAY_OF_MONTH);
