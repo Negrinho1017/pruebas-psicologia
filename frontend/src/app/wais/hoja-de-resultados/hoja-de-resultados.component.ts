@@ -11,9 +11,7 @@ import { Globals } from '../../globals';
   styleUrls: ['./hoja-de-resultados.component.css']
 })
 export class HojaDeResultadosComponent implements OnInit {
-  subpruebas: String[] = ["Diseño con cubos", "Semejanzas", "Retención de dígitos", "Matrices",
-    "Vocabulario", "Aritmética", "Búsqueda de símbolos", "Rompecabezas visual", "Información",
-    "Claves"];
+  subpruebas: String[] = [];
   prueba: Prueba;
   puntuacionesEscalares: number[] = [];
 
@@ -47,6 +45,7 @@ export class HojaDeResultadosComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.subpruebas = this.globals.subpruebas;
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
@@ -106,15 +105,15 @@ export class HojaDeResultadosComponent implements OnInit {
           color: 'black',
           name: "Comprensión verbal",
           data: [{
-            name: 'Semejanzas',
+            name: this.globals.subpruebas[1],
             y: this.puntuacionesEscalares[1]
           },
           {
-            name: 'Vocabulario',
+            name: this.globals.subpruebas[4],
             y: this.puntuacionesEscalares[4]
           },
           {
-            name: 'Información',
+            name: this.globals.subpruebas[8],
             y: this.puntuacionesEscalares[8]
           }]
         }
@@ -136,15 +135,15 @@ export class HojaDeResultadosComponent implements OnInit {
           color: 'black',
           name: "Razonamiento perceptual",
           data: [{
-            name: 'Diseño de cubos',
+            name: this.globals.subpruebas[0],
             y: this.puntuacionesEscalares[0]
           },
           {
-            name: 'Matrices',
+            name: this.globals.subpruebas[3],
             y: this.puntuacionesEscalares[3]
           },
           {
-            name: 'Rompecabezas visual',
+            name: this.globals.subpruebas[7],
             y: this.puntuacionesEscalares[7]
           }]
         }
@@ -166,11 +165,11 @@ export class HojaDeResultadosComponent implements OnInit {
           color: 'black',
           name: "Memoria de trabajo",
           data: [{
-            name: 'Retención de dígitos',
+            name: this.globals.subpruebas[2],
             y: this.puntuacionesEscalares[2]
           },
           {
-            name: 'Aritmética',
+            name: this.globals.subpruebas[5],
             y: this.puntuacionesEscalares[5],
           }],
         }
@@ -192,11 +191,11 @@ export class HojaDeResultadosComponent implements OnInit {
           color: 'black',
           name: "Velocidad de procesamiento",
           data: [{
-            name: 'Búsqueda de símbolos',
+            name: this.globals.subpruebas[6],
             y: this.puntuacionesEscalares[6]
           },
           {
-            name: 'Claves',
+            name: this.globals.subpruebas[9],
             y: this.puntuacionesEscalares[9]
           }]
         }

@@ -105,7 +105,8 @@ export class SubpruebasOpcionalesComponent implements OnInit {
   
   cambiarRuta(posicion: number){
     if(!this.pruebasAEvaluar[posicion]){
-      this.globals.rutas[posicion]="/numeros-letras"
+      this.globals.rutas[posicion]="/numeros-letras";
+      this.globals.subpruebas[posicion] = "Sucesión de números y letras";
     }
   }
 

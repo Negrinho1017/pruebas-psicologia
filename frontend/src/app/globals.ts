@@ -15,4 +15,5 @@ export class Globals {
     edad: number;
     rutas: String[] = [];
     datosSeleccionados: boolean;
+    subpruebas: string[] = [];
 }

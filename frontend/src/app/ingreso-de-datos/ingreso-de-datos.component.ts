@@ -35,6 +35,8 @@ export class IngresoDeDatosComponent implements OnInit {
   ngOnInit() {
     this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
     "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
+    this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
+    "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
     this.ingresoDatosForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),
