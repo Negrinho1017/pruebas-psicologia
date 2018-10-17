@@ -18,8 +18,7 @@ export class SemejanzasComponent implements OnInit {
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false,
-    false, false, false, false, false, false];
+  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false];    
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
 
@@ -64,39 +63,48 @@ export class SemejanzasComponent implements OnInit {
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if (numeroReactivo == 5 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
-      this.habilitaReactivo[numeroReactivo - 2] = false;
-      this.habilitaReactivo[numeroReactivo - 3] = false;
-      this.listaCalificaciones[numeroReactivo - 2] = 0;
-      this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.cambiarFoco(numeroReactivo, 3);
+      this.limpiarReactivosAnt(numeroReactivo);
     }
     else if (numeroReactivo == 2) {
-      if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
-        this.habilitaReactivo[numeroReactivo - 1] = false;
-        this.listaCalificaciones[numeroReactivo - 1] = 0;
-        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
-      } else {
-        this.cambiarFoco(numeroReactivo, 6);
-      }
+      this.reversarInversion(puntuacionReactivo, numeroReactivo);
+    }
+    else if (numeroReactivo == 3) {
+      this.cambiarFoco(numeroReactivo, 2);
+    }
+    else if (numeroReactivo == 1) {
+      this.determinarContinua(puntuacionReactivo, numeroReactivo);
+    }
+    else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
+    }
+  }
+
+  private limpiarReactivosAnt(numeroReactivo: number) {
+    this.habilitaReactivo[numeroReactivo - 2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 3);
+  }
+
+  private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+      this.habilitaReactivo[numeroReactivo - 1] = false;
+      this.listaCalificaciones[numeroReactivo - 1] = 0;
+      this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      if (numeroReactivo == 3) {
-        this.cambiarFoco(numeroReactivo, 2);
-      }
-      else if (numeroReactivo == 1) {
-        if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
-          this.anteriorReactivo = numeroReactivo;
-          this.mensajeError("Se ha descontinuado la subprueba");
-        }
-        else {
-          this.cambiarFoco(numeroReactivo, 6);
-        }
-      }
-      else {
-        if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
-          this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
-        }
-      }
+      this.cambiarFoco(numeroReactivo, 6);
+    }
+  }
+
+  private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    else {
+      this.cambiarFoco(numeroReactivo, 6);
     }
   }
 
@@ -124,7 +132,7 @@ export class SemejanzasComponent implements OnInit {
   }
 
   checkear(i): boolean {
-    return this.habilitaReactivo[i];
+    return i < 5 ? this.habilitaReactivo[i] : false;
   }
 
   getReactivoSiguiente(): number {
