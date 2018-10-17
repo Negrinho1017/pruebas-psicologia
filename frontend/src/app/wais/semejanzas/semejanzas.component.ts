@@ -161,4 +161,10 @@ export class SemejanzasComponent implements OnInit {
       }
     })();
   }
+
+  cambiarSubprueba(){
+    this.globals.rutas[1]="/comprension";
+    this.globals.subpruebas[1] = "Comprensión";
+    this.router.navigate([this.globals.rutas[1]]);
+  }
 }

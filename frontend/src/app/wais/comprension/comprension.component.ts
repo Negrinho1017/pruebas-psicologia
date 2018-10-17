@@ -38,7 +38,7 @@ export class ComprensionComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[13]]);
+        this.navegar();
         this.scrollToTop();
       });
   }
@@ -148,6 +148,18 @@ export class ComprensionComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  navegar() {
+    if (this.globals.rutas[1] == "/comprension") {
+      this.router.navigate([this.globals.rutas[2]]);
+    }
+    if (this.globals.rutas[4] == "/comprension") {
+      this.router.navigate([this.globals.rutas[5]]);
+    }
+    if (this.globals.rutas[8] == "/comprension") {
+      this.router.navigate([this.globals.rutas[9]]);
+    }
   }
 
 }

@@ -55,7 +55,7 @@ export class InformacionComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, 4);
@@ -84,7 +84,7 @@ export class InformacionComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     return discontinua;
   }
@@ -136,7 +136,7 @@ export class InformacionComponent implements OnInit {
     el.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
-  mensajeError(mensaje: string) {
+  mensajeWarning(mensaje: string) {
     swal({
       title: 'Discontinación',
       icon: "warning",
@@ -151,5 +151,23 @@ export class InformacionComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  cambiarSubprueba(){
+    if(this.globals.subpruebas[1]=="Comprensión" || this.globals.subpruebas[4]=="Comprensión"){
+      this.mensajeError("Comprensión ya fué realizada");
+    }else{
+      this.globals.rutas[8]="/comprension";
+      this.globals.subpruebas[8] = "Comprensión";
+      this.router.navigate([this.globals.rutas[8]]);
+    }  
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
   }
 }
