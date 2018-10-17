@@ -29,7 +29,7 @@ export class VocabularioComponent implements OnInit {
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
-  hayDiscontinuacion: boolean = false;  
+  hayDiscontinuacion: boolean = false;
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -39,7 +39,7 @@ export class VocabularioComponent implements OnInit {
     this.subprueba.numeroSubprueba = 5;
   }
 
-  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {    
+  calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.reactivoActual = new Reactivo();
     this.reactivoActual.respuesta =
       (document.getElementById("txtRespuesta" + numeroReactivo) as HTMLInputElement).value;
@@ -51,36 +51,39 @@ export class VocabularioComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == 5 
-      && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
-      this.habilitaReactivo[numeroReactivo - 2] = false;
-      this.habilitaReactivo[numeroReactivo - 3] = false;
-      this.listaCalificaciones[numeroReactivo - 2] = 0;
-      this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.cambiarFoco(numeroReactivo, 3);
+    if (numeroReactivo == 5 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+      this.limpiarReactivosAnt(numeroReactivo);
     }
     else if (numeroReactivo == 2 || numeroReactivo == 1) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else {
-      if (numeroReactivo == 3) {
-        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
-      }
-      else if (numeroReactivo == 0) {
-        if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
-          this.anteriorReactivo = numeroReactivo;
-          this.mensajeError("Se ha descontinuado la subprueba");
-        }
-        else {
-          this.cambiarFoco(numeroReactivo, 6);
-        }
-      }
-      else {
-        if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
-          this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
-        }
-      }
+    else if (numeroReactivo == 3) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
+    else if (numeroReactivo == 0) {
+      this.determinarContinua(puntuacionReactivo, numeroReactivo);
+    }
+    else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
+    }
+  }
+
+  private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    else {
+      this.cambiarFoco(numeroReactivo, 6);
+    }
+  }
+
+  private limpiarReactivosAnt(numeroReactivo: number) {
+    this.habilitaReactivo[numeroReactivo - 2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 3);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
@@ -95,10 +98,10 @@ export class VocabularioComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    let discontinua: boolean = puntuacionReactivo == 0 
-    && this.listaCalificaciones[numeroReactivo - 1] == 0
-    && this.listaCalificaciones[numeroReactivo - 2] == 0;
-    if(discontinua){
+    let discontinua: boolean = puntuacionReactivo == 0
+      && this.listaCalificaciones[numeroReactivo - 1] == 0
+      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+    if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
       this.mensajeError("Se ha descontinuado la subprueba");
@@ -116,9 +119,9 @@ export class VocabularioComponent implements OnInit {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
     }
-    this.subprueba.puntuacionNatural = this.puntuacion;    
+    this.subprueba.puntuacionNatural = this.puntuacion;
     this.puntuacion = 0;
-  }  
+  }
 
   habilitarReactivo(i): boolean {
     return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
@@ -136,7 +139,7 @@ export class VocabularioComponent implements OnInit {
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.router.navigate([this.globals.rutas[5]]);
         this.scrollToTop();
-      });      
+      });
   }
 
   getReactivoSiguiente(): number {

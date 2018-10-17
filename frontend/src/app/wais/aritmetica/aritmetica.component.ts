@@ -17,10 +17,7 @@ export class AritmeticaComponent implements OnInit {
   anteriorReactivo: number = 6;
   respuestasCorrectas: String[] = ["3","Cuenta hasta 3","Cuenta hasta 10","6","9","2","8","5","5","5","17",
   "3","200","38","140","30","47","186","49 1/2","600","51","96","23.100"];
-  reactivos: String [] = ["M. Pelotas","*1. Flores","*2. Manzanas","3. Bates","4. Pájaros","5. Correas","6. Cobijas",
-  "7. Plumas","8. Juguetes","9. Libros","10. Más viejo","11. Boletos","12. Paquetes","13. Tarjetas",
-  "14. Correr","15. Fila","16. Horas","+17. Minutos","18. Dulces","19. Mapas","20. Vueltas","21. Máquinas",
-  "22. Correo"];
+  reactivos: String [] = ["M. Pelotas","*1. Flores","*2. Manzanas","3. Bates","4. Pájaros","5. Correas","6. Cobijas", "7. Plumas","8. Juguetes","9. Libros","10. Más viejo","11. Boletos","12. Paquetes","13. Tarjetas", "14. Correr","15. Fila","16. Horas","+17. Minutos","18. Dulces","19. Mapas","20. Vueltas","21. Máquinas", "22. Correo"];
   listaCalificaciones: number[] = [0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   habilitaReactivo: boolean[] = [true, true, true, true, true, true, false, false, false, 
     false, false, false, false, false, false];
@@ -45,30 +42,38 @@ export class AritmeticaComponent implements OnInit {
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if(numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
-      this.habilitaReactivo[numeroReactivo -2] = false;
-      this.habilitaReactivo[numeroReactivo - 3] = false;
-      this.listaCalificaciones[numeroReactivo - 2] = 0;
-      this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.cambiarFoco(numeroReactivo, 5);
+      this.limpiarReactivosAnt(numeroReactivo);      
     }
     else if(numeroReactivo == 4 || numeroReactivo == 3 || numeroReactivo == 2){
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if(numeroReactivo == 1){
-      if(puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo+1] == 0){
-        this.anteriorReactivo = numeroReactivo;
-        this.mensajeError("Se ha descontinuado la subprueba");
-      }
-      else{
-        this.cambiarFoco(numeroReactivo, 8);
-      }
-    }
     else if(numeroReactivo == 5){
       this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
+    }
+    else if(numeroReactivo == 1){
+      this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
       this.cambiarFoco(numeroReactivo, numeroReactivo + 1);      
     }
+  }
+
+  private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
+    }
+    else {
+      this.cambiarFoco(numeroReactivo, 8);
+    }
+  }
+
+  private limpiarReactivosAnt(numeroReactivo: number) {
+    this.habilitaReactivo[numeroReactivo - 2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 5);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
