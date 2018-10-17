@@ -15,6 +15,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 export class AritmeticaComponent implements OnInit {
   siguienteReactivo: number = 6;
   anteriorReactivo: number = 6;
+  seCambiaraLaSubprueba: boolean = false;
   respuestasCorrectas: String[] = ["3","Cuenta hasta 3","Cuenta hasta 10","6","9","2","8","5","5","5","17",
   "3","200","38","140","30","47","186","49 1/2","600","51","96","23.100"];
   reactivos: String [] = ["M. Pelotas","*1. Flores","*2. Manzanas","3. Bates","4. Pájaros","5. Correas","6. Cobijas", "7. Plumas","8. Juguetes","9. Libros","10. Más viejo","11. Boletos","12. Paquetes","13. Tarjetas", "14. Correr","15. Fila","16. Horas","+17. Minutos","18. Dulces","19. Mapas","20. Vueltas","21. Máquinas", "22. Correo"];
@@ -61,7 +62,7 @@ export class AritmeticaComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, 8);
@@ -101,7 +102,7 @@ export class AritmeticaComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     return discontinua;
   }
@@ -154,7 +155,7 @@ export class AritmeticaComponent implements OnInit {
     el.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
-  mensajeError(mensaje: string) {
+  mensajeWarning(mensaje: string) {
     swal({
       title: 'Discontinación',
       icon: "warning",
@@ -169,5 +170,23 @@ export class AritmeticaComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  cambiarSubprueba(){
+    if(this.globals.subpruebas[2]=="Sucesión de números y letras"){
+      this.mensajeError("Sucesión de números y letras ya fué realizada");
+    }else{
+      this.globals.rutas[5]="/numeros-letras";
+      this.globals.subpruebas[5] = "Sucesión de números y letras";
+      this.router.navigate([this.globals.rutas[5]]);
+    }  
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
   }
 }
