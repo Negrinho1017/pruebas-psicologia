@@ -15,6 +15,7 @@ export class RetencionDigitosComponent implements OnInit {
   siguienteReactivo: number = 0;
   anteriorReactivo: number = 0;
   selectedRetencionDeDigitos: number;
+  seCambiaraLaSubprueba: boolean = false;
   digitosRDD: String[] = ["9 - 7", "6 - 3", "5 - 8 - 2", "6 - 9 - 4", "7 - 2 - 8 - 6", "6 - 4 - 3 - 9"
     , "4 - 2 - 7 - 3 - 1", "7 - 5 - 8 - 3 - 6", "3 - 9 - 2 - 4 - 8 - 7",
     "6 - 1 - 9 - 4 - 7 - 3", "6 - 9 - 1 - 7 - 4 - 2 - 8", "4 - 1 - 7 - 9 - 3 - 8 - 6"
@@ -190,5 +191,11 @@ export class RetencionDigitosComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  cambiarSubprueba(){
+    this.globals.rutas[2]="/numeros-letras";
+    this.globals.subpruebas[2] = "Sucesión de números y letras";
+    this.router.navigate([this.globals.rutas[2]]);
   }
 }

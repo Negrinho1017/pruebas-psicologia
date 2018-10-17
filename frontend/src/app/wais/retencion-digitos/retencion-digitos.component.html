@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<body class = "cuerpo">
+
+<body class="cuerpo">
   <table>
     <td>
       <p>
@@ -24,14 +25,24 @@
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
         <b> Puntuación:</b> <br> Otorgue 0 o 1 punto para cada ensayo<br>
-        <b>RDD, RDI, RDS</b><br> Puntuación natural total para orden directo, orden inverso<br> y secuencia, respectivamente<br>
-        <b>MRDD, MRDI, MRDS</b><br> Número de digitos recordado en el último ensayo con puntuación 1<br> en orden directo,
+        <b>RDD, RDI, RDS</b><br> Puntuación natural total para orden directo, orden inverso<br> y secuencia,
+        respectivamente<br>
+        <b>MRDD, MRDI, MRDS</b><br> Número de digitos recordado en el último ensayo con puntuación 1<br> en orden
+        directo,
         orden inverso y secuencia, respectivamente
       </p>
     </td>
   </table>
-  <br>
 
+  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+    Cambiar subprueba
+  </button>
+  <input type="button" *ngIf="seCambiaraLaSubprueba" 
+  (click)="cambiarSubprueba()" class="btn btn-secondary" value="Sucesión de números y letras">
+  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+    value="Cancelar">
+  
+  <br>
   <div id="rdd" class="tabcontent" *ngIf="this.selectedRetencionDeDigitos==1">
     <div class="table-responsive">
       <table class="table">
@@ -42,26 +53,27 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDD; let i = index" 
-            [ngClass]="{'positive' : i == getReactivoSiguiente()}"
-            id = "checksreactivo{{i}}">
-          <td><p *ngIf="i==0">16-90</p></td>
-          <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
+        <tr *ngFor="let item of digitosRDD; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+          <td>
+            <p *ngIf="i==0">16-90</p>
+          </td>
+          <td>
+            <p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b>
+              <p>
+          </td>
           <td>
             {{item}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)"
-            [disabled] = "habilitarReactivo(i, 1)"><br>
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)"
-            [disabled] = "habilitarReactivo(i, 1)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)" [disabled]="habilitarReactivo(i, 1)"><br>
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)" [disabled]="habilitarReactivo(i, 1)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDD: <br>
-      <b id = "checksreactivo{{i}}">{{this.puntuacionRDD}}</b></p>
+        <b id="checksreactivo{{i}}">{{this.puntuacionRDD}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(2)"
-      id="btnPrueba"> Ir a retención de dígitos de orden inverso
-      <span class="glyphicon glyphicon-arrow-right"></span> 
+    <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(2)" id="btnPrueba"> Ir a retención de dígitos
+      de orden inverso
+      <span class="glyphicon glyphicon-arrow-right"></span>
     </button>
   </div>
 
@@ -76,29 +88,30 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDI; let i = index" 
-            [ngClass]="{'positive' : i == getReactivoSiguiente()}"
-            id = "checksreactivo{{i}}">
-          <td><p *ngIf="i==0">16-90</p></td>
-          <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
+        <tr *ngFor="let item of digitosRDI; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+          <td>
+            <p *ngIf="i==0">16-90</p>
+          </td>
+          <td>
+            <p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b>
+              <p>
+          </td>
           <td>
             {{item}}
           </td>
           <td>
-           {{respuestasRDI[i]}}
+            {{respuestasRDI[i]}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" 
-            [disabled] = "habilitarReactivo(i, 2)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)"
-            [disabled] = "habilitarReactivo(i, 2)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>
-      <b id = "checksreactivo{{i}}">{{this.puntuacionRDI}}</b></p>
+        <b id="checksreactivo{{i}}">{{this.puntuacionRDI}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(3)"
-      id="btnPrueba"> Ir a retención de dígitos en secuencia
-      <span class="glyphicon glyphicon-arrow-right"></span> 
+    <button type="button" class="btn btn-dark btn-lg" (click)="cambiarRD(3)" id="btnPrueba"> Ir a retención de dígitos
+      en secuencia
+      <span class="glyphicon glyphicon-arrow-right"></span>
     </button>
   </div>
 
@@ -113,42 +126,44 @@
           <th>0</th>
           <th>1</th>
         </tr>
-        <tr *ngFor="let item of digitosRDS; let i = index"
-            [ngClass]="{'positive' : i == getReactivoSiguiente()}"
-            id = "checksreactivo{{i}}">
-          <td><p *ngIf="i==0">16-90</p></td>
-          <td><p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b><p></td>
-            <td>
-              {{item}}
-            </td>
-            <td>
-             {{respuestasRDS[i]}}
-            </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)"
-            [disabled] = "habilitarReactivo(i, 3)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)"
-            [disabled] = "habilitarReactivo(i, 3)">
+        <tr *ngFor="let item of digitosRDS; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+          <td>
+            <p *ngIf="i==0">16-90</p>
+          </td>
+          <td>
+            <p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b>
+              <p>
+          </td>
+          <td>
+            {{item}}
+          </td>
+          <td>
+            {{respuestasRDS[i]}}
+          </td>
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)" [disabled]="habilitarReactivo(i, 3)">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)" [disabled]="habilitarReactivo(i, 3)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDS: <br>
-      <b>{{this.puntuacionRDS}}</b></p>
+        <b>{{this.puntuacionRDS}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="obtenerPuntuacionTotal()"
-      id="btnPrueba"> Ir a la puntuación natural total
-      <span class="glyphicon glyphicon-arrow-right"></span> 
+    <button type="button" class="btn btn-dark btn-lg" (click)="obtenerPuntuacionTotal()" id="btnPrueba"> Ir a la
+      puntuación natural total
+      <span class="glyphicon glyphicon-arrow-right"></span>
     </button>
   </div>
   <div *ngIf="this.selectedRetencionDeDigitos==4">
     <table>
-    <p id="puntuacion">
-      Puntuación natural total para Retención de dígitos: <br>
-      <b id = "checksreactivo{{i}}">{{this.puntuacion}}</b>
-    </p>
-    <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()"
-      id="btnPrueba" > Siguiente
-      <span class="glyphicon glyphicon-arrow-right"></span> 
-    </button>
-  </table>
-  </div>  
+      <p id="puntuacion">
+        Puntuación natural total para Retención de dígitos: <br>
+        <b id="checksreactivo{{i}}">{{this.puntuacion}}</b>
+      </p>
+      <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+        Siguiente
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </button>
+    </table>
+  </div>
 </body>
+
 </html>

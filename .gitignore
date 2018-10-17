@@ -50,3 +50,5 @@ frontend/coverage
 .recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_8
 .sonarlint/modules/backend/issues/index.pb
 
+frontend/package-lock.json
+frontend/package.json
