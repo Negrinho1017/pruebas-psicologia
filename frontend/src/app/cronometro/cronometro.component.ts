@@ -10,6 +10,12 @@ export class CronometroComponent implements OnInit {
   timeCounter: number = 0;
   interval;
   estaContando: Boolean = false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
   startTimer() {
     if(!this.estaContando){
       this.interval = setInterval(() => {
@@ -21,7 +27,7 @@ export class CronometroComponent implements OnInit {
       },1000);
       this.estaContando = true;
     }   
-  }
+  }  
 
   startTimeCounter() {
     if(!this.estaContando){
@@ -46,9 +52,8 @@ export class CronometroComponent implements OnInit {
     this.pauseTimer();
   }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  public obtenerTiempo(): number{
+    return this.timeCounter;
+  }  
 
 }

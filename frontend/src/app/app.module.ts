@@ -26,6 +26,8 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
 import { AnalisisComponent } from './wais/analisis/analisis.component';
 import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component';
 import { ComprensionComponent } from './wais/comprension/comprension.component';
+import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
+import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ComprensionComponent } from './wais/comprension/comprension.component';
     PaginaPrincipalComponent,
     AnalisisComponent,
     SubpruebasOpcionalesComponent,
-    ComprensionComponent
+    ComprensionComponent,
+    FigurasIncompletasComponent,
+    PesoFiguradoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChildren, QueryList } from '@angular/core';
 import { Reactivo } from '../../model/Reactivo';
 import { Subprueba } from '../../model/Subprueba';
 import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { Router } from '@angular/router';
 import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
+import { CronometroComponent } from 'src/app/cronometro/cronometro.component';
 
 @Component({
   selector: 'app-diseno-cubos',
@@ -43,6 +44,8 @@ export class DisenoCubosComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png", "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
+  
+  @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -80,6 +83,9 @@ export class DisenoCubosComponent implements OnInit {
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.reactivoActual = new Reactivo();
+
+    console.log("Tiempo: "+this.cronometros.toArray()[numeroReactivo].obtenerTiempo());
+
     this.reactivoActual.respuesta = this.convertirVectorAString(numeroReactivo);
     this.reactivoActual.puntuacion = puntuacionReactivo;
     this.reactivosCalificados[numeroReactivo] = (this.reactivoActual);

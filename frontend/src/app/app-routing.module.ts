@@ -20,6 +20,8 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
 import { AnalisisComponent } from './wais/analisis/analisis.component'
 import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component'
 import { ComprensionComponent } from './wais/comprension/comprension.component';
+import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
+import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
@@ -40,7 +42,9 @@ const routes: Routes =[
   { path: 'numeros-letras', component: NumerosLetrasComponent },
   { path: 'pagina-principal', component: PaginaPrincipalComponent },
   { path: 'analisis', component: AnalisisComponent },
-  { path: 'comprension', component: ComprensionComponent }
+  { path: 'comprension', component: ComprensionComponent },
+  { path: 'figuras-incompletas', component: FigurasIncompletasComponent },
+  { path: 'peso-figurado', component: PesoFiguradoComponent }
 ]
 
 @NgModule({
