@@ -97,11 +97,7 @@ export class DisenoCubosComponent implements OnInit {
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if (numeroReactivo == 6 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
-      this.habilitaReactivo[numeroReactivo - 2] = false;
-      this.habilitaReactivo[numeroReactivo - 3] = false;
-      this.listaCalificaciones[numeroReactivo - 2] = 0;
-      this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.cambiarFoco(numeroReactivo, 4);
+      this.limpiarReactivosAnt(numeroReactivo);
     }
     else if (numeroReactivo == 3 || numeroReactivo == 2) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
@@ -125,6 +121,14 @@ export class DisenoCubosComponent implements OnInit {
         }
       }
     }
+  }
+
+  private limpiarReactivosAnt(numeroReactivo: number) {
+    this.habilitaReactivo[numeroReactivo - 2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 4);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {

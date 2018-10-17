@@ -1,44 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { Reactivo } from '../../model/Reactivo';
-import { Subprueba } from '../../model/Subprueba';
-import { Globals } from '../../globals';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Reactivo } from 'src/app/model/Reactivo';
+import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
-import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
+import { Globals } from 'src/app/globals';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subprueba } from 'src/app/model/Subprueba';
 
 @Component({
-  selector: 'app-semejanzas',
-  templateUrl: './semejanzas.component.html',
-  styleUrls: ['./semejanzas.component.css']
+  selector: 'app-comprension',
+  templateUrl: './comprension.component.html',
+  styleUrls: ['./comprension.component.css']
 })
-export class SemejanzasComponent implements OnInit {
-  siguienteReactivo = 4;
-  anteriorReactivo = 4;
-  reactivos: String[] = ["M. Dos - Siete", "1. Tenedor - Cuchara", "2. Amarillo - Verde", "3. Zanahoria - Brócoli", "*4. Caballo - Tigre", "*5. Piano - Tambor", "6. Barco - Automóvil", "7. Nariz - Lengua", "8. Comida - Gasolina", "9. Capullo - Bebé", "10. Ancla - Cerca", "11. Insignia - Corona", "12. Música - Marea", "13. Poema - Estatua", "14. Desear - Esperar", "15. Aceptación - Negación", "16. Siempre - Nunca", "17. Permitir - Restreingir", "18. Enemigo - Amigo"];
-  puntuacion: number = 0;
-  reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false,
-    false, false, false, false, false, false];
-  subprueba: Subprueba = new Subprueba();
+export class ComprensionComponent implements OnInit {
+  siguienteReactivo = 2;
+  anteriorReactivo = 2;
+  reactivos: String[] = ["1. Relojes", "2. Ropa", "* 3. Dinero", "* 4. Sobre", "& 5. Comida", "& 6. Paises", "7. Persevera - Alcanza", "8. Historia", "& 9. Trabajo", "10. Animales", "& 11. Espacio", "12. Terreno", "13. Perro", "14. Cédula", "15. Democracia", "16. Hablador - Cojo", "17. Delito", "18. Verano"];
+  habilitaReactivo: boolean[] = [true, true, false, false, false, false];
+  listaCalificaciones: number[] = [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   reactivoActual: Reactivo;
+  reactivosCalificados: Reactivo[] = [];
+  subprueba: Subprueba = new Subprueba();
+  puntuacion: number = 0;
 
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
-    this.subprueba.nombre = "Semejanzas";
-    this.subprueba.numeroSubprueba = 2;
+    this.subprueba.nombre = "Comprension";
+    this.subprueba.numeroSubprueba = 13;
   }
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
+    //ACarras se debe crear servicio para puntuacionEscalar
     this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas("20:0-24:11", this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[2]]);
+        this.router.navigate([this.globals.rutas[13]]);
         this.scrollToTop();
       });
   }
@@ -63,41 +63,38 @@ export class SemejanzasComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == 5 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
-      this.habilitaReactivo[numeroReactivo - 2] = false;
-      this.habilitaReactivo[numeroReactivo - 3] = false;
-      this.listaCalificaciones[numeroReactivo - 2] = 0;
-      this.listaCalificaciones[numeroReactivo - 3] = 0;
-      this.cambiarFoco(numeroReactivo, 3);
+    if (numeroReactivo == 3 
+        && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+      this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 2) {
-      if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
-        this.habilitaReactivo[numeroReactivo - 1] = false;
-        this.listaCalificaciones[numeroReactivo - 1] = 0;
-        this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
-      } else {
-        this.cambiarFoco(numeroReactivo, 6);
-      }
+    else if (numeroReactivo == 1) {
+      this.cambiarFoco(numeroReactivo, 0);
+    }
+    else if (numeroReactivo == 0) {
+      this.determinarContinua(puntuacionReactivo, numeroReactivo);
+    }
+    else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
+    }
+
+  }
+
+  private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
+    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+      this.anteriorReactivo = numeroReactivo;
+      this.mensajeError("Se ha descontinuado la subprueba");
     }
     else {
-      if (numeroReactivo == 3) {
-        this.cambiarFoco(numeroReactivo, 2);
-      }
-      else if (numeroReactivo == 1) {
-        if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
-          this.anteriorReactivo = numeroReactivo;
-          this.mensajeError("Se ha descontinuado la subprueba");
-        }
-        else {
-          this.cambiarFoco(numeroReactivo, 6);
-        }
-      }
-      else {
-        if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
-          this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
-        }
-      }
+      this.cambiarFoco(numeroReactivo, 4);
     }
+  }
+
+  private limpiarReactivosAnt(numeroReactivo: number) {
+    this.habilitaReactivo[numeroReactivo - 2] = false;
+    this.habilitaReactivo[numeroReactivo - 3] = false;
+    this.listaCalificaciones[numeroReactivo - 2] = 0;
+    this.listaCalificaciones[numeroReactivo - 3] = 0;
+    this.cambiarFoco(numeroReactivo, 1);
   }
 
   cambiarFoco(numeroReactivo: number, siguienteR: number) {
@@ -110,7 +107,7 @@ export class SemejanzasComponent implements OnInit {
     let discontinua: boolean = (puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0)
-      && numeroReactivo > 7;
+      && numeroReactivo > 5;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
@@ -119,12 +116,12 @@ export class SemejanzasComponent implements OnInit {
     return discontinua;
   }
 
-  habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+  checkear(i): boolean {
+    return i < 3 ? this.habilitaReactivo[i] : false;
   }
 
-  checkear(i): boolean {
-    return this.habilitaReactivo[i];
+  habilitarReactivo(i): boolean {
+    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
   }
 
   getReactivoSiguiente(): number {
@@ -152,4 +149,5 @@ export class SemejanzasComponent implements OnInit {
       }
     })();
   }
+
 }

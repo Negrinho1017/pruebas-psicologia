@@ -25,6 +25,7 @@ import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.com
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { AnalisisComponent } from './wais/analisis/analisis.component';
 import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component';
+import { ComprensionComponent } from './wais/comprension/comprension.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subp
     NumerosLetrasComponent,
     PaginaPrincipalComponent,
     AnalisisComponent,
-    SubpruebasOpcionalesComponent
+    SubpruebasOpcionalesComponent,
+    ComprensionComponent
   ],
   imports: [
     BrowserModule,

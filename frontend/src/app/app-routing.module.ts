@@ -19,6 +19,7 @@ import { Globals } from './globals';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { AnalisisComponent } from './wais/analisis/analisis.component'
 import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component'
+import { ComprensionComponent } from './wais/comprension/comprension.component';
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
@@ -38,7 +39,8 @@ const routes: Routes =[
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent },
   { path: 'numeros-letras', component: NumerosLetrasComponent },
   { path: 'pagina-principal', component: PaginaPrincipalComponent },
-  { path: 'analisis', component: AnalisisComponent }
+  { path: 'analisis', component: AnalisisComponent },
+  { path: 'comprension', component: ComprensionComponent }
 ]
 
 @NgModule({
