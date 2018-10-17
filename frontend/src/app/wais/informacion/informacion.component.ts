@@ -12,6 +12,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./informacion.component.css']
 })
 export class InformacionComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   siguienteReactivo: number = 2;
   anteriorReactivo: number = 2;
   reactivos: String[] = ["*1. Lunes", "*2. Forma", "+3. Termómetro", "+4. Segundos", "5. Agua", "*6. Brasil","7. Emiliano Zapata","8. Italia","9. El quijote de la mancha","10. Cleopatra","11. Sahara", "12. Línea","13. Olimpiadas","14. Revolución mexicana","15. La malinche","16. Relatividad","17. Gandhi", "18. Hervir","19. Órgano","20. Lengua","21. Catalina","*22. Vasos sanguíneos","23. Sherlock Holmes", "*24. Minutos","25. Alicia","*26. Circunferencia"];

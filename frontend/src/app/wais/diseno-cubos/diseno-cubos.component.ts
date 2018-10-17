@@ -13,6 +13,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 })
 
 export class DisenoCubosComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   navIsFixed: boolean;
   anteriorReactivo = 5;
   siguienteReactivo = 5;

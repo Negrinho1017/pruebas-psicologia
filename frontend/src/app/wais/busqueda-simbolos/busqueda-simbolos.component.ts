@@ -11,6 +11,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./busqueda-simbolos.component.css']
 })
 export class BusquedaSimbolosComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   puntuacion: number = 0;
   correctas: number = 0;
   incorrectas: number = 0;

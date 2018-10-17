@@ -14,6 +14,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 })
 
 export class VocabularioComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   siguienteReactivo = 4;
   anteriorReactivo = 4;
   reactivos: String[] = ["1. Libro", "2. Avión", "3. Canasta", "*4. Manzana", "5. Finalizar", "6. Cama",

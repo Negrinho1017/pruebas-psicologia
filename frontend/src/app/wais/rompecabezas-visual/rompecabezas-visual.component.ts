@@ -13,6 +13,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 })
 
 export class RompecabezasVisualComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   siguienteReactivo: number = 6;
   anteriorReactivo: number = 6;
   respuestasCorrectas: String[] = ["1, 2, 6", "1, 3, 6", "2, 3, 5", "1, 2, 5", "1, 4, 6", "2, 3, 6", "3, 5, 6", "1, 3, 6", "2, 5, 6", "1, 3, 4", "1, 3, 6", "1, 2, 5", "1, 2, 5", "1, 4, 5", "3, 4, 6", "2, 3, 4", "1, 2, 6", "3, 4, 6", "1, 2, 6", "2, 3, 5", "1, 5, 6", "2, 3, 5", "1 ,3 ,4", "1, 5, 6", "3, 4, 6", "3, 4, 5", "1, 2, 3", "3, 4, 6"];

@@ -13,6 +13,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 export class ClavesComponent implements OnInit {
   puntuacion: number = 0;
   subprueba: Subprueba = new Subprueba();
+  seCambiaraLaSubprueba: boolean = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 

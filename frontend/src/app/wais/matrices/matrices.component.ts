@@ -12,6 +12,7 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./matrices.component.css']
 })
 export class MatricesComponent implements OnInit {
+  seCambiaraLaSubprueba: boolean = false;
   siguienteReactivo = 5;
   anteriorReactivo = 5;
   respuestasCorrectas: number[] = [5, 4, 3, 2, 1, 5, 3, 4, 4, 5, 1, 5, 2, 3, 1, 1, 5, 2, 3, 2, 1, 4, 5, 1, 4, 2, 3, 4];
