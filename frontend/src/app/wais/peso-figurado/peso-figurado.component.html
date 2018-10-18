@@ -4,9 +4,11 @@
       <p>
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
         <b> Inicio:</b> <br>
-        <b>Edad 16 a 90 años: </b><br>
+        <b>Edad 16 a 69 años: </b><br>
         reactivo muestra A y B, reactivo de práctica<br>
-        después del reactivo 4.
+        después reactivo 4. <br>
+        <b>Edad 70 a 90 años: </b><br>
+        no se aplique.
       </p>
     </td>
     <td>
@@ -14,20 +16,20 @@
         <i class="fa fa-refresh"></i>
         <b> Inversión:</b> <br> Si obtiene una puntuación de 0 en el reactivo 4 o 5<br>
         aplique los reactivos anteriores
-        en orden inverso hasta<br> obtener dos puntuaciones perfectas consecutivas.
+        en orden <b>inverso</b> hasta<br> obtener dos puntuaciones perfectas consecutivas.
       </p>
     </td>
     <td>
       <p>
         <i class="fa fa-hand-paper-o"></i>
-        <b> Discontinuación:</b> <br> Después de tres puntuaciones<br> consecutivas de 0.
+        <b> Discontinuación:</b> <br> Después de <b>tres</b> puntuaciones<br> consecutivas de 0.
       </p>
     </td>
     <td>
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
         <b> Puntuación:</b> <br>
-        Otorgue 0, 1 o 2 puntos<br>
+        Otorgue 0 o 1 punto.<br>
       </p>
     </td>
   </table>
@@ -51,8 +53,8 @@
           <p *ngIf="i>2">{{i-1}}</p>
         </td>
         <td>
-          <p *ngIf="i<=8 && i>1">20''</p>
-          <p *ngIf="i>8">30''</p>
+          <p *ngIf="i<=13 && i>2">20''</p>
+          <p *ngIf="i>13">40''</p>
         </td>
         <td>
           <app-cronometro></app-cronometro>
@@ -64,7 +66,7 @@
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para peso figurado: <br>
-      <b id="checksreactivo28">{{this.subprueba.puntuacionNatural}}</b>
+      <b id="checksreactivo29">{{this.subprueba.puntuacionNatural}}</b>
     </p>
   </div>
       <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">

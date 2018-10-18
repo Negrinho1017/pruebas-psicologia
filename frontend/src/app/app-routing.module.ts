@@ -22,6 +22,7 @@ import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subp
 import { ComprensionComponent } from './wais/comprension/comprension.component';
 import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
 import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
+import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
@@ -44,7 +45,8 @@ const routes: Routes =[
   { path: 'analisis', component: AnalisisComponent },
   { path: 'comprension', component: ComprensionComponent },
   { path: 'figuras-incompletas', component: FigurasIncompletasComponent },
-  { path: 'peso-figurado', component: PesoFiguradoComponent }
+  { path: 'peso-figurado', component: PesoFiguradoComponent },
+  { path: 'cancelacion', component: CancelacionComponent }
 ]
 
 @NgModule({

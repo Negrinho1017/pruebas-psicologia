@@ -28,6 +28,7 @@ import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subp
 import { ComprensionComponent } from './wais/comprension/comprension.component';
 import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
 import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
+import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.compon
     SubpruebasOpcionalesComponent,
     ComprensionComponent,
     FigurasIncompletasComponent,
-    PesoFiguradoComponent
+    PesoFiguradoComponent,
+    CancelacionComponent
   ],
   imports: [
     BrowserModule,

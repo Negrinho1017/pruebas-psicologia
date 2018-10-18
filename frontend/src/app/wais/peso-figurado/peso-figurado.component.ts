@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./peso-figurado.component.css']
 })
 export class PesoFiguradoComponent implements OnInit {
-  siguienteReactivo: number = 3;
-  anteriorReactivo: number = 3;
-  respuestasCorrectas: String[] = ["1, 2, 6", "1, 3, 6", "2, 3, 5", "1, 2, 5", "1, 4, 6", "2, 3, 6", "3, 5, 6", "1, 3, 6", "2, 5, 6", "1, 3, 4", "1, 3, 6", "1, 2, 5", "1, 2, 5", "1, 4, 5", "3, 4, 6", "2, 3, 4", "1, 2, 6", "3, 4, 6", "1, 2, 6", "2, 3, 5", "1, 5, 6", "2, 3, 5", "1 ,3 ,4", "1, 5, 6", "3, 4, 6", "3, 4, 5", "1, 2, 3", "3, 4, 6"];
+  
+  siguienteReactivo: number = 6;
+  anteriorReactivo: number = 6;
+  respuestasCorrectas: String[] = ["1, 2, 6", "1, 3, 6", "2, 3, 5", "1, 2, 5", "1, 4, 6", "2, 3, 6", "3, 5, 6", "1, 3, 6", "2, 5, 6", "1, 3, 4", "1, 3, 6", "1, 2, 5", "1, 2, 5", "1, 4, 5", "3, 4, 6", "2, 3, 4", "1, 2, 6", "3, 4, 6", "1, 2, 6", "2, 3, 5", "1, 5, 6", "2, 3, 5", "1 ,3 ,4", "1, 5, 6", "3, 4, 6", "3, 4, 5", "1, 2, 3", "3, 4, 6", "3, 4"];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  listaCalificaciones: number[] = [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   habilitaReactivo: boolean[] = [true, true, true, true, true, true, false, false, false];    
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
@@ -31,6 +32,18 @@ export class PesoFiguradoComponent implements OnInit {
     this.subprueba.numeroSubprueba = 8;
   }
 
+  
+  finalizarSubprueba() {
+    this.subprueba.reactivos = this.reactivosCalificados;
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRompecabezasVisual("20:0-24:11", this.subprueba.puntuacionNatural)
+      .subscribe(res => {
+        this.subprueba.puntuacionEscalar = res;
+        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.router.navigate([this.globals.rutas[8]]);
+        this.scrollToTop();
+      });
+  }
+
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo);
     this.aplicarInversion(puntuacionReactivo, numeroReactivo);
@@ -41,13 +54,13 @@ export class PesoFiguradoComponent implements OnInit {
     if (numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 4 || numeroReactivo == 3) {
+    else if (numeroReactivo == 4 ) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else if (numeroReactivo == 5) {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
-    else if (numeroReactivo == 2) {
+    else if (numeroReactivo == 3) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
@@ -121,18 +134,6 @@ export class PesoFiguradoComponent implements OnInit {
     }
   }
 
-  finalizarSubprueba() {
-    this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarRompecabezasVisual("20:0-24:11", this.subprueba.puntuacionNatural)
-      .subscribe(res => {
-        this.subprueba.puntuacionEscalar = res;
-        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[8]]);
-        this.scrollToTop();
-      });
-
-  }
-
   habilitarReactivo(i): boolean {
     return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
   }
@@ -166,6 +167,5 @@ export class PesoFiguradoComponent implements OnInit {
       }
     })();
   }
-
 
 }
