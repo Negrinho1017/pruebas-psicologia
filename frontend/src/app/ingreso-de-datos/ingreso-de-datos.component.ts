@@ -48,6 +48,7 @@ export class IngresoDeDatosComponent implements OnInit {
     this.prueba = new Prueba();
 
     this.ingresoDatosForm.get('fechaEvaluacion').setValidators([this.fechaFinalEsMayor('fechaNacimiento'), Validators.required]);
+    
     this.ingresoDatosForm.get('fechaEvaluacion').valueChanges.subscribe(() => {
       if (this.ingresoDatosForm.get('fechaEvaluacion').hasError('invalidDate')) {
         this.fechaInvalida = true;
@@ -56,6 +57,17 @@ export class IngresoDeDatosComponent implements OnInit {
         this.calcularEdad();
       }
     });
+
+    this.ingresoDatosForm.get('fechaNacimiento').valueChanges.subscribe(() => {
+      if (this.ingresoDatosForm.get('fechaNacimiento').hasError('invalidDate')) {
+        this.fechaInvalida = true;
+      } else {
+        this.fechaInvalida = false;
+        this.calcularEdad();
+      }
+    });
+
+
   }
 
   fechaFinalEsMayor(field: string): ValidatorFn {
