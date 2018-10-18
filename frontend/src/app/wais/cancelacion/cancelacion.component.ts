@@ -41,8 +41,8 @@ export class CancelacionComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
-      this.router.navigate([this.globals.rutas[7]]);
+      //this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
+      this.navegar();
       this.scrollToTop();
     });
   }
@@ -54,6 +54,15 @@ export class CancelacionComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  navegar() {
+    if (this.globals.rutas[6] == "/cancelacion") {
+      this.router.navigate([this.globals.rutas[7]]);
+    }
+    if (this.globals.rutas[9] == "/cancelacion") {
+      this.router.navigate(['/hoja-resultados']);
+    }
   }
 
 
