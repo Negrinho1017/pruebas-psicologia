@@ -61,7 +61,7 @@ export class RompecabezasVisualComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -102,7 +102,7 @@ export class RompecabezasVisualComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     return discontinua;
   }
@@ -154,7 +154,7 @@ export class RompecabezasVisualComponent implements OnInit {
     el.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
-  mensajeError(mensaje: string) {
+  mensajeWarning(mensaje: string) {
     swal({
       title: 'Discontinación',
       icon: "warning",
@@ -169,5 +169,42 @@ export class RompecabezasVisualComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  cambiarSubprueba(numeroSubprueba: number){
+    if(numeroSubprueba==1){
+      this.cambiarPorPesoFigurado();
+    }
+    if(numeroSubprueba==2){
+      this.cambiarPorFigurasIncompletas();
+    }   
+  }
+
+  cambiarPorPesoFigurado(){
+    if(this.globals.subpruebas[0]=="Peso figurado" || this.globals.subpruebas[3] == "Peso figurado"){
+      this.mensajeError("La subprueba peso figurado ya fue realizada")
+    }else{
+      this.globals.rutas[7]="/peso-figurado";
+      this.globals.subpruebas[7] = "Peso figurado";
+      this.router.navigate([this.globals.rutas[7]]);
+    }
+  }
+
+  cambiarPorFigurasIncompletas(){
+    if(this.globals.subpruebas[0]=="Figuras incompletas" || this.globals.subpruebas[3] == "Figuras incompletas"){
+      this.mensajeError("La subprueba figuras incompletas ya fue realizada")
+    }else{
+      this.globals.rutas[7]="/figuras-incompletas";
+      this.globals.subpruebas[7] = "Figuras incompletas";
+      this.router.navigate([this.globals.rutas[7]]);
+    }
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
   }
 }

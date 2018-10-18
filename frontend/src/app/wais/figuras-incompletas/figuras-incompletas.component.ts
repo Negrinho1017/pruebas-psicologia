@@ -131,7 +131,7 @@ export class FigurasIncompletasComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.aritmetica = this.subprueba.puntuacionEscalar;
-      this.router.navigate([this.globals.rutas[6]]);
+      this.navegar();
       this.scrollToTop();
     }); 
   }
@@ -186,6 +186,18 @@ export class FigurasIncompletasComponent implements OnInit {
       icon: "error",
       text: mensaje,
     });
+  }
+
+  navegar() {
+    if (this.globals.rutas[0] == "/figuras-incompletas") {
+      this.router.navigate([this.globals.rutas[1]]);
+    }
+    if (this.globals.rutas[3] == "/figuras-incompletas") {
+      this.router.navigate([this.globals.rutas[4]]);
+    }
+    if (this.globals.rutas[7] == "/figuras-incompletas") {
+      this.router.navigate([this.globals.rutas[8]]);
+    }
   }
 
 }

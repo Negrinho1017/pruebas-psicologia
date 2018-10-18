@@ -28,8 +28,8 @@ export class PesoFiguradoComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
-    this.subprueba.nombre = "Rompecabezas visual";
-    this.subprueba.numeroSubprueba = 8;
+    this.subprueba.nombre = "Peso figurado";
+    this.subprueba.numeroSubprueba = 12;
   }
 
   
@@ -39,7 +39,7 @@ export class PesoFiguradoComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[8]]);
+        this.navegar();
         this.scrollToTop();
       });
   }
@@ -166,6 +166,18 @@ export class PesoFiguradoComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  navegar() {
+    if (this.globals.rutas[0] == "/peso-figurado") {
+      this.router.navigate([this.globals.rutas[1]]);
+    }
+    if (this.globals.rutas[3] == "/peso-figurado") {
+      this.router.navigate([this.globals.rutas[4]]);
+    }
+    if (this.globals.rutas[7] == "/peso-figurado") {
+      this.router.navigate([this.globals.rutas[8]]);
+    }
   }
 
 }
