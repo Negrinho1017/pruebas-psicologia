@@ -14,8 +14,10 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 
 export class RompecabezasVisualComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
-  siguienteReactivo: number = 6;
-  anteriorReactivo: number = 6;
+  primerReactivo: number = 2;
+  reactivoDeInicio: number = 6;
+  anteriorReactivo = this.reactivoDeInicio;
+  siguienteReactivo = this.reactivoDeInicio;  
   respuestasCorrectas: String[] = ["1, 2, 6", "1, 3, 6", "2, 3, 5", "1, 2, 5", "1, 4, 6", "2, 3, 6", "3, 5, 6", "1, 3, 6", "2, 5, 6", "1, 3, 4", "1, 3, 6", "1, 2, 5", "1, 2, 5", "1, 4, 5", "3, 4, 6", "2, 3, 4", "1, 2, 6", "3, 4, 6", "1, 2, 6", "2, 3, 5", "1, 5, 6", "2, 3, 5", "1 ,3 ,4", "1, 5, 6", "3, 4, 6", "3, 4, 5", "1, 2, 3", "3, 4, 6"];
   puntuacion: number = 0;
   listaCalificaciones: number[] = [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -39,16 +41,16 @@ export class RompecabezasVisualComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 4 || numeroReactivo == 3) {
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo >= this.primerReactivo+1) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if (numeroReactivo == 5) {
+    else if (numeroReactivo == this.reactivoDeInicio-1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
-    else if (numeroReactivo == 2) {
+    else if (numeroReactivo == this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
@@ -62,7 +64,7 @@ export class RompecabezasVisualComponent implements OnInit {
       this.mensajeError("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, 8);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -71,7 +73,7 @@ export class RompecabezasVisualComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, 5);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
@@ -81,7 +83,7 @@ export class RompecabezasVisualComponent implements OnInit {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, 8);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -92,10 +94,11 @@ export class RompecabezasVisualComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    const cantidadParaDescontinuar: number = 3;
     let discontinua: boolean = puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
-      && numeroReactivo > 9;
+      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

@@ -16,8 +16,10 @@ import { CronometroComponent } from 'src/app/cronometro/cronometro.component';
 export class DisenoCubosComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   navIsFixed: boolean;
-  anteriorReactivo = 5;
-  siguienteReactivo = 5;
+  primerReactivo: number = 1;
+  reactivoDeInicio: number = 5;
+  anteriorReactivo = this.reactivoDeInicio;
+  siguienteReactivo = this.reactivoDeInicio;
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -95,16 +97,16 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == 6 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 3 || numeroReactivo == 2) {
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo >= this.primerReactivo+1) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if (numeroReactivo == 4) {
+    else if (numeroReactivo == this.reactivoDeInicio-1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
-    else if (numeroReactivo == 1) {
+    else if (numeroReactivo == this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
@@ -117,7 +119,7 @@ export class DisenoCubosComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, 4);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
@@ -127,7 +129,7 @@ export class DisenoCubosComponent implements OnInit {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, 7);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -137,14 +139,15 @@ export class DisenoCubosComponent implements OnInit {
       this.mensajeError("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, 7);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    const cantidadParaDescontinuar: number = 2;
     let discontinua: boolean = puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
-      && numeroReactivo > 7;
+      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

@@ -13,8 +13,10 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
   styleUrls: ['./aritmetica.component.css']
 })
 export class AritmeticaComponent implements OnInit {
-  siguienteReactivo: number = 6;
-  anteriorReactivo: number = 6;
+  primerReactivo: number = 1;
+  reactivoDeInicio: number = 6;
+  anteriorReactivo = this.reactivoDeInicio;
+  siguienteReactivo = this.reactivoDeInicio;
   seCambiaraLaSubprueba: boolean = false;
   respuestasCorrectas: String[] = ["3","Cuenta hasta 3","Cuenta hasta 10","6","9","2","8","5","5","5","17",
   "3","200","38","140","30","47","186","49 1/2","600","51","96","23.100"];
@@ -42,16 +44,16 @@ export class AritmeticaComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if(numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+    if(numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
       this.limpiarReactivosAnt(numeroReactivo);      
-    }
-    else if(numeroReactivo == 4 || numeroReactivo == 3 || numeroReactivo == 2){
+    }  
+    else if(numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo >= this.primerReactivo+1){      
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if(numeroReactivo == 5){
+    else if(numeroReactivo == this.reactivoDeInicio-1){
       this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
     }
-    else if(numeroReactivo == 1){
+    else if(numeroReactivo == this.primerReactivo){
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
@@ -65,7 +67,7 @@ export class AritmeticaComponent implements OnInit {
       this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, 8);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -74,7 +76,7 @@ export class AritmeticaComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, 5);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
@@ -84,7 +86,7 @@ export class AritmeticaComponent implements OnInit {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, 8);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -95,10 +97,11 @@ export class AritmeticaComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    const cantidadParaDescontinuar: number = 3;
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
-      && numeroReactivo > 9;
+      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

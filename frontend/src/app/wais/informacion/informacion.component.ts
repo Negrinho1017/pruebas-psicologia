@@ -13,8 +13,10 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 })
 export class InformacionComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
-  siguienteReactivo: number = 2;
-  anteriorReactivo: number = 2;
+  primerReactivo: number = 0;
+  reactivoDeInicio: number = 2;
+  anteriorReactivo = this.reactivoDeInicio;
+  siguienteReactivo = this.reactivoDeInicio;
   reactivos: String[] = ["*1. Lunes", "*2. Forma", "+3. Termómetro", "+4. Segundos", "5. Agua", "*6. Brasil","7. Emiliano Zapata","8. Italia","9. El quijote de la mancha","10. Cleopatra","11. Sahara", "12. Línea","13. Olimpiadas","14. Revolución mexicana","15. La malinche","16. Relatividad","17. Gandhi", "18. Hervir","19. Órgano","20. Lengua","21. Catalina","*22. Vasos sanguíneos","23. Sherlock Holmes", "*24. Minutos","25. Alicia","*26. Circunferencia"];
   puntuacion: number = 0;
   listaCalificaciones: number[] = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -38,13 +40,13 @@ export class InformacionComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if(numeroReactivo == 3 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
+    if(numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
       this.limpiarReactivosAnt(numeroReactivo);
     }    
-    else if(numeroReactivo == 1){
+    else if(numeroReactivo == this.reactivoDeInicio-1){
       this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
     }
-    else if(numeroReactivo == 0){
+    else if(numeroReactivo == this.primerReactivo){
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
@@ -58,7 +60,7 @@ export class InformacionComponent implements OnInit {
       this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, 4);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -67,7 +69,7 @@ export class InformacionComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, 1);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
   }
 
   cambiarFoco(numeroReactivo: number, siguienteR: number){
@@ -77,10 +79,11 @@ export class InformacionComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    const cantidadParaDescontinuar: number = 3;
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
-      && numeroReactivo > 4;
+      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

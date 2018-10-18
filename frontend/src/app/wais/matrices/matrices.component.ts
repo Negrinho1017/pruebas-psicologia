@@ -13,8 +13,10 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 })
 export class MatricesComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
-  siguienteReactivo = 5;
-  anteriorReactivo = 5;
+  primerReactivo: number = 2;
+  reactivoDeInicio: number = 5;
+  siguienteReactivo = this.reactivoDeInicio;
+  anteriorReactivo = this.reactivoDeInicio;
   respuestasCorrectas: number[] = [5, 4, 3, 2, 1, 5, 3, 4, 4, 5, 1, 5, 2, 3, 1, 1, 5, 2, 3, 2, 1, 4, 5, 1, 4, 2, 3, 4];
   puntuacion: number = 0;
   listaCalificaciones: number[] = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -40,16 +42,16 @@ export class MatricesComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == 6 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 3) {
+    else if (numeroReactivo == this.reactivoDeInicio-2) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if (numeroReactivo == 4) {
-      this.cambiarFoco(numeroReactivo, 3);
+    else if (numeroReactivo == this.reactivoDeInicio-1) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo-1);
     }
-    else if (numeroReactivo == 2) {
+    else if (numeroReactivo == this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
@@ -64,7 +66,7 @@ export class MatricesComponent implements OnInit {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, 7);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -74,7 +76,7 @@ export class MatricesComponent implements OnInit {
       this.mensajeError("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, 7);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
     }
   }
 
@@ -83,13 +85,15 @@ export class MatricesComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, 4);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
+    const cantidadParaDescontinuar: number = 3;
     let discontinua: boolean = puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
-      && this.listaCalificaciones[numeroReactivo - 2] == 0;
+      && this.listaCalificaciones[numeroReactivo - 2] == 0
+      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
