@@ -29,6 +29,7 @@ import { ComprensionComponent } from './wais/comprension/comprension.component';
 import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
 import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
 import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
+import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
     ComprensionComponent,
     FigurasIncompletasComponent,
     PesoFiguradoComponent,
-    CancelacionComponent
+    CancelacionComponent,
+    FortalezasDebilidadesComponent
   ],
   imports: [
     BrowserModule,

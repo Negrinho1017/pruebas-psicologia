@@ -16,4 +16,6 @@ export class Globals {
     rutas: String[] = [];
     datosSeleccionados: boolean;
     subpruebas: string[] = [];
+    disenoCubos: number;
+    disenoCubosSinBonificacionTiempo: number = 8;
 }

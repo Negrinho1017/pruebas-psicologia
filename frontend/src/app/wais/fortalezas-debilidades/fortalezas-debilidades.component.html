@@ -1,0 +1,36 @@
+<body class="cuerpo">
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="radio" name="media" checked (click)="this.selectedMedia=1"> Media general de las 10 subpruebas principales
+    </label>
+  </div>
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="radio" name="media" (click)="this.selectedMedia=2"> Media para comprensión verbal y razonamiento perceptual
+    </label>
+  </div>
+  <br>
+  <br>
+  <table>
+    <tr>
+      <th>Subprueba</th>
+      <th>Puntuación escalar de la subprueba</th>
+      <th></th>
+      <th>Puntuación escalar media</th>
+      <th></th>
+      <th>Diferencia de la media</th>
+      <th>Valor crítico</th>
+      <th>Fortaleza o debilidad</th>
+    </tr>
+    <tr *ngFor="let item of subpruebas; let i = index">
+      <td>{{item}}</td>
+      <td></td>
+      <td>-</td>
+      <td></td>
+      <td>=</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</body>

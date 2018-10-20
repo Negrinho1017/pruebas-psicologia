@@ -1,4 +1,5 @@
 <html>
+
 <body class="cuerpo">
   <table>
     <td>
@@ -46,8 +47,7 @@
         <th>Diseño realizado</th>
         <th>Puntuación</th>
       </tr>
-      <tr *ngFor="let item of imagenesCubos; let i = index" 
-          [ngClass]="{'positive' : i == getReactivoSiguiente()}">
+      <tr *ngFor="let item of imagenesCubos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}">
         <td>
           <p *ngIf="i>=1">{{i}}</p>
           <p *ngIf="i==0">M.</p>
@@ -63,7 +63,7 @@
           <p *ngIf="i >= 10">120''</p>
         </td>
         <td>
-          <app-cronometro #cronometro id = "cronometro{{i}}"></app-cronometro>
+          <app-cronometro #cronometro id="cronometro{{i}}"></app-cronometro>
         </td>
         <td>
           <table>
@@ -140,7 +140,10 @@
   <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
-  <p id="puntuacion">Puntuación natural total para RDI: <br>
+  <p id="puntuacion">Puntuación natural total para Diseño de cubos: <br>
     <b id="checksreactivo15">{{this.subprueba.puntuacionNatural}}</b></p>
+  <p id="puntuacionSinBonificacionDeTiempo">Puntuación natural total para Diseño de cubos sin bonificación de tiempo: <br>
+    <b id="checksreactivo15">{{this.puntuacionSinBonificacionDeTiempo}}</b></p>
 </body>
+
 </html>
