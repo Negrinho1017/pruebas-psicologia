@@ -1,12 +1,14 @@
 <body class="cuerpo">
   <div class="form-check-inline">
     <label class="form-check-label">
-      <input type="radio" name="media" checked (click)="this.selectedMedia=1"> Media general de las 10 subpruebas principales
+      <input type="radio" name="media" checked (click)="this.selectedMedia=1; calcularConMediaTotal()"> Media general de las 10 subpruebas
+      principales
     </label>
   </div>
   <div class="form-check-inline">
     <label class="form-check-label">
-      <input type="radio" name="media" (click)="this.selectedMedia=2"> Media para comprensión verbal y razonamiento perceptual
+      <input type="radio" name="media" (click)="this.selectedMedia=2; calcularConDiferenciasDeLaMedia()"> Media para comprensión verbal y razonamiento
+      perceptual
     </label>
   </div>
   <br>
@@ -24,11 +26,15 @@
     </tr>
     <tr *ngFor="let item of subpruebas; let i = index">
       <td>{{item}}</td>
-      <td></td>
+      <td>{{puntuacionesEscalares[i]}}</td>
       <td>-</td>
-      <td></td>
+      <td>
+        <p *ngIf="(i==1 || i==4 || i==8) && this.selectedMedia==2">{{puntuacionEscalarMediaCV}}</p>
+        <p *ngIf="(i==0 || i==3 || i==7) && this.selectedMedia==2">{{puntuacionEscalarMediaRP}}</p>
+        <p *ngIf="this.selectedMedia==1">{{puntuacionEscalarMediaTotal}}</p>
+      </td>
       <td>=</td>
-      <td></td>
+      <td>{{this.diferenciasDeLaMedia[i]}}</td>
       <td></td>
       <td></td>
     </tr>
