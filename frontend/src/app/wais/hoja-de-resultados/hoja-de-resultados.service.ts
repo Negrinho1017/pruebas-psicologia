@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs/';
-import { EdadPersona } from '../../model/EdadPersona';
 import { Prueba } from '../../model/Prueba';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subprueba } from '../../model/Subprueba';
@@ -51,5 +49,11 @@ export class HojaDeResultadosService {
     return this.http.put(this.url + '/puntuacion-compuesta/ingreso-puntuacion-compuesta/'+idEvaluado, httpOptions).subscribe(result => {
         console.log(result);
       }, error => console.log('Error enviando la solicitud'));
+  }
+
+  consultarPruebaPorIdentificacion(identificacion: String) {
+    return this.http.get(this.url + '/prueba-por-id?idEvaluado=' + identificacion, httpOptions).subscribe(res => {
+      console.log(res);
+    }), error => console.log('Error obteniendo la prueba');
   }
 }

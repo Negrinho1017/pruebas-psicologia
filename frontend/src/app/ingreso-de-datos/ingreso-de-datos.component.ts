@@ -26,8 +26,11 @@ export class IngresoDeDatosComponent implements OnInit {
   prueba: Prueba;
   evaluado: Persona;
   ingresoDatosForm: FormGroup;
+  consultarPruebaForm: FormGroup;
   fechaInvalida: Boolean;
   editarPrueba = false;
+  mostrarCrearPrueba = false;
+  mostrarConsultarPrueba = false;
 
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
@@ -44,11 +47,16 @@ export class IngresoDeDatosComponent implements OnInit {
       fechaNacimiento: new FormControl('', [Validators.required]),
       fechaEvaluacion: new FormControl('', [Validators.required]),
     });
+
+    this.consultarPruebaForm = new FormGroup({
+      identificacion: new FormControl('', [Validators.required]),
+    });
+
     this.evaluado = new Persona();
     this.prueba = new Prueba();
 
     this.ingresoDatosForm.get('fechaEvaluacion').setValidators([this.fechaFinalEsMayor('fechaNacimiento'), Validators.required]);
-    
+
     this.ingresoDatosForm.get('fechaEvaluacion').valueChanges.subscribe(() => {
       if (this.ingresoDatosForm.get('fechaEvaluacion').hasError('invalidDate')) {
         this.fechaInvalida = true;
@@ -161,5 +169,20 @@ export class IngresoDeDatosComponent implements OnInit {
     this.globals.idEvaluado = this.idEvaluado;
     this.globals.mostrarNavBar = true;
     this.router.navigate([this.globals.rutas[0]]);
+  }
+
+  mostrarFormularioConsultarPrueba() {
+    this.mostrarConsultarPrueba = true;
+    this.mostrarCrearPrueba = false;
+  }
+
+  mostrarFormularioRealizarPrueba() {
+    this.mostrarCrearPrueba = true;
+    this.mostrarConsultarPrueba = false;
+  }
+
+  consultarPrueba() {
+    this.hojaDeResultadosService.consultarPruebaPorIdentificacion(
+      this.consultarPruebaForm.controls['identificacion'].value);
   }
 }

@@ -1,5 +1,15 @@
 <div class="container col-md-5 cuerpo">
-  <form novalidate [formGroup]="ingresoDatosForm" (ngSubmit)="inicializarPrueba()">
+
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <button class="btn" (click)="mostrarFormularioRealizarPrueba()">
+      Realizar pruebas
+    </button>
+    <button class="btn" (click)="mostrarFormularioConsultarPrueba()">
+      Consultar pruebas realizadas
+    </button>
+  </div>
+
+  <form novalidate [formGroup]="ingresoDatosForm" (ngSubmit)="inicializarPrueba()" *ngIf="mostrarCrearPrueba">
     <div class="form-group row">
       <label for="nombre">Ingrese el nombre del evaluado:</label>
       <input type="text" id="nombre" class="form-control" formControlName="nombre">
@@ -29,27 +39,22 @@
         </small>
       </div>
 
-      <p *ngIf="this.fechas && !fechaInvalida" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses: {{this.edad.meses}},
+      <p *ngIf="this.fechas && !fechaInvalida" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses:
+          {{this.edad.meses}},
           Días: {{this.edad.dias}}</b>
       </p>
     </div>
+    
     <button type="submit" class="btn btn-dark btn-lg" [disabled]="ingresoDatosForm.invalid">Comenzar prueba</button>
   </form>
 
-  <!--<input type="button" id="btnPrueba" class="btn btn-dark btn-lg"
-      value="Editar prueba" (click)="edicionDePrueba()">
+  <form novalidate [formGroup]="consultarPruebaForm" (ngSubmit)="consultarPrueba()" *ngIf="mostrarConsultarPrueba">
+    <div class="form-group row">
+      <label for="identificacion" class="col-form-label">Ingrese la identificación del evaluado:</label>
+      <input type="text" class="form-control" formControlName="identificacion">
+    </div>
 
-  <div *ngIf="editarPrueba == true">
-    <app-subpruebas-opcionales></app-subpruebas-opcionales>
-  </div>-->
+    <button type="submit" class="btn btn-dark btn-lg" [disabled]="consultarPruebaForm.invalid">Consultar Prueba</button>
+  </form>
+
 </div>
-
-    
-
-  
-
-  
-
-
-  
-  
