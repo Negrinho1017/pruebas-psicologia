@@ -12,11 +12,12 @@ export class PaginaPrincipalComponent implements OnInit {
   constructor(private router: Router, private globals:Globals) { }
 
   ngOnInit() {
+    this.globals.mostrarNavBar = false;
   }
 
   cambiarAPruebaWAIS() {
     this.globals.idPrueba = 1;
-    this.router.navigate(['/ingreso-de-datos']);
+    this.router.navigate(['/ingreso-de-datos']);    
   }
 
   cambiarAPruebaWISC(){

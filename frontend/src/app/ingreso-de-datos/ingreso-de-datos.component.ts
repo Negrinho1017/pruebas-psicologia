@@ -35,7 +35,7 @@ export class IngresoDeDatosComponent implements OnInit {
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
     "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
     this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
@@ -184,7 +184,7 @@ export class IngresoDeDatosComponent implements OnInit {
   consultarPrueba() {        
     this.globals.idEvaluado = this.consultarPruebaForm.controls['identificacion'].value;
     alert("id: "+this.globals.idEvaluado);
-    this.globals.mostrarNavBar = true;    
+    this.globals.mostrarNavBar = true;        
     this.router.navigate(['/hoja-resultados']);
     //this.scrollToTop();
 

@@ -1,5 +1,6 @@
 import { Component, OnChanges } from '@angular/core';
 import { Globals } from './globals';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,9 @@ import { Globals } from './globals';
 })
 export class AppComponent{
   title = 'wais';
-  constructor(private globals:Globals){
-
-  }
   idPrueba = this.globals.idPrueba; 
   mostrarNavBar = this.globals.mostrarNavBar;
+
+  constructor(private globals: Globals) { }
+
 }

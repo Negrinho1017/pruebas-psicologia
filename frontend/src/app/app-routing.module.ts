@@ -48,7 +48,8 @@ const routes: Routes =[
   { path: 'comprension', component: ComprensionComponent },
   { path: 'figuras-incompletas', component: FigurasIncompletasComponent },
   { path: 'peso-figurado', component: PesoFiguradoComponent },
-  { path: 'cancelacion', component: CancelacionComponent }
+  { path: 'cancelacion', component: CancelacionComponent },
+  { path: '', component: PaginaPrincipalComponent}
 ]
 
 @NgModule({
