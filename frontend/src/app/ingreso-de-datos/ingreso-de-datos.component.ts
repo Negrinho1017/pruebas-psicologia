@@ -29,7 +29,7 @@ export class IngresoDeDatosComponent implements OnInit {
   consultarPruebaForm: FormGroup;
   fechaInvalida: Boolean;
   editarPrueba = false;
-  mostrarCrearPrueba = false;
+  mostrarCrearPrueba = true;
   mostrarConsultarPrueba = false;
 
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
@@ -181,8 +181,13 @@ export class IngresoDeDatosComponent implements OnInit {
     this.mostrarConsultarPrueba = false;
   }
 
-  consultarPrueba() {
-    this.hojaDeResultadosService.consultarPruebaPorIdentificacion(
-      this.consultarPruebaForm.controls['identificacion'].value);
+  consultarPrueba() {        
+    this.globals.idEvaluado = this.consultarPruebaForm.controls['identificacion'].value;
+    alert("id: "+this.globals.idEvaluado);
+    this.globals.mostrarNavBar = true;    
+    this.router.navigate(['/hoja-resultados']);
+    //this.scrollToTop();
+
   }
+
 }

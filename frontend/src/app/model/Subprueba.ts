@@ -1,7 +1,7 @@
 import { Reactivo } from "./Reactivo";
 export class Subprueba {
     numeroSubprueba: number;
-    nombre: String;
+    nombre: string;
     reactivos: Reactivo[];
     puntuacionNatural: number;
     puntuacionEscalar: number;

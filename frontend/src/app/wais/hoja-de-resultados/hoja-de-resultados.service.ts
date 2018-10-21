@@ -49,11 +49,5 @@ export class HojaDeResultadosService {
     return this.http.put(this.url + '/puntuacion-compuesta/ingreso-puntuacion-compuesta/'+idEvaluado, httpOptions).subscribe(result => {
         console.log(result);
       }, error => console.log('Error enviando la solicitud'));
-  }
-
-  consultarPruebaPorIdentificacion(identificacion: String) {
-    return this.http.get(this.url + '/prueba-por-id?idEvaluado=' + identificacion, httpOptions).subscribe(res => {
-      console.log(res);
-    }), error => console.log('Error obteniendo la prueba');
-  }
+  }  
 }

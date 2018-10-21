@@ -28,7 +28,7 @@ export class DisenoCubosComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   puntuacionEscalar: any;
-  puntuacionSinBonificacionDeTiempo: number;
+  puntuacionSinBonificacionDeTiempo: number = 0;
   posicionCubos: number[][] = [
     [0, 0],
     [0, 0],
@@ -77,29 +77,18 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   calificarSubprueba() {
+    this.puntuacionSinBonificacionDeTiempo = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
+      const califiacionSinTiempo: number = calificacionReactivo <= 4 ? calificacionReactivo : 4;
+      this.puntuacionSinBonificacionDeTiempo = this.puntuacionSinBonificacionDeTiempo + califiacionSinTiempo;
     }
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.puntuacion = 0;
   }
 
-  calificarSinBonificacionDeTiempo(puntuacion: number, numeroReactivo: number){
-    if(numeroReactivo<=4){
-      this.globals.disenoCubosSinBonificacionTiempo-=2;
-    }
-    if(puntuacion>0 && numeroReactivo>4){
-      this.globals.disenoCubosSinBonificacionTiempo+=4;
-      this.puntuacionSinBonificacionDeTiempo = this.globals.disenoCubosSinBonificacionTiempo;
-    }else{
-      this.globals.disenoCubosSinBonificacionTiempo+=puntuacion;
-      this.puntuacionSinBonificacionDeTiempo = this.globals.disenoCubosSinBonificacionTiempo;
-    }
-  }
-
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
-    this.reactivoActual = new Reactivo();
-    this.calificarSinBonificacionDeTiempo(puntuacionReactivo,numeroReactivo);
+    this.reactivoActual = new Reactivo();    
     console.log("Tiempo: "+this.cronometros.toArray()[numeroReactivo].obtenerTiempo());
     this.reactivoActual.respuesta = this.convertirVectorAString(numeroReactivo);
     this.reactivoActual.puntuacion = puntuacionReactivo;

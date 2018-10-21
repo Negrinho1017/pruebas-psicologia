@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Prueba } from "./model/Prueba";
 
 @Injectable()
 export class Globals {
@@ -18,4 +19,5 @@ export class Globals {
     subpruebas: string[] = [];
     disenoCubos: number;
     disenoCubosSinBonificacionTiempo: number = 8;
+    prueba: Prueba;
 }
