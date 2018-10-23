@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ca2re.backend.controller.MainController;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Subprueba;
@@ -176,5 +175,19 @@ public class AdministradorPruebas {
 	public ValorCriticoWAIS obtenerValoresCriticos(int edad) {
 		int idRangoEdad = EdadUtil.obtenerRangoEdad(edad);
 		return calificacionWaisDAO.obtenerValoresCriticos(idRangoEdad);
+	}
+	
+	public List<Subprueba> obtenerTodasLasSubpruebasPorIdentificacion(String id){
+		List<Subprueba> subpruebas = new ArrayList<>();
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(id).get(0);
+		subpruebas.addAll(prueba.getRamaDelConocimiento().get(RamasDelConocimiento.COMPRENSION_VERBAL.getValue())
+				.getSubpruebas());
+		subpruebas.addAll(prueba.getRamaDelConocimiento().get(RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue())
+				.getSubpruebas());
+		subpruebas.addAll(prueba.getRamaDelConocimiento().get(RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue())
+				.getSubpruebas());
+		subpruebas.addAll(prueba.getRamaDelConocimiento().get(RamasDelConocimiento.VELOCIDAD_DE_PROCESAMIENTO.getValue())
+				.getSubpruebas());
+		return subpruebas;
 	}
 }

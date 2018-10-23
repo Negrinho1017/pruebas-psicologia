@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subprueba } from 'src/app/model/Subprueba';
+import { Globals } from 'src/app/globals';
+import { Router } from '@angular/router';
+import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 
 @Component({
   selector: 'app-fortalezas-debilidades',
@@ -6,20 +10,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fortalezas-debilidades.component.css']
 })
 export class FortalezasDebilidadesComponent implements OnInit {
-  subpruebas: String[] = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices","Vocabulario",
-  "Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
+  subpruebas: String[] = [];
   selectedMedia: number = 1;
-  puntuacionesEscalares: number[] = [9,9,10,5,7,12,7,4,8,9];
+  puntuacionesEscalares: number[] = [];
   diferenciasDeLaMedia: number[] = [0,0,0,0,0,0,0,0,0,0];
   puntuacionEscalarMediaCV: number;
   puntuacionEscalarMediaRP: number;
   puntuacionEscalarMediaTotal: number;
-  constructor() { }
+  listaSubpruebas: Subprueba[];
+  constructor( private globals: Globals, private router: Router,
+     private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.calcularPuntuacionEscalarMedia();
     this.calcularDiferencias();
+    this.puntuacionEscalarService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
+      this.listaSubpruebas = res;
+      this.subpruebas = [this.listaSubpruebas[3].nombre, this.listaSubpruebas[0].nombre,
+      this.listaSubpruebas[6].nombre, this.listaSubpruebas[4].nombre ,this.listaSubpruebas[1].nombre,
+      this.listaSubpruebas[7].nombre, this.listaSubpruebas[8].nombre, this.listaSubpruebas[5].nombre,
+      this.listaSubpruebas[2].nombre, this.listaSubpruebas[9].nombre]
+      this.puntuacionesEscalares = [this.listaSubpruebas[3].puntuacionEscalar, this.listaSubpruebas[0].puntuacionEscalar,
+      this.listaSubpruebas[6].puntuacionEscalar, this.listaSubpruebas[4].puntuacionEscalar ,this.listaSubpruebas[1].puntuacionEscalar,
+      this.listaSubpruebas[7].puntuacionEscalar, this.listaSubpruebas[8].puntuacionEscalar, this.listaSubpruebas[5].puntuacionEscalar,
+      this.listaSubpruebas[2].puntuacionEscalar, this.listaSubpruebas[9].puntuacionEscalar]
+      this.calcularPuntuacionEscalarMedia();
+      this.calcularDiferencias();
+    }); 
   }
+
+
 
   calcularDiferencias(){
     if(this.selectedMedia == 1){

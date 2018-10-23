@@ -2,6 +2,7 @@ package ca2re.backend.controller;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -68,6 +69,13 @@ public class MainController {
 		Prueba prueba = administradorPruebas.ingresarSubprueba(subprueba, idEvaluado);
 		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
 	}
+	
+	@RequestMapping(value = "/subpruebas", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Subprueba> obtenerSubpruebasPorId(@RequestParam String idEvaluado) {
+		return administradorPruebas.obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
+	}
+	
 	
 	/*@RequestMapping(value = "/creacion-reactivo", method = RequestMethod.PUT)
 	@ResponseBody
