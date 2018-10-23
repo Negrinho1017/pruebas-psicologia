@@ -3,6 +3,7 @@ import { Subprueba } from 'src/app/model/Subprueba';
 import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
+import { FortalezasDebilidadesService } from './fortalezas-debilidades.service';
 
 @Component({
   selector: 'app-fortalezas-debilidades',
@@ -17,14 +18,16 @@ export class FortalezasDebilidadesComponent implements OnInit {
   puntuacionEscalarMediaCV: number;
   puntuacionEscalarMediaRP: number;
   puntuacionEscalarMediaTotal: number;
+  valoresCriticos: number[] = [];
   listaSubpruebas: Subprueba[];
+  fortalezasYDebilidades: String[] = [];
   constructor( private globals: Globals, private router: Router,
-     private puntuacionEscalarService: PuntuacionEscalarService ) { }
+     private fortalezasDebilidadesService: FortalezasDebilidadesService ) { }
 
   ngOnInit() {
     this.calcularPuntuacionEscalarMedia();
     this.calcularDiferencias();
-    this.puntuacionEscalarService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
+    this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
       this.listaSubpruebas = res;
       this.subpruebas = [this.listaSubpruebas[3].nombre, this.listaSubpruebas[0].nombre,
       this.listaSubpruebas[6].nombre, this.listaSubpruebas[4].nombre ,this.listaSubpruebas[1].nombre,
@@ -53,6 +56,18 @@ export class FortalezasDebilidadesComponent implements OnInit {
     this.puntuacionEscalarMediaRP = (this.puntuacionesEscalares[0]+this.puntuacionesEscalares[3]+this.puntuacionesEscalares[7])/3;
   }
 
+  evaluarFortalezasYDebilidades(){
+    var i = 0;
+    for(let diferencia of this.diferenciasDeLaMedia){
+      if(diferencia>this.valoresCriticos[i]){
+        this.fortalezasYDebilidades[i] = 'F';
+      }else{
+        this.fortalezasYDebilidades[i] = 'D';
+      }
+      i++;
+    }
+  }
+
   calcularPuntuacionEscalarMediaTotal(){
     var contador = 0;
     for(let calificacionSubprueba of this.puntuacionesEscalares){
@@ -63,15 +78,18 @@ export class FortalezasDebilidadesComponent implements OnInit {
 
   calcularConMediaTotal(){
     this.calcularPuntuacionEscalarMediaTotal();
+    this.valoresCriticos = [2.96,3.65,2.55,3.03,2.87,3.08,3.58,3.06,2.52,3.27];
     var i = 0;
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaTotal;
       i++;
     }
+    this.evaluarFortalezasYDebilidades();
   }
 
   calcularConDiferenciasDeLaMedia(){
     var i = 0;
+    this.valoresCriticos = [2.19,2.03,null,2.22,2.17,null,null,2.23,2.03,null];
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       if(i==1 || i==4 || i==8){
         this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaCV;
@@ -83,6 +101,11 @@ export class FortalezasDebilidadesComponent implements OnInit {
       }
       i++;
     }
+    this.evaluarFortalezasYDebilidades();
+    this.fortalezasYDebilidades[2] = null;
+    this.fortalezasYDebilidades[5] = null;
+    this.fortalezasYDebilidades[6] = null;
+    this.fortalezasYDebilidades[9] = null;
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subprueba } from '../model/Subprueba';
 const httpOptions = {
@@ -15,7 +15,7 @@ export class PuntuacionEscalarService {
   private url = "http://localhost:8080";
   private headers = new Headers({'Content-Type':'application/json'});
   private options = new RequestOptions({headers:this.headers});
-  constructor( private _http: Http, private http: HttpClient ) { }
+  constructor( private _http: Http ) { }
 
   obtenerPuntuacionEscalarDisenoCubos(idEdad: String, puntuacionNatural: number) {
     return this._http.get(this.url + '/puntuacion-escalar/diseno-cubos?idEdad='
@@ -114,19 +114,5 @@ export class PuntuacionEscalarService {
     catchError( error => {
       return ("Error!!")
     }));  
-  }
-
-  obtenerSubpruebasPorId(idEvaluado: String){
-    return this._http.get(this.url + 'subpruebas?idEvaluado='
-    +idEvaluado, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    })); 
-  }
-
-  obtenerSubpruebasPorIdEvaluado(idEvaluado: String): Observable<Subprueba[]> {
-    return this.http.get<Subprueba[]>(this.url + '/subpruebas?idEvaluado='
-    +idEvaluado);
   }
 }
