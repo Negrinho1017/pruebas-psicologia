@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.PuntuacionCompuesta;
 import ca2re.backend.dominio.Subprueba;
-import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
@@ -25,7 +25,7 @@ public class PuntuacionCompuestaController {
 	AdministradorPruebas administradorPruebas;
 
 	@Autowired
-	public PruebaWaisDAO pruebaWaisDAO;
+	public PruebaWaisMongoDAO pruebaWaisDAO;
 
 	@RequestMapping(value = "/componentes-puntuacion", method = RequestMethod.GET)
 	@ResponseBody

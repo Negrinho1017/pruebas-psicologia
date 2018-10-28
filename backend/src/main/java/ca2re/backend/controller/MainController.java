@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.dominio.EdadPersona;
-import ca2re.backend.dominio.Persona;
 import ca2re.backend.dominio.Prueba;
-import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
-import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.persistencia.PruebaWAISDAO;
+import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
-import ca2re.backend.servicio.CalificadorPrueba;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;
 
@@ -31,7 +29,7 @@ import ca2re.backend.util.FechaUtil;
 public class MainController {
 	
 	@Autowired
-	public PruebaWaisDAO pruebaWaisDAO;
+	public PruebaWAISDAO pruebaWaisDAO;
 	
 	@Autowired
 	AdministradorPruebas administradorPruebas;	

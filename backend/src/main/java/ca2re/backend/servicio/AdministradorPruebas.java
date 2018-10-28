@@ -11,18 +11,18 @@ import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.Subpruebas;
-import ca2re.backend.persistencia.CalificacionWaisDAO;
-import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
+import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadorDePuntuacionEscalar;
 import ca2re.backend.util.EdadUtil;
 
 public class AdministradorPruebas {
 
 	@Autowired
-	private CalificacionWaisDAO calificacionWaisDAO;
+	private CalificacionWaisMongoDAO calificacionWaisDAO;
 
 	@Autowired
-	private PruebaWaisDAO pruebaWaisDAO;
+	private PruebaWaisMongoDAO pruebaWaisDAO;
 
 	public Prueba ingresarSubprueba(Subprueba subprueba, String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
