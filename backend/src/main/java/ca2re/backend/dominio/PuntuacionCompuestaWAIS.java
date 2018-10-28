@@ -6,6 +6,7 @@ public class PuntuacionCompuestaWAIS {
 	private double[] percentil;
 	private String[] intervaloConfianza;
 	
+	public PuntuacionCompuestaWAIS() {}
 	public PuntuacionCompuestaWAIS(String idIndice, int[] puntuacionCompuesta, double[] percentil,
 			String[] intervaloConfianza) {
 		super();

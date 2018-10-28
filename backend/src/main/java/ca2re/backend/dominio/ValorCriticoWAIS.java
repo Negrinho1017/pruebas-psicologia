@@ -8,6 +8,7 @@ public class ValorCriticoWAIS {
 	private double valorCriticoIRP_IMT;
 	private double valorCriticoIRP_IVP;
 	private double valorCriticoIMT_IVP;
+	public ValorCriticoWAIS() {}
 	public ValorCriticoWAIS(int idRangoEdad, double valorCriticoICV_IRP, double valorCriticoICV_IMT,
 			double valorCriticoICV_IVP, double valorCriticoIRP_IMT, double valorCriticoIRP_IVP,
 			double valorCriticoIMT_IVP) {

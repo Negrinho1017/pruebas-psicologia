@@ -1,5 +1,8 @@
 package ca2re.backend.persistencia.builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.persistencia.mongo.entidades.EntidadSubprueba;
 
@@ -25,6 +28,22 @@ public class SubpruebaBuilder {
 		entidad.setPuntuacionNatural(subprueba.getPuntuacionNatural());
 		entidad.setReactivos(ReactivoBuilder.convertirListaAEntidadReactivo(subprueba.getReactivos()));
 		return entidad;
+	}
+	
+	public static List<EntidadSubprueba> convertirAListaEntidad(List<Subprueba> subpruebas){
+		List<EntidadSubprueba> entidadSubpruebas = new ArrayList<>();
+		for (Subprueba subprueba : subpruebas) {
+			entidadSubpruebas.add(convertirAEntidad(subprueba));
+		}
+		return entidadSubpruebas;
+	}
+	
+	public static List<Subprueba> convertirAListaDominio(List<EntidadSubprueba> entidadSubpruebas){
+		List<Subprueba> subpruebas = new ArrayList<>();
+		for (EntidadSubprueba entidadSubprueba : entidadSubpruebas) {
+			subpruebas.add(convertirADominio(entidadSubprueba));
+		}
+		return subpruebas;
 	}
 
 }
