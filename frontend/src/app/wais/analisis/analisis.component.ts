@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Globals } from '../../globals';
 import { ValorCriticoWAIS } from '../../model/ValorCriticoWAIS';
 import { AnalisisService } from './analisis.service';
+import { FortalezasDebilidadesService } from '../fortalezas-debilidades/fortalezas-debilidades.service';
 
 @Component({
   selector: 'app-analisis',
@@ -23,7 +24,8 @@ export class AnalisisComponent implements OnInit {
   hayDiferenciasSignificativas: String[] = [];
   valorCriticoWAIS: ValorCriticoWAIS = new ValorCriticoWAIS();
   constructor( private router: Router, private globals: Globals,
-    private analisisService: AnalisisService ) { }
+    private analisisService: AnalisisService,
+    private fortalezasDebilidadesService: FortalezasDebilidadesService ) { }
 
   ngOnInit() {
     var i = 0
@@ -70,10 +72,8 @@ export class AnalisisComponent implements OnInit {
       } 
       i++;
     }
-    this.diferencia = [this.puntuacion1[0]-this.puntuacion2[0],this.puntuacion1[1]-this.puntuacion2[1],
-    this.puntuacion1[2]-this.puntuacion2[2], this.puntuacion1[3]-this.puntuacion2[3],
-    this.puntuacion1[4]-this.puntuacion2[4], this.puntuacion1[5]-this.puntuacion2[5],
-    this.puntuacion1[6]-this.puntuacion2[6], this.puntuacion1[7]-this.puntuacion2[7]];
+    this.obtenerSubpruebas();
+    
     this.analisisService.obtenerValorCritico(this.globals.edad)
     .subscribe(res => {
       this.valorCriticoWAIS = res;
@@ -93,6 +93,18 @@ export class AnalisisComponent implements OnInit {
     });
   }
 
+  obtenerSubpruebas(){
+    this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
+      this.puntuacion1[6] = res[6].puntuacionEscalar;
+      this.puntuacion2[6] = res[7].puntuacionEscalar;
+      this.puntuacion1[7] = res[8].puntuacionEscalar;
+      this.puntuacion2[7] = res[9].puntuacionEscalar;
+      this.diferencia = [this.puntuacion1[0]-this.puntuacion2[0],this.puntuacion1[1]-this.puntuacion2[1],
+      this.puntuacion1[2]-this.puntuacion2[2], this.puntuacion1[3]-this.puntuacion2[3],
+      this.puntuacion1[4]-this.puntuacion2[4], this.puntuacion1[5]-this.puntuacion2[5],
+      this.puntuacion1[6]-this.puntuacion2[6], this.puntuacion1[7]-this.puntuacion2[7]];
+    });
+  }
   
 
 }
