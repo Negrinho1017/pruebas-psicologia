@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import static org.springframework.data.mongodb.core.query.Update.update;
 
 import ca2re.backend.dominio.Prueba;
+import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.persistencia.PruebaWAISDAO;
 
 public class PruebaWaisMongoDAO implements PruebaWAISDAO{

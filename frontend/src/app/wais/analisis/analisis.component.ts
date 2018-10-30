@@ -72,8 +72,7 @@ export class AnalisisComponent implements OnInit {
       } 
       i++;
     }
-    this.obtenerSubpruebas();
-    
+    this.obtenerSubpruebas();  
     this.analisisService.obtenerValorCritico(this.globals.edad)
     .subscribe(res => {
       this.valorCriticoWAIS = res;

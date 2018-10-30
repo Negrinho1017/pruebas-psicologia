@@ -13,7 +13,7 @@ import org.junit.Test;
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.Operaciones;
-import ca2re.backend.util.CalculadorDePuntuacionEscalar;
+import ca2re.backend.util.CalculadoraDePuntuaciones;
 
 public class UtilTest {
 	@Test
@@ -54,7 +54,7 @@ public class UtilTest {
 	
 	@Test
 	public void obtenerLimites() {
-		String[] limites = CalculadorDePuntuacionEscalar.crearRango("39-50");
+		String[] limites = CalculadoraDePuntuaciones.crearRango("39-50");
 		assertEquals("39", limites[0]);
 		assertEquals("50", limites[1]);
 	}
@@ -62,20 +62,20 @@ public class UtilTest {
 	@Test
 	public void estaEnElRango() {
 		String rango = "39-50";
-		assertTrue(CalculadorDePuntuacionEscalar.estaEnElRango(41, rango));
-		assertFalse(CalculadorDePuntuacionEscalar.estaEnElRango(51, rango));
-		assertTrue(CalculadorDePuntuacionEscalar.estaEnElRango(50, rango));
-		assertTrue(CalculadorDePuntuacionEscalar.estaEnElRango(39, rango));
-		assertFalse(CalculadorDePuntuacionEscalar.estaEnElRango(38, rango));
+		assertTrue(CalculadoraDePuntuaciones.estaEnElRango(41, rango));
+		assertFalse(CalculadoraDePuntuaciones.estaEnElRango(51, rango));
+		assertTrue(CalculadoraDePuntuaciones.estaEnElRango(50, rango));
+		assertTrue(CalculadoraDePuntuaciones.estaEnElRango(39, rango));
+		assertFalse(CalculadoraDePuntuaciones.estaEnElRango(38, rango));
 	}
 	
 	@Test
 	public void calcularPuntuacionEscalar() {
 		String[] rangos = {"0-10","11-20","21-30","31-40","41-50"};
-		assertEquals(3, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 26));
-		assertEquals(4, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 38));
-		assertEquals(2, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 18));
-		assertEquals(1, CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangos, 1));
+		assertEquals(3, CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangos, 26));
+		assertEquals(4, CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangos, 38));
+		assertEquals(2, CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangos, 18));
+		assertEquals(1, CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangos, 1));
 	}
 	
 	@Test

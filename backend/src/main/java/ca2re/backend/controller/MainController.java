@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Prueba;
+import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.persistencia.PruebaWAISDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;

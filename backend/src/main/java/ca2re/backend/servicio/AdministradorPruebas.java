@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.RamaDelConocimiento;
+import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
-import ca2re.backend.util.CalculadorDePuntuacionEscalar;
+import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
 
 public class AdministradorPruebas {
@@ -107,57 +108,57 @@ public class AdministradorPruebas {
 
 	public int obtenerPuntuacionEscalarDisenioCubos(String idEdad, int puntuacionNatural) {
 		String[] rangosDisenioCubos = calificacionWaisDAO.obtenerDisenioDeCubosPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosDisenioCubos, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosDisenioCubos, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarSemejanzas(String idEdad, int puntuacionNatural) {
 		String[] rangosSemejanzas = calificacionWaisDAO.obtenerSemejanzasPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosSemejanzas, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosSemejanzas, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarRetencionDigitos(String idEdad, int puntuacionNatural) {
 		String[] rangosRetencionDigitos = calificacionWaisDAO.obtenerRetencionDigitosPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosRetencionDigitos, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosRetencionDigitos, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarMatrices(String idEdad, int puntuacionNatural) {
 		String[] rangosMatrices = calificacionWaisDAO.obtenerMatricesPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosMatrices, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosMatrices, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarVocabulario(String idEdad, int puntuacionNatural) {
 		String[] rangosVocabulario = calificacionWaisDAO.obtenerVocabularioPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosVocabulario, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosVocabulario, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarAritmetica(String idEdad, int puntuacionNatural) {
 		String[] rangosAritmetica = calificacionWaisDAO.obtenerAritmeticaPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosAritmetica, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosAritmetica, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarBusquedaSimbolos(String idEdad, int puntuacionNatural) {
 		String[] rangosBusquedaSimbolos = calificacionWaisDAO.obtenerBusquedaDeSimbolosPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosBusquedaSimbolos, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosBusquedaSimbolos, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarRompecabezasVisual(String idEdad, int puntuacionNatural) {
 		String[] rangosRompecabezasVisual = calificacionWaisDAO.obtenerRompecabezasVisualPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosRompecabezasVisual, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosRompecabezasVisual, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarInformacion(String idEdad, int puntuacionNatural) {
 		String[] rangosInformacion = calificacionWaisDAO.obtenerInformacionPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosInformacion, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosInformacion, puntuacionNatural);
 	}
 
 	public int obtenerPuntuacionEscalarClaves(String idEdad, int puntuacionNatural) {
 		String[] rangosClaves = calificacionWaisDAO.obtenerClavesPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);
 	}
 	
 	public int obtenerPuntuacionEscalarNumerosLetras(String idEdad, int puntuacionNatural) {		
 		String[] rangosNumerosLetras = calificacionWaisDAO.obtenerNumerosLetrasPorIdEdad(idEdad);
-		return CalculadorDePuntuacionEscalar.obtenerPuntuacionEscalar(rangosNumerosLetras, puntuacionNatural);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosNumerosLetras, puntuacionNatural);
 	}
 	
 	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
@@ -189,5 +190,14 @@ public class AdministradorPruebas {
 		subpruebas.addAll(prueba.getRamaDelConocimiento().get(RamasDelConocimiento.VELOCIDAD_DE_PROCESAMIENTO.getValue())
 				.getSubpruebas());
 		return subpruebas;
+	}
+	
+	public List<Reactivo> obtenerListaReactivosPorSubprueba(int numeroSubprueba, String idEvaluado){
+		return obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado).get(numeroSubprueba).getReactivos();
+	}
+	
+	public int obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
+		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
+		return CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
 	}
 }
