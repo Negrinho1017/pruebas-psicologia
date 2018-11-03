@@ -3,6 +3,7 @@ package ca2re.backend.util;
 import java.util.List;
 
 import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 
 public class CalculadoraDePuntuaciones {
 	private static final int PUNTUACION_RESTO_DE_REACTIVOS = 4;
@@ -40,5 +41,22 @@ public class CalculadoraDePuntuaciones {
 			}
 		}
 		return puntuacion-PUNTUACION_PRIMEROS_REACTIVOS;
+	}
+	
+	public static int obtenerRetencionDeDigitos(List<Reactivo> reactivos, int retencionDeDigitos) {
+		int puntuacion = 0;
+		int contador;
+		if(retencionDeDigitos == RetencionDeDigitos.RDD.getValue()) {
+			contador=0;
+		}else if(retencionDeDigitos == RetencionDeDigitos.RDI.getValue()) {
+			contador=16;
+		}else {
+			contador=32;
+		}
+		for(int i=0;i<16;i++) {
+			puntuacion+=reactivos.get(contador).getPuntuacion();
+			contador++;
+		}
+		return puntuacion;
 	}
 }

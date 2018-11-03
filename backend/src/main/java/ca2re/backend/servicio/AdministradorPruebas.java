@@ -11,6 +11,7 @@ import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
+import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
@@ -196,8 +197,27 @@ public class AdministradorPruebas {
 		return obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado).get(numeroSubprueba).getReactivos();
 	}
 	
-	public int obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
+	public Subprueba obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
-		return CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
+		String[] puntuacionesEscalares = calificacionWaisDAO.obtenerDisenoCubosSinBonificacionPorTiempo("20:0-24:11");
+		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
+		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
+		return new Subprueba(puntuacionNatural,puntuacionEscalar);
 	}
+	
+	public Subprueba obtenerRetencionDeDigitos(int numeroRetencionDigitos, int numeroSubprueba, String idEvaluado) {
+		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
+		String[] puntuacionesEscalares;
+		if(numeroRetencionDigitos == RetencionDeDigitos.RDD.getValue()) {
+			puntuacionesEscalares = calificacionWaisDAO.obtenerRDD("20:0-24:11");
+		}else if(numeroRetencionDigitos == RetencionDeDigitos.RDI.getValue()) {
+			puntuacionesEscalares = calificacionWaisDAO.obtenerRDI("20:0-24:11");
+		}else {
+			puntuacionesEscalares = calificacionWaisDAO.obtenerRDS("20:0-24:11");
+		}
+		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerRetencionDeDigitos(reactivos, numeroRetencionDigitos);
+		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
+		return new Subprueba(puntuacionNatural,puntuacionEscalar);
+	}
+
 }

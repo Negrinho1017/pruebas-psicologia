@@ -22,6 +22,12 @@ public class Subprueba {
 		this.esOpcional = esOpcional;
 	}
 
+	public Subprueba(int puntuacionNatural, int puntuacionEscalar) {
+		super();
+		this.puntuacionNatural = puntuacionNatural;
+		this.puntuacionEscalar = puntuacionEscalar;
+	}
+	
 	public int getPuntuacionNatural() {
 		return puntuacionNatural;
 	}

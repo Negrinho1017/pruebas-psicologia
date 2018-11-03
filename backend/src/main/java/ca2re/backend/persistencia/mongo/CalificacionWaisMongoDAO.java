@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
+import ca2re.backend.dominio.AnalisisProcesoWAIS;
 import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 
 public class CalificacionWaisMongoDAO {
+	private static final String ANALISIS_PROCESO = "analisis_proceso";
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
 	private static final String COLLECTION_CONVERSION_PUNTUACION_COMPUESTA = "conversion_puntuacion_compuesta_wais";
 	private static final String COLLECTION_VALORES_CRITICOS = "valores_criticos_wais";
@@ -115,6 +117,34 @@ public class CalificacionWaisMongoDAO {
 		Query valoresCriticos = query(where("idRangoEdad").is(idRangoEdad));
 		return mongoOperations
 				.find(valoresCriticos, ValorCriticoWAIS.class, COLLECTION_VALORES_CRITICOS).get(0);
+	}
+	
+	public String[] obtenerDisenoCubosSinBonificacionPorTiempo(String idEdad) {
+		Query dcbt = query(where("idEdad").is(idEdad));
+		return mongoOperations
+				.find(dcbt, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
+				.get(0).getDcbt();
+	}
+	
+	public String[] obtenerRDD(String idEdad) {
+		Query rdd = query(where("idEdad").is(idEdad));
+		return mongoOperations
+				.find(rdd, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
+				.get(0).getRdd();
+	}
+	
+	public String[] obtenerRDI(String idEdad) {
+		Query rdi = query(where("idEdad").is(idEdad));
+		return mongoOperations
+				.find(rdi, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
+				.get(0).getRdi();
+	}
+	
+	public String[] obtenerRDS(String idEdad) {
+		Query rds = query(where("idEdad").is(idEdad));
+		return mongoOperations
+				.find(rds, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
+				.get(0).getRds();
 	}
 
 }
