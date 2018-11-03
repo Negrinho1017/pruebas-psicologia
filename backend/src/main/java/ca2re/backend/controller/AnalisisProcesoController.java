@@ -13,7 +13,6 @@ import ca2re.backend.persistencia.PruebaWAISDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/analisis-proceso")
 public class AnalisisProcesoController {
 	
