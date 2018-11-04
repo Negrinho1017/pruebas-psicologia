@@ -1,4 +1,4 @@
-package ca2re.backend.persistencia;
+package ca2re.backend.persistencia.mongo;
 
 import java.util.List;
 
@@ -12,8 +12,10 @@ import org.springframework.data.mongodb.core.query.Update;
 import static org.springframework.data.mongodb.core.query.Update.update;
 
 import ca2re.backend.dominio.Prueba;
+import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.persistencia.PruebaWAISDAO;
 
-public class PruebaWaisDAO {
+public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 
 	private static final String COLLECTION_PRUEBA_WISC = "prueba_wisc";
 	private static final String COLLECTION_PRUEBA_WAIS = "prueba_wais";
@@ -24,7 +26,7 @@ public class PruebaWaisDAO {
 	@Autowired
 	private static MongoTemplate mongoTemplate;
 
-	public PruebaWaisDAO(MongoOperations mongoOperations) {
+	public PruebaWaisMongoDAO(MongoOperations mongoOperations) {
 		super();
 		this.mongoOperations = mongoOperations;
 	}

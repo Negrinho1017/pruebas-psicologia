@@ -2,6 +2,7 @@ package ca2re.backend.controller;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,13 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.dominio.EdadPersona;
-import ca2re.backend.dominio.Persona;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
-import ca2re.backend.persistencia.PruebaWaisDAO;
+import ca2re.backend.persistencia.PruebaWAISDAO;
+import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
-import ca2re.backend.servicio.CalificadorPrueba;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;
 
@@ -29,7 +29,7 @@ import ca2re.backend.util.FechaUtil;
 public class MainController {
 	
 	@Autowired
-	public PruebaWaisDAO pruebaWaisDAO;
+	public PruebaWAISDAO pruebaWaisDAO;
 	
 	@Autowired
 	AdministradorPruebas administradorPruebas;	
@@ -67,6 +67,13 @@ public class MainController {
 		Prueba prueba = administradorPruebas.ingresarSubprueba(subprueba, idEvaluado);
 		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
 	}
+	
+	@RequestMapping(value = "/subpruebas", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Subprueba> obtenerSubpruebasPorId(@RequestParam String idEvaluado) {
+		return administradorPruebas.obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
+	}
+	
 	
 	/*@RequestMapping(value = "/creacion-reactivo", method = RequestMethod.PUT)
 	@ResponseBody

@@ -1,4 +1,4 @@
-package ca2re.backend.persistencia;
+package ca2re.backend.persistencia.mongo;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -11,14 +11,15 @@ import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 
-public class CalificacionWaisDAO {
+public class CalificacionWaisMongoDAO {
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
 	private static final String COLLECTION_CONVERSION_PUNTUACION_COMPUESTA = "conversion_puntuacion_compuesta_wais";
 	private static final String COLLECTION_VALORES_CRITICOS = "valores_criticos_wais";
+	
 	@Autowired
 	private static MongoOperations mongoOperations;
 
-	public CalificacionWaisDAO(MongoOperations mongoOperations) {
+	public CalificacionWaisMongoDAO(MongoOperations mongoOperations) {
 		super();
 		this.mongoOperations = mongoOperations;
 	}

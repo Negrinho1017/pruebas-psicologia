@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subprueba } from 'src/app/model/Subprueba';
+import { Globals } from 'src/app/globals';
+import { Router } from '@angular/router';
+import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
+import { FortalezasDebilidadesService } from './fortalezas-debilidades.service';
 
 @Component({
   selector: 'app-fortalezas-debilidades',
@@ -6,20 +11,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fortalezas-debilidades.component.css']
 })
 export class FortalezasDebilidadesComponent implements OnInit {
-  subpruebas: String[] = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices","Vocabulario",
-  "Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
+  subpruebas: String[] = [];
   selectedMedia: number = 1;
-  puntuacionesEscalares: number[] = [9,9,10,5,7,12,7,4,8,9];
+  puntuacionesEscalares: number[] = [];
   diferenciasDeLaMedia: number[] = [0,0,0,0,0,0,0,0,0,0];
   puntuacionEscalarMediaCV: number;
   puntuacionEscalarMediaRP: number;
   puntuacionEscalarMediaTotal: number;
-  constructor() { }
+  valoresCriticos: number[] = [];
+  listaSubpruebas: Subprueba[];
+  fortalezasYDebilidades: String[] = [];
+  constructor( private globals: Globals, private router: Router,
+     private fortalezasDebilidadesService: FortalezasDebilidadesService ) { }
 
   ngOnInit() {
     this.calcularPuntuacionEscalarMedia();
     this.calcularDiferencias();
+    this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
+      this.listaSubpruebas = res;
+      this.subpruebas = [this.listaSubpruebas[3].nombre, this.listaSubpruebas[0].nombre,
+      this.listaSubpruebas[6].nombre, this.listaSubpruebas[4].nombre ,this.listaSubpruebas[1].nombre,
+      this.listaSubpruebas[7].nombre, this.listaSubpruebas[8].nombre, this.listaSubpruebas[5].nombre,
+      this.listaSubpruebas[2].nombre, this.listaSubpruebas[9].nombre]
+      this.puntuacionesEscalares = [this.listaSubpruebas[3].puntuacionEscalar, this.listaSubpruebas[0].puntuacionEscalar,
+      this.listaSubpruebas[6].puntuacionEscalar, this.listaSubpruebas[4].puntuacionEscalar ,this.listaSubpruebas[1].puntuacionEscalar,
+      this.listaSubpruebas[7].puntuacionEscalar, this.listaSubpruebas[8].puntuacionEscalar, this.listaSubpruebas[5].puntuacionEscalar,
+      this.listaSubpruebas[2].puntuacionEscalar, this.listaSubpruebas[9].puntuacionEscalar]
+      this.calcularPuntuacionEscalarMedia();
+      this.calcularDiferencias();
+    }); 
   }
+
+
 
   calcularDiferencias(){
     if(this.selectedMedia == 1){
@@ -33,6 +56,18 @@ export class FortalezasDebilidadesComponent implements OnInit {
     this.puntuacionEscalarMediaRP = (this.puntuacionesEscalares[0]+this.puntuacionesEscalares[3]+this.puntuacionesEscalares[7])/3;
   }
 
+  evaluarFortalezasYDebilidades(){
+    var i = 0;
+    for(let diferencia of this.diferenciasDeLaMedia){
+      if(diferencia>this.valoresCriticos[i]){
+        this.fortalezasYDebilidades[i] = 'F';
+      }else{
+        this.fortalezasYDebilidades[i] = 'D';
+      }
+      i++;
+    }
+  }
+
   calcularPuntuacionEscalarMediaTotal(){
     var contador = 0;
     for(let calificacionSubprueba of this.puntuacionesEscalares){
@@ -43,15 +78,18 @@ export class FortalezasDebilidadesComponent implements OnInit {
 
   calcularConMediaTotal(){
     this.calcularPuntuacionEscalarMediaTotal();
+    this.valoresCriticos = [2.96,3.65,2.55,3.03,2.87,3.08,3.58,3.06,2.52,3.27];
     var i = 0;
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaTotal;
       i++;
     }
+    this.evaluarFortalezasYDebilidades();
   }
 
   calcularConDiferenciasDeLaMedia(){
     var i = 0;
+    this.valoresCriticos = [2.19,2.03,null,2.22,2.17,null,null,2.23,2.03,null];
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       if(i==1 || i==4 || i==8){
         this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaCV;
@@ -63,6 +101,11 @@ export class FortalezasDebilidadesComponent implements OnInit {
       }
       i++;
     }
+    this.evaluarFortalezasYDebilidades();
+    this.fortalezasYDebilidades[2] = null;
+    this.fortalezasYDebilidades[5] = null;
+    this.fortalezasYDebilidades[6] = null;
+    this.fortalezasYDebilidades[9] = null;
   }
 
 }
