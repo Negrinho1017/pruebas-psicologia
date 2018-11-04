@@ -11,7 +11,6 @@ import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/valor-critico")
 public class ValorCriticoController {
 

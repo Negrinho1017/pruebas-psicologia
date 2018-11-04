@@ -17,7 +17,6 @@ import ca2re.backend.persistencia.PruebaWaisDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/puntuacion-compuesta")
 public class PuntuacionCompuestaController {
 

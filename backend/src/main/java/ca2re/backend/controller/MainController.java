@@ -25,7 +25,6 @@ import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/")
 public class MainController {
 	

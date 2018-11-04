@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ca2re.backend.servicio.AdministradorPruebas;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "/puntuacion-escalar")
 public class PuntuacionEscalarController {
 	
