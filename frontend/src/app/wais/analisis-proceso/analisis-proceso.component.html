@@ -11,4 +11,29 @@
       <td>{{this.subpruebas[i].puntuacionEscalar}}</td>
     </tr>
   </table>
+  <h3><b>Comparación de discrepancias entre puntuaciones escalares</b></h3>
+  <table>
+    <tr>
+      <th>Comparación</th>
+      <th></th>
+      <th>Puntuación 1</th>
+      <th></th>
+      <th>Puntuación 2</th>
+      <th></th>
+      <th>Diferencia</th>
+      <th>Valor crítico</th>
+      <th>Diferencia significativa</th>
+    </tr>
+    <tr *ngFor="let item of comparaciones; let i = index">
+      <td>{{item}}</td>
+      <td>{{p1[i]}}</td>
+      <td>{{puntuacionesNaturales1[i]}}</td>
+      <td>- {{p2[i]}}</td>
+      <td>{{puntuacionesNaturales2[i]}}</td>
+      <td>=</td>
+      <td>{{diferencias[i]}}</td>
+      <td>{{valoresCriticos[i]}}</td>
+      <td>{{diferenciasSignificativos[i]}}</td>
+    </tr>
+  </table>
 </body>
