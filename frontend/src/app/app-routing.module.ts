@@ -24,9 +24,11 @@ import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-
 import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
 import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component'
+import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component'
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
+  { path: 'analisis-proceso', component: AnalisisProcesoComponent },
   { path: 'fortalezas-debilidades', component: FortalezasDebilidadesComponent },
   { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent },
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },

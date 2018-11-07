@@ -1,0 +1,14 @@
+<body class="cuerpo">
+  <table>
+    <tr>
+      <th>Puntuación de proceso</th>
+      <th>Puntuación natural</th>
+      <th>Puntuación escalar</th>
+    </tr>
+    <tr *ngFor="let item of puntuacionesProceso; let i = index">
+      <td>{{item}}</td>
+      <td>{{this.subpruebas[i].puntuacionNatural}}</td>
+      <td>{{this.subpruebas[i].puntuacionEscalar}}</td>
+    </tr>
+  </table>
+</body>
