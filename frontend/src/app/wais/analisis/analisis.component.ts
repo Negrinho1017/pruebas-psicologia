@@ -104,6 +104,20 @@ export class AnalisisComponent implements OnInit {
       this.puntuacion1[6]-this.puntuacion2[6], this.puntuacion1[7]-this.puntuacion2[7]];
     });
   }
+
+  siguiente() {
+    this.router.navigate(['/fortalezas-debilidades']);
+    this.scrollToTop();
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
+      }
+    })();
+  }
   
 
 }
