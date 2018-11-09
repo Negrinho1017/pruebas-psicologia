@@ -23,6 +23,7 @@ export class AnalisisComponent implements OnInit {
   valoresCriticos: number[] = [];
   hayDiferenciasSignificativas: String[] = [];
   sonLas10SubpruebasPrincipales: boolean;
+  seHizoDisenoCubosYRetencionDigitos: boolean;
   valorCriticoWAIS: ValorCriticoWAIS = new ValorCriticoWAIS();
   constructor( private router: Router, private globals: Globals,
     private analisisService: AnalisisService,
@@ -126,15 +127,24 @@ export class AnalisisComponent implements OnInit {
     this.analisisService.sonLas10SubpruebasPrincipales(this.globals.idEvaluado)
     .subscribe(res => {
       this.sonLas10SubpruebasPrincipales = res;
-      if(this.sonLas10SubpruebasPrincipales){
-        this.router.navigate(['/fortalezas-debilidades']);
-      }else{
-        this.router.navigate(['/analisis-proceso']);
-      }   
-      this.scrollToTop();
+      this.seHizoRetencionDigitosYDisenoCubos();
     });
   }
 
+  seHizoRetencionDigitosYDisenoCubos(){
+    this.analisisService.seHizoRetencionDigitosYDisenoCubos(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.seHizoDisenoCubosYRetencionDigitos = res;
+      if(this.sonLas10SubpruebasPrincipales){
+        this.router.navigate(['/fortalezas-debilidades']);
+      }else if(this.seHizoDisenoCubosYRetencionDigitos){
+        this.router.navigate(['/analisis-proceso']);
+      }else{
+        this.mensajeAlerta("No hay más datos que mostrar");
+      }
+      this.scrollToTop();
+    });
+  }
   edadEvaluado(){
     this.analisisService.edadEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
@@ -143,4 +153,11 @@ export class AnalisisComponent implements OnInit {
     });
   }
 
+  mensajeAlerta(mensaje: string) {
+    swal({
+      title: 'Advertencia!',
+      icon: "warning",
+      text: mensaje,
+    });
+  }
 }

@@ -18,6 +18,7 @@ import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.Operaciones;
+import ca2re.backend.util.VerificadorPruebas;
 
 public class AdministradorPruebas {
 
@@ -223,11 +224,17 @@ public class AdministradorPruebas {
 	
 	public boolean verificarSiSonLas10SubpruebasPrincipales(String idEvaluado) {
 		List<Subprueba> subpruebas = obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
-		return Operaciones.sonLas10SubpruebasPrincipales(subpruebas);
+		return VerificadorPruebas.sonLas10SubpruebasPrincipales(subpruebas);
 	}
 	
 	public int obtenerEdadEvaluado(String idEvaluado) {
 		return pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios();
+	}
+	
+	public boolean verificarDisenoCubosYRetencionDigitos(String idEvaluado) {
+		List<Subprueba> subpruebas = obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
+		return VerificadorPruebas.seHizoDisenoCubos(subpruebas)
+				&& VerificadorPruebas.seHizoRetencionDigitos(subpruebas);
 	}
 
 }

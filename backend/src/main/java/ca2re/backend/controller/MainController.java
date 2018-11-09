@@ -80,6 +80,12 @@ public class MainController {
 		return administradorPruebas.verificarSiSonLas10SubpruebasPrincipales(idEvaluado);
 	}
 	
+	@RequestMapping(value = "/se-hizo-retencion-digitos-y-diseno-cubos", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean seHizoRetencionDigitosYDisenoCubos(@RequestParam String idEvaluado) {
+		return administradorPruebas.verificarDisenoCubosYRetencionDigitos(idEvaluado);
+	}
+	
 	@RequestMapping(value = "/edad-evaluado", method = RequestMethod.GET)
 	@ResponseBody
 	public int edadEvaluado(@RequestParam String idEvaluado) {

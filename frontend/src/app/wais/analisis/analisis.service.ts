@@ -29,6 +29,15 @@ export class AnalisisService {
     }));  
   }
 
+  seHizoRetencionDigitosYDisenoCubos(idEvaluado: String) {
+    return this._http.get(this.url + '/se-hizo-retencion-digitos-y-diseno-cubos?idEvaluado='+idEvaluado,
+      this.options).
+    pipe(map((response:Response)=>response.json()),
+    catchError( error => {
+      return ("Error!!")
+    }));  
+  }
+
   edadEvaluado(idEvaluado: String) {
     return this._http.get(this.url + '/edad-evaluado?idEvaluado='+idEvaluado,
       this.options).
