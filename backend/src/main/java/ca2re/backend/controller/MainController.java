@@ -74,6 +74,18 @@ public class MainController {
 		return administradorPruebas.obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
 	}
 	
+	@RequestMapping(value = "/son-las-subpruebas-principales", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean sonLas10SubpruebasPrincipales(@RequestParam String idEvaluado) {
+		return administradorPruebas.verificarSiSonLas10SubpruebasPrincipales(idEvaluado);
+	}
+	
+	@RequestMapping(value = "/edad-evaluado", method = RequestMethod.GET)
+	@ResponseBody
+	public int edadEvaluado(@RequestParam String idEvaluado) {
+		return administradorPruebas.obtenerEdadEvaluado(idEvaluado);
+	}
+	
 	
 	/*@RequestMapping(value = "/creacion-reactivo", method = RequestMethod.PUT)
 	@ResponseBody

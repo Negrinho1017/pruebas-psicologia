@@ -19,4 +19,22 @@ export class AnalisisService {
       return ("Error!!")
     }));  
   }
+
+  sonLas10SubpruebasPrincipales(idEvaluado: String) {
+    return this._http.get(this.url + '/son-las-subpruebas-principales?idEvaluado='+idEvaluado,
+      this.options).
+    pipe(map((response:Response)=>response.json()),
+    catchError( error => {
+      return ("Error!!")
+    }));  
+  }
+
+  edadEvaluado(idEvaluado: String) {
+    return this._http.get(this.url + '/edad-evaluado?idEvaluado='+idEvaluado,
+      this.options).
+    pipe(map((response:Response)=>response.json()),
+    catchError( error => {
+      return ("Error!!")
+    }));  
+  }
 }

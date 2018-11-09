@@ -22,6 +22,7 @@ export class AnalisisComponent implements OnInit {
   valorCriticoBS_CL: number = 2.66;
   valoresCriticos: number[] = [];
   hayDiferenciasSignificativas: String[] = [];
+  sonLas10SubpruebasPrincipales: boolean;
   valorCriticoWAIS: ValorCriticoWAIS = new ValorCriticoWAIS();
   constructor( private router: Router, private globals: Globals,
     private analisisService: AnalisisService,
@@ -73,6 +74,10 @@ export class AnalisisComponent implements OnInit {
       i++;
     }
     this.obtenerSubpruebas();  
+    this.edadEvaluado();  
+  }
+
+  obtenerDatos(){
     this.analisisService.obtenerValorCritico(this.globals.edad)
     .subscribe(res => {
       this.valorCriticoWAIS = res;
@@ -91,7 +96,6 @@ export class AnalisisComponent implements OnInit {
       } 
     });
   }
-
   obtenerSubpruebas(){
     this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
       this.puntuacion1[6] = res[6].puntuacionEscalar;
@@ -106,8 +110,7 @@ export class AnalisisComponent implements OnInit {
   }
 
   siguiente() {
-    this.router.navigate(['/fortalezas-debilidades']);
-    this.scrollToTop();
+    this.seHicieronLasSubpruebasPrincipales();
   }
 
   scrollToTop() {
@@ -119,5 +122,25 @@ export class AnalisisComponent implements OnInit {
     })();
   }
   
+  seHicieronLasSubpruebasPrincipales(){
+    this.analisisService.sonLas10SubpruebasPrincipales(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.sonLas10SubpruebasPrincipales = res;
+      if(this.sonLas10SubpruebasPrincipales){
+        this.router.navigate(['/fortalezas-debilidades']);
+      }else{
+        this.router.navigate(['/analisis-proceso']);
+      }   
+      this.scrollToTop();
+    });
+  }
+
+  edadEvaluado(){
+    this.analisisService.edadEvaluado(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.globals.edad = res;
+      this.obtenerDatos();
+    });
+  }
 
 }
