@@ -26,16 +26,19 @@ export class AnalisisProcesoComponent implements OnInit {
   diferencias: number[] = [];
   valoresCriticos: number[] = [3.22, 3.8, 3.69, 3.88];
   diferenciasSignificativos: String[] = [];
+  loading: boolean;
   constructor(private analisisProcesoService: AnalisisProcesoService,
     private router: Router, private globals: Globals,
     private fortalezasDebilidadesService: FortalezasDebilidadesService) { }
 
   ngOnInit() {
+    this.loading=true;
     this.analisisProcesoService.obtenerDisenoCubosSinBonificacionPorTiempo(this.globals.idEvaluado)
       .subscribe(res => {
         this.subpruebas[0] = res;
         this.puntuacionesNaturales2[0] = this.subpruebas[0].puntuacionNatural;
-        this.rdd();     
+        this.rdd();   
+        this.loading=false;  
       });
   }
 

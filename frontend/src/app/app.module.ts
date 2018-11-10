@@ -31,6 +31,7 @@ import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.compon
 import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component';
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proce
     HttpModule,
     FormsModule,
     ChartModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule
   ],
   providers: [VocabularioService],
   bootstrap: [AppComponent]

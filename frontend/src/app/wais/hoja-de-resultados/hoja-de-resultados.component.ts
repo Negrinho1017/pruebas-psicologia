@@ -14,7 +14,7 @@ export class HojaDeResultadosComponent implements OnInit {
   subpruebas: string[] = [];
   prueba: Prueba;
   puntuacionesEscalares: number[] = [];
-
+  loading: boolean;
   puntajeSemejanzas: number;
   puntajeRetencionDigitos: number;
   puntajeMatrices: number;
@@ -45,7 +45,8 @@ export class HojaDeResultadosComponent implements OnInit {
   }
 
   ngOnInit() {    
-    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
+    this.loading=true;
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)    
       .subscribe(res => {
         this.prueba = res;
 
@@ -74,6 +75,7 @@ export class HojaDeResultadosComponent implements OnInit {
         this.globals.CITotal = this.CITotal;
         this.hojaDeResultadosService.ingresarPuntuacionCompuesta(this.globals.idEvaluado);
         this.graficar();
+        this.loading=false;
       });
   }
 

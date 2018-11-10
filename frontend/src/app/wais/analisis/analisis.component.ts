@@ -21,6 +21,7 @@ export class AnalisisComponent implements OnInit {
   valorCriticoRD_AR: number = 2.14;
   valorCriticoBS_CL: number = 2.66;
   valoresCriticos: number[] = [];
+  loading: boolean;
   hayDiferenciasSignificativas: String[] = [];
   sonLas10SubpruebasPrincipales: boolean;
   seHizoDisenoCubosYRetencionDigitos: boolean;
@@ -30,6 +31,7 @@ export class AnalisisComponent implements OnInit {
     private fortalezasDebilidadesService: FortalezasDebilidadesService ) { }
 
   ngOnInit() {
+    this.loading=true;
     var i = 0
     for(let indice of this.p1){
       if(indice=="ICV"){
@@ -94,6 +96,7 @@ export class AnalisisComponent implements OnInit {
           this.hayDiferenciasSignificativas[i] = "N"
         }
         i++;
+        this.loading=false;
       } 
     });
   }

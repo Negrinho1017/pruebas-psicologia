@@ -21,10 +21,12 @@ export class FortalezasDebilidadesComponent implements OnInit {
   valoresCriticos: number[] = [];
   listaSubpruebas: Subprueba[];
   fortalezasYDebilidades: String[] = [];
+  loading: boolean;
   constructor( private globals: Globals, private router: Router,
      private fortalezasDebilidadesService: FortalezasDebilidadesService ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.calcularPuntuacionEscalarMedia();
     this.calcularDiferencias();
     this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado).subscribe(res => {
@@ -39,6 +41,7 @@ export class FortalezasDebilidadesComponent implements OnInit {
       this.listaSubpruebas[2].puntuacionEscalar, this.listaSubpruebas[9].puntuacionEscalar]
       this.calcularPuntuacionEscalarMedia();
       this.calcularDiferencias();
+      this.loading=false;
     }); 
   }
 

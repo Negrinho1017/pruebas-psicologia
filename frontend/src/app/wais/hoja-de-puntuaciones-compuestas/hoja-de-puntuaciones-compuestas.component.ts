@@ -22,12 +22,14 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   intervalosConfianza: String[] = [];
   percentiles: number[] = [];
   puntuacionesCompuestas: number[] = [];
+  loading: boolean;
   puntuacionCompuestaCIT: PuntuacionCompuesta = new PuntuacionCompuesta();
   constructor(private router: Router, private globals: Globals,
     private hojaDePuntuacionesCompuestasService: HojaDePuntuacionesCompuestasService,
     private hojaDeResultadosService: HojaDeResultadosService ) { }
 
   ngOnInit() {
+    this.loading = true
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
@@ -43,6 +45,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
       }    
       this.globals.indices = this.puntuacionesCompuestas;
       this.obtenerPuntuacionCompuestaCIT(this.globals.CITotal);
+      this.loading=false;
     });
   }
 
