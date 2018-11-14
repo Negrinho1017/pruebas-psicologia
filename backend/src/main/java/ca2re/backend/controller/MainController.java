@@ -18,6 +18,7 @@ import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.PruebaWAISDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
@@ -56,7 +57,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/prueba-por-id", method = RequestMethod.GET)
 	@ResponseBody
-	public Prueba obtenerPruebaPorId(@RequestParam String idEvaluado) throws ParseException {
+	public Prueba obtenerPruebaPorId(@RequestParam String idEvaluado) throws PruebasPsicologiaException {
 		return pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 	}
 	

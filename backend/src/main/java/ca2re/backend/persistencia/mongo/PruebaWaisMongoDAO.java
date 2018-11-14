@@ -13,6 +13,7 @@ import static org.springframework.data.mongodb.core.query.Update.update;
 
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Reactivo;
+import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.PruebaWAISDAO;
 
 public class PruebaWaisMongoDAO implements PruebaWAISDAO{
@@ -45,9 +46,13 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 		return mongoOperations.findAll(Prueba.class, COLLECTION_PRUEBA_WAIS);
 	}
 
-	public List<Prueba> obtenerPruebaPorIdEvaluado(String id) {
+	public List<Prueba> obtenerPruebaPorIdEvaluado(String id) throws PruebasPsicologiaException {
 		Query pruebaPorNombre = query(where("evaluado.id").is(id));
-		return mongoOperations.find(pruebaPorNombre, Prueba.class, COLLECTION_PRUEBA_WAIS);
+		List<Prueba> prueba = mongoOperations.find(pruebaPorNombre, Prueba.class, COLLECTION_PRUEBA_WAIS);
+		if(prueba.size()==0) {
+			throw new PruebasPsicologiaException("No se encontró la prueba, intente de nuevo");
+		}
+		return prueba;
 	}
 
 	public Prueba actualizarPrueba(Prueba prueba, String id) {

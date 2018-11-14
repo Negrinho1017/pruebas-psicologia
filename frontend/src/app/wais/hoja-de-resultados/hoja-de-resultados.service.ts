@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
 import { Prueba } from '../../model/Prueba';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subprueba } from '../../model/Subprueba';
+import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -25,18 +26,17 @@ export class HojaDeResultadosService {
     }));  
   }
 
-  obtenerPruebaPorIdDelEvaluado(idEvaluado: String){
-    return this._http.get(this.url + '/prueba-por-id?idEvaluado='+idEvaluado, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
-  }
+  public obtenerPruebaPorIdDelEvaluado(idEvaluado: string): Observable<any>{
+    const httpOptions ={
+      params: new HttpParams().set('idEvaluado', idEvaluado)
+    };
+    return this.http.get(this.url + '/prueba-por-id', httpOptions);
+  };
   
   crearPrueba(prueba: Prueba) {
     return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions).subscribe(result => {
         console.log(result);
-      }, error => console.log('There was an error: '));
+      });
   }
 
   crearSubprueba(subprueba: Subprueba, idEvaluado: String) {

@@ -46,10 +46,9 @@ export class HojaDeResultadosComponent implements OnInit {
 
   ngOnInit() {    
     this.loading=true;
-    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)    
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado)    
       .subscribe(res => {
         this.prueba = res;
-
         this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
           this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,
           this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionEscalar];
@@ -76,6 +75,10 @@ export class HojaDeResultadosComponent implements OnInit {
         this.hojaDeResultadosService.ingresarPuntuacionCompuesta(this.globals.idEvaluado);
         this.graficar();
         this.loading=false;
+      }, error => {
+        this.mensajeError(error.error.mensaje);
+        this.router.navigate(['/ingreso-de-datos']);
+        this.loading = false;
       });
   }
 
@@ -240,6 +243,14 @@ export class HojaDeResultadosComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     })();
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
   }
 
 }

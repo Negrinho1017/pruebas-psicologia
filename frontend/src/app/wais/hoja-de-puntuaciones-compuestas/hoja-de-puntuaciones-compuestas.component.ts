@@ -30,7 +30,7 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true
-    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(this.globals.idEvaluado)
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado)
     .subscribe(res => {
       this.prueba = res;
       this.puntuacionesEscalares = [this.prueba.ramaDelConocimiento[0].puntuacionTotal,
