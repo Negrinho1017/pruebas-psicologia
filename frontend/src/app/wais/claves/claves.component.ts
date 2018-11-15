@@ -28,10 +28,15 @@ export class ClavesComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.globals.clavesNatural = this.subprueba.puntuacionNatural;
       this.globals.claves = this.subprueba.puntuacionEscalar;
       this.router.navigate(['/hoja-resultados']);
       this.scrollToTop();
+    }, error => {
+      this.mensajeError(error.error.mensaje);
+      this.scrollToTop();
     });
+    
   }
 
   scrollToTop() {

@@ -12,6 +12,7 @@ export class Globals {
     aritmetica: number;
     busquedaSimbolos: number;
     claves: number;
+    clavesNatural: number;
     indices: number[] = [];
     edad: number;
     rutas: String[] = [];

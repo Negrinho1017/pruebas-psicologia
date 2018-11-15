@@ -49,6 +49,12 @@ export class HojaDeResultadosComponent implements OnInit {
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado)    
       .subscribe(res => {
         this.prueba = res;
+        if(this.prueba.ramaDelConocimiento[3].subpruebas[1]==null){
+          this.prueba.ramaDelConocimiento[3].subpruebas[1]=this.prueba.ramaDelConocimiento[3].subpruebas[0];
+          this.prueba.ramaDelConocimiento[3].subpruebas[1].nombre = "Claves";
+          this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionEscalar = this.globals.claves;
+          this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural = this.globals.clavesNatural;
+        }
         this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
           this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,
           this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionEscalar];

@@ -24,6 +24,8 @@ import ca2re.backend.util.VerificadorPruebas;
 
 public class AdministradorPruebas {
 
+	private static final int PUNTUACION_MAXIMA_CLAVES = 135;
+
 	private static final int PUNTUACION_MAXIMA_BUSQUEDA_SIMBOLOS = 60;
 
 	@Autowired
@@ -162,6 +164,9 @@ public class AdministradorPruebas {
 	}
 
 	public int obtenerPuntuacionEscalarClaves(String idEdad, int puntuacionNatural) {
+		if(puntuacionNatural > PUNTUACION_MAXIMA_CLAVES) {
+			throw new PruebasPsicologiaException("Puntuación por fuera del rango, intente de nuevo");
+		}
 		String[] rangosClaves = calificacionWaisDAO.obtenerClavesPorIdEdad(idEdad);
 		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);
 	}

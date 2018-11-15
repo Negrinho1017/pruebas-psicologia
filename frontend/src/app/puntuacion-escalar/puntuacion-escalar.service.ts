@@ -71,15 +71,6 @@ export class PuntuacionEscalarService {
     }));  
   }
 
-  /*obtenerPuntuacionEscalarBusquedaSimbolos(idEdad: String, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/busqueda-simbolos?idEdad='
-    +idEdad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
-  }*/
-
   public obtenerPuntuacionEscalarBusquedaSimbolos(idEdad: string, puntuacionNatural: number): Observable<any>{
     const httpOptions = {
       params: new HttpParams().set('idEdad', idEdad)
@@ -105,13 +96,20 @@ export class PuntuacionEscalarService {
     }));  
   }
 
-  obtenerPuntuacionEscalarClaves(idEdad: String, puntuacionNatural: number) {
+  /*obtenerPuntuacionEscalarClaves(idEdad: String, puntuacionNatural: number) {
     return this._http.get(this.url + '/puntuacion-escalar/claves?idEdad='
     +idEdad+'&puntuacionNatural='+puntuacionNatural, this.options).
     pipe(map((response:Response)=>response.json()),
     catchError( error => {
       return ("Error!!")
     }));  
+  }*/
+
+  public obtenerPuntuacionEscalarClaves(idEdad: string, puntuacionNatural: number): Observable<any>{
+    const httpOptions = {
+      params: new HttpParams().set('idEdad', idEdad)
+    };
+    return this.http.get(this.url + '/puntuacion-escalar/claves?puntuacionNatural='+puntuacionNatural, httpOptions);
   }
 
   obtenerPuntuacionEscalarNumerosLetras(idEdad: String, puntuacionNatural: number) {

@@ -39,7 +39,6 @@ export class BusquedaSimbolosComponent implements OnInit {
       this.scrollToTop();
     }, error => {
       this.mensajeError(error.error.mensaje);
-      this.router.navigate([this.globals.rutas[6]]);
       this.scrollToTop();
     });
   }
