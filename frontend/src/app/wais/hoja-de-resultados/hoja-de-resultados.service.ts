@@ -34,9 +34,7 @@ export class HojaDeResultadosService {
   };
   
   crearPrueba(prueba: Prueba) {
-    return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions).subscribe(result => {
-        console.log(result);
-      });
+    return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions)
   }
 
   crearSubprueba(subprueba: Subprueba, idEvaluado: String) {

@@ -31,7 +31,6 @@ export class IngresoDeDatosComponent implements OnInit {
   editarPrueba = false;
   mostrarCrearPrueba = true;
   mostrarConsultarPrueba = false;
-
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
 
@@ -121,8 +120,15 @@ export class IngresoDeDatosComponent implements OnInit {
       this.prueba.fechaEvaluacion = this.ingresoDatosForm.controls['fechaEvaluacion'].value;
       this.prueba.tipoPrueba = "WAIS";
       this.llenarRamasDelConocimiento();
-      this.hojaDeResultadosService.crearPrueba(this.prueba);
-      this.siguiente();
+      this.hojaDeResultadosService.crearPrueba(this.prueba).subscribe(
+        res => {
+          this.siguiente();
+        }, error => {
+          this.mensajeError(error.error.mensaje);
+          this.router.navigate(['ingreso-de-datos']);
+        }
+      );
+      
     }
   }
 

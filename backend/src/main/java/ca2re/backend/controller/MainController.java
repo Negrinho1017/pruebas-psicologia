@@ -43,22 +43,16 @@ public class MainController {
 		return EdadUtil.calcularEdad(fechaEvaluacionConvertida, fechaNacimientoConvertida);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public String hola() {
-		return "hola";
-	}
-	
 	@RequestMapping(value = "/creacion-prueba", method = RequestMethod.POST)
 	@ResponseBody
 	public Prueba crearPrueba(@RequestBody Prueba prueba) {
-		return pruebaWaisDAO.guardarPruebaWais(prueba);
+		return administradorPruebas.guardarPruebaWais(prueba);
 	}
 	
 	@RequestMapping(value = "/prueba-por-id", method = RequestMethod.GET)
 	@ResponseBody
 	public Prueba obtenerPruebaPorId(@RequestParam String idEvaluado) throws PruebasPsicologiaException {
-		return pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		return administradorPruebas.obtenerPruebaPorIdEvaluado(idEvaluado);
 	}
 	
 	@RequestMapping(value = "/creacion-subprueba/{idEvaluado}", method = RequestMethod.PUT)

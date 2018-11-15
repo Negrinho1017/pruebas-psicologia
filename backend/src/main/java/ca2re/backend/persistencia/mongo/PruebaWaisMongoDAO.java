@@ -1,5 +1,6 @@
 package ca2re.backend.persistencia.mongo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 		Query pruebaPorNombre = query(where("evaluado.id").is(id));
 		List<Prueba> prueba = mongoOperations.find(pruebaPorNombre, Prueba.class, COLLECTION_PRUEBA_WAIS);
 		if(prueba.size()==0) {
-			throw new PruebasPsicologiaException("No se encontró la prueba, intente de nuevo");
+			return new ArrayList<Prueba>();
 		}
 		return prueba;
 	}

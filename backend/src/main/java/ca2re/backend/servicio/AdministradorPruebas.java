@@ -2,6 +2,7 @@ package ca2re.backend.servicio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
+import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
@@ -235,6 +237,24 @@ public class AdministradorPruebas {
 		List<Subprueba> subpruebas = obtenerTodasLasSubpruebasPorIdentificacion(idEvaluado);
 		return VerificadorPruebas.seHizoDisenoCubos(subpruebas)
 				&& VerificadorPruebas.seHizoRetencionDigitos(subpruebas);
+	}
+	
+	public Prueba obtenerPruebaPorIdEvaluado(String idEvaluado) {
+		if(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).size()==0) {
+			throw new PruebasPsicologiaException("Prueba no encontrada, intente de nuevo");
+		}
+		return pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+	}
+	
+	public boolean verificarSiSePuedeCrearLaPrueba(String idEvaluado) {
+		return (pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).size()==0)? true : false;
+	}
+	
+	public Prueba guardarPruebaWais(Prueba prueba) {
+		if(verificarSiSePuedeCrearLaPrueba(prueba.getEvaluado().getId())) {
+			return pruebaWaisDAO.guardarPruebaWais(prueba);
+		}
+		throw new PruebasPsicologiaException("El usuario ya fue evaluado");
 	}
 
 }
