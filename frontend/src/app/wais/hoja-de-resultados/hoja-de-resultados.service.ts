@@ -27,7 +27,7 @@ export class HojaDeResultadosService {
   }
 
   public obtenerPruebaPorIdDelEvaluado(idEvaluado: string): Observable<any>{
-    const httpOptions ={
+    const httpOptions = {
       params: new HttpParams().set('idEvaluado', idEvaluado)
     };
     return this.http.get(this.url + '/prueba-por-id', httpOptions);

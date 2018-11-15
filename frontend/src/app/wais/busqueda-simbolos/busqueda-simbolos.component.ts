@@ -37,6 +37,10 @@ export class BusquedaSimbolosComponent implements OnInit {
       this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.router.navigate([this.globals.rutas[7]]);
       this.scrollToTop();
+    }, error => {
+      this.mensajeError(error.error.mensaje);
+      this.router.navigate([this.globals.rutas[6]]);
+      this.scrollToTop();
     });
   }
 
@@ -53,6 +57,14 @@ export class BusquedaSimbolosComponent implements OnInit {
     this.globals.rutas[6]="/cancelacion";
     this.globals.subpruebas[6] = "Cancelación";
     this.router.navigate([this.globals.rutas[6]]);
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!',
+      icon: "error",
+      text: mensaje,
+    });
   }
 
 }

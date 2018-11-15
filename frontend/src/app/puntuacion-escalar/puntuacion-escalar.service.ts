@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subprueba } from '../model/Subprueba';
 const httpOptions = {
@@ -15,7 +15,7 @@ export class PuntuacionEscalarService {
   private url = "http://localhost:8080";
   private headers = new Headers({'Content-Type':'application/json'});
   private options = new RequestOptions({headers:this.headers});
-  constructor( private _http: Http ) { }
+  constructor( private _http: Http, private http: HttpClient ) { }
 
   obtenerPuntuacionEscalarDisenoCubos(idEdad: String, puntuacionNatural: number) {
     return this._http.get(this.url + '/puntuacion-escalar/diseno-cubos?idEdad='
@@ -71,13 +71,20 @@ export class PuntuacionEscalarService {
     }));  
   }
 
-  obtenerPuntuacionEscalarBusquedaSimbolos(idEdad: String, puntuacionNatural: number) {
+  /*obtenerPuntuacionEscalarBusquedaSimbolos(idEdad: String, puntuacionNatural: number) {
     return this._http.get(this.url + '/puntuacion-escalar/busqueda-simbolos?idEdad='
     +idEdad+'&puntuacionNatural='+puntuacionNatural, this.options).
     pipe(map((response:Response)=>response.json()),
     catchError( error => {
       return ("Error!!")
     }));  
+  }*/
+
+  public obtenerPuntuacionEscalarBusquedaSimbolos(idEdad: string, puntuacionNatural: number): Observable<any>{
+    const httpOptions = {
+      params: new HttpParams().set('idEdad', idEdad)
+    };
+    return this.http.get(this.url + '/puntuacion-escalar/busqueda-simbolos?puntuacionNatural='+puntuacionNatural, httpOptions);
   }
 
   obtenerPuntuacionEscalarRompecabezasVisual(idEdad: String, puntuacionNatural: number) {

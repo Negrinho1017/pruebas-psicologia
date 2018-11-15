@@ -24,6 +24,8 @@ import ca2re.backend.util.VerificadorPruebas;
 
 public class AdministradorPruebas {
 
+	private static final int PUNTUACION_MAXIMA_BUSQUEDA_SIMBOLOS = 60;
+
 	@Autowired
 	private CalificacionWaisMongoDAO calificacionWaisDAO;
 
@@ -142,6 +144,9 @@ public class AdministradorPruebas {
 	}
 
 	public int obtenerPuntuacionEscalarBusquedaSimbolos(String idEdad, int puntuacionNatural) {
+		if(puntuacionNatural > PUNTUACION_MAXIMA_BUSQUEDA_SIMBOLOS) {
+			throw new PruebasPsicologiaException("Puntuación por fuera del rango, intente de nuevo");
+		}
 		String[] rangosBusquedaSimbolos = calificacionWaisDAO.obtenerBusquedaDeSimbolosPorIdEdad(idEdad);
 		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosBusquedaSimbolos, puntuacionNatural);
 	}
@@ -246,15 +251,20 @@ public class AdministradorPruebas {
 		return pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 	}
 	
-	public boolean verificarSiSePuedeCrearLaPrueba(String idEvaluado) {
+	public boolean elUsuarioNoHaSidoEvaluado(String idEvaluado) {
 		return (pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).size()==0)? true : false;
 	}
 	
+	public boolean elUsuarioCumpleConLaEdad(int anios) {
+		return(anios>=16)? true : false;
+	}
+	
 	public Prueba guardarPruebaWais(Prueba prueba) {
-		if(verificarSiSePuedeCrearLaPrueba(prueba.getEvaluado().getId())) {
+		if(elUsuarioNoHaSidoEvaluado(prueba.getEvaluado().getId())
+				&& elUsuarioCumpleConLaEdad(prueba.getEdadEvaluado().getAnios())) {
 			return pruebaWaisDAO.guardarPruebaWais(prueba);
 		}
-		throw new PruebasPsicologiaException("El usuario ya fue evaluado");
+		throw new PruebasPsicologiaException("El usuario ya fue evaluado o no cumple con la edad");
 	}
 
 }
