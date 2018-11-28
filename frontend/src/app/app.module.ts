@@ -32,6 +32,7 @@ import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component';
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AuthGuard } from './AuthGuard';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     ReactiveFormsModule,
     NgxLoadingModule
   ],
-  providers: [VocabularioService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

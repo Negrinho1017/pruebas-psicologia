@@ -25,33 +25,34 @@ import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.compon
 import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component'
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component'
+import { AuthGuard } from './AuthGuard';
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
-  { path: 'analisis-proceso', component: AnalisisProcesoComponent },
-  { path: 'fortalezas-debilidades', component: FortalezasDebilidadesComponent },
-  { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent },
+  { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
+  { path: 'fortalezas-debilidades', component: FortalezasDebilidadesComponent, canActivate: [AuthGuard] },
+  { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent, canActivate: [AuthGuard] },
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
-  { path: 'semejanzas', component: SemejanzasComponent }, 
-  { path: 'diseno-cubos', component: DisenoCubosComponent},
-  { path: 'retencion-digitos', component: RetencionDigitosComponent },
-  { path: 'matrices', component: MatricesComponent },
-  { path: 'vocabulario', component: VocabularioComponent },
-  { path: 'aritmetica', component: AritmeticaComponent },
-  { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent },
-  { path: 'rompecabezas-visual', component: RompecabezasVisualComponent },
-  { path: 'informacion', component: InformacionComponent },
-  { path: 'claves', component: ClavesComponent },
-  { path: 'hoja-resultados', component: HojaDeResultadosComponent },
-  { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent },
-  { path: 'numeros-letras', component: NumerosLetrasComponent },
-  { path: 'pagina-principal', component: PaginaPrincipalComponent },
-  { path: 'analisis', component: AnalisisComponent },
-  { path: 'comprension', component: ComprensionComponent },
-  { path: 'figuras-incompletas', component: FigurasIncompletasComponent },
-  { path: 'peso-figurado', component: PesoFiguradoComponent },
-  { path: 'cancelacion', component: CancelacionComponent },
-  { path: '', component: PaginaPrincipalComponent}
+  { path: 'semejanzas', component: SemejanzasComponent, canActivate: [AuthGuard] }, 
+  { path: 'diseno-cubos', component: DisenoCubosComponent, canActivate: [AuthGuard]},
+  { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
+  { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
+  { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
+  { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },
+  { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent, canActivate: [AuthGuard] },
+  { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
+  { path: 'informacion', component: InformacionComponent, canActivate: [AuthGuard] },
+  { path: 'claves', component: ClavesComponent, canActivate: [AuthGuard] },
+  { path: 'hoja-resultados', component: HojaDeResultadosComponent, canActivate: [AuthGuard] },
+  { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent, canActivate: [AuthGuard] },
+  { path: 'numeros-letras', component: NumerosLetrasComponent, canActivate: [AuthGuard] },
+  { path: 'pagina-principal', component: PaginaPrincipalComponent, canActivate: [AuthGuard] },
+  { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
+  { path: 'comprension', component: ComprensionComponent, canActivate: [AuthGuard] },
+  { path: 'figuras-incompletas', component: FigurasIncompletasComponent, canActivate: [AuthGuard] },
+  { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
+  { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
+  { path: '', component: PaginaPrincipalComponent }
 ]
 
 @NgModule({

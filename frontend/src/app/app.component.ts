@@ -14,4 +14,8 @@ export class AppComponent{
 
   constructor(private globals: Globals) { }
 
+  salir(){
+    localStorage.removeItem('idEvaluado');
+    this.globals.mostrarNavBar = false;
+  }
 }
