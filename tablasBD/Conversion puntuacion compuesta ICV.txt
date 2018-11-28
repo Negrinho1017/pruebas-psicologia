@@ -1,5 +1,4 @@
 {
-    "_id" : ObjectId("5ba2c63afb08c92a43382b15"),
     "idIndice" : "ICV",
     "puntuacionCompuesta" : [ 
         50, 

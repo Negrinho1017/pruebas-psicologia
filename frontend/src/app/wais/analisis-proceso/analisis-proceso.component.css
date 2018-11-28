@@ -46,7 +46,8 @@ th {
 
 .cuerpo {
     margin-left: 25px;
-    margin-right: 25px;       
+    margin-right: 25px; 
+    margin-top: 25px;     
 }
 td, th {
     border: 1px solid #dddddd;

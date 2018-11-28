@@ -1,5 +1,4 @@
 {
-    "_id" : ObjectId("5ba42fd3fb08c92a433843b7"),
     "idIndice" : "IVP",
     "puntuacionCompuesta" : [ 
         50, 
