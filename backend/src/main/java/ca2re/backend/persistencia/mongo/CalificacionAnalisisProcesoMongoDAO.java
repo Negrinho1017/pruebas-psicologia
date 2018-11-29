@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import ca2re.backend.dominio.AnalisisProcesoWAIS;
 import ca2re.backend.persistencia.CalificacionAnalisisProcesoDAO;
+import ca2re.backend.persistencia.builder.AnalisisProcesoWAISBuilder;
+import ca2re.backend.persistencia.mongo.entidades.EntidadAnalisisProcesoWAIS;
 
 public class CalificacionAnalisisProcesoMongoDAO implements CalificacionAnalisisProcesoDAO{
 	private static final String ANALISIS_PROCESO = "analisis_proceso";
@@ -23,30 +25,30 @@ public class CalificacionAnalisisProcesoMongoDAO implements CalificacionAnalisis
 	
 	public String[] obtenerDisenoCubosSinBonificacionPorTiempo(String idEdad) {
 		Query dcbt = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(dcbt, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getDcbt();
+		EntidadAnalisisProcesoWAIS entidadAnalisisProcesoWAIS = mongoOperations
+				.find(dcbt, EntidadAnalisisProcesoWAIS.class, ANALISIS_PROCESO).get(0);
+		return AnalisisProcesoWAISBuilder.convertirADominio(entidadAnalisisProcesoWAIS).getDcbt();
 	}
 	
 	public String[] obtenerRDD(String idEdad) {
 		Query rdd = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rdd, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRdd();
+		EntidadAnalisisProcesoWAIS entidadAnalisisProcesoWAIS = mongoOperations
+				.find(rdd, EntidadAnalisisProcesoWAIS.class, ANALISIS_PROCESO).get(0);
+		return AnalisisProcesoWAISBuilder.convertirADominio(entidadAnalisisProcesoWAIS).getRdd();
 	}
 	
 	public String[] obtenerRDI(String idEdad) {
 		Query rdi = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rdi, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRdi();
+		EntidadAnalisisProcesoWAIS entidadAnalisisProcesoWAIS = mongoOperations
+				.find(rdi, EntidadAnalisisProcesoWAIS.class, ANALISIS_PROCESO).get(0);
+		return AnalisisProcesoWAISBuilder.convertirADominio(entidadAnalisisProcesoWAIS).getRdi();
 	}
 	
 	public String[] obtenerRDS(String idEdad) {
 		Query rds = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rds, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRds();
+		EntidadAnalisisProcesoWAIS entidadAnalisisProcesoWAIS = mongoOperations
+				.find(rds, EntidadAnalisisProcesoWAIS.class, ANALISIS_PROCESO).get(0);
+		return AnalisisProcesoWAISBuilder.convertirADominio(entidadAnalisisProcesoWAIS).getRds();
 	}
 
 }

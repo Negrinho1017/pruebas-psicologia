@@ -1,6 +1,6 @@
-package ca2re.backend.dominio;
+package ca2re.backend.persistencia.mongo.entidades;
 
-public class AnalisisProcesoWAIS {
+public class EntidadAnalisisProcesoWAIS {
 	private String idEdad;
 	private String[] dcbt;
 	private String[] rdd;
@@ -45,6 +45,5 @@ public class AnalisisProcesoWAIS {
 
 	public void setRds(String[] rds) {
 		this.rds = rds;
-	}
-
+	}		
 }
