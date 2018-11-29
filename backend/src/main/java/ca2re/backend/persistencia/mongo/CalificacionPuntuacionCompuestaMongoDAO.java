@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
-import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
 import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
+import ca2re.backend.persistencia.builder.PuntuacionCompuestaWAISBuilder;
+import ca2re.backend.persistencia.mongo.entidades.EntidadPuntuacionCompuestaWAIS;
 
 public class CalificacionPuntuacionCompuestaMongoDAO implements CalificacionPuntuacionCompuestaDAO{
 	private static final String COLLECTION_CONVERSION_PUNTUACION_COMPUESTA = "conversion_puntuacion_compuesta_wais";
@@ -23,22 +24,22 @@ public class CalificacionPuntuacionCompuestaMongoDAO implements CalificacionPunt
 	
 	public int[] obtenerPuntuacionCompuesta(String idIndice) {
 		Query puntuacionCompuesta = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(puntuacionCompuesta, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA)
-				.get(0).getPuntuacionCompuesta();
+		EntidadPuntuacionCompuestaWAIS entidadPuntuacionCompuestaWAIS = mongoOperations
+				.find(puntuacionCompuesta, EntidadPuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA).get(0);
+		return PuntuacionCompuestaWAISBuilder.convertirADominio(entidadPuntuacionCompuestaWAIS).getPuntuacionCompuesta();
 	}
 
 	public double[] obtenerPercentil(String idIndice) {
-		Query percentil = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(percentil, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA).get(0)
-				.getPercentil();
+		Query puntuacionCompuesta = query(where("idIndice").is(idIndice));
+		EntidadPuntuacionCompuestaWAIS entidadPuntuacionCompuestaWAIS = mongoOperations
+				.find(puntuacionCompuesta, EntidadPuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA).get(0);
+		return PuntuacionCompuestaWAISBuilder.convertirADominio(entidadPuntuacionCompuestaWAIS).getPercentil();
 	}
 
 	public String[] obtenerIntervaloDeConfianza(String idIndice) {
-		Query intervaloConfianza = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(intervaloConfianza, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA)
-				.get(0).getIntervaloConfianza();
+		Query puntuacionCompuesta = query(where("idIndice").is(idIndice));
+		EntidadPuntuacionCompuestaWAIS entidadPuntuacionCompuestaWAIS = mongoOperations
+				.find(puntuacionCompuesta, EntidadPuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA).get(0);
+		return PuntuacionCompuestaWAISBuilder.convertirADominio(entidadPuntuacionCompuestaWAIS).getIntervaloConfianza();
 	}
 }
