@@ -14,9 +14,10 @@ import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
+import ca2re.backend.persistencia.CalificacionAnalisisProcesoDAO;
 import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
 import ca2re.backend.persistencia.CalificacionValoresCriticosDAO;
-import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
+import ca2re.backend.persistencia.CalificacionWAISDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
@@ -29,7 +30,7 @@ public class AdministradorPruebas {
 	private static final int PUNTUACION_MAXIMA_BUSQUEDA_SIMBOLOS = 60;
 
 	@Autowired
-	private CalificacionWaisMongoDAO calificacionWaisDAO;
+	private CalificacionWAISDAO calificacionWaisDAO;
 	
 	@Autowired
 	private CalificacionValoresCriticosDAO calificacionValoresCriticosDAO;
@@ -37,6 +38,8 @@ public class AdministradorPruebas {
 	@Autowired
 	CalificacionPuntuacionCompuestaDAO calificacionPuntuacionCompuestaDAO;
 	
+	@Autowired
+	CalificacionAnalisisProcesoDAO calificacionAnalisisProcesoDAO;
 	@Autowired
 	private PruebaWaisMongoDAO pruebaWaisDAO;
 
@@ -219,7 +222,7 @@ public class AdministradorPruebas {
 	
 	public Subprueba obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
-		String[] puntuacionesEscalares = calificacionWaisDAO.obtenerDisenoCubosSinBonificacionPorTiempo("20:0-24:11");
+		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo("20:0-24:11");
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
@@ -229,11 +232,11 @@ public class AdministradorPruebas {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
 		String[] puntuacionesEscalares;
 		if(numeroRetencionDigitos == RetencionDeDigitos.RDD.getValue()) {
-			puntuacionesEscalares = calificacionWaisDAO.obtenerRDD("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD("20:0-24:11");
 		}else if(numeroRetencionDigitos == RetencionDeDigitos.RDI.getValue()) {
-			puntuacionesEscalares = calificacionWaisDAO.obtenerRDI("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDI("20:0-24:11");
 		}else {
-			puntuacionesEscalares = calificacionWaisDAO.obtenerRDS("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS("20:0-24:11");
 		}
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerRetencionDeDigitos(reactivos, numeroRetencionDigitos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);

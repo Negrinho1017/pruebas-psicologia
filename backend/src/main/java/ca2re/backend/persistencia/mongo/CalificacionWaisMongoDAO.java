@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
-import ca2re.backend.dominio.AnalisisProcesoWAIS;
+import ca2re.backend.persistencia.CalificacionWAISDAO;
 import ca2re.backend.persistencia.builder.TablaCalificacionWAISBuilder;
 import ca2re.backend.persistencia.mongo.entidades.EntidadTablaCalificacionWAIS;
 
-public class CalificacionWaisMongoDAO {
-	private static final String ANALISIS_PROCESO = "analisis_proceso";
+public class CalificacionWaisMongoDAO implements CalificacionWAISDAO{
+	
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
 	
 	@Autowired
@@ -88,34 +88,6 @@ public class CalificacionWaisMongoDAO {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
 		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
 		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getSusecionNumeroLetrasLN();
-	}
-	
-	public String[] obtenerDisenoCubosSinBonificacionPorTiempo(String idEdad) {
-		Query dcbt = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(dcbt, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getDcbt();
-	}
-	
-	public String[] obtenerRDD(String idEdad) {
-		Query rdd = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rdd, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRdd();
-	}
-	
-	public String[] obtenerRDI(String idEdad) {
-		Query rdi = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rdi, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRdi();
-	}
-	
-	public String[] obtenerRDS(String idEdad) {
-		Query rds = query(where("idEdad").is(idEdad));
-		return mongoOperations
-				.find(rds, AnalisisProcesoWAIS.class, ANALISIS_PROCESO)
-				.get(0).getRds();
 	}
 
 }
