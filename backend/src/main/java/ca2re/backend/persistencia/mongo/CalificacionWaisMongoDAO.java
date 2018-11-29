@@ -8,16 +8,12 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
 import ca2re.backend.dominio.AnalisisProcesoWAIS;
-import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
-import ca2re.backend.dominio.TablaCalificacionWAIS;
-import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.persistencia.builder.TablaCalificacionWAISBuilder;
 import ca2re.backend.persistencia.mongo.entidades.EntidadTablaCalificacionWAIS;
 
 public class CalificacionWaisMongoDAO {
 	private static final String ANALISIS_PROCESO = "analisis_proceso";
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
-	private static final String COLLECTION_VALORES_CRITICOS = "valores_criticos_wais";
 	
 	@Autowired
 	private static MongoOperations mongoOperations;
@@ -92,12 +88,6 @@ public class CalificacionWaisMongoDAO {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
 		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
 		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getSusecionNumeroLetrasLN();
-	}
-	
-	public ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad) {
-		Query valoresCriticos = query(where("idRangoEdad").is(idRangoEdad));
-		return mongoOperations
-				.find(valoresCriticos, ValorCriticoWAIS.class, COLLECTION_VALORES_CRITICOS).get(0);
 	}
 	
 	public String[] obtenerDisenoCubosSinBonificacionPorTiempo(String idEdad) {

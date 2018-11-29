@@ -2,7 +2,6 @@ package ca2re.backend.servicio;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,12 +15,11 @@ import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
-import ca2re.backend.persistencia.mongo.CalificacionPuntuacionCompuestaMongoDAO;
+import ca2re.backend.persistencia.CalificacionValoresCriticosDAO;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
-import ca2re.backend.util.Operaciones;
 import ca2re.backend.util.VerificadorPruebas;
 
 public class AdministradorPruebas {
@@ -32,6 +30,9 @@ public class AdministradorPruebas {
 
 	@Autowired
 	private CalificacionWaisMongoDAO calificacionWaisDAO;
+	
+	@Autowired
+	private CalificacionValoresCriticosDAO calificacionValoresCriticosDAO;
 	
 	@Autowired
 	CalificacionPuntuacionCompuestaDAO calificacionPuntuacionCompuestaDAO;
@@ -195,7 +196,7 @@ public class AdministradorPruebas {
 	
 	public ValorCriticoWAIS obtenerValoresCriticos(int edad) {
 		int idRangoEdad = EdadUtil.obtenerRangoEdad(edad);
-		return calificacionWaisDAO.obtenerValoresCriticos(idRangoEdad);
+		return calificacionValoresCriticosDAO.obtenerValoresCriticos(idRangoEdad);
 	}
 	
 	public List<Subprueba> obtenerTodasLasSubpruebasPorIdentificacion(String id){

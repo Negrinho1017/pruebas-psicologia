@@ -1,18 +1,15 @@
 package ca2re.backend;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 import ca2re.backend.dominio.EdadPersona;
@@ -22,9 +19,7 @@ import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
-import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
-import ca2re.backend.servicio.AdministradorPruebas;
 
 public class TableWAISTest {
 	

@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import com.mongodb.MongoClient;
 
 import ca2re.backend.persistencia.mongo.CalificacionPuntuacionCompuestaMongoDAO;
+import ca2re.backend.persistencia.mongo.CalificacionValoresCriticosMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
@@ -55,6 +56,11 @@ public class Configuracion {
 	@Bean
 	public CalificacionPuntuacionCompuestaMongoDAO crearCalificacionPuntuacionCompuestaMongoDAO(MongoOperations mongoOperations) {
 		return new CalificacionPuntuacionCompuestaMongoDAO(mongoOperations);
+	}
+	
+	@Bean
+	public CalificacionValoresCriticosMongoDAO crearCalificacionValoresCriticosMongoDAO(MongoOperations mongoOperations) {
+		return new CalificacionValoresCriticosMongoDAO(mongoOperations);
 	}
 	
 	@Bean

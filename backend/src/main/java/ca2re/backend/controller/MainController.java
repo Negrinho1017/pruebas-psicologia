@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Prueba;
-import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.PruebaWAISDAO;
-import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;

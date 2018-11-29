@@ -4,16 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.junit.Test;
 
 import ca2re.backend.dominio.EdadPersona;
+import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.Operaciones;
-import ca2re.backend.util.CalculadoraDePuntuaciones;
 
 public class UtilTest {
 	@Test

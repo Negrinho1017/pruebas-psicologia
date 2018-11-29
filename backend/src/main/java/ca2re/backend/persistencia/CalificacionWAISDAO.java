@@ -1,7 +1,5 @@
 package ca2re.backend.persistencia;
 
-import ca2re.backend.dominio.ValorCriticoWAIS;
-
 public interface CalificacionWAISDAO {
 	String[] obtenerDisenioDeCubosPorIdEdad(String idEdad);
 
@@ -24,6 +22,4 @@ public interface CalificacionWAISDAO {
 	String[] obtenerClavesPorIdEdad(String idEdad);
 	
 	String[] obtenerNumerosLetrasPorIdEdad(String idEdad);
-	
-	ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad);
 }

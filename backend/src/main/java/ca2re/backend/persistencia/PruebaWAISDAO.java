@@ -3,7 +3,6 @@ package ca2re.backend.persistencia;
 import java.util.List;
 
 import ca2re.backend.dominio.Prueba;
-import ca2re.backend.dominio.Reactivo;
 
 public interface PruebaWAISDAO {
 	Prueba guardarPruebaWais(Prueba prueba);

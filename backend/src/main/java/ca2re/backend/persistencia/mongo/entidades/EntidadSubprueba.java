@@ -2,8 +2,6 @@ package ca2re.backend.persistencia.mongo.entidades;
 
 import java.util.List;
 
-import ca2re.backend.dominio.Reactivo;
-
 public class EntidadSubprueba {
 	private int numeroSubprueba;
 	private String nombre;
