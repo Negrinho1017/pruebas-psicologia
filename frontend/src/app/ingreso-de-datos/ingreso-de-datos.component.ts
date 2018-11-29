@@ -135,9 +135,9 @@ export class IngresoDeDatosComponent implements OnInit {
   llenarRamasDelConocimiento() {
     this.prueba.ramaDelConocimiento = [];
     this.prueba.ramaDelConocimiento[0] = new RamaDelConocimiento();
-    this.prueba.ramaDelConocimiento[1] = new RamaDelConocimiento();;
-    this.prueba.ramaDelConocimiento[2] = new RamaDelConocimiento();;
-    this.prueba.ramaDelConocimiento[3] = new RamaDelConocimiento();;
+    this.prueba.ramaDelConocimiento[1] = new RamaDelConocimiento();
+    this.prueba.ramaDelConocimiento[2] = new RamaDelConocimiento();
+    this.prueba.ramaDelConocimiento[3] = new RamaDelConocimiento();
     this.prueba.ramaDelConocimiento[0].nombre = "Comprensión verbal";
     this.prueba.ramaDelConocimiento[1].nombre = "Razonamiento perceptual";
     this.prueba.ramaDelConocimiento[2].nombre = "Memoria de trabajo";

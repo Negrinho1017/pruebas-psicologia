@@ -1,5 +1,8 @@
 package ca2re.backend.persistencia.builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.persistencia.mongo.entidades.EntidadPrueba;
 
@@ -24,5 +27,13 @@ public class PruebaBuilder {
 		prueba.setRamaDelConocimiento(RamaDelConocimientoBuilder.convertirAListaDominio(entidadPrueba.getRamaDelConocimiento()));
 		prueba.setTipoPrueba(entidadPrueba.getTipoPrueba());
 		return prueba;
+	}
+	
+	public static List<Prueba> convertirAListaDominio(List<EntidadPrueba> entidadesPrueba) {
+		List<Prueba> pruebas = new ArrayList<>();
+		for(EntidadPrueba entidadPrueba : entidadesPrueba) {
+			pruebas.add(convertirADominio(entidadPrueba));
+		}
+		return pruebas;
 	}
 }

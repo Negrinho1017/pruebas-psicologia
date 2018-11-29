@@ -30,8 +30,8 @@ public class RamaDelConocimientoBuilder {
 		entidadRamaDelConocimiento.setPuntuacionCompuesta(ramaDelConocimiento.getPuntuacionCompuesta());
 		entidadRamaDelConocimiento.setPuntuacionTotal(ramaDelConocimiento.getPuntuacionTotal());
 		entidadRamaDelConocimiento.setRangoPercentil(ramaDelConocimiento.getRangoPercentil());
-		entidadRamaDelConocimiento.setSubpruebas(
-				SubpruebaBuilder.convertirAListaEntidad(ramaDelConocimiento.getSubpruebas()));
+		entidadRamaDelConocimiento.setSubpruebas( ramaDelConocimiento.getSubpruebas() != null ?
+				SubpruebaBuilder.convertirAListaEntidad(ramaDelConocimiento.getSubpruebas()) : new ArrayList<>());
 		return entidadRamaDelConocimiento;
 	}
 	

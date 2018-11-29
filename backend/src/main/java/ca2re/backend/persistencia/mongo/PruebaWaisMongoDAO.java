@@ -16,6 +16,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.PruebaWAISDAO;
+import ca2re.backend.persistencia.builder.PruebaBuilder;
+import ca2re.backend.persistencia.mongo.entidades.EntidadPrueba;
 
 public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 
@@ -34,42 +36,45 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 	}
 
 	public Prueba guardarPruebaWais(Prueba prueba) {
-		mongoOperations.save(prueba, COLLECTION_PRUEBA_WAIS);
+		EntidadPrueba entidadPrueba = PruebaBuilder.convertirAEntidad(prueba);
+		mongoOperations.save(entidadPrueba, COLLECTION_PRUEBA_WAIS);
 		return prueba;
 	}
 
 	public Prueba guardarPruebaWisc(Prueba prueba) {
-		mongoOperations.save(prueba, COLLECTION_PRUEBA_WISC);
+		EntidadPrueba entidadPrueba = PruebaBuilder.convertirAEntidad(prueba);
+		mongoOperations.save(entidadPrueba, COLLECTION_PRUEBA_WISC);
 		return prueba;
 	}
 
 	public List<Prueba> obtenerTodasLasPruebasWais() {
-		return mongoOperations.findAll(Prueba.class, COLLECTION_PRUEBA_WAIS);
+		return PruebaBuilder.convertirAListaDominio(mongoOperations.findAll(EntidadPrueba.class, COLLECTION_PRUEBA_WAIS));
 	}
 
 	public List<Prueba> obtenerPruebaPorIdEvaluado(String id) throws PruebasPsicologiaException {
 		Query pruebaPorNombre = query(where("evaluado.id").is(id));
-		List<Prueba> prueba = mongoOperations.find(pruebaPorNombre, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		if(prueba.size()==0) {
+		List<EntidadPrueba> pruebaEntidad = mongoOperations.find(pruebaPorNombre, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		if(pruebaEntidad.size()==0) {
 			return new ArrayList<Prueba>();
 		}
-		return prueba;
+		return PruebaBuilder.convertirAListaDominio(pruebaEntidad);
 	}
 
 	public Prueba actualizarPrueba(Prueba prueba, String id) {
+		EntidadPrueba entidadPrueba = PruebaBuilder.convertirAEntidad(prueba);
 		Query query = query(where("evaluado.id").is(id));
-		Update actualizacionTipoPrueba = update("tipoPrueba", prueba.getTipoPrueba());
-		Update actualizacionRamaDelConocimiento = update("ramaDelConocimiento", prueba.getRamaDelConocimiento());
-		Update actualizacionNombreExamindor = update("nombreExaminador", prueba.getNombreExaminador());
-		Update actualizacionEvaluado = update("evaluado", prueba.getEvaluado());
-		Update actualizacionFechaEvaluacion = update("fechaEvaluacion", prueba.getFechaEvaluacion());
-		Update actualizacionEdadEvaluado = update("edadEvaluado", prueba.getEdadEvaluado());
-		mongoOperations.updateFirst(query, actualizacionTipoPrueba, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		mongoOperations.updateFirst(query, actualizacionRamaDelConocimiento, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		mongoOperations.updateFirst(query, actualizacionNombreExamindor, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		mongoOperations.updateFirst(query, actualizacionEvaluado, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		mongoOperations.updateFirst(query, actualizacionFechaEvaluacion, Prueba.class, COLLECTION_PRUEBA_WAIS);
-		mongoOperations.updateFirst(query, actualizacionEdadEvaluado, Prueba.class, COLLECTION_PRUEBA_WAIS);
+		Update actualizacionTipoPrueba = update("tipoPrueba", entidadPrueba.getTipoPrueba());
+		Update actualizacionRamaDelConocimiento = update("ramaDelConocimiento", entidadPrueba.getRamaDelConocimiento());
+		Update actualizacionNombreExamindor = update("nombreExaminador", entidadPrueba.getNombreExaminador());
+		Update actualizacionEvaluado = update("evaluado", entidadPrueba.getEvaluado());
+		Update actualizacionFechaEvaluacion = update("fechaEvaluacion", entidadPrueba.getFechaEvaluacion());
+		Update actualizacionEdadEvaluado = update("edadEvaluado", entidadPrueba.getEdadEvaluado());
+		mongoOperations.updateFirst(query, actualizacionTipoPrueba, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		mongoOperations.updateFirst(query, actualizacionRamaDelConocimiento, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		mongoOperations.updateFirst(query, actualizacionNombreExamindor, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		mongoOperations.updateFirst(query, actualizacionEvaluado, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		mongoOperations.updateFirst(query, actualizacionFechaEvaluacion, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
+		mongoOperations.updateFirst(query, actualizacionEdadEvaluado, EntidadPrueba.class, COLLECTION_PRUEBA_WAIS);
 		return obtenerPruebaPorIdEvaluado(id).get(0);
 	}
 }

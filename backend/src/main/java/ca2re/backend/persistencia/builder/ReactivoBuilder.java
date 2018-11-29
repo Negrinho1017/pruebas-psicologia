@@ -25,7 +25,7 @@ public class ReactivoBuilder {
 	public static List<EntidadReactivo> convertirListaAEntidadReactivo(List<Reactivo> reactivos){
 		List<EntidadReactivo> entidades = new ArrayList<>();
 		for (Reactivo reactivo : reactivos) {
-			entidades.add(convertirAEntidad(reactivo));
+			entidades.add(reactivo != null ? convertirAEntidad(reactivo) : null);
 		}
 		return entidades;
 	}
@@ -33,7 +33,7 @@ public class ReactivoBuilder {
 	public static List<Reactivo> convertirAListaReactivo(List<EntidadReactivo> entidades){
 		List<Reactivo> reactivos = new ArrayList<>();
 		for (EntidadReactivo entidadReactivo : entidades) {
-			reactivos.add(convertirADominio(entidadReactivo));
+			reactivos.add(entidadReactivo != null ? convertirADominio(entidadReactivo) : null);
 		}
 		return reactivos;
 	}

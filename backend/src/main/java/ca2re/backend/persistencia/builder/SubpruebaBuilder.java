@@ -26,7 +26,8 @@ public class SubpruebaBuilder {
 		entidad.setNumeroSubprueba(subprueba.getNumeroSubprueba());
 		entidad.setPuntuacionEscalar(subprueba.getPuntuacionEscalar());
 		entidad.setPuntuacionNatural(subprueba.getPuntuacionNatural());
-		entidad.setReactivos(ReactivoBuilder.convertirListaAEntidadReactivo(subprueba.getReactivos()));
+		entidad.setReactivos(subprueba.getReactivos()!=null ? 
+				ReactivoBuilder.convertirListaAEntidadReactivo(subprueba.getReactivos()) : new ArrayList<>());
 		return entidad;
 	}
 	
