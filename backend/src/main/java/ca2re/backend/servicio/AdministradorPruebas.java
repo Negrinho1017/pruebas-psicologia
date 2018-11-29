@@ -15,6 +15,8 @@ import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
+import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
+import ca2re.backend.persistencia.mongo.CalificacionPuntuacionCompuestaMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
@@ -30,7 +32,10 @@ public class AdministradorPruebas {
 
 	@Autowired
 	private CalificacionWaisMongoDAO calificacionWaisDAO;
-
+	
+	@Autowired
+	CalificacionPuntuacionCompuestaDAO calificacionPuntuacionCompuestaDAO;
+	
 	@Autowired
 	private PruebaWaisMongoDAO pruebaWaisDAO;
 
@@ -177,15 +182,15 @@ public class AdministradorPruebas {
 	}
 	
 	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
-		return calificacionWaisDAO.obtenerPuntuacionCompuesta(id)[puntuacionTotal];
+		return calificacionPuntuacionCompuestaDAO.obtenerPuntuacionCompuesta(id)[puntuacionTotal];
 	}
 
 	public double obtenerPercentil(String id, int puntuacionTotal) {
-		return calificacionWaisDAO.obtenerPercentil(id)[puntuacionTotal];
+		return calificacionPuntuacionCompuestaDAO.obtenerPercentil(id)[puntuacionTotal];
 	}
 
 	public String obtenerIntervaloConfianza(String id, int puntuacionTotal) {
-		return calificacionWaisDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];
+		return calificacionPuntuacionCompuestaDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];
 	}
 	
 	public ValorCriticoWAIS obtenerValoresCriticos(int edad) {

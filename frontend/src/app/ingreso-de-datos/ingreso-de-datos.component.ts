@@ -191,7 +191,6 @@ export class IngresoDeDatosComponent implements OnInit {
   consultarPrueba() {        
     this.globals.idEvaluado = this.consultarPruebaForm.controls['identificacion'].value;
     localStorage.setItem('idEvaluado', <string> this.globals.idEvaluado);
-    alert("id: "+this.globals.idEvaluado);
     this.globals.mostrarNavBar = true;        
     this.router.navigate(['/hoja-resultados']);
     //this.scrollToTop();

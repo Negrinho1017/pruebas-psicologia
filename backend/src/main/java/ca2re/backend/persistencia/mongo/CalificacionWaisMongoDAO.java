@@ -11,11 +11,12 @@ import ca2re.backend.dominio.AnalisisProcesoWAIS;
 import ca2re.backend.dominio.PuntuacionCompuestaWAIS;
 import ca2re.backend.dominio.TablaCalificacionWAIS;
 import ca2re.backend.dominio.ValorCriticoWAIS;
+import ca2re.backend.persistencia.builder.TablaCalificacionWAISBuilder;
+import ca2re.backend.persistencia.mongo.entidades.EntidadTablaCalificacionWAIS;
 
 public class CalificacionWaisMongoDAO {
 	private static final String ANALISIS_PROCESO = "analisis_proceso";
 	private static final String COLLECTION_CALIFICACION_WAIS = "tabla_calificacion_wais";
-	private static final String COLLECTION_CONVERSION_PUNTUACION_COMPUESTA = "conversion_puntuacion_compuesta_wais";
 	private static final String COLLECTION_VALORES_CRITICOS = "valores_criticos_wais";
 	
 	@Autowired
@@ -28,89 +29,69 @@ public class CalificacionWaisMongoDAO {
 
 	public String[] obtenerDisenioDeCubosPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getDisenioCubosC();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getDisenioCubosC();
 	}
 
 	public String[] obtenerSemejanzasPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getSemejanzasS();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getSemejanzasS();
+
 	}
 
 	public String[] obtenerRetencionDigitosPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getDigitosD();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getDigitosD();
 	}
 
 	public String[] obtenerMatricesPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getMatricesM();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getMatricesM();
 	}
 
 	public String[] obtenerVocabularioPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getVocabularioV();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getVocabularioV();
 	}
 
 	public String[] obtenerAritmeticaPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getAritmeticaA();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getAritmeticaA();
 	}
 
 	public String[] obtenerBusquedaDeSimbolosPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getBusquedaSimbolosBS();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getBusquedaSimbolosBS();
 	}
 
 	public String[] obtenerRompecabezasVisualPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getRompecabezasVisualPV();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getRompecabezasVisualPV();
 	}
 
 	public String[] obtenerInformacionPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getInformacionI();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getInformacionI();
 	}
 
 	public String[] obtenerClavesPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getClavesCN();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getClavesCN();
 	}
 	
 	public String[] obtenerNumerosLetrasPorIdEdad(String idEdad) {
 		Query pruebaPorId = query(where("idEdad").is(idEdad));
-		return mongoOperations.find(pruebaPorId, TablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0)
-				.getSusecionNumeroLetrasLN();
-	}
-
-	public int[] obtenerPuntuacionCompuesta(String idIndice) {
-		Query puntuacionCompuesta = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(puntuacionCompuesta, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA)
-				.get(0).getPuntuacionCompuesta();
-	}
-
-	public double[] obtenerPercentil(String idIndice) {
-		Query percentil = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(percentil, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA).get(0)
-				.getPercentil();
-	}
-
-	public String[] obtenerIntervaloDeConfianza(String idIndice) {
-		Query intervaloConfianza = query(where("idIndice").is(idIndice));
-		return mongoOperations
-				.find(intervaloConfianza, PuntuacionCompuestaWAIS.class, COLLECTION_CONVERSION_PUNTUACION_COMPUESTA)
-				.get(0).getIntervaloConfianza();
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getSusecionNumeroLetrasLN();
 	}
 	
 	public ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad) {

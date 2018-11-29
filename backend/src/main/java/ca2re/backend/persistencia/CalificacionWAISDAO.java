@@ -24,12 +24,6 @@ public interface CalificacionWAISDAO {
 	String[] obtenerClavesPorIdEdad(String idEdad);
 	
 	String[] obtenerNumerosLetrasPorIdEdad(String idEdad);
-
-	int[] obtenerPuntuacionCompuesta(String idIndice);
-
-	double[] obtenerPercentil(String idIndice);
-
-	String[] obtenerIntervaloDeConfianza(String idIndice);
 	
 	ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad);
 }

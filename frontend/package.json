@@ -25,6 +25,7 @@
     "highcharts": "^6.1.2",
     "ng-bootstrap": "^1.6.3",
     "ng2-page-scroll": "^4.0.0-beta.12",
+    "ngx-loading": "^3.0.1",
     "rxjs": "^6.3.2",
     "sweetalert": "^2.1.0",
     "zone.js": "~0.8.26"
