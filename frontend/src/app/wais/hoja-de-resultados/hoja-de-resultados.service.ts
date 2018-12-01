@@ -26,6 +26,13 @@ export class HojaDeResultadosService {
     }));  
   }
 
+  public esPermitidoElUsuario(idUsuario: String): Observable<boolean>{
+    const httpOptions = {
+      params: new HttpParams().set('idUsuario', <string> idUsuario)
+    };
+    return this.http.get<boolean>(this.url + '/es-permitido-el-usuario', httpOptions);
+  }
+
   public obtenerPruebaPorIdDelEvaluado(idEvaluado: string): Observable<any>{
     const httpOptions = {
       params: new HttpParams().set('idEvaluado', idEvaluado)

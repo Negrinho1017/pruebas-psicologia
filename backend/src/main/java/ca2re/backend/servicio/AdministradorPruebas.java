@@ -288,7 +288,7 @@ public class AdministradorPruebas {
 	
 	public boolean esPermitidoElUsuario(String idUsuario) {
 		if(!usuarioDAO.esPermitidoElUsuario(idUsuario)) {
-			throw new PruebasPsicologiaException("Usuario inválido, intente nuevamente");
+			throw new PruebasPsicologiaException("Este usuario no tiene permisos, intente nuevamente");
 		}
 		return true;
 	}

@@ -31,6 +31,7 @@ export class IngresoDeDatosComponent implements OnInit {
   editarPrueba = false;
   mostrarCrearPrueba = true;
   mostrarConsultarPrueba = false;
+  idExaminador: String;
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
 
@@ -43,12 +44,14 @@ export class IngresoDeDatosComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),
       nombreExaminador: new FormControl('', [Validators.required]),
+      idExaminador: new FormControl('', [Validators.required]),
       fechaNacimiento: new FormControl('', [Validators.required]),
-      fechaEvaluacion: new FormControl('', [Validators.required]),
+      fechaEvaluacion: new FormControl('', [Validators.required])
     });
 
     this.consultarPruebaForm = new FormGroup({
       identificacion: new FormControl('', [Validators.required]),
+      idExaminador: new FormControl('', [Validators.required])
     });
 
     this.evaluado = new Persona();
@@ -75,6 +78,26 @@ export class IngresoDeDatosComponent implements OnInit {
     });
 
 
+  }
+
+  verificarDatosRealizarPrueba(){
+    this.idExaminador = this.ingresoDatosForm.controls['idExaminador'].value;
+    this.hojaDeResultadosService.esPermitidoElUsuario(this.idExaminador).subscribe(
+      res => {
+        this.inicializarPrueba();
+      }, error => {
+        this.mensajeError(error.error.mensaje);
+      })
+  }
+
+  verificarDatosConsultarPrueba(){
+    this.idExaminador = this.consultarPruebaForm.controls['idExaminador'].value;
+    this.hojaDeResultadosService.esPermitidoElUsuario(this.idExaminador).subscribe(
+      res => {
+        this.consultarPrueba();
+      }, error => {
+        this.mensajeError(error.error.mensaje);
+      })
   }
 
   fechaFinalEsMayor(field: string): ValidatorFn {

@@ -89,10 +89,4 @@ public class MainController {
 	public boolean esPermitidoElUsuario(@RequestParam String idUsuario) {
 		return administradorPruebas.esPermitidoElUsuario(idUsuario);
 	}
-	
-	/*@RequestMapping(value = "/creacion-reactivo", method = RequestMethod.PUT)
-	@ResponseBody
-	public void ingresarReactivo(@RequestBody Reactivo reactivo, @RequestBody String idEvaluado) {
-		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
-	}*/
 }
