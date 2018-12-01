@@ -14,6 +14,7 @@ import ca2re.backend.persistencia.mongo.CalificacionPuntuacionCompuestaMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionValoresCriticosMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
+import ca2re.backend.persistencia.mongo.UsuarioMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.servicio.CalificadorPrueba;
 
@@ -67,6 +68,11 @@ public class Configuracion {
 	@Bean
 	public CalificacionAnalisisProcesoMongoDAO crearCalificacionAnalisisProcesoMongoDAO(MongoOperations mongoOperations) {
 		return new CalificacionAnalisisProcesoMongoDAO(mongoOperations);
+	}
+	
+	@Bean
+	public UsuarioMongoDAO crearUsuarioMongoDAO(MongoOperations mongoOperations) {
+		return new UsuarioMongoDAO(mongoOperations);
 	}
 	
 	@Bean

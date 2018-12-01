@@ -18,6 +18,7 @@ import ca2re.backend.persistencia.CalificacionAnalisisProcesoDAO;
 import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
 import ca2re.backend.persistencia.CalificacionValoresCriticosDAO;
 import ca2re.backend.persistencia.CalificacionWAISDAO;
+import ca2re.backend.persistencia.UsuarioDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.util.CalculadoraDePuntuaciones;
 import ca2re.backend.util.EdadUtil;
@@ -40,8 +41,12 @@ public class AdministradorPruebas {
 	
 	@Autowired
 	CalificacionAnalisisProcesoDAO calificacionAnalisisProcesoDAO;
+	
 	@Autowired
 	private PruebaWaisMongoDAO pruebaWaisDAO;
+	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
 
 	public Prueba ingresarSubprueba(Subprueba subprueba, String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
@@ -279,6 +284,13 @@ public class AdministradorPruebas {
 			return pruebaWaisDAO.guardarPruebaWais(prueba);
 		}
 		throw new PruebasPsicologiaException("El usuario ya fue evaluado o no cumple con la edad");
+	}
+	
+	public boolean esPermitidoElUsuario(String idUsuario) {
+		if(!usuarioDAO.esPermitidoElUsuario(idUsuario)) {
+			throw new PruebasPsicologiaException("Usuario inválido, intente nuevamente");
+		}
+		return true;
 	}
 
 }

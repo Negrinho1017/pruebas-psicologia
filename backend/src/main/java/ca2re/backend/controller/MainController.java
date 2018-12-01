@@ -84,6 +84,11 @@ public class MainController {
 		return administradorPruebas.obtenerEdadEvaluado(idEvaluado);
 	}
 	
+	@RequestMapping(value = "/es-permitido-el-usuario", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean esPermitidoElUsuario(@RequestParam String idUsuario) {
+		return administradorPruebas.esPermitidoElUsuario(idUsuario);
+	}
 	
 	/*@RequestMapping(value = "/creacion-reactivo", method = RequestMethod.PUT)
 	@ResponseBody
