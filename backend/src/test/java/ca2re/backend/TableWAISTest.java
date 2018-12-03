@@ -94,7 +94,7 @@ public class TableWAISTest {
 		pruebaWais.setTipoPrueba("WISC");
 		pruebaWais.setEdadEvaluado(new EdadPersona(10, 10, 10));
 		pruebaWais.setEvaluado(new Persona("Julián Carrasquilla", "12/11/1995", "1038414958"));
-		Prueba pruebaWisc = pruebaWaisDAO.actualizarPrueba(pruebaWais, "1038414958");
+		Prueba pruebaWisc = pruebaWaisDAO.actualizarPrueba(pruebaWais, "1038414958", "prueba_wais");
 		assertEquals(pruebaWisc.getTipoPrueba(),"WISC");
 		assertEquals(pruebaWisc.getEdadEvaluado().getAnios(),10);
 		assertEquals(pruebaWisc.getEvaluado().getNombreCompleto(),"Julián Carrasquilla");

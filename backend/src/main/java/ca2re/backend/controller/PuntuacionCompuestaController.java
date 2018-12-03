@@ -12,6 +12,7 @@ import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.PuntuacionCompuesta;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
+import ca2re.backend.util.VerificadorPruebas;
 
 @RestController
 @RequestMapping(value = "/puntuacion-compuesta")
@@ -37,6 +38,7 @@ public class PuntuacionCompuestaController {
 	@ResponseBody
 	public Prueba ingresarPuntuacionCompuesta(@PathVariable(value = "idEvaluado") String idEvaluado) {
 		Prueba prueba = administradorPruebas.ingresarPuntuacionCompuesta(idEvaluado);
-		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
+		String coleccion = VerificadorPruebas.obtenerColeccionEnBD(prueba.getTipoPrueba());
+		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado, coleccion);
 	}
 }

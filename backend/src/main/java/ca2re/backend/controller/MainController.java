@@ -17,7 +17,6 @@ import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
-import ca2re.backend.persistencia.PruebaWAISDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
 import ca2re.backend.util.EdadUtil;
 import ca2re.backend.util.FechaUtil;
@@ -25,9 +24,6 @@ import ca2re.backend.util.FechaUtil;
 @RestController
 @RequestMapping(value = "/")
 public class MainController {
-	
-	@Autowired
-	public PruebaWAISDAO pruebaWaisDAO;
 	
 	@Autowired
 	AdministradorPruebas administradorPruebas;	
@@ -43,7 +39,7 @@ public class MainController {
 	@RequestMapping(value = "/creacion-prueba", method = RequestMethod.POST)
 	@ResponseBody
 	public Prueba crearPrueba(@RequestBody Prueba prueba) {
-		return administradorPruebas.guardarPruebaWais(prueba);
+		return administradorPruebas.guardarPrueba(prueba);
 	}
 	
 	@RequestMapping(value = "/prueba-por-id", method = RequestMethod.GET)
@@ -57,7 +53,7 @@ public class MainController {
 	public Prueba ingresarReactivo(@RequestBody Subprueba subprueba,
 			@PathVariable(value = "idEvaluado") String idEvaluado) {
 		Prueba prueba = administradorPruebas.ingresarSubprueba(subprueba, idEvaluado);
-		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado);
+		return administradorPruebas.actualizarPrueba(prueba, idEvaluado);
 	}
 	
 	@RequestMapping(value = "/subpruebas", method = RequestMethod.GET)

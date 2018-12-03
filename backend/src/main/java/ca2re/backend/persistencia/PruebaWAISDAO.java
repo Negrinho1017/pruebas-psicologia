@@ -13,6 +13,6 @@ public interface PruebaWAISDAO {
 
 	List<Prueba> obtenerPruebaPorIdEvaluado(String id);
 
-	Prueba actualizarPrueba(Prueba prueba, String id);
+	Prueba actualizarPrueba(Prueba prueba, String id, String coleccion);
 	
 }

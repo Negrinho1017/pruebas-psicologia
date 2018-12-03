@@ -36,10 +36,6 @@ export class IngresoDeDatosComponent implements OnInit {
     private router: Router, private globals: Globals) { }
 
   ngOnInit() {    
-    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
-    "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
-    this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
-    "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
     this.ingresoDatosForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),
@@ -141,7 +137,7 @@ export class IngresoDeDatosComponent implements OnInit {
       this.prueba.evaluado = this.evaluado;
       this.prueba.nombreExaminador = this.ingresoDatosForm.controls['nombreExaminador'].value;
       this.prueba.fechaEvaluacion = this.ingresoDatosForm.controls['fechaEvaluacion'].value;
-      this.prueba.tipoPrueba = "WAIS";
+      this.prueba.tipoPrueba = localStorage.getItem('tipoPrueba');
       this.llenarRamasDelConocimiento();
       this.hojaDeResultadosService.crearPrueba(this.prueba).subscribe(
         res => {

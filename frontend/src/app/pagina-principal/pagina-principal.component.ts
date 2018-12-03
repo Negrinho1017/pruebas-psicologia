@@ -17,11 +17,21 @@ export class PaginaPrincipalComponent implements OnInit {
 
   cambiarAPruebaWAIS() {
     this.globals.idPrueba = 1;
+    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
+    "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
+    this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
+    "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
+    localStorage.setItem('tipoPrueba', "WAIS");
     this.router.navigate(['/ingreso-de-datos']);    
   }
 
   cambiarAPruebaWISC(){
     this.globals.idPrueba = 2;
+    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
+    "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
+    this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
+    "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];
+    localStorage.setItem('tipoPrueba', "WISC");
     this.router.navigate(['/ingreso-de-datos']);
   }
 }

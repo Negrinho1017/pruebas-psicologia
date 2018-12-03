@@ -4,10 +4,13 @@ import java.util.List;
 
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.constantes.Subpruebas;
+import ca2re.backend.dominio.constantes.TiposPrueba;
 
 public class VerificadorPruebas {
 	private static final int RETENCION_DIGITOS = 6;
 	private static final int DISENO_CUBOS = 3;
+	private static final String COLLECTION_PRUEBA_WISC = "prueba_wisc";
+	private static final String COLLECTION_PRUEBA_WAIS = "prueba_wais";
 
 	public static boolean sonLas10SubpruebasPrincipales(List<Subprueba> subpruebas) {
 		for(Subprueba subprueba: subpruebas) {
@@ -30,5 +33,9 @@ public class VerificadorPruebas {
 			return true;
 		}
 		return false;
+	}
+	
+	public static String obtenerColeccionEnBD(String tipoPrueba) {
+		return tipoPrueba.equals(TiposPrueba.WAIS.getValue()) ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
 	}
 }

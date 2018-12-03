@@ -13,6 +13,7 @@ import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.Subpruebas;
+import ca2re.backend.dominio.constantes.TiposPrueba;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.CalificacionAnalisisProcesoDAO;
 import ca2re.backend.persistencia.CalificacionPuntuacionCompuestaDAO;
@@ -274,23 +275,41 @@ public class AdministradorPruebas {
 		return (pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).size()==0)? true : false;
 	}
 	
-	public boolean elUsuarioCumpleConLaEdad(int anios) {
-		return(anios>=16)? true : false;
+	public boolean elUsuarioCumpleConLaEdad(int anios, String tipoPrueba) {
+		if(tipoPrueba.equals(TiposPrueba.WAIS.getValue())) {
+			return(anios>=16)? true : false;
+		}else if(tipoPrueba.equals(TiposPrueba.WISC.getValue())) {
+			return(anios<17)? true : false;
+		}
+		return false;
 	}
 	
-	public Prueba guardarPruebaWais(Prueba prueba) {
+	public Prueba guardarPrueba(Prueba prueba) {
 		if(elUsuarioNoHaSidoEvaluado(prueba.getEvaluado().getId())
-				&& elUsuarioCumpleConLaEdad(prueba.getEdadEvaluado().getAnios())) {
-			return pruebaWaisDAO.guardarPruebaWais(prueba);
+				&& elUsuarioCumpleConLaEdad(prueba.getEdadEvaluado().getAnios(), prueba.getTipoPrueba())) {
+			return guardarPruebaCorrespondiente(prueba);
 		}
 		throw new PruebasPsicologiaException("El usuario ya fue evaluado o no cumple con la edad");
 	}
 	
+	public Prueba guardarPruebaCorrespondiente(Prueba prueba) {
+		if(prueba.getTipoPrueba().equals(TiposPrueba.WAIS.getValue())) {
+			return pruebaWaisDAO.guardarPruebaWais(prueba);
+		}
+		else if(prueba.getTipoPrueba().equals(TiposPrueba.WISC.getValue())) {
+			return pruebaWaisDAO.guardarPruebaWisc(prueba);
+		}
+		throw new PruebasPsicologiaException("Tipo de prueba inválido");
+	}
 	public boolean esPermitidoElUsuario(String idUsuario) {
 		if(!usuarioDAO.esPermitidoElUsuario(idUsuario)) {
 			throw new PruebasPsicologiaException("Este usuario no tiene permisos, intente nuevamente");
 		}
 		return true;
 	}
-
+	
+	public Prueba actualizarPrueba(Prueba prueba, String idEvaluado) {
+		String coleccion = VerificadorPruebas.obtenerColeccionEnBD(prueba.getTipoPrueba());
+		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado, coleccion);
+	}
 }
