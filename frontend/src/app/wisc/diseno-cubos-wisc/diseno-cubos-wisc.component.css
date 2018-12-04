@@ -1,0 +1,60 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: black;
+    color: white;
+  }
+
+  #txtRespuesta {
+    width: 100%;
+  }
+
+  .cuerpo {
+    margin-left: 25px;
+    margin-right: 25px;       
+}
+
+#puntuacion {
+  width: 25%;
+  border: 3px solid black;
+  padding: 1%;
+  right: 0%;
+  position: absolute;
+  margin: 1%;  
+}
+
+#puntuacionSinBonificacionDeTiempo {
+  width: 25%;
+  border: 3px solid black;
+  right: 26%;
+  position: absolute;
+  padding: 1%;
+  margin: 1%;  
+}
+
+.positive {
+  background-color: #cfd2f0;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scroll {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}

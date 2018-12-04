@@ -27,7 +27,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   cambiarAPruebaWISC(){
     this.globals.idPrueba = 2;
-    this.globals.rutas = ["/diseno-cubos","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
+    this.globals.rutas = ["/diseno-cubos-wisc","/semejanzas","/retencion-digitos","/matrices","/vocabulario",
     "/aritmetica","/busqueda-simbolos","/rompecabezas-visual","/informacion","/claves"];
     this.globals.subpruebas = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
     "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves"];

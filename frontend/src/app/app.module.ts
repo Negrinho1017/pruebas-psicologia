@@ -33,6 +33,7 @@ import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fo
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AuthGuard } from './AuthGuard';
+import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AuthGuard } from './AuthGuard';
     PesoFiguradoComponent,
     CancelacionComponent,
     FortalezasDebilidadesComponent,
-    AnalisisProcesoComponent
+    AnalisisProcesoComponent,
+    DisenoCubosWiscComponent
   ],
   imports: [
     BrowserModule,

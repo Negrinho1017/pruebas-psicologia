@@ -26,6 +26,7 @@ import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
 import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component'
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component'
 import { AuthGuard } from './AuthGuard';
+import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 
 const routes: Routes =[
   //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
@@ -35,6 +36,7 @@ const routes: Routes =[
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
   { path: 'semejanzas', component: SemejanzasComponent, canActivate: [AuthGuard] }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent, canActivate: [AuthGuard]},
+  { path: 'diseno-cubos-wisc', component: DisenoCubosWiscComponent/*, canActivate: [AuthGuard]*/},
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
