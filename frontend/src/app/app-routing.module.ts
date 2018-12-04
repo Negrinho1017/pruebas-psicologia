@@ -36,7 +36,7 @@ const routes: Routes =[
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
   { path: 'semejanzas', component: SemejanzasComponent, canActivate: [AuthGuard] }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent, canActivate: [AuthGuard]},
-  { path: 'diseno-cubos-wisc', component: DisenoCubosWiscComponent/*, canActivate: [AuthGuard]*/},
+  { path: 'diseno-cubos-wisc', component: DisenoCubosWiscComponent, canActivate: [AuthGuard]},
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
