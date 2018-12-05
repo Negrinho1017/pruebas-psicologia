@@ -84,6 +84,8 @@ export class HojaDeResultadosComponent implements OnInit {
       }, error => {
         this.mensajeError(error.error.mensaje);
         this.router.navigate(['/ingreso-de-datos']);
+        localStorage.removeItem('idEvaluado');
+        this.globals.mostrarNavBar = false;    
         this.loading = false;
       });
   }
