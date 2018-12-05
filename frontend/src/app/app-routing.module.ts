@@ -27,14 +27,15 @@ import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fo
 import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component'
 import { AuthGuard } from './AuthGuard';
 import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
+import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
 
 const routes: Routes =[
-  //{ path: 'semejanzas/:idEvaluado', component: SemejanzasComponent }, 
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
   { path: 'fortalezas-debilidades', component: FortalezasDebilidadesComponent, canActivate: [AuthGuard] },
   { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent, canActivate: [AuthGuard] },
   { path: 'ingreso-de-datos', component: IngresoDeDatosComponent },
   { path: 'semejanzas', component: SemejanzasComponent, canActivate: [AuthGuard] }, 
+  { path: 'semejanzas-wisc', component: SemejanzasWiscComponent, canActivate: [AuthGuard] }, 
   { path: 'diseno-cubos', component: DisenoCubosComponent, canActivate: [AuthGuard]},
   { path: 'diseno-cubos-wisc', component: DisenoCubosWiscComponent, canActivate: [AuthGuard]},
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },

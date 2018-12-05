@@ -1,0 +1,84 @@
+<html>
+
+<body class="cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br> Edades de 16 a 90 años: <br> Reactivo muestra, después reactivo 4
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-refresh"></i>
+        <b> Inversión:</b> <br> Si obtiene una puntuación de 0 o 1 en el reactivo 4 o 5<br> aplique los reactivos
+        anteriores
+        en orden inverso hasta<br> obtener dos puntuaciones perfectas consecutivas
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br> Después de 3 puntuaciones<br> consecutivas de 0
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br> Otorgue 0, 1 o 2 puntos<br> Vease el manual de aplicación para<br> respuestas de
+        muestra
+      </p>
+    </td>
+  </table>
+  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+    Cambiar subprueba
+  </button>
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Comprensión">
+  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+    value="Cancelar">
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Reactivo</th>
+        <th>Puntuación</th>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+      </tr>
+      <tr *ngFor="let item of reactivos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+        <ng-container *ngIf="i<reactivos.length - 1">
+          <td>
+            <p *ngIf="i==0 || i==4">16-90</p>
+          </td>
+          <td>{{item}}</td>
+          <td>
+            <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui..." class="form-control">
+          </td>
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,txtRespuesta)" [disabled]="habilitarReactivo(i)"
+              *ngIf="i>0"></td>
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,txtRespuesta)" [disabled]="habilitarReactivo(i)"
+              *ngIf="i>0" [checked]="checkear(i)"></td>
+          <td *ngIf="i>2"><input type="radio" id="p3" name="{{item}}" (click)="calificarReactivo(2,i,txtRespuesta)"
+              [disabled]="habilitarReactivo(i)" [checked]="checkear(i)"></td>
+        </ng-container>
+      </tr>
+
+    </table>
+  </div>
+  <table>
+    <td>
+      * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
+      como se sugiere en el manual de aplicación
+    </td>
+    <td>
+      Puntuación natural total para semejanzas: <br>
+      <b id="checksreactivo18">{{this.subprueba.puntuacionNatural}}</b>
+    </td>
+  </table>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+</body>
+
+</html>
