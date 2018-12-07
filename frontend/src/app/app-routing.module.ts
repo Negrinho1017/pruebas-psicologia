@@ -28,6 +28,7 @@ import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proce
 import { AuthGuard } from './AuthGuard';
 import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
+import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 
 const routes: Routes =[
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -39,6 +40,7 @@ const routes: Routes =[
   { path: 'diseno-cubos', component: DisenoCubosComponent, canActivate: [AuthGuard]},
   { path: 'diseno-cubos-wisc', component: DisenoCubosWiscComponent, canActivate: [AuthGuard]},
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
+  { path: 'retencion-digitos-wisc', component: RetencionDigitosWiscComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
   { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },

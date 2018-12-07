@@ -35,6 +35,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { AuthGuard } from './AuthGuard';
 import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
+import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.
     FortalezasDebilidadesComponent,
     AnalisisProcesoComponent,
     DisenoCubosWiscComponent,
-    SemejanzasWiscComponent
+    SemejanzasWiscComponent,
+    RetencionDigitosWiscComponent
   ],
   imports: [
     BrowserModule,
