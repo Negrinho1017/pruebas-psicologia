@@ -12,6 +12,7 @@ import { Subprueba } from 'src/app/model/Subprueba';
   styleUrls: ['./retencion-digitos-wisc.component.css']
 })
 export class RetencionDigitosWiscComponent implements OnInit {
+  reactivoDeInicioRDI: number = 2;
   siguienteReactivo: number = 0;
   anteriorReactivo: number = 0;
   selectedRetencionDeDigitos: number;
@@ -158,8 +159,8 @@ export class RetencionDigitosWiscComponent implements OnInit {
 
   cambiarRD(num: number): void{
     this.selectedRetencionDeDigitos=num; 
-    this.siguienteReactivo = 0;
-    this.anteriorReactivo = 0;
+    this.siguienteReactivo = this.reactivoDeInicioRDI;
+    this.anteriorReactivo = this.reactivoDeInicioRDI;
     window.scroll(0,0);
   }
 

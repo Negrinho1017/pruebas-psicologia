@@ -93,8 +93,10 @@
             <p *ngIf="i==0">16-90</p>
           </td>
           <td>
-            <p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b>
-              <p>
+            <p *ngIf="i%2==0">
+              <b *ngIf="i<2">M</b>
+              <b *ngIf="i>=2">{{((i+1)/2+0.5) - 1}}</b>
+            </p>
           </td>
           <td>
             {{item}}
@@ -102,8 +104,8 @@
           <td>
             {{respuestasRDI[i]}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
+          <td><input type="radio" *ngIf="i>=2" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)">
+          <td><input type="radio" *ngIf="i>=2"id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>

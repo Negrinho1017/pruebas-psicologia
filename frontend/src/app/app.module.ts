@@ -36,6 +36,7 @@ import { AuthGuard } from './AuthGuard';
 import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
 import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
+import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/ret
     AnalisisProcesoComponent,
     DisenoCubosWiscComponent,
     SemejanzasWiscComponent,
-    RetencionDigitosWiscComponent
+    RetencionDigitosWiscComponent,
+    ConceptosConDibujosComponent
   ],
   imports: [
     BrowserModule,
