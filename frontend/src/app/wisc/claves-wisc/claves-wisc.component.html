@@ -1,0 +1,81 @@
+<body class="cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br>
+        <b>Edad 16 a 90 años: </b><br>
+        Reactivo muestra, reactivos de práctica, <br>
+        después reactivos de subprueba.
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br> Después de 120 segundos
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br>
+        Utilice la planilla de calificación de claves<br>
+        para calificar las respuestas del examinado.<br>
+        Otorgue 1 punto por cada respuesta correcta
+      </p>
+    </td>
+  </table>
+  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+    Cambiar subprueba
+  </button>
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Cancelación">
+  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+    value="Cancelar"><br>
+  <table>
+    <tr>
+      <th></th>
+      <th>Forma</th>
+      <th>Límite de tiempo</th>
+      <th>Tiempo de terminación</th>
+    </tr>
+    <tr *ngFor="let item of tiposPrueba; let i = index">
+      <td>{{rangoEdades[i]}}</td>
+      <td>120''</td>
+      <td>{{item}}</td>
+      <td>
+        <app-cronometro></app-cronometro>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th colspan="8">Puntuaciones con bonificación por tiempo en ejecución perfecta para claves A</th>
+    </tr>
+    <tr>
+      <td>Tiempo en segundos</td>
+      <td>116 - 120</td>
+      <td>111 - 115</td>
+      <td>106 - 110</td>
+      <td>101 - 105</td>
+      <td>96 - 100</td>
+      <td>86 - 95</td>
+      <td>0 - 85</td>
+    </tr>
+    <tr>
+      <td>Puntuación</td>
+      <td>59</td>
+      <td>60</td>
+      <td>61</td>
+      <td>62</td>
+      <td>63</td>
+      <td>64</td>
+      <td>65</td>
+    </tr>
+  </table>
+  <br>
+  Puntuación natural total: <input type="number" id="txtRespuesta" [(ngModel)]="puntuacion" pattern="[0-9]*"><br><br>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+</body>

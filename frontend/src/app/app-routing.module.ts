@@ -30,6 +30,7 @@ import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
 import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
+import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 
 const routes: Routes =[
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -50,6 +51,7 @@ const routes: Routes =[
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
   { path: 'informacion', component: InformacionComponent, canActivate: [AuthGuard] },
   { path: 'claves', component: ClavesComponent, canActivate: [AuthGuard] },
+  { path: 'claves-wisc', component: ClavesWiscComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'hoja-resultados', component: HojaDeResultadosComponent, canActivate: [AuthGuard] },
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent, canActivate: [AuthGuard] },
   { path: 'numeros-letras', component: NumerosLetrasComponent, canActivate: [AuthGuard] },

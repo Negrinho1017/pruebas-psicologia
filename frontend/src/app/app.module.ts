@@ -37,6 +37,7 @@ import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
 import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
+import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conce
     DisenoCubosWiscComponent,
     SemejanzasWiscComponent,
     RetencionDigitosWiscComponent,
-    ConceptosConDibujosComponent
+    ConceptosConDibujosComponent,
+    ClavesWiscComponent
   ],
   imports: [
     BrowserModule,
