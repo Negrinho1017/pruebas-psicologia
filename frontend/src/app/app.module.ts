@@ -38,6 +38,7 @@ import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.
 import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
+import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
     SemejanzasWiscComponent,
     RetencionDigitosWiscComponent,
     ConceptosConDibujosComponent,
-    ClavesWiscComponent
+    ClavesWiscComponent,
+    VocabularioWiscComponent
   ],
   imports: [
     BrowserModule,

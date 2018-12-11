@@ -31,6 +31,7 @@ import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.
 import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/retencion-digitos-wisc.component';
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
+import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 
 const routes: Routes =[
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -45,13 +46,14 @@ const routes: Routes =[
   { path: 'retencion-digitos-wisc', component: RetencionDigitosWiscComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
   { path: 'conceptos-con-dibujos', component: ConceptosConDibujosComponent, canActivate: [AuthGuard] },
-  { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
+  { path: 'vocabulario', component: VocabularioComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'vocabulario-wisc', component: VocabularioWiscComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent, canActivate: [AuthGuard] },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
   { path: 'informacion', component: InformacionComponent, canActivate: [AuthGuard] },
   { path: 'claves', component: ClavesComponent, canActivate: [AuthGuard] },
-  { path: 'claves-wisc', component: ClavesWiscComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'claves-wisc', component: ClavesWiscComponent, canActivate: [AuthGuard] },
   { path: 'hoja-resultados', component: HojaDeResultadosComponent, canActivate: [AuthGuard] },
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent, canActivate: [AuthGuard] },
   { path: 'numeros-letras', component: NumerosLetrasComponent, canActivate: [AuthGuard] },
