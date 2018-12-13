@@ -39,6 +39,7 @@ import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/ret
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
+import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wi
     RetencionDigitosWiscComponent,
     ConceptosConDibujosComponent,
     ClavesWiscComponent,
-    VocabularioWiscComponent
+    VocabularioWiscComponent,
+    NumerosLetrasWiscComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,7 @@ import { RetencionDigitosWiscComponent } from './wisc/retencion-digitos-wisc/ret
 import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conceptos-con-dibujos.component';
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
+import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
 
 const routes: Routes =[
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -46,8 +47,8 @@ const routes: Routes =[
   { path: 'retencion-digitos-wisc', component: RetencionDigitosWiscComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
   { path: 'conceptos-con-dibujos', component: ConceptosConDibujosComponent, canActivate: [AuthGuard] },
-  { path: 'vocabulario', component: VocabularioComponent, /*canActivate: [AuthGuard]*/ },
-  { path: 'vocabulario-wisc', component: VocabularioWiscComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
+  { path: 'vocabulario-wisc', component: VocabularioWiscComponent, canActivate: [AuthGuard] },
   { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent, canActivate: [AuthGuard] },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
@@ -57,6 +58,7 @@ const routes: Routes =[
   { path: 'hoja-resultados', component: HojaDeResultadosComponent, canActivate: [AuthGuard] },
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent, canActivate: [AuthGuard] },
   { path: 'numeros-letras', component: NumerosLetrasComponent, canActivate: [AuthGuard] },
+  { path: 'numeros-letras-wisc', component: NumerosLetrasWiscComponent, canActivate: [AuthGuard] },
   { path: 'pagina-principal', component: PaginaPrincipalComponent, canActivate: [AuthGuard] },
   { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
   { path: 'comprension', component: ComprensionComponent, canActivate: [AuthGuard] },
