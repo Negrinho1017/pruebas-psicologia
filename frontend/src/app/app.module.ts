@@ -40,6 +40,7 @@ import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conce
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
+import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-l
     ConceptosConDibujosComponent,
     ClavesWiscComponent,
     VocabularioWiscComponent,
-    NumerosLetrasWiscComponent
+    NumerosLetrasWiscComponent,
+    MatricesWiscComponent
   ],
   imports: [
     BrowserModule,

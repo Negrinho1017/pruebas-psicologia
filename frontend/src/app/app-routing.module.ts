@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SemejanzasComponent } from '../app/wais/semejanzas/semejanzas.component'
-import { RetencionDigitosComponent } from '../app/wais/retencion-digitos/retencion-digitos.component'
-import { MatricesComponent } from '../app/wais/matrices/matrices.component'
-import { VocabularioComponent } from '../app/wais/vocabulario/vocabulario.component'
-import { AritmeticaComponent } from '../app/wais/aritmetica/aritmetica.component'
-import { BusquedaSimbolosComponent } from '../app/wais/busqueda-simbolos/busqueda-simbolos.component'
-import { RompecabezasVisualComponent } from '../app/wais/rompecabezas-visual/rompecabezas-visual.component'
-import { InformacionComponent } from '../app/wais/informacion/informacion.component'
+import { SemejanzasComponent } from '../app/wais/semejanzas/semejanzas.component';
+import { RetencionDigitosComponent } from '../app/wais/retencion-digitos/retencion-digitos.component';
+import { MatricesComponent } from '../app/wais/matrices/matrices.component';
+import { VocabularioComponent } from '../app/wais/vocabulario/vocabulario.component';
+import { AritmeticaComponent } from '../app/wais/aritmetica/aritmetica.component';
+import { BusquedaSimbolosComponent } from '../app/wais/busqueda-simbolos/busqueda-simbolos.component';
+import { RompecabezasVisualComponent } from '../app/wais/rompecabezas-visual/rompecabezas-visual.component';
+import { InformacionComponent } from '../app/wais/informacion/informacion.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DisenoCubosComponent } from './wais/diseno-cubos/diseno-cubos.component';
-import { ClavesComponent } from './wais/claves/claves.component'
-import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component'
-import { HojaDeResultadosComponent } from './wais/hoja-de-resultados/hoja-de-resultados.component'
-import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component'
-import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component'
+import { ClavesComponent } from './wais/claves/claves.component';
+import { NumerosLetrasComponent } from './wais/numeros-letras/numeros-letras.component';
+import { HojaDeResultadosComponent } from './wais/hoja-de-resultados/hoja-de-resultados.component';
+import { IngresoDeDatosComponent } from './ingreso-de-datos/ingreso-de-datos.component';
+import { HojaDePuntuacionesCompuestasComponent } from './wais/hoja-de-puntuaciones-compuestas/hoja-de-puntuaciones-compuestas.component';
 import { Globals } from './globals';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
-import { AnalisisComponent } from './wais/analisis/analisis.component'
-import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component'
+import { AnalisisComponent } from './wais/analisis/analisis.component';
+import { SubpruebasOpcionalesComponent } from './wais/subpruebas-opcionales/subpruebas-opcionales.component';
 import { ComprensionComponent } from './wais/comprension/comprension.component';
 import { FigurasIncompletasComponent } from './wais/figuras-incompletas/figuras-incompletas.component';
 import { PesoFiguradoComponent } from './wais/peso-figurado/peso-figurado.component';
 import { CancelacionComponent } from './wais/cancelacion/cancelacion.component';
-import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component'
-import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component'
+import { FortalezasDebilidadesComponent } from './wais/fortalezas-debilidades/fortalezas-debilidades.component';
+import { AnalisisProcesoComponent } from './wais/analisis-proceso/analisis-proceso.component';
 import { AuthGuard } from './AuthGuard';
 import { DisenoCubosWiscComponent } from './wisc/diseno-cubos-wisc/diseno-cubos-wisc.component';
 import { SemejanzasWiscComponent } from './wisc/semejanzas-wisc/semejanzas-wisc.component';
@@ -33,8 +33,9 @@ import { ConceptosConDibujosComponent } from './wisc/conceptos-con-dibujos/conce
 import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
+import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.component';
 
-const routes: Routes =[
+const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
   { path: 'fortalezas-debilidades', component: FortalezasDebilidadesComponent, canActivate: [AuthGuard] },
   { path: 'subpruebas-opcionales', component: SubpruebasOpcionalesComponent, canActivate: [AuthGuard] },
@@ -46,6 +47,7 @@ const routes: Routes =[
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
   { path: 'retencion-digitos-wisc', component: RetencionDigitosWiscComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
+  { path: 'matrices-wisc', component: MatricesWiscComponent, canActivate: [AuthGuard]},
   { path: 'conceptos-con-dibujos', component: ConceptosConDibujosComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario-wisc', component: VocabularioWiscComponent, canActivate: [AuthGuard] },

@@ -1,0 +1,38 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: black;
+    color: white;
+  }
+
+  .cuerpo {
+    margin-left: 25px;
+    margin-right: 25px;       
+  }
+
+  #txtRespuesta {
+    width: 100%;
+  }
+
+  #puntuacion {
+    width: 25%;
+    border: 3px solid black;
+    padding: 1%;
+    right: 0px;
+    position: absolute;
+    margin: 1%;
+  }
+
+  .positive {
+    background-color: #cfd2f0;
+    }

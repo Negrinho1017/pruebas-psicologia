@@ -1,0 +1,71 @@
+<html>
+<body class = "cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br> Edades de 16 a 90 años: <br> Reactivos muestra A y B, después reactivo 4
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-refresh"></i>
+        <b> Inversión:</b> <br> Si obtiene una puntuación de 0 en el reactivo 4 o 5<br> aplique los reactivos anteriores en
+        orden inverso hasta<br> obtener dos puntuaciones perfectas consecutivas
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br> Después de 3 puntuaciones<br> consecutivas de 0
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br> Otorgue 0 o 1 punto<br> Las respuestas correctas están a color
+      </p>
+    </td>
+  </table>
+  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+    Cambiar subprueba
+  </button>
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(1)" class="btn btn-secondary" value="Peso figurado">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(2)" class="btn btn-secondary" value="Figuras incompletas">
+  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+    value="Cancelar">
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Reactivo</th>
+        <th>Respuesta</th>
+        <th>0</th>
+        <th>1</th>
+      </tr>
+      <tr *ngFor="let item of respuestasCorrectas; let i = index"
+          [ngClass]="{'positive' : i == getReactivoSiguiente()}"
+          id="checksreactivo{{i}}">
+        <td>
+          <p *ngIf="i==5">16-90</p>
+        </td>
+        <td><p *ngIf="i>1">{{i-1}}</p>
+          <p *ngIf="i==0">MA.</p>
+          <p *ngIf="i==1">MB.</p>
+        </td>
+        <td><b>{{item}}</b></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
+          [disabled]="habilitarReactivo(i)" *ngIf="i>=2"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>=2"></td>
+      </tr>
+    </table>
+    <p id="puntuacion">Puntuación natural total para Matrices: <br>
+      <b>{{this.subprueba.puntuacionNatural}}</b>
+    </p>
+  </div>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+</button>
+</body>
+</html>
