@@ -14,29 +14,50 @@ import { Subprueba } from 'src/app/model/Subprueba';
 export class SemejanzasWiscComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   primerReactivo: number = 1;
-  reactivoDeInicio: number = 4;
-  siguienteReactivo = this.reactivoDeInicio;
-  anteriorReactivo = this.reactivoDeInicio;
+  reactivoDeInicio: number;
+  siguienteReactivo: number;
+  anteriorReactivo: number;
   reactivos: String[] = ["M. Rojo - Azul", "1. Leche - Agua", "2. Pluma - Lápiz", "3. Gato - Ratón",
-   "*4. Manzana - Plátano", "*5. Camisa - Zapato", "6. Invierno - Verano", "7. Mariposa - Abeja",
+    "*4. Manzana - Plátano", "*5. Camisa - Zapato", "6. Invierno - Verano", "7. Mariposa - Abeja",
     "8. Madera - Ladrillos", "9. Enojo - Alegría", "10. Poeta - Pintor", "11. Pintura - Estatua",
     "12. Montaña - Lago", "13. Hielo - Vapor", "14. Codo - Rodilla", "15. Mueca - Sonrisa",
-    "16. Inundación - Sequía", "17. Primero - Último", "18. Hule - Papel","19. Permiso - Prohibición",
-    "20. Sal - Agua","21. Venganza - Perdón","22. Realidad - Fantasía","23. Espacio - Tiempo",""];
+    "16. Inundación - Sequía", "17. Primero - Último", "18. Hule - Papel", "19. Permiso - Prohibición",
+    "20. Sal - Agua", "21. Venganza - Perdón", "22. Realidad - Fantasía", "23. Espacio - Tiempo", ""];
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false];    
+  listaCalificaciones: number[];
+  habilitaReactivo: boolean[];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
-
+  maximaPuntuacionPorReactivo: number[] = [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.criteriosDeInversion();
+    this.siguienteReactivo = this.reactivoDeInicio;
+    this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Semejanzas";
     this.subprueba.numeroSubprueba = 2;
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 8) {
+      this.reactivoDeInicio = 1;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
+      this.reactivoDeInicio = 3;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else {
+      this.reactivoDeInicio = 5;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
   }
 
   finalizarSubprueba() {
@@ -58,9 +79,9 @@ export class SemejanzasWiscComponent implements OnInit {
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
     }
-    
+
   }
-  
+
   calificarSubprueba() {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.puntuacion = this.puntuacion + calificacionReactivo;
@@ -77,16 +98,21 @@ export class SemejanzasWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+    if (numeroReactivo == this.reactivoDeInicio + 1 && 
+      (puntuacionReactivo < this.maximaPuntuacionPorReactivo[numeroReactivo] 
+      || this.listaCalificaciones[numeroReactivo - 1] <  this.maximaPuntuacionPorReactivo[numeroReactivo - 1])) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == this.reactivoDeInicio-2) {
+    else if (numeroReactivo == this.reactivoDeInicio - 3) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if (numeroReactivo == this.reactivoDeInicio-1) {
+    else if (numeroReactivo == this.reactivoDeInicio - 2) {
+      this.reversarInversion(puntuacionReactivo, numeroReactivo);
+    }
+    else if (numeroReactivo == this.reactivoDeInicio - 1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
-    else if (numeroReactivo == this.primerReactivo) {
+    else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
@@ -99,27 +125,27 @@ export class SemejanzasWiscComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio - 1);
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
-    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+    if (puntuacionReactivo < this.maximaPuntuacionPorReactivo[numeroReactivo] || this.listaCalificaciones[numeroReactivo + 1] < this.maximaPuntuacionPorReactivo[numeroReactivo+1]) {
       this.habilitaReactivo[numeroReactivo - 1] = false;
       this.listaCalificaciones[numeroReactivo - 1] = 0;
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
     }
   }
 
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
-    if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
+    if (puntuacionReactivo < this.maximaPuntuacionPorReactivo[numeroReactivo] || this.listaCalificaciones[numeroReactivo + 1] < this.maximaPuntuacionPorReactivo[numeroReactivo+1]) {
       this.anteriorReactivo = numeroReactivo;
       this.mensajeError("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
     }
   }
 
@@ -134,7 +160,7 @@ export class SemejanzasWiscComponent implements OnInit {
     let discontinua: boolean = (puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0)
-      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
+      && numeroReactivo > this.reactivoDeInicio + cantidadParaDescontinuar;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
@@ -177,8 +203,8 @@ export class SemejanzasWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(){
-    this.globals.rutas[1]="/comprension";
+  cambiarSubprueba() {
+    this.globals.rutas[1] = "/comprension";
     this.globals.subpruebas[1] = "Comprensión";
     this.router.navigate([this.globals.rutas[1]]);
   }
