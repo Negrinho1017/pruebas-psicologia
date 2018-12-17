@@ -48,24 +48,12 @@
         <th>1</th>
         <th>2</th>
       </tr>
-      <tr *ngFor="let item of primerosReactivos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
-          <ng-container *ngIf="i<reactivos.length - 1">
-            <td>
-              <p *ngIf="i==4">16-90</p>
-            </td>
-            <td>{{item}}</td>
-            <td>
-              <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui..." class="form-control">
-            </td>
-            <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
-            <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-                [checked]="checkear(i)"></td>
-          </ng-container>
-        </tr>
       <tr *ngFor="let item of reactivos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
         <ng-container *ngIf="i<reactivos.length - 1">
           <td>
-            <p *ngIf="i==4">16-90</p>
+              <p *ngIf="i==4">6-8</p>
+              <p *ngIf="i==6">9-11</p>
+              <p *ngIf="i==8">12-16</p>
           </td>
           <td>{{item}}</td>
           <td>

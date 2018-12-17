@@ -14,19 +14,18 @@ import { Subprueba } from 'src/app/model/Subprueba';
 export class VocabularioWiscComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   primerReactivo: number = 0;
-  reactivoDeInicio: number = 4;
-  siguienteReactivo = this.reactivoDeInicio;
-  anteriorReactivo = this.reactivoDeInicio;
+  reactivoDeInicio: number;
+  siguienteReactivo: number;
+  anteriorReactivo: number;
   reactivos: String[] = ["1. Coche (Auto, Automóvil)","2. Flor","3. Tren (Ferrocarril)","4. Cubeta (balde)","5. Reloj","6. Sombrilla","7. Ladrón","8. Vaca","9. Sombrero","10. Valiente","11. Obedecer",
   "12. Bicicleta","13. Antiguo","14. Abecedario","15. Remedar","16. Fábula","17. Emigrar","18. Isla",
   "19. Absorber","20. Salir","21. Transparente","22. Molestia","23. Raramente","24. Preciso","25. Obligar",
   "26. Rivalidad","27. Disparate","28. Previsión","29. Aflicción","30. Arduo","31. Unánime","32. Dilatorio",
   "33. Enmienda","34. Inminente","35. Aberración","36. Locuaz",""];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false, false, false,false,false,false];
+  listaCalificaciones: number[];
+  maximaCalificacionPorReactivo: number[] = [1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2];
+  habilitaReactivo: boolean[];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -36,8 +35,30 @@ export class VocabularioWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.edad = 9
+    this.criteriosDeInversion();
+    this.siguienteReactivo = this.reactivoDeInicio;
+    this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Vocabulario";
     this.subprueba.numeroSubprueba = 5;
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 8) {
+      this.reactivoDeInicio = 4;
+      this.habilitaReactivo = [true,true,true,true];
+      this.listaCalificaciones = [1, 1, 1, 1];
+    }
+    else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
+      this.reactivoDeInicio = 6;
+      this.habilitaReactivo = [true,true,true,true,true,true];
+      this.listaCalificaciones = [1, 1, 1, 1, 2, 2];
+    }
+    else {
+      this.reactivoDeInicio = 8;
+      this.habilitaReactivo = [true,true,true,true,true,true,true,true];
+      this.listaCalificaciones = [1, 1, 1, 1, 2, 2, 2, 2];
+    }
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
@@ -52,10 +73,13 @@ export class VocabularioWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+    if (this.reactivoDeInicio != this.primerReactivo &&
+    numeroReactivo == this.reactivoDeInicio+1 && 
+    (puntuacionReactivo < this.maximaCalificacionPorReactivo[numeroReactivo] || 
+    this.listaCalificaciones[numeroReactivo - 1] < this.maximaCalificacionPorReactivo[numeroReactivo - 1])) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo >= this.primerReactivo+1) {
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else if (numeroReactivo == this.reactivoDeInicio-1) {
@@ -70,7 +94,8 @@ export class VocabularioWiscComponent implements OnInit {
   }
 
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
-    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
+    if (puntuacionReactivo < this.maximaCalificacionPorReactivo[numeroReactivo] || 
+    this.listaCalificaciones[numeroReactivo + 1] < this.maximaCalificacionPorReactivo[numeroReactivo + 1]) {
       this.anteriorReactivo = numeroReactivo;
       this.mensajeWarning("Se ha descontinuado la subprueba");
     }
@@ -88,13 +113,14 @@ export class VocabularioWiscComponent implements OnInit {
   }
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
-    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] < numeroReactivo) {
+    if (puntuacionReactivo < this.maximaCalificacionPorReactivo[numeroReactivo] ||
+    this.listaCalificaciones[numeroReactivo + 1] < this.maximaCalificacionPorReactivo[numeroReactivo + 1]) {
       this.habilitaReactivo[numeroReactivo - 1] = false;
       this.listaCalificaciones[numeroReactivo - 1] = 0;
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, 6);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
     }
   }
 
