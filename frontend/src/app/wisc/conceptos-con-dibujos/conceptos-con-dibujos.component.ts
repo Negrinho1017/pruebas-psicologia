@@ -14,17 +14,15 @@ import { Subprueba } from 'src/app/model/Subprueba';
 export class ConceptosConDibujosComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   primerReactivo: number = 2;
-  reactivoDeInicio: number = 5;
-  siguienteReactivo = this.reactivoDeInicio;
-  anteriorReactivo = this.reactivoDeInicio;
+  reactivoDeInicio: number;
+  siguienteReactivo: number;
+  anteriorReactivo: number;
   respuestasCorrectas: String[] = ["2, 3","1, 3","1, 4","1 ,4","2, 4","1, 3","3, 5","1, 6","2, 6","2, 3",
   "3, 5","2, 4","1, 5","3, 4","1, 6, 9","3, 5, 7","2, 6, 8","3, 5, 8","2, 6, 7","3, 6, 11","2, 4, 9",
   "1, 8, 10","3, 4, 7","2, 7, 9","3, 5, 12","2, 8, 10","1, 7, 12","1, 6, 7","4, 5, 9","2, 8, 10"];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false];
+  listaCalificaciones: number[];
+  habilitaReactivo: boolean[];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -33,8 +31,29 @@ export class ConceptosConDibujosComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.criteriosDeInversion();
+    this.siguienteReactivo = this.reactivoDeInicio;
+    this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.numeroSubprueba = 4;
     this.subprueba.nombre = "Conceptos con dibujos";
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 8) {
+      this.reactivoDeInicio = 2;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
+      this.reactivoDeInicio = 5;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else {
+      this.reactivoDeInicio = 7;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
@@ -44,16 +63,17 @@ export class ConceptosConDibujosComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+    if(this.reactivoDeInicio != this.primerReactivo &&
+      numeroReactivo == this.reactivoDeInicio + 1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == this.reactivoDeInicio-2) {
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else if (numeroReactivo == this.reactivoDeInicio-1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo-1);
     }
-    else if (numeroReactivo == this.primerReactivo) {
+    else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {

@@ -98,7 +98,8 @@ export class SemejanzasWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio + 1 && 
+    if (this.reactivoDeInicio != this.primerReactivo &&
+      numeroReactivo == this.reactivoDeInicio + 1 && 
       (puntuacionReactivo < this.maximaPuntuacionPorReactivo[numeroReactivo] 
       || this.listaCalificaciones[numeroReactivo - 1] <  this.maximaPuntuacionPorReactivo[numeroReactivo - 1])) {
       this.limpiarReactivosAnt(numeroReactivo);

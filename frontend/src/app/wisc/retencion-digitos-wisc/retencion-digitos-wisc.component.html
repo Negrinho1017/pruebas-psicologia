@@ -55,7 +55,7 @@
         </tr>
         <tr *ngFor="let item of digitosRDD; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
           <td>
-            <p *ngIf="i==0">16-90</p>
+            <p *ngIf="i==0">6-16</p>
           </td>
           <td>
             <p *ngIf="i%2==0"><b>{{(i+1)/2+0.5}}</b>
@@ -90,7 +90,7 @@
         </tr>
         <tr *ngFor="let item of digitosRDI; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
           <td>
-            <p *ngIf="i==0">16-90</p>
+            <p *ngIf="i==2">6-16</p>
           </td>
           <td>
             <p *ngIf="i%2==0">
