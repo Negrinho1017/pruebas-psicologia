@@ -13,16 +13,14 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 })
 export class MatricesWiscComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
-  primerReactivo: number = 2;
-  reactivoDeInicio: number = 5;
-  siguienteReactivo = this.reactivoDeInicio;
-  anteriorReactivo = this.reactivoDeInicio;
-  respuestasCorrectas: number[] = [5, 4, 3, 2, 1, 5, 3, 4, 4, 5, 1, 5, 2, 3, 1, 1, 5, 2, 3, 2, 1, 4, 5, 1, 4, 2, 3, 4];
+  primerReactivo: number = 3;
+  reactivoDeInicio: number;
+  siguienteReactivo: number;
+  anteriorReactivo: number;
+  respuestasCorrectas: number[] = [1,5,4,5,1,2,2,3,4,4,1,4,3,2,5,1,4,2,1,4,5,4,3,2,3,3,4,2,1,1,3,2,2,5,4,3,1,5];
   puntuacion: number = 0;
-  listaCalificaciones: number[] = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false];
+  listaCalificaciones: number[];
+  habilitaReactivo: boolean[] = [];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -31,8 +29,30 @@ export class MatricesWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.edad = 9;
+    this.criteriosDeInversion();
+    this.siguienteReactivo = this.reactivoDeInicio;
+    this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.numeroSubprueba = 4;
     this.subprueba.nombre = "Matrices";
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 8) {
+      this.reactivoDeInicio = 6;
+      this.habilitaReactivo = [true,true,true,true,true, true];
+      this.listaCalificaciones = [0, 0, 0, 1, 1, 1];
+    }
+    else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
+      this.reactivoDeInicio = 9;
+      this.habilitaReactivo = [true,true,true,true,true, true,true,true,true];
+      this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1];
+    }
+    else {
+      this.reactivoDeInicio = 13;
+      this.habilitaReactivo = [true,true,true,true,true,true,true, true,true,true,true,true,true];
+      this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    }
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
@@ -42,16 +62,17 @@ export class MatricesWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+    if (this.reactivoDeInicio != this.primerReactivo &&
+      numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == this.reactivoDeInicio-2) {
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else if (numeroReactivo == this.reactivoDeInicio-1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo-1);
     }
-    else if (numeroReactivo == this.primerReactivo) {
+    else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {

@@ -47,17 +47,21 @@
           [ngClass]="{'positive' : i == getReactivoSiguiente()}"
           id="checksreactivo{{i}}">
         <td>
-          <p *ngIf="i==5">16-90</p>
+          <p *ngIf="i==0">6-16</p>
+          <p *ngIf="i==6">6-8</p>
+          <p *ngIf="i==9">9-11</p>
+          <p *ngIf="i==12">12-16</p>
         </td>
-        <td><p *ngIf="i>1">{{i-1}}</p>
-          <p *ngIf="i==0">MA.</p>
-          <p *ngIf="i==1">MB.</p>
+        <td><p *ngIf="i>2">{{i-2}}</p>
+          <p *ngIf="i==0">A</p>
+          <p *ngIf="i==1">B</p>
+          <p *ngIf="i==2">C</p>
         </td>
         <td><b>{{item}}</b></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)" *ngIf="i>=2"></td>
+          [disabled]="habilitarReactivo(i)" *ngIf="i>2"></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>=2"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>2"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
