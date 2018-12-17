@@ -46,12 +46,12 @@ export class ConceptosConDibujosComponent implements OnInit {
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
       this.reactivoDeInicio = 5;
-      this.habilitaReactivo = [];
+      this.habilitaReactivo = [true,true,true,true,true];
       this.listaCalificaciones = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
     else {
       this.reactivoDeInicio = 7;
-      this.habilitaReactivo = [];
+      this.habilitaReactivo = [true,true,true,true,true,true,true];
       this.listaCalificaciones = [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
   }

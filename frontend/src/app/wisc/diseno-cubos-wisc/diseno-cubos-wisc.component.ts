@@ -15,14 +15,14 @@ import { Subprueba } from 'src/app/model/Subprueba';
 export class DisenoCubosWiscComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   navIsFixed: boolean;
-  primerReactivo: number = 1;
-  reactivoDeInicio: number = 5;
-  anteriorReactivo = this.reactivoDeInicio;
-  siguienteReactivo = this.reactivoDeInicio;
+  primerReactivo: number = 0;
+  reactivoDeInicio: number;
+  anteriorReactivo: number;
+  siguienteReactivo: number
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
-  listaCalificaciones: number[] = [0, 2, 2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, true, false, false, false, false];
+  listaCalificaciones: number[];
+  habilitaReactivo: boolean[];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
@@ -45,7 +45,9 @@ export class DisenoCubosWiscComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-  imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png", "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
+  imagenesCubos: any[] = ["Cubos_1.png","Cubos_2.png","Cubos_3.png","Cubos_4.png","Cubos_5.png","Cubos_6.png",
+  "Cubos_7.png","Cubos_8.png","Cubos_9.png","Cubos_10.png","Cubos_11.png","Cubos_12.png","Cubos_13.png",
+  "Cubos_14.png"];
   
   @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
@@ -60,8 +62,24 @@ export class DisenoCubosWiscComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.criteriosDeInversion();
+    this.anteriorReactivo = this.reactivoDeInicio;
+    this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 7) {
+      this.reactivoDeInicio = 0;
+      this.habilitaReactivo = [];
+      this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else{
+      this.reactivoDeInicio = 2;
+      this.habilitaReactivo = [true,true];
+      this.listaCalificaciones = [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
   }
 
   finalizarSubprueba() {
@@ -98,7 +116,8 @@ export class DisenoCubosWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if (numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
+    if (this.reactivoDeInicio != this.primerReactivo &&
+      numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo - 1] < 2)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
     else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo >= this.primerReactivo+1) {
@@ -107,7 +126,7 @@ export class DisenoCubosWiscComponent implements OnInit {
     else if (numeroReactivo == this.reactivoDeInicio-1) {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
-    else if (numeroReactivo == this.primerReactivo) {
+    else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
     else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {

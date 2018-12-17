@@ -40,6 +40,7 @@
   <div class="table-responsive">
     <table class="table">
       <tr>
+        <th></th>
         <th>Reactivo</th>
         <th>Diseño</th>
         <th>Forma de presentación</th>
@@ -50,20 +51,23 @@
       </tr>
       <tr *ngFor="let item of imagenesCubos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}">
         <td>
-          <p *ngIf="i>=1">{{i}}</p>
-          <p *ngIf="i==0">M.</p>
+          <p *ngIf="i==0">6-7</p>
+          <p *ngIf="i==2">8-16</p>
         </td>
-        <td> <img src='/src/assets/{{item}}' alt='image' style="width:125px;"> </td>
+        <td>
+          <p>{{i+1}}</p>
+        </td>
+        <td> <img src='/src/assets/cubosWisc/{{item}}' alt='image' style="width:125px;"> </td>
         <td>
           <p *ngIf="i <= 2">Modelo</p>
           <p *ngIf="i == 3">Modelo y dibujo</p>
           <p *ngIf="i >= 4">Dibujo</p>
         </td>
         <td>
-          <p *ngIf="i == 1">30''</p>
-          <p *ngIf="i >= 2 && i < 6">45''</p>
-          <p *ngIf="i >= 6 && i < 11">75''</p>
-          <p *ngIf="i >= 11">120''</p>
+          <p *ngIf="i == 0">30''</p>
+          <p *ngIf="i >= 1 && i < 5">45''</p>
+          <p *ngIf="i >= 5 && i < 10">75''</p>
+          <p *ngIf="i >= 10">120''</p>
         </td>
         <td>
           <app-cronometro #cronometro id="cronometro{{i}}"></app-cronometro>
@@ -106,7 +110,7 @@
           </table>
         </td>
         <td>
-          <table *ngIf="i>0">
+          <table>
             <tr>
               <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
               <td *ngIf="i < 4">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"></td>
