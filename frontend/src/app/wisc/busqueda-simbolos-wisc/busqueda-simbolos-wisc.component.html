@@ -1,0 +1,58 @@
+<body class="cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br>
+        <b>Edad de 16 a 90 años: </b><br>
+        Reactivos muestra, reactivos de práctica, <br>
+        después reactivos de la subprueba
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br> Después de 120 segundos
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br>
+        Utilice la plantilla de búsqueda de símbolos para calificar las <br>
+        respuestas del examinado.<br>
+        Reste el número de respuestas incorrectas del número de respuestas <br>
+        correctas.<br>
+        Si la puntuación natural total es menor que 0, anote 0 como la puntuación natural total.
+      </p>
+    </td>
+  </table>
+  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+    Cambiar subprueba
+  </button>
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Cancelación">
+  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+    value="Cancelar">
+  <table>
+    <tr>
+      <th>Tiempo empleado</th>
+      <th>Número de correctas</th>
+      <th>Número de incorrectas</th>
+      <th>Puntuación natural total para Búsqueda de símbolos</th>
+    </tr>
+    <tr>
+      <td>
+        <app-cronometro></app-cronometro>
+      </td>
+      <td><input type="number" id="txtRespuesta" [(ngModel)]="correctas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="number" id="txtRespuesta" [(ngModel)]="incorrectas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td>
+        <b>{{this.puntuacion}}</b>
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+</body>
