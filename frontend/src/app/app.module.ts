@@ -41,6 +41,7 @@ import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
 import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.component';
+import { ComprensionWiscComponent } from './wisc/comprension-wisc/comprension-wisc.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.compon
     ClavesWiscComponent,
     VocabularioWiscComponent,
     NumerosLetrasWiscComponent,
-    MatricesWiscComponent
+    MatricesWiscComponent,
+    ComprensionWiscComponent
   ],
   imports: [
     BrowserModule,

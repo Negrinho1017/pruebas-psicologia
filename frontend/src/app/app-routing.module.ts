@@ -34,6 +34,7 @@ import { ClavesWiscComponent } from './wisc/claves-wisc/claves-wisc.component';
 import { VocabularioWiscComponent } from './wisc/vocabulario-wisc/vocabulario-wisc.component';
 import { NumerosLetrasWiscComponent } from './wisc/numeros-letras-wisc/numeros-letras-wisc.component';
 import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.component';
+import { ComprensionWiscComponent } from './wisc/comprension-wisc/comprension-wisc.component';
 
 const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'pagina-principal', component: PaginaPrincipalComponent, canActivate: [AuthGuard] },
   { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
   { path: 'comprension', component: ComprensionComponent, canActivate: [AuthGuard] },
+  { path: 'comprension-wisc', component: ComprensionWiscComponent, canActivate: [AuthGuard] },
   { path: 'figuras-incompletas', component: FigurasIncompletasComponent, canActivate: [AuthGuard] },
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
