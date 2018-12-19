@@ -55,8 +55,7 @@ const routes: Routes = [
   { path: 'vocabulario-wisc', component: VocabularioWiscComponent, canActivate: [AuthGuard] },
   { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent, canActivate: [AuthGuard] },
-  { path: 'busqueda-simbolos-wisc', component: BusquedaSimbolosWiscComponent, //canActivate: [AuthGuard] 
-},
+  { path: 'busqueda-simbolos-wisc', component: BusquedaSimbolosWiscComponent, canActivate: [AuthGuard] },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
   { path: 'informacion', component: InformacionComponent, canActivate: [AuthGuard] },
   { path: 'claves', component: ClavesComponent, canActivate: [AuthGuard] },

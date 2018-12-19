@@ -32,7 +32,7 @@ export class ClavesWiscComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.clavesNatural = this.subprueba.puntuacionNatural;
       this.globals.claves = this.subprueba.puntuacionEscalar;
-      this.router.navigate(['/hoja-resultados']);
+      this.router.navigate([this.globals.rutas[5]]);
       this.scrollToTop();
     }, error => {
       this.mensajeError(error.error.mensaje);

@@ -166,7 +166,7 @@ export class VocabularioWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[5]]);
+        this.router.navigate([this.globals.rutas[6]]);
         this.scrollToTop();
       });
   }

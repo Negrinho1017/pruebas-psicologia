@@ -35,7 +35,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
-        this.router.navigate([this.globals.rutas[7]]);
+        this.router.navigate(['/hoja-resultados']);
         this.scrollToTop();
       }, error => {
         this.mensajeError(error.error.mensaje);

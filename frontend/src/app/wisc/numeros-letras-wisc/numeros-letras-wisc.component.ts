@@ -122,7 +122,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[6]]);
+        this.router.navigate([this.globals.rutas[7]]);
         console.log("escalar: " + this.subprueba.puntuacionEscalar);
         this.scrollToTop();
       });
