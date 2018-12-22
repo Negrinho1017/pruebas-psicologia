@@ -17,8 +17,8 @@ export class SemejanzasWiscComponent implements OnInit {
   reactivoDeInicio: number;
   siguienteReactivo: number;
   anteriorReactivo: number;
-  reactivos: String[] = ["M. Rojo - Azul", "1. Leche - Agua", "2. Pluma - Lápiz", "3. Gato - Ratón",
-    "*4. Manzana - Plátano", "*5. Camisa - Zapato", "6. Invierno - Verano", "7. Mariposa - Abeja",
+  reactivos: String[] = ["M. Rojo - Azul", "*1. Leche - Agua", "*2. Pluma - Lápiz", "3. Gato - Ratón",
+    "4. Manzana - Plátano", "5. Camisa - Zapato", "6. Invierno - Verano", "7. Mariposa - Abeja",
     "8. Madera - Ladrillos", "9. Enojo - Alegría", "10. Poeta - Pintor", "11. Pintura - Estatua",
     "12. Montaña - Lago", "13. Hielo - Vapor", "14. Codo - Rodilla", "15. Mueca - Sonrisa",
     "16. Inundación - Sequía", "17. Primero - Último", "18. Hule - Papel", "19. Permiso - Prohibición",
