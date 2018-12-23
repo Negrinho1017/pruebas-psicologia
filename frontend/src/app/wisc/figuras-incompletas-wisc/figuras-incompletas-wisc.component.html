@@ -1,0 +1,101 @@
+<div class="cuerpo">
+  <table>
+    <tr>
+      <td>
+        <p>
+          <span class="glyphicon glyphicon-circle-arrow-right"></span>
+          <b> Inicio:</b> <br>
+          <b>Edad 6 a 8 años: </b><br>
+          reactivo muestra, luego reactivo 1.<br>
+          <b>Edad 9 a 11 años: </b><br>
+          reactivo muestra, luego reactivo 5.<br>
+          <b>Edad 12 a 16 años: </b><br>
+          reactivo muestra, luego reactivo 10.
+        </p>
+      </td>
+      <td>
+        <p>
+          <i class="fa fa-refresh"></i>
+          <b> Inversión:</b> <br> 
+          <b>Edades 9-16:</b> puntuación de <b>0</b> en cualquiera<br> 
+          de los dos primeros reactivos dados, aplique los reactivos<br> 
+          en orden inverso hasta obtener 2 puntuaciones consecutivas perfectas. 
+        </p>
+      </td>
+      <td>
+        <p>
+          <i class="fa fa-hand-paper-o"></i>
+          <b> Discontinuación:</b> <br> Después de <b>6</b> puntuaciones<br> consecutivas de 0.
+        </p>
+      </td>
+      <td>
+        <p>
+          <span class="glyphicon glyphicon-pencil"></span>
+          <b> Puntuación:</b> <br>
+          Puntuación <b>0</b> o <b>1</b><br>
+          Véase el Manual de aplicación y calificación para respuestas muestra.
+        </p>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td>
+        <p>
+          Cada una de las siguientes indicaciones puede darse sólo una vez durante la aplicación de la subprueba. <br>
+          Si el examinado nombra el dibujo en lugar de referirse o señalar la parte que falta, diga: Sí, pero ¿Qué
+          falta? <br>
+          Si el examinado se refiere o señala una parte que está fuera de la página, diga: A esta figura le falta una
+          parte. ¿Qué parte le falta? <br>
+          Si el examinado se refiere o señala una parte no esencial del dibujo, diga: Si, pero ¿Cuál es la parte más
+          importante que falta?
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Reactivo</th>
+        <th>Tiempo empleado</th>
+        <th>Respuesta</th>
+        <th>0</th>
+        <th>1</th>
+      </tr>
+      <tr *ngFor="let item of reactivos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+        <td>
+          <b *ngIf="i==0">6-16 </b>
+          <b *ngIf="i==1">6-8 </b>
+          <b *ngIf="i==5">9-11 </b>
+          <b *ngIf="i==10">12-16 </b>
+          {{item}}
+        </td>
+        <td>
+          <app-cronometro></app-cronometro>
+        </td>
+        <td>
+          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
+        </td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
+            *ngIf="i>0"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
+            [checked]="checkear(i)" *ngIf="i>0"></td>
+      </tr>
+    </table>
+  </div>
+  <table>
+    <td>
+      * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
+      como se sugiere en el manual de aplicación.<br>
+      + Si el examinado da la respuesta en horas, solicitar el equivalente en minutos.
+    </td>
+    <td>
+      Puntuación natural total para Figuras incompletas: <br>
+      <b id="checksreactivo39">{{this.subprueba.puntuacionNatural}}</b>
+    </td>
+  </table>
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+</div>
