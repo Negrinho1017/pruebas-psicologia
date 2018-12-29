@@ -37,6 +37,7 @@ import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.compon
 import { ComprensionWiscComponent } from './wisc/comprension-wisc/comprension-wisc.component';
 import { BusquedaSimbolosWiscComponent } from './wisc/busqueda-simbolos-wisc/busqueda-simbolos-wisc.component';
 import { FigurasIncompletasWiscComponent } from './wisc/figuras-incompletas-wisc/figuras-incompletas-wisc.component';
+import { RegistrosComponent } from './wisc/registros/registros.component';
 
 const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -73,6 +74,7 @@ const routes: Routes = [
   { path: 'figuras-incompletas-wisc', component: FigurasIncompletasWiscComponent, canActivate: [AuthGuard] },
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
+  { path: 'registros', component: RegistrosComponent, /*canActivate: [AuthGuard]*/ },
   { path: '', component: PaginaPrincipalComponent }
 ]
 

@@ -1,0 +1,100 @@
+<div class="cuerpo">
+  <table>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        <b> Inicio:</b> <br>
+        <b>Edad de 6 a 16 años: </b><br>
+        reactivos muestra, reactivos de práctica, <br>
+        después reactivo 1.
+        <b>Edades de 70 a 90 años:</b><br>
+        no se aplique.
+      </p>
+    </td>
+    <td>
+      <p>
+        <i class="fa fa-hand-paper-o"></i>
+        <b> Discontinuación:</b> <br> Después de 45 segundos para cada reactivo.
+      </p>
+    </td>
+    <td>
+      <p>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <b> Puntuación:</b> <br>
+        Utilice la plantilla de calificación para verificar las respuestas del niño <br>
+        Reste el número de respuestas incorrectas del número de respuestas correctas.<br>
+        Si la puntuación natural total es menor que 0, anote 0 como la puntuación natural total.<br>
+        <b>RA y RE: </b>Puntuación natural total para los reactivos 1 y 2, respectivamente
+      </p>
+    </td>
+  </table>
+  <table>
+    <tr>
+      <th>Reactivo</th>
+      <th>Tiempo empleado</th>
+      <th>Número de correctas</th>
+      <th>Número de incorrectas</th>
+      <th>Puntuación del reactivo</th>
+    </tr>
+    <tr>
+      <td>1. Aleatoria</td>
+      <td>
+        <app-cronometro></app-cronometro>
+      </td>
+      <td><input type="text" id="txtRespuesta" [(ngModel)]="correctas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" id="txtRespuesta" [(ngModel)]="incorrectas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td>
+        <b>{{this.puntuacion1}}</b>
+      </td>
+    </tr>
+    <tr>
+      <td>2. Estructurada</td>
+      <td>
+        <app-cronometro></app-cronometro>
+      </td>
+      <td><input type="text" id="txtRespuesta" [(ngModel)]="correctas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" id="txtRespuesta" [(ngModel)]="incorrectas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td>
+        <b>{{this.puntuacion2}}</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Puntuación natural total: <br>
+        <b>{{this.puntuacionTotal}}</b>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <th colspan="6">
+        <p align="center">Puntos de bonificación por tiempo<br>
+          Si el niño termina un reactivo antes de 45 segundos y la diferencia es mayor o igual a 60, 
+          otorgue puntos de bonificación
+        </p>
+      </th>
+    </tr>
+    <tr>
+      <td>Tiempo en segundos</td>
+      <td>45</td>
+      <td>40-44</td>
+      <td>36-39</td>
+      <td>30-34</td>
+      <td>0-29</td>
+    </tr>
+    <tr>
+      <td>Puntos de bonificación</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+  </table>
+
+
+
+  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
+  </button>
+</div>

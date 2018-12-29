@@ -44,6 +44,7 @@ import { MatricesWiscComponent } from './wisc/matrices-wisc/matrices-wisc.compon
 import { ComprensionWiscComponent } from './wisc/comprension-wisc/comprension-wisc.component';
 import { BusquedaSimbolosWiscComponent } from './wisc/busqueda-simbolos-wisc/busqueda-simbolos-wisc.component';
 import { FigurasIncompletasWiscComponent } from './wisc/figuras-incompletas-wisc/figuras-incompletas-wisc.component';
+import { RegistrosComponent } from './wisc/registros/registros.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,8 @@ import { FigurasIncompletasWiscComponent } from './wisc/figuras-incompletas-wisc
     MatricesWiscComponent,
     ComprensionWiscComponent,
     BusquedaSimbolosWiscComponent,
-    FigurasIncompletasWiscComponent
+    FigurasIncompletasWiscComponent,
+    RegistrosComponent
   ],
   imports: [
     BrowserModule,
