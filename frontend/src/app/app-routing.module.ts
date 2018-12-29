@@ -74,7 +74,7 @@ const routes: Routes = [
   { path: 'figuras-incompletas-wisc', component: FigurasIncompletasWiscComponent, canActivate: [AuthGuard] },
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
-  { path: 'registros', component: RegistrosComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'registros', component: RegistrosComponent, canActivate: [AuthGuard] },
   { path: '', component: PaginaPrincipalComponent }
 ]
 
