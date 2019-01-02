@@ -33,7 +33,7 @@ export class MatricesWiscComponent implements OnInit {
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
-    this.subprueba.numeroSubprueba = 4;
+    this.subprueba.numeroSubprueba = 8;
     this.subprueba.nombre = "Matrices";
   }
 

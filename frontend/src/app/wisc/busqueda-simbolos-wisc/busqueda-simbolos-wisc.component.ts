@@ -21,7 +21,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
 
   ngOnInit() {
     this.subprueba.nombre = "Búsqueda de símbolos";
-    this.subprueba.numeroSubprueba = 7;
+    this.subprueba.numeroSubprueba = 10;
   }
 
   calcularPuntuacion() {
@@ -35,7 +35,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
-        this.router.navigate(['/hoja-resultados']);
+        this.router.navigate(['/hoja-resultados-wisc']);
         this.scrollToTop();
       }, error => {
         this.mensajeError(error.error.mensaje);

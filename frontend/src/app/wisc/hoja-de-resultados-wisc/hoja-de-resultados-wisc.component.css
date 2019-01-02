@@ -1,0 +1,50 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: black;
+    color: white;
+}
+
+.puntuacionEcalarDesactivada{
+    background: black;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.puntuacionEcalarActivada{
+    background: white; 
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#btnPrueba:hover {
+    color: white;
+}
+
+#edad {
+    width: 110%;
+    border: 3px solid gainsboro;
+    padding: 1%;
+    margin: 1%;
+    background: gainsboro;
+    color: white;
+  }
+
+.datosPrueba {    
+    margin-left: 10px;
+    margin-right: 10px;       
+}
+
+.cuerpo {
+    margin-left: 25px;
+    margin-right: 25px;       
+}

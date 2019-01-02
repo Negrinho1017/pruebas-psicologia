@@ -211,7 +211,11 @@ export class IngresoDeDatosComponent implements OnInit {
     this.globals.idEvaluado = this.consultarPruebaForm.controls['identificacion'].value;
     localStorage.setItem('idEvaluado', <string> this.globals.idEvaluado);
     this.globals.mostrarNavBar = true;
-    this.router.navigate(['/hoja-resultados']);
+    if(localStorage.getItem('tipoPrueba')=="WISC"){
+      this.router.navigate(['/hoja-resultados-wisc']);
+    }else{
+      this.router.navigate(['/hoja-resultados']);
+    }
     //this.scrollToTop();
 
   }

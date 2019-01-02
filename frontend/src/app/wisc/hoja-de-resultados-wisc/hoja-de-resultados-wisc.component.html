@@ -1,0 +1,68 @@
+<body class="cuerpo">
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>Subprueba</th>
+          <th>Puntuación <br>
+            natural</th>
+          <th colspan="5">Puntuación escalar</th>
+        </tr>
+        <tr *ngFor="let item of subpruebas; let i = index">
+          <td class="puntuacionEcalarActivada">{{item}}</td>
+          <td class="puntuacionEcalarActivada">{{this.puntuacionesNaturales[i]}}</td>
+          <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==1 || i==5 || i==8)}">
+            <p *ngIf="i==1 || i==5 || i==8">{{this.puntuacionesEscalares[i]}}</p>
+          </td>
+          <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==0 || i==3 || i==7)}">
+            <p *ngIf="i==0 || i==3 || i==7">{{this.puntuacionesEscalares[i]}}</p>
+          </td>
+          <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==2 || i==6)}">
+            <p *ngIf="i==2 || i==6">{{this.puntuacionesEscalares[i]}}</p>
+          </td>
+          <td class="puntuacionEcalarDesactivada" [ngClass]="{'puntuacionEcalarActivada': (i==4 || i==9)}">
+            <p *ngIf="i==4 || i==9">{{this.puntuacionesEscalares[i]}}</p>
+          </td>
+          <td class="puntuacionEcalarActivada">{{this.puntuacionesEscalares[i]}}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th></th>
+          <th>
+            <h6>Comprensión verbal</h6>
+          </th>
+          <th>
+            <h6>Razonamiento perceptual</h6>
+          </th>
+          <th>
+            <h6>Memoria de trabajo</h6>
+          </th>
+          <th>
+            <h6>Velocidad de procesamiento</h6>
+          </th>
+          <th>
+            <h6>CI Total</h6>
+          </th>
+        </tr>
+        <tr>
+          <td class="puntuacionEcalarActivada">Suma de puntuaciones escalares</td>
+          <td class="puntuacionEcalarActivada">{{this.comprensionVerbal}}</td>
+          <td class="puntuacionEcalarActivada">{{this.razonamientoPerceptual}}</td>
+          <td class="puntuacionEcalarActivada">{{this.memoriaDeTrabajo}}</td>
+          <td class="puntuacionEcalarActivada">{{this.velocidadDeProcesamiento}}</td>
+          <td class="puntuacionEcalarActivada">{{this.CITotal}}</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <div [chart]="graficaComprensionVerbal" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+      <div [chart]="graficaRazonamientoPerceptual" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+      <div [chart]="graficaMemoriaDeTrabajo" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+      <div [chart]="graficaVelocidadProcesamiento" class="col-sm-6 col-md-6 col-xs-12 col-lg-3"></div>
+    </div>
+    <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="siguiente()" id="btnPrueba"> Ver
+      puntuaciones compuestas
+      <span class="glyphicon glyphicon-arrow-right"></span>
+    </button>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
+  </body>

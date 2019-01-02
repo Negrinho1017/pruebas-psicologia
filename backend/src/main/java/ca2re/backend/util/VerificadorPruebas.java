@@ -4,6 +4,7 @@ import java.util.List;
 
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.constantes.Subpruebas;
+import ca2re.backend.dominio.constantes.SubpruebasWisc;
 import ca2re.backend.dominio.constantes.TiposPrueba;
 
 public class VerificadorPruebas {
@@ -37,5 +38,47 @@ public class VerificadorPruebas {
 	
 	public static String obtenerColeccionEnBD(String tipoPrueba) {
 		return tipoPrueba.equals(TiposPrueba.WAIS.getValue()) ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
+	}
+	
+	public static boolean esSubpruebaDeMemoriaDeTrabajo(int numeroSubprueba) {
+		return numeroSubprueba == Subpruebas.RETENCION_DE_DIGITOS.getValue()
+				|| numeroSubprueba == Subpruebas.ARITMETICA.getValue()
+				|| numeroSubprueba == Subpruebas.SUCESION_NUMEROS_LETRAS.getValue();
+	}
+
+	public static boolean esSubpruebaDeRazonamientoPerceptual(int numeroSubprueba) {
+		return numeroSubprueba == Subpruebas.DISENO_DE_CUBOS.getValue()
+				|| numeroSubprueba == Subpruebas.MATRICES.getValue()
+				|| numeroSubprueba == Subpruebas.ROMPECABEZAS_VISUAL.getValue()
+				|| numeroSubprueba == Subpruebas.PESO_FIGURADO.getValue()
+				|| numeroSubprueba == Subpruebas.FIGURAS_INCOMPLETAS.getValue();
+	}
+
+	public static boolean esSubpruebaDeComprensionVerbal(int numeroSubprueba) {
+		return numeroSubprueba == Subpruebas.SEMEJANZAS.getValue()
+				|| numeroSubprueba == Subpruebas.VOCABULARIO.getValue()
+				|| numeroSubprueba == Subpruebas.INFORMACION.getValue()
+				|| numeroSubprueba == Subpruebas.COMPRENSION.getValue();
+	}
+	
+	public static boolean esSubpruebaDeMemoriaDeTrabajoWisc(int numeroSubprueba) {
+		return numeroSubprueba == SubpruebasWisc.RETENCION_DE_DIGITOS.getValue()
+				|| numeroSubprueba == SubpruebasWisc.ARITMETICA.getValue()
+				|| numeroSubprueba == SubpruebasWisc.SUCESION_NUMEROS_LETRAS.getValue();
+	}
+
+	public static boolean esSubpruebaDeRazonamientoPerceptualWisc(int numeroSubprueba) {
+		return numeroSubprueba == SubpruebasWisc.DISENO_DE_CUBOS.getValue()
+				|| numeroSubprueba == SubpruebasWisc.MATRICES.getValue()
+				|| numeroSubprueba == SubpruebasWisc.CONCEPTOS_CON_DIBUJOS.getValue()
+				|| numeroSubprueba == Subpruebas.FIGURAS_INCOMPLETAS.getValue();
+	}
+
+	public static boolean esSubpruebaDeComprensionVerbalWisc(int numeroSubprueba) {
+		return numeroSubprueba == SubpruebasWisc.SEMEJANZAS.getValue()
+				|| numeroSubprueba == SubpruebasWisc.VOCABULARIO.getValue()
+				|| numeroSubprueba == SubpruebasWisc.INFORMACION.getValue()
+				|| numeroSubprueba == SubpruebasWisc.COMPRENSION.getValue()
+				|| numeroSubprueba == SubpruebasWisc.PISTAS.getValue();
 	}
 }

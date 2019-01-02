@@ -35,12 +35,11 @@ export class VocabularioWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
-    this.globals.edad = 9
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Vocabulario";
-    this.subprueba.numeroSubprueba = 5;
+    this.subprueba.numeroSubprueba = 6;
   }
 
   criteriosDeInversion() {

@@ -20,7 +20,7 @@ export class ClavesWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
-    this.subprueba.numeroSubprueba = 10;
+    this.subprueba.numeroSubprueba = 5;
     this.subprueba.nombre = "Claves";
   }
 

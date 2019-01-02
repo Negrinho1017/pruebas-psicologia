@@ -25,7 +25,7 @@ export class RegistrosComponent implements OnInit {
 
   ngOnInit() {
     this.subprueba.nombre = "Cancelación";
-    this.subprueba.numeroSubprueba = 14;
+    this.subprueba.numeroSubprueba = 12;
   }
 
   calcularPuntuacion(){

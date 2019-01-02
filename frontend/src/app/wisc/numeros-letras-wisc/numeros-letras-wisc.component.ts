@@ -44,7 +44,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
 
   ngOnInit() {
     this.subprueba.nombre = "Sucesión de números y letras";
-    this.subprueba.numeroSubprueba = 11;
+    this.subprueba.numeroSubprueba = 7;
     this.crearRespuestas();
   }
 

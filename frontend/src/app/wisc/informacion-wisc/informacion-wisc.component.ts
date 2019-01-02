@@ -37,7 +37,7 @@ export class InformacionWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Información";
-    this.subprueba.numeroSubprueba = 9;
+    this.subprueba.numeroSubprueba = 13;
   }
 
   criteriosDeInversion() {

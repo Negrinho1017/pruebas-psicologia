@@ -36,7 +36,7 @@ export class ComprensionWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Comprensión";
-    this.subprueba.numeroSubprueba = 13;
+    this.subprueba.numeroSubprueba = 9;
   }
 
   criteriosDeInversion() {

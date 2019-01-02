@@ -52,7 +52,7 @@ public class AdministradorPruebas {
 	public Prueba ingresarSubprueba(Subprueba subprueba, String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
-		int ramaDelConocimiento = buscarRamaDelConocimiento(subprueba.getNumeroSubprueba());
+		int ramaDelConocimiento = obtenerRamaDelConocimiento(subprueba.getNumeroSubprueba(), prueba.getTipoPrueba());
 		if (ramasDelConocimiento.get(ramaDelConocimiento).getSubpruebas() == null) {
 			ramasDelConocimiento.get(ramaDelConocimiento).setSubpruebas(new ArrayList<Subprueba>());
 			ramasDelConocimiento.get(ramaDelConocimiento).setPuntuacionTotal(0);
@@ -64,6 +64,14 @@ public class AdministradorPruebas {
 				ramasDelConocimiento.get(ramaDelConocimiento).getPuntuacionTotal() + subprueba.getPuntuacionEscalar());
 		prueba.setRamaDelConocimiento(ramasDelConocimiento);
 		return prueba;
+	}
+	
+	public int obtenerRamaDelConocimiento(int numeroSubprueba, String tipoSubprueba) {
+		if(tipoSubprueba.equals(TiposPrueba.WAIS.getValue())) {
+			return buscarRamaDelConocimiento(numeroSubprueba);
+		}else {
+			return buscarRamaDelConocimientoWisc(numeroSubprueba);
+		}
 	}
 
 	public Prueba ingresarPuntuacionCompuesta(String idEvaluado) {
@@ -96,38 +104,29 @@ public class AdministradorPruebas {
 			return "IVP";
 		}
 	}
-
-	public int buscarRamaDelConocimiento(int numeroSubprueba) {
-		if (esSubpruebaDeComprensionVerbal(numeroSubprueba)) {
+	
+	public int buscarRamaDelConocimientoWisc(int numeroSubprueba) {
+		if (VerificadorPruebas.esSubpruebaDeComprensionVerbalWisc(numeroSubprueba)) {
 			return RamasDelConocimiento.COMPRENSION_VERBAL.getValue();
-		} else if (esSubpruebaDeRazonamientoPerceptual(numeroSubprueba)) {
+		} else if (VerificadorPruebas.esSubpruebaDeRazonamientoPerceptualWisc(numeroSubprueba)) {
 			return RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue();
-		} else if (esSubpruebaDeMemoriaDeTrabajo(numeroSubprueba)) {
+		} else if (VerificadorPruebas.esSubpruebaDeMemoriaDeTrabajoWisc(numeroSubprueba)) {
 			return RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue();
 		} else {
 			return RamasDelConocimiento.VELOCIDAD_DE_PROCESAMIENTO.getValue();
 		}
 	}
 
-	private boolean esSubpruebaDeMemoriaDeTrabajo(int numeroSubprueba) {
-		return numeroSubprueba == Subpruebas.RETENCION_DE_DIGITOS.getValue()
-				|| numeroSubprueba == Subpruebas.ARITMETICA.getValue()
-				|| numeroSubprueba == Subpruebas.SUCESION_NUMEROS_LETRAS.getValue();
-	}
-
-	private boolean esSubpruebaDeRazonamientoPerceptual(int numeroSubprueba) {
-		return numeroSubprueba == Subpruebas.DISENO_DE_CUBOS.getValue()
-				|| numeroSubprueba == Subpruebas.MATRICES.getValue()
-				|| numeroSubprueba == Subpruebas.ROMPECABEZAS_VISUAL.getValue()
-				|| numeroSubprueba == Subpruebas.PESO_FIGURADO.getValue()
-				|| numeroSubprueba == Subpruebas.FIGURAS_INCOMPLETAS.getValue();
-	}
-
-	private boolean esSubpruebaDeComprensionVerbal(int numeroSubprueba) {
-		return numeroSubprueba == Subpruebas.SEMEJANZAS.getValue()
-				|| numeroSubprueba == Subpruebas.VOCABULARIO.getValue()
-				|| numeroSubprueba == Subpruebas.INFORMACION.getValue()
-				|| numeroSubprueba == Subpruebas.COMPRENSION.getValue();
+	public int buscarRamaDelConocimiento(int numeroSubprueba) {
+		if (VerificadorPruebas.esSubpruebaDeComprensionVerbal(numeroSubprueba)) {
+			return RamasDelConocimiento.COMPRENSION_VERBAL.getValue();
+		} else if (VerificadorPruebas.esSubpruebaDeRazonamientoPerceptual(numeroSubprueba)) {
+			return RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue();
+		} else if (VerificadorPruebas.esSubpruebaDeMemoriaDeTrabajo(numeroSubprueba)) {
+			return RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue();
+		} else {
+			return RamasDelConocimiento.VELOCIDAD_DE_PROCESAMIENTO.getValue();
+		}
 	}
 
 	public int obtenerPuntuacionEscalarDisenioCubos(String idEdad, int puntuacionNatural) {
