@@ -39,6 +39,7 @@ import { BusquedaSimbolosWiscComponent } from './wisc/busqueda-simbolos-wisc/bus
 import { FigurasIncompletasWiscComponent } from './wisc/figuras-incompletas-wisc/figuras-incompletas-wisc.component';
 import { RegistrosComponent } from './wisc/registros/registros.component';
 import { InformacionWiscComponent } from './wisc/informacion-wisc/informacion-wisc.component';
+import { AritmeticaWiscComponent } from './wisc/aritmetica-wisc/aritmetica-wisc.component';
 
 const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -57,6 +58,7 @@ const routes: Routes = [
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario-wisc', component: VocabularioWiscComponent, canActivate: [AuthGuard] },
   { path: 'aritmetica', component: AritmeticaComponent, canActivate: [AuthGuard] },
+  { path: 'aritmetica-wisc', component: AritmeticaWiscComponent, canActivate: [AuthGuard] },
   { path: 'busqueda-simbolos', component: BusquedaSimbolosComponent, canActivate: [AuthGuard] },
   { path: 'busqueda-simbolos-wisc', component: BusquedaSimbolosWiscComponent, canActivate: [AuthGuard] },
   { path: 'rompecabezas-visual', component: RompecabezasVisualComponent, canActivate: [AuthGuard] },
