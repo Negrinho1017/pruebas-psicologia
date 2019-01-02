@@ -17,7 +17,11 @@ export class InformacionWiscComponent implements OnInit {
   reactivoDeInicio: number;
   anteriorReactivo: number;
   siguienteReactivo: number;
-  reactivos: String[] = ["*1. Lunes", "*2. Forma", "+3. Termómetro", "+4. Segundos", "5. Agua", "*6. Brasil","7. Emiliano Zapata","8. Italia","9. El quijote de la mancha","10. Cleopatra","11. Sahara", "12. Línea","13. Olimpiadas","14. Revolución mexicana","15. La malinche","16. Relatividad","17. Gandhi", "18. Hervir","19. Órgano","20. Lengua","21. Catalina","*22. Vasos sanguíneos","23. Sherlock Holmes", "*24. Minutos","25. Alicia","*26. Circunferencia"];
+  reactivos: String[] = ["1. Pie","2. Nariz","3. Comida","4. Orejas","5. Años","6. Patas","7. Jueves","8. Monedas",
+  "9. Marzo","10. Hierve","11.Semana","12. Año","13. Colón","14. Estaciones","15. Docena","16. Estómago",
+  "17. Mes","18. Fósil","19. Ozono","20. Oxígeno","21. Jeroglíficos","22. Población","23. Grecia",
+  "24. Oxidación","25. Hojas","26. Darwin","27. Diamantes","28. Confucio","29. Solsticio","30. Barómetro",
+  "31. Fisión","32. Nueva York","33. Resina natural"];
   puntuacion: number = 0;
   listaCalificaciones: number[];
   habilitaReactivo: boolean[];    
@@ -62,7 +66,7 @@ export class InformacionWiscComponent implements OnInit {
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if(this.reactivoDeInicio != this.primerReactivo &&
-      numeroReactivo == this.reactivoDeInicio + 1 && (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo-1] < 2)){
+      numeroReactivo == this.reactivoDeInicio + 1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
       this.limpiarReactivosAnt(numeroReactivo);
     }    
     else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
@@ -80,7 +84,7 @@ export class InformacionWiscComponent implements OnInit {
   }  
 
   private reversarInversion(puntuacionReactivo: number, numeroReactivo: number) {
-    if (puntuacionReactivo < 1 || this.listaCalificaciones[numeroReactivo + 1] < 1) {
+    if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.habilitaReactivo[numeroReactivo - 1] = false;
       this.listaCalificaciones[numeroReactivo - 1] = 0;
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
