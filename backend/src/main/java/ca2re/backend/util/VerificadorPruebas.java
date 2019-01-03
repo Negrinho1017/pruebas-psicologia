@@ -2,7 +2,9 @@ package ca2re.backend.util;
 
 import java.util.List;
 
+import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.dominio.constantes.SubpruebasWisc;
 import ca2re.backend.dominio.constantes.TiposPrueba;
@@ -81,4 +83,13 @@ public class VerificadorPruebas {
 				|| numeroSubprueba == SubpruebasWisc.COMPRENSION.getValue()
 				|| numeroSubprueba == SubpruebasWisc.PISTAS.getValue();
 	}
+	
+	public static boolean estaRetencionDeDigitos(Prueba prueba) {
+		return prueba.getRamaDelConocimiento().get(RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue()).getSubpruebas().get(0).getNumeroSubprueba() == 3;
+	}
+
+	public static boolean estaDisenoDeCubos(Prueba prueba) {
+		return prueba.getRamaDelConocimiento().get(RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue()).getSubpruebas().get(0).getNumeroSubprueba() == 1;
+	}
+	
 }

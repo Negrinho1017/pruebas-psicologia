@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { map, catchError } from 'rxjs/operators';
 import { Prueba } from '../../model/Prueba';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subprueba } from '../../model/Subprueba';
+import { Observable } from 'rxjs';
+import { SubpruebasAnalisisProceso } from 'src/app/model/SubpruebasAnalisisProceso';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +16,10 @@ export class AnalisisProcesoService {
   private options = new RequestOptions({headers:this.headers});
   constructor( private _http: Http, private http: HttpClient ) { }
 
-  obtenerDisenoCubosSinBonificacionPorTiempo(idEvaluado: String){
-    return this._http.get(this.url + '/analisis-proceso/diseno-cubos-sin-bonificacion-tiempo?idEvaluado='+idEvaluado, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
-  }
-
-  obtenerRetencionDeDigitos(idEvaluado: String, numeroRetencionDigitos: number){
-    return this._http.get(this.url + '/analisis-proceso/retencion-digitos?idEvaluado='+idEvaluado+
-    '&numeroRetencionDigitos='+numeroRetencionDigitos, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerSubpruebasAnalisisProceso(idEvaluado: String): Observable<SubpruebasAnalisisProceso>{
+    const httpOptions = {
+      params: new HttpParams().set('idEvaluado', <string> idEvaluado)
+    };
+    return this.http.get<SubpruebasAnalisisProceso>(this.url + '/analisis-proceso/subpruebas-analisis-proceso', httpOptions);
   }
 }

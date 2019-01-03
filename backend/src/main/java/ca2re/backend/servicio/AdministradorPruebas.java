@@ -9,10 +9,10 @@ import ca2re.backend.dominio.Prueba;
 import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
+import ca2re.backend.dominio.SubpruebasAnalisisProceso;
 import ca2re.backend.dominio.ValorCriticoWAIS;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
-import ca2re.backend.dominio.constantes.Subpruebas;
 import ca2re.backend.dominio.constantes.TiposPrueba;
 import ca2re.backend.dominio.excepciones.PruebasPsicologiaException;
 import ca2re.backend.persistencia.CalificacionAnalisisProcesoDAO;
@@ -31,6 +31,10 @@ public class AdministradorPruebas {
 
 	private static final int PUNTUACION_MAXIMA_BUSQUEDA_SIMBOLOS = 60;
 
+	private static final int RETENCION_DIGITOS = 6;
+	
+	private static final int DISENO_CUBOS = 3;
+	
 	@Autowired
 	private CalificacionWAISDAO calificacionWaisDAO;
 	
@@ -310,5 +314,19 @@ public class AdministradorPruebas {
 	public Prueba actualizarPrueba(Prueba prueba, String idEvaluado) {
 		String coleccion = VerificadorPruebas.obtenerColeccionEnBD(prueba.getTipoPrueba());
 		return pruebaWaisDAO.actualizarPrueba(prueba, idEvaluado, coleccion);
+	}
+	
+	public SubpruebasAnalisisProceso obtenerSubpruebasAnalisisProceso(String idEvaluado) {
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		if(VerificadorPruebas.estaDisenoDeCubos(prueba) && VerificadorPruebas.estaRetencionDeDigitos(prueba)){
+			Subprueba disenoCubos = prueba.getRamaDelConocimiento().get(1).getSubpruebas().get(0);
+			return new SubpruebasAnalisisProceso(obtenerRetencionDeDigitos(RetencionDeDigitos.RDD.getValue(), RETENCION_DIGITOS, idEvaluado),
+					obtenerRetencionDeDigitos(RetencionDeDigitos.RDI.getValue(), RETENCION_DIGITOS, idEvaluado),
+					obtenerRetencionDeDigitos(RetencionDeDigitos.RDS.getValue(), RETENCION_DIGITOS, idEvaluado), 
+					disenoCubos, 
+					obtenerDisenoCubosSinBonificacionDeTiempo(DISENO_CUBOS, idEvaluado));
+		}
+		throw new PruebasPsicologiaException("No se encontraron pruebas de diseño de cubos o de retención de dígitos");
+		
 	}
 }

@@ -11,13 +11,8 @@ import { FortalezasDebilidadesService } from '../fortalezas-debilidades/fortalez
   styleUrls: ['./analisis-proceso.component.css']
 })
 export class AnalisisProcesoComponent implements OnInit {
-  puntuacionesProceso: String[] = ["Diseño de cubos sin bonificación por tiempo",
-  "Retención de dígitos en orden directo","Retención de dígitos en orden inverso",
-  "Retención de dígitos en secuencia"];
-  comparaciones: String[] = ["Diseño de cubos - Diseño de cubos sin bonificación por tiempo",
-  "Retención de dígitos en orden directo - Retención de dígitos en orden inverso",
-  "Retención de dígitos en orden directo - Retención de dígitos en secuencia",
-  "Retención de dígitos en orden inverso - Retención de dígitos en secuencia"];
+  puntuacionesProceso: String[];
+  comparaciones: String[];
   p1: String[] = ["DC","RDD","RDD","RDI"];
   p2: String[] = ["DCS","RDI","RDS","RDS"];
   subpruebas: Subprueba[] = [];
@@ -33,11 +28,29 @@ export class AnalisisProcesoComponent implements OnInit {
 
   ngOnInit() {
     this.loading=true;
-    this.analisisProcesoService.obtenerDisenoCubosSinBonificacionPorTiempo(this.globals.idEvaluado)
+    this.analisisProcesoService.obtenerSubpruebasAnalisisProceso(this.globals.idEvaluado)
       .subscribe(res => {
-        this.subpruebas[0] = res;
+        this.subpruebas[0] = res.dcsbt;
+        this.subpruebas[1] = res.rdd;
+        this.subpruebas[2] = res.rdi;
+        this.subpruebas[3] = res.rds;
+        this.subpruebas[4] = res.dc;
         this.puntuacionesNaturales2[0] = this.subpruebas[0].puntuacionNatural;
-        this.rdd();   
+        this.puntuacionesNaturales1[1] = this.subpruebas[1].puntuacionNatural;
+        this.puntuacionesNaturales1[2] = this.subpruebas[1].puntuacionNatural;
+        this.puntuacionesNaturales1[3] = this.subpruebas[2].puntuacionNatural;
+        this.puntuacionesNaturales2[1] = this.subpruebas[2].puntuacionNatural;
+        this.puntuacionesNaturales2[2] = this.subpruebas[3].puntuacionNatural;
+        this.puntuacionesNaturales2[3] = this.subpruebas[3].puntuacionNatural;
+        this.puntuacionesNaturales1[0] = this.subpruebas[4].puntuacionNatural;  
+        this.calcularDiferencias();
+        this.comparaciones = ["Diseño de cubos - Diseño de cubos sin bonificación por tiempo",
+        "Retención de dígitos en orden directo - Retención de dígitos en orden inverso",
+        "Retención de dígitos en orden directo - Retención de dígitos en secuencia",
+        "Retención de dígitos en orden inverso - Retención de dígitos en secuencia"];
+        this.puntuacionesProceso = ["Diseño de cubos sin bonificación por tiempo",
+        "Retención de dígitos en orden directo","Retención de dígitos en orden inverso",
+        "Retención de dígitos en secuencia"];
         this.loading=false;  
       });
   }
@@ -53,44 +66,6 @@ export class AnalisisProcesoComponent implements OnInit {
       }
       i++;
     }
-  }
-
-  rdd(){
-    this.analisisProcesoService.obtenerRetencionDeDigitos(this.globals.idEvaluado,1)
-      .subscribe(res => {
-        this.subpruebas[1] = res;
-        this.puntuacionesNaturales1[1] = this.subpruebas[1].puntuacionNatural;
-        this.puntuacionesNaturales1[2] = this.subpruebas[1].puntuacionNatural;
-        this.rdi();
-      });
-  }
-
-  rdi(){
-    this.analisisProcesoService.obtenerRetencionDeDigitos(this.globals.idEvaluado,2)
-      .subscribe(res => {
-        this.subpruebas[2] = res;
-        this.puntuacionesNaturales1[3] = this.subpruebas[2].puntuacionNatural;
-        this.puntuacionesNaturales2[1] = this.subpruebas[2].puntuacionNatural;
-        this.rds();
-      });
-  }
-
-  rds(){
-    this.analisisProcesoService.obtenerRetencionDeDigitos(this.globals.idEvaluado,3)
-      .subscribe(res => {
-        this.subpruebas[3] = res;
-        this.puntuacionesNaturales2[2] = this.subpruebas[3].puntuacionNatural;
-        this.puntuacionesNaturales2[3] = this.subpruebas[3].puntuacionNatural;
-        this.dc();
-      });
-  }
-
-  dc(){
-    this.fortalezasDebilidadesService.obtenerSubpruebasPorIdEvaluado(this.globals.idEvaluado)
-    .subscribe(res => {
-      this.puntuacionesNaturales1[0] = res[3].puntuacionNatural;
-      this.calcularDiferencias();
-    });
   }
 
 }
