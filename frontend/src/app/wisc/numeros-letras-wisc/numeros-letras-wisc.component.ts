@@ -118,7 +118,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarNumerosLetras("20:0-24:11", this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarNumerosLetras(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

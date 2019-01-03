@@ -146,7 +146,7 @@ export class RetencionDigitosComponent implements OnInit {
     this.subprueba.numeroSubprueba = 3;
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.subprueba.nombre = "Retención de dígitos";
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDigitos("20:0-24:11", this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDigitos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

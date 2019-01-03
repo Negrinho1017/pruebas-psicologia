@@ -30,7 +30,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.puntuacionNatural = this.puntuacion;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos("20:0-24:11", this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

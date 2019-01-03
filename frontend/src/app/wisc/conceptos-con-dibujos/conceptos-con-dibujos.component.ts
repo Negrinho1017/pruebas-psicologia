@@ -158,7 +158,7 @@ export class ConceptosConDibujosComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarMatrices("20:0-24:11", this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarMatrices(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

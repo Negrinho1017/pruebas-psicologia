@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca2re.backend.servicio.AdministradorPruebas;
+import ca2re.backend.util.EdadUtil;
 
 @RestController
 @RequestMapping(value = "/puntuacion-escalar")
@@ -20,67 +21,67 @@ public class PuntuacionEscalarController {
 	
 	@RequestMapping(value = "/diseno-cubos", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarDisenioCubos(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarDisenioCubos(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarDisenioCubos(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarDisenioCubos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/semejanzas", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarSemejanzas(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarSemejanzas(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarSemejanzas(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarSemejanzas(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/retencion-digitos", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarRetencionDigitos(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarRetencionDigitos(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarRetencionDigitos(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarRetencionDigitos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/matrices", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarMatrices(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarMatrices(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarMatrices(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarMatrices(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/vocabulario", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarVocabulario(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarVocabulario(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarVocabulario(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarVocabulario(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/aritmetica", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarAritmetica(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarAritmetica(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarAritmetica(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarAritmetica(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/busqueda-simbolos", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarBusquedaSimbolos(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarBusquedaSimbolos(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarBusquedaSimbolos(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarBusquedaSimbolos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/rompecabezas-visual", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarRompecabezasVisual(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarRompecabezasVisual(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarRompecabezasVisual(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarRompecabezasVisual(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/informacion", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarInformacion(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarInformacion(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarInformacion(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarInformacion(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/claves", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarClaves(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarClaves(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarClaves(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarClaves(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/numeros-letras", method = RequestMethod.GET)
 	@ResponseBody
-	public int obtenerPuntuacionEscalarNumerosLetras(@RequestParam String idEdad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(idEdad, puntuacionNatural);
+	public int obtenerPuntuacionEscalarNumerosLetras(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 }

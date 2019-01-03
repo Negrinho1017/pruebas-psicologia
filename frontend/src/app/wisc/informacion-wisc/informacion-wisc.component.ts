@@ -153,7 +153,7 @@ export class InformacionWiscComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion("20:0-24:11",this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

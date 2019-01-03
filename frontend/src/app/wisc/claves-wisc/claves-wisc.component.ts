@@ -26,7 +26,7 @@ export class ClavesWiscComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.puntuacionNatural = this.puntuacion;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarClaves("20:0-24:11",this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarClaves(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

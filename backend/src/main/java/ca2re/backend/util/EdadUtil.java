@@ -3,6 +3,7 @@ package ca2re.backend.util;
 import java.util.Calendar;
 
 import ca2re.backend.dominio.EdadPersona;
+import ca2re.backend.dominio.constantes.IdsEdad;
 import ca2re.backend.dominio.constantes.IdsRangoEdad;
 
 public class EdadUtil {
@@ -44,5 +45,38 @@ public class EdadUtil {
 		}else if(Operaciones.elValorEstaEnElRango(85, 89, edad)) {
 			return IdsRangoEdad.EDADES_85_89.getValue();
 		}return IdsRangoEdad.EDADES_POR_DEFECTO.getValue();
+	}
+	
+	public static String obtenerIdEdad(int edad) {
+		if(Operaciones.elValorEstaEnElRango(16, 17, edad)) {
+			return IdsEdad.EDADES_16_17.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(18, 19, edad)) {
+			return IdsEdad.EDADES_18_19.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(20, 24, edad)) {
+			return IdsEdad.EDADES_20_24.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(25, 34, edad)) {
+			return IdsEdad.EDADES_25_34.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(35, 44, edad)) {
+			return IdsEdad.EDADES_35_44.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(45, 54, edad)) {
+			return IdsEdad.EDADES_45_54.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(55, 69, edad)) {
+			return IdsEdad.EDADES_55_69.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(70, 79, edad)) {
+			return IdsEdad.EDADES_70_79.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(80, 84, edad)) {
+			return IdsEdad.EDADES_80_84.getValue();
+		}
+		else {
+			return IdsEdad.EDADES_85_89.getValue();
+		}
 	}
 }
