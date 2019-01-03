@@ -41,7 +41,6 @@ export class CancelacionComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      //this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.navegar();
       this.scrollToTop();
     });
@@ -61,6 +60,7 @@ export class CancelacionComponent implements OnInit {
       this.router.navigate([this.globals.rutas[7]]);
     }
     if (this.globals.rutas[9] == "/cancelacion") {
+      this.globals.ultimaSubprueba = this.subprueba;
       this.router.navigate(['/hoja-resultados']);
     }
   }

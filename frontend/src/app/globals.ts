@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Prueba } from "./model/Prueba";
+import { Subprueba } from "./model/Subprueba";
 
 @Injectable()
 export class Globals {
@@ -11,6 +12,7 @@ export class Globals {
     retencionDigitos: number;
     aritmetica: number;
     busquedaSimbolos: number;
+    ultimaSubprueba: Subprueba;
     claves: number;
     clavesNatural: number;
     indices: number[] = [];
