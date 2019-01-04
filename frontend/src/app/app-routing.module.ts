@@ -41,6 +41,7 @@ import { RegistrosComponent } from './wisc/registros/registros.component';
 import { InformacionWiscComponent } from './wisc/informacion-wisc/informacion-wisc.component';
 import { AritmeticaWiscComponent } from './wisc/aritmetica-wisc/aritmetica-wisc.component';
 import { HojaDeResultadosWiscComponent } from './wisc/hoja-de-resultados-wisc/hoja-de-resultados-wisc.component';
+import { PistasComponent } from './wisc/pistas/pistas.component';
 
 const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -81,6 +82,7 @@ const routes: Routes = [
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
   { path: 'registros', component: RegistrosComponent, canActivate: [AuthGuard] },
+  { path: 'pistas', component: PistasComponent, canActivate: [AuthGuard] },
   { path: '', component: PaginaPrincipalComponent }
 ]
 

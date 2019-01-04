@@ -48,6 +48,7 @@ import { RegistrosComponent } from './wisc/registros/registros.component';
 import { InformacionWiscComponent } from './wisc/informacion-wisc/informacion-wisc.component';
 import { AritmeticaWiscComponent } from './wisc/aritmetica-wisc/aritmetica-wisc.component';
 import { HojaDeResultadosWiscComponent } from './wisc/hoja-de-resultados-wisc/hoja-de-resultados-wisc.component';
+import { PistasComponent } from './wisc/pistas/pistas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +90,8 @@ import { HojaDeResultadosWiscComponent } from './wisc/hoja-de-resultados-wisc/ho
     RegistrosComponent,
     InformacionWiscComponent,
     AritmeticaWiscComponent,
-    HojaDeResultadosWiscComponent
+    HojaDeResultadosWiscComponent,
+    PistasComponent
   ],
   imports: [
     BrowserModule,
