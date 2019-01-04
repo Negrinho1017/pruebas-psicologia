@@ -17,7 +17,7 @@ export class MatricesWiscComponent implements OnInit {
   reactivoDeInicio: number;
   siguienteReactivo: number;
   anteriorReactivo: number;
-  respuestasCorrectas: number[] = [1,5,4,5,1,2,2,3,4,4,1,4,3,2,5,1,4,2,1,4,5,4,3,2,3,3,4,2,1,1,3,2,2,5,4,3,1,5];
+  respuestasCorrectas: number[] = [1, 5, 4, 5, 1, 2, 2, 3, 4, 4, 1, 4, 3, 2, 5, 1, 4, 2, 1, 4, 5, 4, 3, 2, 3, 3, 4, 2, 1, 1, 3, 2, 2, 5, 4, 3, 1, 5];
   puntuacion: number = 0;
   listaCalificaciones: number[];
   habilitaReactivo: boolean[] = [];
@@ -40,17 +40,17 @@ export class MatricesWiscComponent implements OnInit {
   criteriosDeInversion() {
     if (this.globals.edad >= 6 && this.globals.edad <= 8) {
       this.reactivoDeInicio = 6;
-      this.habilitaReactivo = [true,true,true,true,true, true];
+      this.habilitaReactivo = [true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1];
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
       this.reactivoDeInicio = 9;
-      this.habilitaReactivo = [true,true,true,true,true, true,true,true,true];
+      this.habilitaReactivo = [true, true, true, true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1];
     }
     else {
       this.reactivoDeInicio = 13;
-      this.habilitaReactivo = [true,true,true,true,true,true,true, true,true,true,true,true,true];
+      this.habilitaReactivo = [true, true, true, true, true, true, true, true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     }
   }
@@ -63,14 +63,14 @@ export class MatricesWiscComponent implements OnInit {
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
     if (this.reactivoDeInicio != this.primerReactivo &&
-      numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+      numeroReactivo == this.reactivoDeInicio + 1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
+    else if (numeroReactivo <= this.reactivoDeInicio - 2 && numeroReactivo > this.primerReactivo) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if (numeroReactivo == this.reactivoDeInicio-1) {
-      this.cambiarFoco(numeroReactivo, numeroReactivo-1);
+    else if (numeroReactivo == this.reactivoDeInicio - 1) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
@@ -87,7 +87,7 @@ export class MatricesWiscComponent implements OnInit {
       this.cambiarFoco(numeroReactivo, numeroReactivo - 1);
     }
     else {
-      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
     }
   }
 
@@ -97,7 +97,7 @@ export class MatricesWiscComponent implements OnInit {
       this.mensajeWarning("Se ha descontinuado la subprueba");
     }
     else {
-      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
+      this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
     }
   }
 
@@ -106,7 +106,7 @@ export class MatricesWiscComponent implements OnInit {
     this.habilitaReactivo[numeroReactivo - 3] = false;
     this.listaCalificaciones[numeroReactivo - 2] = 0;
     this.listaCalificaciones[numeroReactivo - 3] = 0;
-    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio-1);
+    this.cambiarFoco(numeroReactivo, this.reactivoDeInicio - 1);
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
@@ -114,7 +114,7 @@ export class MatricesWiscComponent implements OnInit {
     let discontinua: boolean = puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
-      && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
+      && numeroReactivo > this.reactivoDeInicio + cantidadParaDescontinuar;
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
@@ -193,32 +193,13 @@ export class MatricesWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(numeroSubprueba: number){
-    if(numeroSubprueba==1){
-      this.cambiarPorPesoFigurado();
-    }
-    if(numeroSubprueba==2){
-      this.cambiarPorFigurasIncompletas();
-    }   
-  }
-
-  cambiarPorPesoFigurado(){
-    if(this.globals.subpruebas[0]=="Peso figurado"){
-      this.mensajeError("La subprueba peso figurado ya fue realizada")
-    }else{
-      this.globals.rutas[3]="/peso-figurado";
-      this.globals.subpruebas[3] = "Peso figurado";
-      this.router.navigate([this.globals.rutas[3]]);
-    }
-  }
-
-  cambiarPorFigurasIncompletas(){
-    if(this.globals.subpruebas[0]=="Figuras incompletas"){
+  cambiarPorFigurasIncompletas() {
+    if (this.globals.subpruebas[0] == "Figuras incompletas" || this.globals.subpruebas[3] == "Figuras incompletas") {
       this.mensajeError("La subprueba figuras incompletas ya fue realizada")
-    }else{
-      this.globals.rutas[3]="/figuras-incompletas";
-      this.globals.subpruebas[3] = "Figuras incompletas";
-      this.router.navigate([this.globals.rutas[3]]);
+    } else {
+      this.globals.rutas[7] = "/figuras-incompletas-wisc";
+      this.globals.subpruebas[7] = "Figuras incompletas";
+      this.router.navigate([this.globals.rutas[7]]);
     }
   }
 

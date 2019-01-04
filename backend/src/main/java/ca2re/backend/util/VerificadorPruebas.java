@@ -73,7 +73,7 @@ public class VerificadorPruebas {
 		return numeroSubprueba == SubpruebasWisc.DISENO_DE_CUBOS.getValue()
 				|| numeroSubprueba == SubpruebasWisc.MATRICES.getValue()
 				|| numeroSubprueba == SubpruebasWisc.CONCEPTOS_CON_DIBUJOS.getValue()
-				|| numeroSubprueba == Subpruebas.FIGURAS_INCOMPLETAS.getValue();
+				|| numeroSubprueba == SubpruebasWisc.FIGURAS_INCOMPLETAS.getValue();
 	}
 
 	public static boolean esSubpruebaDeComprensionVerbalWisc(int numeroSubprueba) {

@@ -174,16 +174,6 @@ export class FigurasIncompletasWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(){
-    if(this.globals.subpruebas[2]=="Sucesión de números y letras"){
-      this.mensajeError("Sucesión de números y letras ya fué realizada");
-    }else{
-      this.globals.rutas[5]="/numeros-letras";
-      this.globals.subpruebas[5] = "Sucesión de números y letras";
-      this.router.navigate([this.globals.rutas[5]]);
-    }  
-  }
-
   mensajeError(mensaje: string) {
     swal({
       title: 'Error!',
@@ -193,13 +183,13 @@ export class FigurasIncompletasWiscComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[0] == "/figuras-incompletas") {
+    if (this.globals.rutas[0] == "/figuras-incompletas-wisc") {
       this.router.navigate([this.globals.rutas[1]]);
     }
-    if (this.globals.rutas[3] == "/figuras-incompletas") {
+    if (this.globals.rutas[3] == "/figuras-incompletas-wisc") {
       this.router.navigate([this.globals.rutas[4]]);
     }
-    if (this.globals.rutas[7] == "/figuras-incompletas") {
+    if (this.globals.rutas[7] == "/figuras-incompletas-wisc") {
       this.router.navigate([this.globals.rutas[8]]);
     }
   }

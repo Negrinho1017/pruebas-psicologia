@@ -233,23 +233,8 @@ export class DisenoCubosWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(numeroSubprueba: number){
-    if(numeroSubprueba==1){
-      this.cambiarPorPesoFigurado();
-    }
-    if(numeroSubprueba==2){
-      this.cambiarPorFigurasIncompletas();
-    }   
-  }
-
-  cambiarPorPesoFigurado(){
-    this.globals.rutas[0]="/peso-figurado";
-    this.globals.subpruebas[0] = "Peso figurado";
-    this.router.navigate([this.globals.rutas[0]]);
-  }
-
   cambiarPorFigurasIncompletas(){
-    this.globals.rutas[0]="/figuras-incompletas";
+    this.globals.rutas[0]="/figuras-incompletas-wisc";
     this.globals.subpruebas[0] = "Figuras incompletas";
     this.router.navigate([this.globals.rutas[0]]);
   }
