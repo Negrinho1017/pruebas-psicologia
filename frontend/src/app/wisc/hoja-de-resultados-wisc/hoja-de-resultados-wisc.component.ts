@@ -50,10 +50,7 @@ export class HojaDeResultadosWiscComponent implements OnInit {
       .subscribe(res => {
         this.prueba = res;
         if(this.prueba.ramaDelConocimiento[3].subpruebas[1]==null){
-          this.prueba.ramaDelConocimiento[3].subpruebas[1]=this.prueba.ramaDelConocimiento[3].subpruebas[0];
-          this.prueba.ramaDelConocimiento[3].subpruebas[1].nombre = "Búsqueda de símbolos";
-          this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionEscalar = this.globals.claves;
-          this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural = this.globals.clavesNatural;
+          this.prueba.ramaDelConocimiento[3].subpruebas[1] = this.globals.ultimaSubprueba;
         }
         this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
           this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,

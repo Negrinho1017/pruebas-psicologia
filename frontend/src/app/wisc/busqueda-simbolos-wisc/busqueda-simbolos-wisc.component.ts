@@ -34,6 +34,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.ultimaSubprueba = this.subprueba;
         this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
         this.router.navigate(['/hoja-resultados-wisc']);
         this.scrollToTop();
@@ -53,9 +54,13 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
   }
 
   cambiarSubprueba() {
-    this.globals.rutas[6] = "/cancelacion";
-    this.globals.subpruebas[6] = "Cancelación";
-    this.router.navigate([this.globals.rutas[6]]);
+    if(this.globals.subpruebas[4]=="Registros"){
+      this.mensajeError("Registros ya fué realizada");
+    }else{
+      this.globals.rutas[9]="/registros";
+      this.globals.subpruebas[9] = "Registros";
+      this.router.navigate([this.globals.rutas[9]]);
+    }  
   }
 
   mensajeError(mensaje: string) {

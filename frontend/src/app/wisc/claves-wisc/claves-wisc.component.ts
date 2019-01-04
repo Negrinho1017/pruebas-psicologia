@@ -51,13 +51,9 @@ export class ClavesWiscComponent implements OnInit {
   }
 
   cambiarSubprueba(){
-    if(this.globals.subpruebas[6]=="Cancelación"){
-      this.mensajeError("Cancelación ya fué realizada");
-    }else{
-      this.globals.rutas[9]="/cancelacion";
-      this.globals.subpruebas[9] = "Cancelación";
-      this.router.navigate([this.globals.rutas[9]]);
-    }  
+    this.globals.rutas[4]="/registros";
+    this.globals.subpruebas[4] = "Registros";
+    this.router.navigate([this.globals.rutas[4]]);
   }
 
   mensajeError(mensaje: string) {

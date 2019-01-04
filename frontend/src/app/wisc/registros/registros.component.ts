@@ -24,7 +24,7 @@ export class RegistrosComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
-    this.subprueba.nombre = "Cancelación";
+    this.subprueba.nombre = "Registros";
     this.subprueba.numeroSubprueba = 12;
   }
 
@@ -56,11 +56,12 @@ export class RegistrosComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[6] == "/cancelacion") {
-      this.router.navigate([this.globals.rutas[7]]);
+    if (this.globals.rutas[4] == "/registros") {
+      this.router.navigate([this.globals.rutas[5]]);
     }
-    if (this.globals.rutas[9] == "/cancelacion") {
-      this.router.navigate(['/hoja-resultados']);
+    if (this.globals.rutas[9] == "/registros") {
+      this.globals.ultimaSubprueba = this.subprueba;
+      this.router.navigate(['/hoja-resultados-wisc']);
     }
   }
 
