@@ -51,7 +51,7 @@ export class PistasComponent implements OnInit {
     this.criteriosDeInversion();
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
-    this.subprueba.nombre = "Información";
+    this.subprueba.nombre = "Pistas";
     this.subprueba.numeroSubprueba = 15;
   }
 
@@ -166,7 +166,7 @@ export class PistasComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate([this.globals.rutas[9]]);
+      this.navegar();
       this.scrollToTop();
     });    
   }
@@ -221,6 +221,18 @@ export class PistasComponent implements OnInit {
       icon: "error",
       text: mensaje,
     });
+  }
+
+  navegar() {
+    if (this.globals.rutas[1] == "/pistas") {
+      this.router.navigate([this.globals.rutas[2]]);
+    }
+    if (this.globals.rutas[5] == "/pistas") {
+      this.router.navigate([this.globals.rutas[6]]);
+    }
+    if (this.globals.rutas[8] == "/pistas") {
+      this.router.navigate([this.globals.rutas[9]]);
+    }
   }
 
 

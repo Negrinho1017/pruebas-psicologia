@@ -204,10 +204,17 @@ export class SemejanzasWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba() {
-    this.globals.rutas[1] = "/comprension";
-    this.globals.subpruebas[1] = "Comprensión";
-    this.router.navigate([this.globals.rutas[1]]);
+  cambiarSubprueba(numeroSubprueba: number) {
+    if(numeroSubprueba == 1){
+      this.globals.rutas[1] = "/informacion-wisc";
+      this.globals.subpruebas[1] = "Información";
+      this.router.navigate([this.globals.rutas[1]]);
+    }else if(numeroSubprueba == 2){
+      this.globals.rutas[1] = "/pistas";
+      this.globals.subpruebas[1] = "Pistas";
+      this.router.navigate([this.globals.rutas[1]]);
+    }
+    
   }
 
 }

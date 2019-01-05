@@ -157,7 +157,7 @@ export class InformacionWiscComponent implements OnInit {
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      this.router.navigate([this.globals.rutas[9]]);
+      this.navegar();
       this.scrollToTop();
     });    
   }
@@ -196,22 +196,24 @@ export class InformacionWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(){
-    if(this.globals.subpruebas[1]=="Comprensión" || this.globals.subpruebas[4]=="Comprensión"){
-      this.mensajeError("Comprensión ya fué realizada");
-    }else{
-      this.globals.rutas[8]="/comprension";
-      this.globals.subpruebas[8] = "Comprensión";
-      this.router.navigate([this.globals.rutas[8]]);
-    }  
-  }
-
   mensajeError(mensaje: string) {
     swal({
       title: 'Error!',
       icon: "error",
       text: mensaje,
     });
+  }
+
+  navegar() {
+    if (this.globals.rutas[1] == "/informacion-wisc") {
+      this.router.navigate([this.globals.rutas[2]]);
+    }
+    if (this.globals.rutas[5] == "/informacion-wisc") {
+      this.router.navigate([this.globals.rutas[6]]);
+    }
+    if (this.globals.rutas[8] == "/informacion-wisc") {
+      this.router.navigate([this.globals.rutas[9]]);
+    }
   }
 
 }
