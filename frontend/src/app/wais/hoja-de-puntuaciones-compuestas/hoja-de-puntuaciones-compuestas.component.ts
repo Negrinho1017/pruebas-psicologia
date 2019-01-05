@@ -102,7 +102,12 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   finalizarSubprueba(){
-    this.router.navigate(['/analisis']);
+    if(this.prueba.tipoPrueba == "WAIS"){
+      this.router.navigate(['/analisis']);
+    }else{
+      this.router.navigate(['/analisis-wisc']);
+    }
+    
     this.scrollToTop();
   }
 

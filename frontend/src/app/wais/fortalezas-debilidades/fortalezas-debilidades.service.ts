@@ -15,7 +15,6 @@ export class FortalezasDebilidadesService {
   constructor( private _http: Http, private http: HttpClient ) { }
 
   obtenerSubpruebasPorIdEvaluado(idEvaluado: String): Observable<Subprueba[]> {
-    return this.http.get<Subprueba[]>(this.url + '/subpruebas?idEvaluado='
-    +idEvaluado);
+    return this.http.get<Subprueba[]>(this.url + '/subpruebas?idEvaluado='+idEvaluado);
   }
 }
