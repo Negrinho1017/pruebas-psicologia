@@ -161,7 +161,7 @@ export class AritmeticaWiscComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.aritmetica = this.subprueba.puntuacionEscalar;
-      this.router.navigate([this.globals.rutas[6]]);
+      this.navegar();
       this.scrollToTop();
     }); 
   }
@@ -200,14 +200,13 @@ export class AritmeticaWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(){
-    if(this.globals.subpruebas[2]=="Sucesión de números y letras"){
-      this.mensajeError("Sucesión de números y letras ya fué realizada");
-    }else{
-      this.globals.rutas[5]="/numeros-letras";
-      this.globals.subpruebas[5] = "Sucesión de números y letras";
-      this.router.navigate([this.globals.rutas[5]]);
-    }  
+  navegar() {
+    if (this.globals.rutas[2] == "/aritmetica-wisc") {
+      this.router.navigate([this.globals.rutas[3]]);
+    }
+    else if (this.globals.rutas[6] == "/aritmetica-wisc") {
+      this.router.navigate([this.globals.rutas[7]]);
+    }
   }
 
   mensajeError(mensaje: string) {

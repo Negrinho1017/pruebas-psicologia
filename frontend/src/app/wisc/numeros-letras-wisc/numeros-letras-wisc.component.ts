@@ -103,7 +103,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeAlerta("Se ha descontinuado la subprueba");
     }
     return discontinua;
   }
@@ -154,10 +154,28 @@ export class NumerosLetrasWiscComponent implements OnInit {
     el.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
-  mensajeError(mensaje: string) {
+  cambiarSubprueba(){
+    if(this.globals.rutas[2] == "/aritmetica-wisc"){
+      this.mensajeError("La subprueba aritmética ya fue realizada");
+    }else{
+      this.globals.rutas[6]="/aritmetica-wisc";
+      this.globals.subpruebas[6] = "Aritmética";
+      this.router.navigate([this.globals.rutas[6]]);
+    } 
+  }
+
+  mensajeAlerta(mensaje: string) {
     swal({
       title: 'Discontinación',
       icon: "warning",
+      text: mensaje,
+    });
+  }
+
+  mensajeError(mensaje: string) {
+    swal({
+      title: 'Error!!',
+      icon: "error",
       text: mensaje,
     });
   }

@@ -217,7 +217,7 @@ export class ComprensionWiscComponent implements OnInit {
 
   cambiarPorInformacion(){
     if(this.globals.rutas[1] == "/informacion-wisc" || this.globals.rutas[5] == "/informacion-wisc"){
-      this.mensajeError("La subprueba información ya fue realizada")
+      this.mensajeError("La subprueba información ya fue realizada");
     }else{
       this.globals.rutas[8] = "/informacion-wisc";
       this.globals.subpruebas[8] = "Información";

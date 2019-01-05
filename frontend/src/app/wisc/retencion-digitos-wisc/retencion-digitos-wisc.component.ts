@@ -195,8 +195,8 @@ export class RetencionDigitosWiscComponent implements OnInit {
   }
 
   cambiarSubprueba(){
-    this.globals.rutas[2]="/numeros-letras";
-    this.globals.subpruebas[2] = "Sucesión de números y letras";
+    this.globals.rutas[2]="/aritmetica-wisc";
+    this.globals.subpruebas[2] = "Aritmética";
     this.router.navigate([this.globals.rutas[2]]);
   }
 
