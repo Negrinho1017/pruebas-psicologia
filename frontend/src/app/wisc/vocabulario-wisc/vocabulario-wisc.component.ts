@@ -196,14 +196,33 @@ export class VocabularioWiscComponent implements OnInit {
     })();
   }
 
-  cambiarSubprueba(){
-    if(this.globals.subpruebas[1]=="Comprensión"){
-      this.mensajeError("Comprensión ya fué realizada");
+  cambiarSubprueba(numeroSubprueba: number){
+    if(numeroSubprueba==1){
+      this.cambiarPorInformacion();
+    }
+    else if(numeroSubprueba==2){
+      this.cambiarPorPistas();
+    }   
+  }
+
+  cambiarPorPistas(){
+    if(this.globals.rutas[1] == "/pistas"){
+      this.mensajeError("La subprueba pistas ya fue realizada")
     }else{
-      this.globals.rutas[4]="/comprension";
-      this.globals.subpruebas[4] = "Comprensión";
-      this.router.navigate([this.globals.rutas[4]]);
-    }  
+      this.globals.rutas[5] = "/pistas";
+      this.globals.subpruebas[5] = "Pistas";
+      this.router.navigate([this.globals.rutas[5]]);
+    }
+  }
+
+  cambiarPorInformacion(){
+    if(this.globals.rutas[1] == "/informacion-wisc"){
+      this.mensajeError("La subprueba información ya fue realizada")
+    }else{
+      this.globals.rutas[5] = "/informacion-wisc";
+      this.globals.subpruebas[5] = "Información";
+      this.router.navigate([this.globals.rutas[5]]);
+    }
   }
 
   mensajeError(mensaje: string) {

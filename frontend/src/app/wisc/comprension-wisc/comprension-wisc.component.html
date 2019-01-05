@@ -34,7 +34,8 @@
   <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
-  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Comprensión">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(1)" class="btn btn-secondary" value="Información">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(2)" class="btn btn-secondary" value="Pistas">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">
   <div class="table-responsive">
