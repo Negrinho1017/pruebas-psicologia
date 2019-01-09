@@ -6,6 +6,8 @@ public class SubpruebasAnalisisProceso {
 	private Subprueba rds;
 	private Subprueba dc;
 	private Subprueba dcsbt;
+	private Subprueba registrosAleatorio;
+	private Subprueba registrosEstructurado;
 	
 	public SubpruebasAnalisisProceso(Subprueba rdd, Subprueba rdi, Subprueba rds, Subprueba dc, Subprueba dcsbt) {
 		super();
@@ -14,6 +16,17 @@ public class SubpruebasAnalisisProceso {
 		this.rds = rds;
 		this.dc = dc;
 		this.dcsbt = dcsbt;
+	}
+
+	public SubpruebasAnalisisProceso(Subprueba rdd, Subprueba rdi, Subprueba dc, Subprueba dcsbt,
+			Subprueba registrosAleatorio, Subprueba registrosEstructurado) {
+		super();
+		this.rdd = rdd;
+		this.rdi = rdi;
+		this.dc = dc;
+		this.dcsbt = dcsbt;
+		this.registrosAleatorio = registrosAleatorio;
+		this.registrosEstructurado = registrosEstructurado;
 	}
 
 	public Subprueba getRdd() {
@@ -54,5 +67,21 @@ public class SubpruebasAnalisisProceso {
 
 	public void setDcsbt(Subprueba dcsbt) {
 		this.dcsbt = dcsbt;
+	}
+
+	public Subprueba getRegistrosAleatorio() {
+		return registrosAleatorio;
+	}
+
+	public void setRegistrosAleatorio(Subprueba registrosAleatorio) {
+		this.registrosAleatorio = registrosAleatorio;
+	}
+
+	public Subprueba getRegistrosEstructurado() {
+		return registrosEstructurado;
+	}
+
+	public void setRegistrosEstructurado(Subprueba registrosEstructurado) {
+		this.registrosEstructurado = registrosEstructurado;
 	}
 }

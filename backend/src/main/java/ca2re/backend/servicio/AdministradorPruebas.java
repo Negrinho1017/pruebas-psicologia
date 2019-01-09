@@ -240,15 +240,32 @@ public class AdministradorPruebas {
 	public Subprueba obtenerRetencionDeDigitos(int numeroRetencionDigitos, int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
 		String[] puntuacionesEscalares;
+		//String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String idEdad = "20:0-24:11";
 		if(numeroRetencionDigitos == RetencionDeDigitos.RDD.getValue()) {
-			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD(idEdad);
 		}else if(numeroRetencionDigitos == RetencionDeDigitos.RDI.getValue()) {
-			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDI("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDI(idEdad);
 		}else {
-			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS("20:0-24:11");
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS(idEdad);
 		}
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerRetencionDeDigitos(reactivos, numeroRetencionDigitos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
+		return new Subprueba(puntuacionNatural,puntuacionEscalar);
+	}
+	
+	public Subprueba obtenerRegistros(int numeroRegistros, int numeroSubprueba, String idEvaluado) {
+		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
+		String[] puntuacionesEscalares;
+		//String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String idEdad = "20:0-24:11";
+		if(numeroRegistros == RetencionDeDigitos.RDD.getValue()) {
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD(idEdad);
+		}else {
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS(idEdad);
+		}
+		int puntuacionNatural = numeroRegistros == 1 ? reactivos.get(0).getPuntuacion() : reactivos.get(1).getPuntuacion();
+		int puntuacionEscalar = 0;
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
 	}
 	
@@ -318,6 +335,16 @@ public class AdministradorPruebas {
 	
 	public SubpruebasAnalisisProceso obtenerSubpruebasAnalisisProceso(String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		if(prueba.getTipoPrueba().equals("WAIS")) {
+			return obtenerSubpruebasAnalisisProcesoWAIS(idEvaluado);
+		}else if(prueba.getTipoPrueba().equals("WISC")) {
+			return obtenerSubpruebasAnalisisProcesoWISC(idEvaluado);
+		}
+		throw new PruebasPsicologiaException("Prueba no encontrada");
+	}
+	
+	public SubpruebasAnalisisProceso obtenerSubpruebasAnalisisProcesoWAIS(String idEvaluado) {
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 		if(VerificadorPruebas.estaDisenoDeCubos(prueba) && VerificadorPruebas.estaRetencionDeDigitos(prueba)){
 			Subprueba disenoCubos = prueba.getRamaDelConocimiento().get(1).getSubpruebas().get(0);
 			return new SubpruebasAnalisisProceso(obtenerRetencionDeDigitos(RetencionDeDigitos.RDD.getValue(), RETENCION_DIGITOS, idEvaluado),
@@ -327,6 +354,19 @@ public class AdministradorPruebas {
 					obtenerDisenoCubosSinBonificacionDeTiempo(DISENO_CUBOS, idEvaluado));
 		}
 		throw new PruebasPsicologiaException("No se encontraron pruebas de diseño de cubos o de retención de dígitos");
-		
+	}
+	
+	public SubpruebasAnalisisProceso obtenerSubpruebasAnalisisProcesoWISC(String idEvaluado) {
+		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		if(VerificadorPruebas.estaDisenoDeCubos(prueba) && VerificadorPruebas.estaRetencionDeDigitos(prueba)){
+			Subprueba disenoCubos = prueba.getRamaDelConocimiento().get(1).getSubpruebas().get(0);
+			return new SubpruebasAnalisisProceso(obtenerRetencionDeDigitos(RetencionDeDigitos.RDD.getValue(), RETENCION_DIGITOS, idEvaluado),
+					obtenerRetencionDeDigitos(RetencionDeDigitos.RDI.getValue(), RETENCION_DIGITOS, idEvaluado), 
+					disenoCubos, 
+					obtenerDisenoCubosSinBonificacionDeTiempo(DISENO_CUBOS, idEvaluado),
+					obtenerRegistros(1, 8, idEvaluado),
+					obtenerRegistros(2, 8, idEvaluado));
+		}
+		throw new PruebasPsicologiaException("No se encontraron pruebas de diseño de cubos o de retención de dígitos");
 	}
 }

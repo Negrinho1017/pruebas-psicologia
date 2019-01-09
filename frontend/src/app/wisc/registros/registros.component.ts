@@ -4,6 +4,7 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { Reactivo } from 'src/app/model/Reactivo';
 
 @Component({
   selector: 'app-registros',
@@ -36,6 +37,11 @@ export class RegistrosComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.puntuacionNatural = this.puntuacionTotal;
+    this.subprueba.reactivos = [];
+    this.subprueba.reactivos[0] = new Reactivo();
+    this.subprueba.reactivos[0].puntuacion = this.correctas1 - this.incorrectas1;
+    this.subprueba.reactivos[1] = new Reactivo();
+    this.subprueba.reactivos[1].puntuacion = this.correctas2 - this.incorrectas2;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;

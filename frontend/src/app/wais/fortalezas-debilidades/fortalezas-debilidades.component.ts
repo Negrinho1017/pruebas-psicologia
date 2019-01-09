@@ -112,7 +112,12 @@ export class FortalezasDebilidadesComponent implements OnInit {
   }
 
   siguiente() {
-    this.router.navigate(['/analisis-proceso']);
+    if(localStorage.getItem('tipoPrueba')=='WAIS'){
+      this.router.navigate(['/analisis-proceso']);
+    }else if(localStorage.getItem('tipoPrueba')=='WISC'){
+      this.router.navigate(['/analisis-proceso-wisc']);
+    }
+    
     this.scrollToTop();
   }
 

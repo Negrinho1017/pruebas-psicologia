@@ -5,5 +5,7 @@ export class SubpruebasAnalisisProceso {
 	public rdi: Subprueba;
 	public rds: Subprueba;
 	public dc: Subprueba;
-    public dcsbt: Subprueba;
+	public dcsbt: Subprueba;
+	public registrosAleatorio: Subprueba;
+	public registrosEstructurado: Subprueba;
 }

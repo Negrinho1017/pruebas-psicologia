@@ -1,0 +1,43 @@
+<body class="cuerpo">
+  <table>
+    <tr>
+      <th>Puntuación de proceso</th>
+      <th>Puntuación natural</th>
+      <th>Puntuación escalar</th>
+    </tr>
+    <tr *ngFor="let item of puntuacionesProceso; let i = index">
+      <td>{{item}}</td>
+      <td><p *ngIf="this.subpruebas[i]!=null">{{this.subpruebas[i].puntuacionNatural}}</p></td>
+      <td><p *ngIf="this.subpruebas[i]!=null">{{this.subpruebas[i].puntuacionEscalar}}</p></td>
+    </tr>
+  </table>
+  <h3><b>Comparación de discrepancias entre puntuaciones escalares</b></h3>
+  <table>
+    <tr>
+      <th>Comparación</th>
+      <th></th>
+      <th>Puntuación 1</th>
+      <th></th>
+      <th></th>
+      <th>Puntuación 2</th>
+      <th></th>
+      <th>Diferencia</th>
+      <th>Valor crítico</th>
+      <th>Diferencia significativa</th>
+    </tr>
+    <tr *ngFor="let item of comparaciones; let i = index">
+      <td>{{item}}</td>
+      <td>{{p1[i]}}</td>
+      <td><p *ngIf="puntuacionesNaturales1[i]!=-1">{{puntuacionesNaturales1[i]}}</p></td>
+      <td></td>
+      <td>{{p2[i]}}</td>
+      <td><p *ngIf="puntuacionesNaturales2[i]!=-1">{{puntuacionesNaturales2[i]}}</p></td>
+      <td></td>
+      <td><p *ngIf="puntuacionesNaturales1[i]!=-1 && puntuacionesNaturales2[i]!=-1">{{diferencias[i]}}</p></td>
+      <td>{{valoresCriticos[i]}}</td>
+      <td>{{diferenciasSignificativos[i]}}</td>
+    </tr>
+  </table>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
+</body>
+

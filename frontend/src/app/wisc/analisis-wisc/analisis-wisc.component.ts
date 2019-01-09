@@ -145,7 +145,7 @@ export class AnalisisWiscComponent implements OnInit {
       if(this.sonLas10SubpruebasPrincipales){
         this.router.navigate(['/fortalezas-debilidades']);
       }else if(this.seHizoDisenoCubosYRetencionDigitos){
-        this.router.navigate(['/analisis-proceso']);
+        this.router.navigate(['/analisis-proceso-wisc']);
       }else{
         this.mensajeAlerta("No hay más datos que mostrar");
       }
