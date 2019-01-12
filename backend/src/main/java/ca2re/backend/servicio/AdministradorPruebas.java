@@ -264,8 +264,12 @@ public class AdministradorPruebas {
 		}else {
 			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS(idEdad);
 		}
-		int puntuacionNatural = numeroRegistros == 1 ? reactivos.get(0).getPuntuacion() : reactivos.get(1).getPuntuacion();
+		int puntuacionNatural = 0;
 		int puntuacionEscalar = 0;
+		if(reactivos.size()>0) {
+			puntuacionNatural = numeroRegistros == 1 ? reactivos.get(0).getPuntuacion() : reactivos.get(1).getPuntuacion();
+			/*puntuacionEscalar = 0;*/
+		}
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
 	}
 	
