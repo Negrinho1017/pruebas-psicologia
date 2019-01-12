@@ -46,38 +46,22 @@ export class HojaDeResultadosWiscComponent implements OnInit {
 
   ngOnInit() {    
     this.loading=true;
+    this.obtenerPrueba();
+  }
+
+  private obtenerPrueba(){
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado)    
       .subscribe(res => {
         this.prueba = res;
-        if(this.prueba.ramaDelConocimiento[3].subpruebas[1]==null){
-          this.prueba.ramaDelConocimiento[3].subpruebas[1] = this.globals.ultimaSubprueba;
-        }
-        this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
-          this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,
-          this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionEscalar];
-        this.puntuacionesRazonamientoPerceptual = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionEscalar,
-          this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionEscalar,
-          this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionEscalar];        
-        this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionEscalar,
-          this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionEscalar];
-        this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionEscalar,
-        this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionEscalar];
-        
-        this.llenarPuntuacionesEscalares();
-        this.llenarPuntuacionesNaturales();        
-        this.llenarNombreSubpruebas();        
-        
-        this.comprensionVerbal = this.prueba.ramaDelConocimiento[0].puntuacionTotal;
-        this.razonamientoPerceptual = this.prueba.ramaDelConocimiento[1].puntuacionTotal;
-        this.memoriaDeTrabajo = this.prueba.ramaDelConocimiento[2].puntuacionTotal;
-        this.velocidadDeProcesamiento = this.prueba.ramaDelConocimiento[3].puntuacionTotal;
-
-        this.CITotal = this.comprensionVerbal + this.razonamientoPerceptual 
-          + this.memoriaDeTrabajo + this.velocidadDeProcesamiento;
-        this.globals.CITotal = this.CITotal;
-        this.hojaDeResultadosService.ingresarPuntuacionCompuesta(this.globals.idEvaluado);
-        this.graficar();
-        this.loading=false;
+        if(this.prueba.tipoPrueba=="WISC"){
+          this.mostrarPrueba();
+        }else{
+          this.mensajeError("Prueba no encontrada");
+          this.router.navigate(['/ingreso-de-datos']);
+          localStorage.removeItem('idEvaluado');
+          this.globals.mostrarNavBar = false;    
+          this.loading = false;
+        }      
       }, error => {
         this.mensajeError(error.error.mensaje);
         this.router.navigate(['/ingreso-de-datos']);
@@ -85,6 +69,38 @@ export class HojaDeResultadosWiscComponent implements OnInit {
         this.globals.mostrarNavBar = false;    
         this.loading = false;
       });
+  }
+
+  private mostrarPrueba(){
+    if(this.prueba.ramaDelConocimiento[3].subpruebas[1]==null){
+      this.prueba.ramaDelConocimiento[3].subpruebas[1] = this.globals.ultimaSubprueba;
+    }
+    this.puntuacionesComprensionVerbal = [this.prueba.ramaDelConocimiento[0].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[0].subpruebas[1].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[0].subpruebas[2].puntuacionEscalar];
+    this.puntuacionesRazonamientoPerceptual = [this.prueba.ramaDelConocimiento[1].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[1].subpruebas[1].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[1].subpruebas[2].puntuacionEscalar];        
+    this.puntuacionesMemoriaDeTrabajo = [this.prueba.ramaDelConocimiento[2].subpruebas[0].puntuacionEscalar,
+      this.prueba.ramaDelConocimiento[2].subpruebas[1].puntuacionEscalar];
+    this.puntuacionesVelocidadDeProcesamiento = [this.prueba.ramaDelConocimiento[3].subpruebas[0].puntuacionEscalar,
+    this.prueba.ramaDelConocimiento[3].subpruebas[1].puntuacionEscalar];
+    
+    this.llenarPuntuacionesEscalares();
+    this.llenarPuntuacionesNaturales();        
+    this.llenarNombreSubpruebas();        
+    
+    this.comprensionVerbal = this.prueba.ramaDelConocimiento[0].puntuacionTotal;
+    this.razonamientoPerceptual = this.prueba.ramaDelConocimiento[1].puntuacionTotal;
+    this.memoriaDeTrabajo = this.prueba.ramaDelConocimiento[2].puntuacionTotal;
+    this.velocidadDeProcesamiento = this.prueba.ramaDelConocimiento[3].puntuacionTotal;
+
+    this.CITotal = this.comprensionVerbal + this.razonamientoPerceptual 
+      + this.memoriaDeTrabajo + this.velocidadDeProcesamiento;
+    this.globals.CITotal = this.CITotal;
+    this.hojaDeResultadosService.ingresarPuntuacionCompuesta(this.globals.idEvaluado);
+    this.graficar();
+    this.loading=false;
   }
 
   private llenarPuntuacionesEscalares() {

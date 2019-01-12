@@ -56,7 +56,7 @@ export class HojaDeResultadosComponent implements OnInit {
       .subscribe(res => {
         this.prueba = res;
         if(this.prueba.tipoPrueba=="WAIS"){
-          this.mostrarPrueba()
+          this.mostrarPrueba();
         }else{
           this.mensajeError("Prueba no encontrada");
           this.router.navigate(['/ingreso-de-datos']);
