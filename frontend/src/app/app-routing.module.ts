@@ -80,7 +80,7 @@ const routes: Routes = [
   { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
   { path: 'analisis-wisc', component: AnalisisWiscComponent, canActivate: [AuthGuard] },
   { path: 'comprension', component: ComprensionComponent, canActivate: [AuthGuard] },
-  { path: 'comprension-wisc', component: ComprensionWiscComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'comprension-wisc', component: ComprensionWiscComponent, canActivate: [AuthGuard] },
   { path: 'figuras-incompletas', component: FigurasIncompletasComponent, canActivate: [AuthGuard] },
   { path: 'figuras-incompletas-wisc', component: FigurasIncompletasWiscComponent, canActivate: [AuthGuard] },
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
