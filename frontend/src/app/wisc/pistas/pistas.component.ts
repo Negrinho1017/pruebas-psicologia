@@ -132,6 +132,8 @@ export class PistasComponent implements OnInit {
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
+      && this.listaCalificaciones[numeroReactivo - 3] == 0
+      && this.listaCalificaciones[numeroReactivo - 4] == 0
       && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
