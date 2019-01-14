@@ -82,7 +82,7 @@ const routes: Routes = [
   { path: 'comprension', component: ComprensionComponent, canActivate: [AuthGuard] },
   { path: 'comprension-wisc', component: ComprensionWiscComponent, canActivate: [AuthGuard] },
   { path: 'figuras-incompletas', component: FigurasIncompletasComponent, canActivate: [AuthGuard] },
-  { path: 'figuras-incompletas-wisc', component: FigurasIncompletasWiscComponent, canActivate: [AuthGuard] },
+  { path: 'figuras-incompletas-wisc', component: FigurasIncompletasWiscComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'peso-figurado', component: PesoFiguradoComponent, canActivate: [AuthGuard] },
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
   { path: 'registros', component: RegistrosComponent, canActivate: [AuthGuard] },

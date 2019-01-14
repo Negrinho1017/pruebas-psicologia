@@ -12,6 +12,7 @@ import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-
   styleUrls: ['./figuras-incompletas-wisc.component.css']
 })
 export class FigurasIncompletasWiscComponent implements OnInit {  
+  primerReactivo: number = 1;
   reactivoDeInicio: number = 5;
   siguienteReactivo: number = this.reactivoDeInicio;
   anteriorReactivo: number = this.reactivoDeInicio;
@@ -29,8 +30,29 @@ export class FigurasIncompletasWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.criteriosDeInversion();
+    this.siguienteReactivo = this.reactivoDeInicio;
+    this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Figuras incompletas";
     this.subprueba.numeroSubprueba = 11;
+  }
+
+  criteriosDeInversion() {
+    if (this.globals.edad >= 6 && this.globals.edad <= 8) {
+      this.reactivoDeInicio = 1;
+      this.habilitaReactivo = [true];
+      this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
+      this.reactivoDeInicio = 5;
+      this.habilitaReactivo = [true,true,true,true,true];
+      this.listaCalificaciones = [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    else {
+      this.reactivoDeInicio = 10;
+      this.habilitaReactivo = [true,true,true,true,true,true,true,true,true,true];
+      this.listaCalificaciones = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
   }
   
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
@@ -40,23 +62,21 @@ export class FigurasIncompletasWiscComponent implements OnInit {
   }
 
   aplicarInversion(puntuacionReactivo: number, numeroReactivo: number): void {
-    if(numeroReactivo == this.reactivoDeInicio+1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo-1] == 0)){
-      this.limpiarReactivosAnt(numeroReactivo);      
+    if(this.reactivoDeInicio != this.primerReactivo &&
+      numeroReactivo == this.reactivoDeInicio + 1 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
+      this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if(numeroReactivo == this.reactivoDeInicio-3){
+    else if (numeroReactivo <= this.reactivoDeInicio-2 && numeroReactivo > this.primerReactivo) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
-    else if(numeroReactivo == this.reactivoDeInicio-2){
-      this.reversarInversion(puntuacionReactivo, numeroReactivo);
+    else if (numeroReactivo == this.reactivoDeInicio-1) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo-1);
     }
-    else if(numeroReactivo == this.reactivoDeInicio-1){
-      this.cambiarFoco(numeroReactivo, numeroReactivo-1);            
-    }
-    else if(numeroReactivo == 1){
+    else if (numeroReactivo == this.primerReactivo && this.reactivoDeInicio != this.primerReactivo) {
       this.determinarContinua(puntuacionReactivo, numeroReactivo);
     }
-    else if(!this.discontinuar(puntuacionReactivo, numeroReactivo)){
-      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);      
+    else if (!this.discontinuar(puntuacionReactivo, numeroReactivo)) {
+      this.cambiarFoco(numeroReactivo, numeroReactivo + 1);
     }
   }
 
@@ -100,6 +120,8 @@ export class FigurasIncompletasWiscComponent implements OnInit {
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
       && this.listaCalificaciones[numeroReactivo - 3] == 0
+      && this.listaCalificaciones[numeroReactivo - 4] == 0
+      && this.listaCalificaciones[numeroReactivo - 5] == 0
       && numeroReactivo > this.reactivoDeInicio+4;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
