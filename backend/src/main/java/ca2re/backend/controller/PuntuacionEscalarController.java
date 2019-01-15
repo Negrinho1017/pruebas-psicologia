@@ -94,7 +94,7 @@ public class PuntuacionEscalarController {
 	@RequestMapping(value = "/comprension", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarComprension(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarPesoFigurado(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebas.obtenerPuntuacionEscalarComprension(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/cancelacion", method = RequestMethod.GET)

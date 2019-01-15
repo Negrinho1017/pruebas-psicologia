@@ -199,6 +199,11 @@ public class AdministradorPruebas {
 		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosPesoFigurado, puntuacionNatural);
 	}
 	
+	public int obtenerPuntuacionEscalarComprension(String idEdad, int puntuacionNatural) {		
+		String[] rangosComprension = calificacionWaisDAO.obtenerComprensionPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosComprension, puntuacionNatural);
+	}
+	
 	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
 		return calificacionPuntuacionCompuestaDAO.obtenerPuntuacionCompuesta(id)[puntuacionTotal];
 	}
