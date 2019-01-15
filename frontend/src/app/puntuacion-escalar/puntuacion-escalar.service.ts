@@ -105,4 +105,20 @@ export class PuntuacionEscalarService {
       return ("Error!!")
     }));  
   }
+
+  public obtenerPuntuacionEscalarPesoFigurado(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/peso-figurado?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarComprension(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/comprension?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarCancelacion(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/cancelacion?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarFigurasIncompletas(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/figuras-incompletas?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
+  }
 }

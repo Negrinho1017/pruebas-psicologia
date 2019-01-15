@@ -37,7 +37,7 @@ export class CancelacionComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.puntuacionNatural = this.puntuacionTotal;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarCancelacion(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

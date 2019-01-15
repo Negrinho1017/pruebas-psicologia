@@ -126,7 +126,7 @@ export class FigurasIncompletasComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarAritmetica(this.globals.edad,this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarFigurasIncompletas(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
