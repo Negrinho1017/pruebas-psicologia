@@ -99,8 +99,9 @@ public class CalificacionWaisMongoDAO implements CalificacionWAISDAO{
 
 	@Override
 	public String[] obtenerCancelacionPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		Query pruebaPorId = query(where("idEdad").is(idEdad));
+		EntidadTablaCalificacionWAIS entidadTablaCalificacionWAIS = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWAIS.class, COLLECTION_CALIFICACION_WAIS).get(0);
+		return TablaCalificacionWAISBuilder.convertirADominio(entidadTablaCalificacionWAIS).getCancelacionCA();
 	}
 
 	@Override
