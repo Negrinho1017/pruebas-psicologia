@@ -106,6 +106,6 @@ public class PuntuacionEscalarController {
 	@RequestMapping(value = "/figuras-incompletas", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarFigurasIncompletas(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebas.obtenerPuntuacionFigurasIncompletas(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 }

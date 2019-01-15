@@ -205,8 +205,13 @@ public class AdministradorPruebas {
 	}
 	
 	public int obtenerPuntuacionCancelacion(String idEdad, int puntuacionNatural) {
-		String[] rangosComprension = calificacionWaisDAO.obtenerCancelacionPorIdEdad(idEdad);
-		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosComprension, puntuacionNatural);
+		String[] rangosCancelacion = calificacionWaisDAO.obtenerCancelacionPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosCancelacion, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionFigurasIncompletas(String idEdad, int puntuacionNatural) {
+		String[] rangosFigurasIncompletas = calificacionWaisDAO.obtenerFigurasIncompletasPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosFigurasIncompletas, puntuacionNatural);
 	}
 	
 	public int obtenerPuntuacionCompuesta(String id, int puntuacionTotal) {
