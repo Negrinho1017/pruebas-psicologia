@@ -33,20 +33,26 @@ private static final String COLLECTION_CALIFICACION_WISC = "tabla_calificacion_w
 
 	@Override
 	public String[] obtenerSemejanzasPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getSemejanzasSE();
 	}
 
 	@Override
 	public String[] obtenerRetencionDigitosPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getDigitosRD();
 	}
 
 	@Override
 	public String[] obtenerConceptosConDibujosPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getConceptosDibujosCD();
 	}
 
 	@Override
