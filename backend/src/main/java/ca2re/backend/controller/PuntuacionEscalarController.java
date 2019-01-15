@@ -84,4 +84,28 @@ public class PuntuacionEscalarController {
 	public int obtenerPuntuacionEscalarNumerosLetras(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
 		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
+	
+	@RequestMapping(value = "/peso-figurado", method = RequestMethod.GET)
+	@ResponseBody
+	public int obtenerPuntuacionEscalarPesoFigurado(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarPesoFigurado(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+	}
+	
+	@RequestMapping(value = "/comprension", method = RequestMethod.GET)
+	@ResponseBody
+	public int obtenerPuntuacionEscalarComprension(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarPesoFigurado(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+	}
+	
+	@RequestMapping(value = "/cancelacion", method = RequestMethod.GET)
+	@ResponseBody
+	public int obtenerPuntuacionEscalarCancelacion(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+	}
+	
+	@RequestMapping(value = "/figuras-incompletas", method = RequestMethod.GET)
+	@ResponseBody
+	public int obtenerPuntuacionEscalarFigurasIncompletas(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
+		return administradorPruebas.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+	}
 }

@@ -22,4 +22,12 @@ public interface CalificacionWAISDAO {
 	String[] obtenerClavesPorIdEdad(String idEdad);
 	
 	String[] obtenerNumerosLetrasPorIdEdad(String idEdad);
+	
+	String[] obtenerPesoFiguradoPorIdEdad(String idEdad);
+	
+	String[] obtenerCancelacionPorIdEdad(String idEdad);
+	
+	String[] obtenerComprensionPorIdEdad(String idEdad);
+	
+	String[] obtenerFigurasIncompletasPorIdEdad(String idEdad);
 }
