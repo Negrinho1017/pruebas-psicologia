@@ -46,24 +46,24 @@ public class PuntuacionEscalarWISCController {
 	@RequestMapping(value = "/claves", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarClaves(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebasWISC.obtenerPuntuacionEscalarDisenioCubos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebasWISC.obtenerPuntuacionEscalarClaves(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/vocabulario", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarVocabulario(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebasWISC.obtenerPuntuacionEscalarDisenioCubos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebasWISC.obtenerPuntuacionEscalarVocabulario(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/numeros-letras", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarNumerosLetras(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebasWISC.obtenerPuntuacionEscalarDisenioCubos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebasWISC.obtenerPuntuacionEscalarNumerosLetras(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/matrices", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarMatrices(@RequestParam int edad, @RequestParam int puntuacionNatural) throws ParseException {
-		return administradorPruebasWISC.obtenerPuntuacionEscalarDisenioCubos(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebasWISC.obtenerPuntuacionEscalarMatrices(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 }

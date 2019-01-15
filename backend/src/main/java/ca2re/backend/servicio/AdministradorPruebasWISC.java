@@ -29,4 +29,24 @@ public class AdministradorPruebasWISC {
 		String[] rangosConceptosConDibujos = calificacionWISCDAO.obtenerConceptosConDibujosPorIdEdad(idEdad);
 		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosConceptosConDibujos, puntuacionNatural);
 	}
+	
+	public int obtenerPuntuacionEscalarClaves(String idEdad, int puntuacionNatural) {
+		String[] rangosClaves = calificacionWISCDAO.obtenerClavesPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosClaves, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarVocabulario(String idEdad, int puntuacionNatural) {
+		String[] rangosVocabulario = calificacionWISCDAO.obtenerVocabularioPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosVocabulario, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarNumerosLetras(String idEdad, int puntuacionNatural) {
+		String[] rangosNumerosLetras = calificacionWISCDAO.obtenerNumerosLetrasPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosNumerosLetras, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarMatrices(String idEdad, int puntuacionNatural) {
+		String[] rangosMatrices = calificacionWISCDAO.obtenerMatricesPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosMatrices, puntuacionNatural);
+	}
 }

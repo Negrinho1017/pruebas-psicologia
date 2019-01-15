@@ -57,26 +57,34 @@ private static final String COLLECTION_CALIFICACION_WISC = "tabla_calificacion_w
 
 	@Override
 	public String[] obtenerClavesPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getClavesCL();
 	}
 
 	@Override
 	public String[] obtenerVocabularioPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getVocabularioVB();
 	}
 
 	@Override
 	public String[] obtenerNumerosLetrasPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getSusecionNumeroLetrasNL();
 	}
 
 	@Override
 	public String[] obtenerMatricesPorIdEdad(String idEdad) {
-		// TODO Auto-generated method stub
-		return null;
+		//Query pruebaPorId = query(where("idEdad").is(idEdad));
+		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
+		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
+		return (entidadTablaCalificacionWISC).getMatricesMT();
 	}
 
 	@Override
