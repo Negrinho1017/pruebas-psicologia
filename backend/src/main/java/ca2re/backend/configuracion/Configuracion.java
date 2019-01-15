@@ -9,13 +9,16 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.MongoClient;
 
+import ca2re.backend.persistencia.CalificacionWISCDAO;
 import ca2re.backend.persistencia.mongo.CalificacionAnalisisProcesoMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionPuntuacionCompuestaMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionValoresCriticosMongoDAO;
+import ca2re.backend.persistencia.mongo.CalificacionWISCMongoDAO;
 import ca2re.backend.persistencia.mongo.CalificacionWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.PruebaWaisMongoDAO;
 import ca2re.backend.persistencia.mongo.UsuarioMongoDAO;
 import ca2re.backend.servicio.AdministradorPruebas;
+import ca2re.backend.servicio.AdministradorPruebasWISC;
 import ca2re.backend.servicio.CalificadorPrueba;
 
 @Configuration
@@ -56,6 +59,11 @@ public class Configuracion {
 	}
 	
 	@Bean
+	public CalificacionWISCDAO crearCalificacionWISCDAO(MongoOperations mongoOperations) {
+		return new CalificacionWISCMongoDAO(mongoOperations);
+	}
+	
+	@Bean
 	public CalificacionPuntuacionCompuestaMongoDAO crearCalificacionPuntuacionCompuestaMongoDAO(MongoOperations mongoOperations) {
 		return new CalificacionPuntuacionCompuestaMongoDAO(mongoOperations);
 	}
@@ -78,6 +86,11 @@ public class Configuracion {
 	@Bean
 	public AdministradorPruebas crearAdministradorPruebas() {
 		return new AdministradorPruebas();
+	}
+	
+	@Bean
+	public AdministradorPruebasWISC crearAdministradorPruebasWISC() {
+		return new AdministradorPruebasWISC();
 	}
 	
 }
