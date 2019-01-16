@@ -8,8 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
 import ca2re.backend.persistencia.CalificacionWISCDAO;
-import ca2re.backend.persistencia.builder.TablaCalificacionWAISBuilder;
-import ca2re.backend.persistencia.mongo.entidades.EntidadTablaCalificacionWAIS;
+import ca2re.backend.persistencia.builder.TablaCalificacionWISCBuilder;
 import ca2re.backend.persistencia.mongo.entidades.EntidadTablaCalificacionWISC;
 
 public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
@@ -29,7 +28,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getDisenioCubosDC();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getDisenioCubosDC();
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getSemejanzasSE();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getSemejanzasSE();
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getDigitosRD();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getDigitosRD();
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getConceptosDibujosCD();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getConceptosDibujosCD();
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getClavesCL();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getClavesCL();
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getVocabularioVB();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getVocabularioVB();
 	}
 
 	@Override
@@ -83,7 +82,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getSusecionNumeroLetrasNL();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getSusecionNumeroLetrasNL();
 	}
 
 	@Override
@@ -92,7 +91,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getMatricesMT();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getMatricesMT();
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getComprensionCM();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getComprensionCM();
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getBusquedaSimbolosBS();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getBusquedaSimbolosBS();
 	}
 
 	@Override
@@ -119,7 +118,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getFigurasIncompletasFI();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getFigurasIncompletasFI();
 	}
 
 	@Override
@@ -128,7 +127,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getRegistrosRG();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getRegistrosRG();
 	}
 
 	@Override
@@ -137,7 +136,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getInformacionIN();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getInformacionIN();
 	}
 
 	@Override
@@ -146,7 +145,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getAritmeticaAR();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getAritmeticaAR();
 	}
 
 	@Override
@@ -155,7 +154,7 @@ public class CalificacionWISCMongoDAO implements CalificacionWISCDAO {
 		Query pruebaPorId = query(where("idEdad").is("13:0-13:3"));
 		EntidadTablaCalificacionWISC entidadTablaCalificacionWISC = mongoOperations
 				.find(pruebaPorId, EntidadTablaCalificacionWISC.class, COLLECTION_CALIFICACION_WISC).get(0);
-		return (entidadTablaCalificacionWISC).getPistasPC();
+		return TablaCalificacionWISCBuilder.convertirADominio(entidadTablaCalificacionWISC).getPistasPC();
 	}
 
 }
