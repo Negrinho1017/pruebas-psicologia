@@ -16,6 +16,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
   anteriorReactivo = 2;
   siguienteReactivo = 2;
   puntuacion: number = 0;
+  seCambiaraLaSubprueba: boolean = false;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] =
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

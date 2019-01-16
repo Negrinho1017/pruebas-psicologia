@@ -16,6 +16,7 @@ export class SubpruebasOpcionalesComponent implements OnInit {
   contadorMT: number = 0;
   contadorVP: number = 0;
   cambiosGuardados: boolean = false;
+  datosSeleccionados: boolean = this.globals.datosSeleccionados;
   constructor( private globals: Globals ) { }
   
   ngOnInit() {
