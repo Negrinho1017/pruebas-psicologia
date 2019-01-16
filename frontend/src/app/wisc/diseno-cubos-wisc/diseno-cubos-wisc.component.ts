@@ -85,7 +85,7 @@ export class DisenoCubosWiscComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarWiscService.obtenerPuntuacionEscalarDisenoCubos(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarWiscService.obtenerPuntuacionEscalarDisenoCubos(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

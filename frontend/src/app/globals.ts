@@ -17,6 +17,7 @@ export class Globals {
     clavesNatural: number;
     indices: number[] = [];
     edad: number;
+    meses: number;
     rutas: String[] = [];
     datosSeleccionados: boolean;
     subpruebas: string[] = [];

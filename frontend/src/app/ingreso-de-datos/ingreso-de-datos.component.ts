@@ -117,6 +117,7 @@ export class IngresoDeDatosComponent implements OnInit {
     this.hojaDeResultadosService.obtenerEdadEvaluado(fechaNacimiento, fechaEvaluacion).subscribe(res => {
       this.edad = res;
       this.globals.edad = this.edad.anios;
+      this.globals.meses = this.edad.meses;
       this.fechas = true;
     });
   }

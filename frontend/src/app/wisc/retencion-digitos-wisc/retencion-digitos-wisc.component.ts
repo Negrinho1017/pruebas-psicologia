@@ -148,7 +148,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
     this.subprueba.numeroSubprueba = 3;
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.subprueba.nombre = "Retención de dígitos";
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDeDigitos(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDeDigitos(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
