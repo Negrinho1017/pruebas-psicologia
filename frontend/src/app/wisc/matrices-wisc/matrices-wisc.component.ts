@@ -110,7 +110,7 @@ export class MatricesWiscComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    const cantidadParaDescontinuar: number = 3;
+    const cantidadParaDescontinuar: number = 4;
     let reactivoActual = puntuacionReactivo == 0 ? 1 : 0;
     let reactivoAnterior = this.listaCalificaciones[numeroReactivo - 1] == 0 ? 1 : 0;
     let reactivoAnterior2 = this.listaCalificaciones[numeroReactivo - 2] == 0 ? 1 : 0;
@@ -123,7 +123,7 @@ export class MatricesWiscComponent implements OnInit {
       && this.listaCalificaciones[numeroReactivo - 3] == 0
       && this.listaCalificaciones[numeroReactivo - 4] == 0
       && numeroReactivo > this.reactivoDeInicio + cantidadParaDescontinuar)
-      || (contadorDePuntuacionesFallidas == 4);
+      || (contadorDePuntuacionesFallidas == 4 && numeroReactivo > this.reactivoDeInicio + 5);
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;

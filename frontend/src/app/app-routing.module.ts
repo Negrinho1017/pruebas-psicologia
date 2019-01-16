@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'retencion-digitos', component: RetencionDigitosComponent, canActivate: [AuthGuard] },
   { path: 'retencion-digitos-wisc', component: RetencionDigitosWiscComponent, canActivate: [AuthGuard] },
   { path: 'matrices', component: MatricesComponent, canActivate: [AuthGuard] },
-  { path: 'matrices-wisc', component: MatricesWiscComponent, canActivate: [AuthGuard]},
+  { path: 'matrices-wisc', component: MatricesWiscComponent, /*canActivate: [AuthGuard]*/},
   { path: 'conceptos-con-dibujos', component: ConceptosConDibujosComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario', component: VocabularioComponent, canActivate: [AuthGuard] },
   { path: 'vocabulario-wisc', component: VocabularioWiscComponent, canActivate: [AuthGuard] },
