@@ -5,6 +5,7 @@ import java.util.Calendar;
 import ca2re.backend.dominio.EdadPersona;
 import ca2re.backend.dominio.constantes.IdsEdad;
 import ca2re.backend.dominio.constantes.IdsRangoEdad;
+import ca2re.backend.dominio.constantes.idsEdadWISC;
 
 public class EdadUtil {
 
@@ -78,5 +79,29 @@ public class EdadUtil {
 		else {
 			return IdsEdad.EDADES_85_89.getValue();
 		}
+	}
+	
+	public static String obtenerIdEdadWISC(int edad, int meses) {
+		int posicion;
+		String[] idsEdad = {idsEdadWISC.EDADES_6_1.getValue(), idsEdadWISC.EDADES_6_2.getValue(), idsEdadWISC.EDADES_6_3.getValue(),
+				idsEdadWISC.EDADES_7_1.getValue(), idsEdadWISC.EDADES_7_2.getValue(), idsEdadWISC.EDADES_7_3.getValue(),
+				idsEdadWISC.EDADES_8_1.getValue(), idsEdadWISC.EDADES_8_2.getValue(), idsEdadWISC.EDADES_8_3.getValue(),
+				idsEdadWISC.EDADES_9_1.getValue(), idsEdadWISC.EDADES_9_2.getValue(), idsEdadWISC.EDADES_9_3.getValue(),
+				idsEdadWISC.EDADES_10_1.getValue(), idsEdadWISC.EDADES_10_2.getValue(), idsEdadWISC.EDADES_10_3.getValue(),
+				idsEdadWISC.EDADES_11_1.getValue(), idsEdadWISC.EDADES_11_2.getValue(), idsEdadWISC.EDADES_11_3.getValue(),
+				idsEdadWISC.EDADES_12_1.getValue(), idsEdadWISC.EDADES_12_2.getValue(), idsEdadWISC.EDADES_12_3.getValue(),
+				idsEdadWISC.EDADES_13_1.getValue(), idsEdadWISC.EDADES_13_2.getValue(), idsEdadWISC.EDADES_13_3.getValue(),
+				idsEdadWISC.EDADES_14_1.getValue(), idsEdadWISC.EDADES_14_2.getValue(), idsEdadWISC.EDADES_14_3.getValue(),
+				idsEdadWISC.EDADES_15_1.getValue(), idsEdadWISC.EDADES_15_2.getValue(), idsEdadWISC.EDADES_15_3.getValue(),
+				idsEdadWISC.EDADES_16_1.getValue(), idsEdadWISC.EDADES_16_2.getValue(), idsEdadWISC.EDADES_16_3.getValue()};
+		if(Operaciones.elValorEstaEnElRango(0, 3, meses)) {
+			posicion = (edad - 6)*3;
+		}
+		else if(Operaciones.elValorEstaEnElRango(4, 7, meses)) {
+			posicion = (edad - 5)*3;
+		}else {
+			posicion = (edad - 4)*3;
+		}
+		return idsEdad[posicion];
 	}
 }
