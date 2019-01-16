@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Globals } from '../../globals';
 import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de-resultados.service';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-matrices-wisc',
@@ -26,7 +27,7 @@ export class MatricesWiscComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.globals.edad = 9;

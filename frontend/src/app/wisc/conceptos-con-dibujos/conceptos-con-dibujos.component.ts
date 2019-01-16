@@ -5,6 +5,7 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 import { Router } from '@angular/router';
 import { Globals } from 'src/app/globals';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-conceptos-con-dibujos',
@@ -28,7 +29,7 @@ export class ConceptosConDibujosComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.criteriosDeInversion();
@@ -160,7 +161,7 @@ export class ConceptosConDibujosComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarMatrices(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarConceptosConDibujos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

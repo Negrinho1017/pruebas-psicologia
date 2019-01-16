@@ -6,6 +6,7 @@ import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { CronometroComponent } from 'src/app/cronometro/cronometro.component';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-diseno-cubos-wisc',
@@ -52,7 +53,7 @@ export class DisenoCubosWiscComponent implements OnInit {
   @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarWiscService: PuntuacionEscalarWiscService) { }
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
@@ -84,7 +85,7 @@ export class DisenoCubosWiscComponent implements OnInit {
 
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarWiscService.obtenerPuntuacionEscalarDisenoCubos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

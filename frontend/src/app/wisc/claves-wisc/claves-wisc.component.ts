@@ -4,6 +4,7 @@ import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-
 import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de-resultados.service';
 import { Subprueba } from 'src/app/model/Subprueba';
 import { Router } from '@angular/router';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-claves-wisc',
@@ -17,7 +18,7 @@ export class ClavesWiscComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   seCambiaraLaSubprueba: boolean = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.subprueba.numeroSubprueba = 5;

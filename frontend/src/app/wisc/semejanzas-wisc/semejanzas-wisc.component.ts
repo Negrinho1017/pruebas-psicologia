@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Globals } from 'src/app/globals';
 import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-semejanzas-wisc',
@@ -32,7 +33,7 @@ export class SemejanzasWiscComponent implements OnInit {
   maximaPuntuacionPorReactivo: number[] = [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.criteriosDeInversion();

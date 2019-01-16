@@ -5,6 +5,7 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-vocabulario-wisc',
@@ -32,7 +33,7 @@ export class VocabularioWiscComponent implements OnInit {
   hayDiscontinuacion: boolean = false;
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.criteriosDeInversion();

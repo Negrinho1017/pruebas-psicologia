@@ -5,6 +5,7 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 import { ActivatedRoute, Router } from '@angular/router';
 import { Globals } from 'src/app/globals';
 import { Subprueba } from 'src/app/model/Subprueba';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-retencion-digitos-wisc',
@@ -50,7 +51,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
   hayDiscontinuacion: boolean;
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.construirRespuestasRDI();
@@ -147,7 +148,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
     this.subprueba.numeroSubprueba = 3;
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.subprueba.nombre = "Retención de dígitos";
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDigitos(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRetencionDeDigitos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
