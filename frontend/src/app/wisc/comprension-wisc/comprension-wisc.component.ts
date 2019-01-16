@@ -154,7 +154,7 @@ export class ComprensionWiscComponent implements OnInit {
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
     //ACarras se debe crear servicio para puntuacionEscalar
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarComprension(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
