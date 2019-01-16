@@ -123,7 +123,7 @@ export class AritmeticaWiscComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    const cantidadParaDescontinuar: number = 3;
+    const cantidadParaDescontinuar: number = 4;
     let discontinua: boolean = puntuacionReactivo == 0 
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0

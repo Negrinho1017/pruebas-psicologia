@@ -122,7 +122,7 @@ export class FigurasIncompletasWiscComponent implements OnInit {
       && this.listaCalificaciones[numeroReactivo - 3] == 0
       && this.listaCalificaciones[numeroReactivo - 4] == 0
       && this.listaCalificaciones[numeroReactivo - 5] == 0
-      && numeroReactivo > this.reactivoDeInicio+4;
+      && numeroReactivo > this.reactivoDeInicio + 6;
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
