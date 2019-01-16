@@ -70,7 +70,7 @@ public class PuntuacionEscalarWISCController {
 	@RequestMapping(value = "/comprension", method = RequestMethod.GET)
 	@ResponseBody
 	public int obtenerPuntuacionEscalarComprension(@RequestParam int edad, @RequestParam int puntuacionNatural, @RequestParam int meses) throws ParseException {
-		return administradorPruebasWISC.obtenerPuntuacionEscalarMatrices(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
+		return administradorPruebasWISC.obtenerPuntuacionEscalarComprension(EdadUtil.obtenerIdEdad(edad), puntuacionNatural);
 	}
 	
 	@RequestMapping(value = "/busqueda-simbolos", method = RequestMethod.GET)

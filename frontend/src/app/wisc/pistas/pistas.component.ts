@@ -165,7 +165,7 @@ export class PistasComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion(this.globals.edad,this.subprueba.puntuacionNatural, this.globals.meses)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarPistas(this.globals.edad,this.subprueba.puntuacionNatural, this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
