@@ -30,7 +30,6 @@ export class MatricesWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
-    this.globals.edad = 9;
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
