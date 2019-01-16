@@ -98,9 +98,9 @@ public class EdadUtil {
 			posicion = (edad - 6)*3;
 		}
 		else if(Operaciones.elValorEstaEnElRango(4, 7, meses)) {
-			posicion = (edad - 5)*3;
+			posicion = (edad - 6)*3 + 1;
 		}else {
-			posicion = (edad - 4)*3;
+			posicion = (edad - 6)*3 + 2;
 		}
 		return idsEdad[posicion];
 	}

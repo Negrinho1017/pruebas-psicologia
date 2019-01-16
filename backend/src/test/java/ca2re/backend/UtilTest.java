@@ -87,8 +87,8 @@ public class UtilTest {
 	
 	@Test
 	public void calcularIdEdadWISC() {
-		int edad = 6;
-		int meses = 8;
-		assertEquals("6:8-6:11", EdadUtil.obtenerIdEdadWISC(edad, meses));
+		int edad = 10;
+		int meses = 6;
+		assertEquals("10:4-10:7", EdadUtil.obtenerIdEdadWISC(edad, meses));
 	}
 }
