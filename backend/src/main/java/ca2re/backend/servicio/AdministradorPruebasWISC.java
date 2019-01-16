@@ -49,4 +49,39 @@ public class AdministradorPruebasWISC {
 		String[] rangosMatrices = calificacionWISCDAO.obtenerMatricesPorIdEdad(idEdad);
 		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosMatrices, puntuacionNatural);
 	}
+	
+	public int obtenerPuntuacionEscalarComprension(String idEdad, int puntuacionNatural) {
+		String[] rangosComprension = calificacionWISCDAO.obtenerComprensionPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosComprension, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarBusquedaSimbolos(String idEdad, int puntuacionNatural) {
+		String[] rangosBusquedaSimbolos = calificacionWISCDAO.obtenerBusquedaSimbolosPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosBusquedaSimbolos, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarFigurasIncompletas(String idEdad, int puntuacionNatural) {
+		String[] rangosFigurasIncompletas = calificacionWISCDAO.obtenerFigurasIncompletasPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosFigurasIncompletas, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarRegistros(String idEdad, int puntuacionNatural) {
+		String[] rangosRegistros = calificacionWISCDAO.obtenerRegistrosPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosRegistros, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarInformacion(String idEdad, int puntuacionNatural) {
+		String[] rangosInformacion = calificacionWISCDAO.obtenerInformacionPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosInformacion, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarAritmetica(String idEdad, int puntuacionNatural) {
+		String[] rangosAritmetica = calificacionWISCDAO.obtenerAritmeticaPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosAritmetica, puntuacionNatural);
+	}
+	
+	public int obtenerPuntuacionEscalarPistas(String idEdad, int puntuacionNatural) {
+		String[] rangosPistas = calificacionWISCDAO.obtenerPistasPorIdEdad(idEdad);
+		return CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(rangosPistas, puntuacionNatural);
+	}
 }
