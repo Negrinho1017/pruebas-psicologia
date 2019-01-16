@@ -75,7 +75,7 @@ const routes: Routes = [
   { path: 'hoja-resultados-wisc', component: HojaDeResultadosWiscComponent, canActivate: [AuthGuard] },
   { path: 'hoja-puntuaciones-compuestas', component: HojaDePuntuacionesCompuestasComponent, canActivate: [AuthGuard] },
   { path: 'numeros-letras', component: NumerosLetrasComponent, canActivate: [AuthGuard] },
-  { path: 'numeros-letras-wisc', component: NumerosLetrasWiscComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'numeros-letras-wisc', component: NumerosLetrasWiscComponent, canActivate: [AuthGuard] },
   { path: 'pagina-principal', component: PaginaPrincipalComponent, canActivate: [AuthGuard] },
   { path: 'analisis', component: AnalisisComponent, canActivate: [AuthGuard] },
   { path: 'analisis-wisc', component: AnalisisWiscComponent, canActivate: [AuthGuard] },
