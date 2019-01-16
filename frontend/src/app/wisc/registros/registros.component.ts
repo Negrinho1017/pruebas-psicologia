@@ -42,7 +42,7 @@ export class RegistrosComponent implements OnInit {
     this.subprueba.reactivos[0].puntuacion = this.correctas1 - this.incorrectas1;
     this.subprueba.reactivos[1] = new Reactivo();
     this.subprueba.reactivos[1].puntuacion = this.correctas2 - this.incorrectas2;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,this.subprueba.puntuacionNatural,this.globals.meses)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarRegistros(this.globals.edad,this.subprueba.puntuacionNatural,this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
