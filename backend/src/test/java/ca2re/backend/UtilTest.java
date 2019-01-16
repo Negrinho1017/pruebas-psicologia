@@ -84,4 +84,11 @@ public class UtilTest {
 		assertTrue(Operaciones.elValorEstaEnElRango(44, 60, valor));
 		assertTrue(Operaciones.elValorEstaEnElRango(40, 44, valor));
 	}
+	
+	@Test
+	public void calcularIdEdadWISC() {
+		int edad = 6;
+		int meses = 8;
+		assertEquals("6:8-6:11", EdadUtil.obtenerIdEdadWISC(edad, meses));
+	}
 }
