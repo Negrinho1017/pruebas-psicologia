@@ -5,6 +5,7 @@ import { Globals } from 'src/app/globals';
 import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de-resultados.service';
 import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { Router } from '@angular/router';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-aritmetica-wisc',
@@ -33,7 +34,7 @@ export class AritmeticaWiscComponent implements OnInit {
   hayDiscontinuacion: boolean = false;
   puntuacion: number = 0;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.criteriosDeInversion();
@@ -157,7 +158,7 @@ export class AritmeticaWiscComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarAritmetica(this.globals.edad,this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarAritmetica(this.globals.edad,this.subprueba.puntuacionNatural,this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

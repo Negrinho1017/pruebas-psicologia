@@ -45,4 +45,32 @@ export class PuntuacionEscalarWiscService {
   public obtenerPuntuacionEscalarMatrices(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
     return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/matrices?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
   }
+
+  public obtenerPuntuacionEscalarComprension(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/comprension?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarBusquedaSimbolos(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/busqueda-simbolos?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarFigurasIncompletas(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/figuras-incompletas?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarRegistros(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/registros?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarInformacion(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/informacion?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarAritmetica(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/aritmetica?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
+
+  public obtenerPuntuacionEscalarPistas(edad: number, puntuacionNatural: number, meses: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar-wisc/pistas?puntuacionNatural='+puntuacionNatural+'&edad='+edad+'&meses='+meses, httpOptions);
+  }
 }

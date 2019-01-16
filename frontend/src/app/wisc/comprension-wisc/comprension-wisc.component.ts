@@ -5,6 +5,7 @@ import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de
 import { Globals } from 'src/app/globals';
 import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { Reactivo } from 'src/app/model/Reactivo';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-comprension-wisc',
@@ -29,7 +30,7 @@ export class ComprensionWiscComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.criteriosDeInversion();
@@ -153,7 +154,7 @@ export class ComprensionWiscComponent implements OnInit {
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
     //ACarras se debe crear servicio para puntuacionEscalar
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas(this.globals.edad, this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

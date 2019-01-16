@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { HojaDeResultadosService } from 'src/app/wais/hoja-de-resultados/hoja-de-resultados.service';
 import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { Subprueba } from 'src/app/model/Subprueba';
 import { Reactivo } from 'src/app/model/Reactivo';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-registros',
@@ -22,7 +22,7 @@ export class RegistrosComponent implements OnInit {
   incorrectas2: number = 0;
   subprueba: Subprueba = new Subprueba();
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Registros";
@@ -42,7 +42,7 @@ export class RegistrosComponent implements OnInit {
     this.subprueba.reactivos[0].puntuacion = this.correctas1 - this.incorrectas1;
     this.subprueba.reactivos[1] = new Reactivo();
     this.subprueba.reactivos[1].puntuacion = this.correctas2 - this.incorrectas2;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,this.subprueba.puntuacionNatural,this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);

@@ -5,6 +5,7 @@ import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-
 import { Router } from '@angular/router';
 import { Subprueba } from 'src/app/model/Subprueba';
 import { Reactivo } from 'src/app/model/Reactivo';
+import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
 
 @Component({
   selector: 'app-pistas',
@@ -45,7 +46,7 @@ export class PistasComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
-    private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
+    private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.criteriosDeInversion();
@@ -164,7 +165,7 @@ export class PistasComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion(this.globals.edad,this.subprueba.puntuacionNatural)
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion(this.globals.edad,this.subprueba.puntuacionNatural, this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
