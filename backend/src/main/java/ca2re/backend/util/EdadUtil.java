@@ -58,8 +58,11 @@ public class EdadUtil {
 		else if(Operaciones.elValorEstaEnElRango(20, 24, edad)) {
 			return IdsEdad.EDADES_20_24.getValue();
 		}
-		else if(Operaciones.elValorEstaEnElRango(25, 34, edad)) {
-			return IdsEdad.EDADES_25_34.getValue();
+		else if(Operaciones.elValorEstaEnElRango(25, 29, edad)) {
+			return IdsEdad.EDADES_25_29.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(30, 34, edad)) {
+			return IdsEdad.EDADES_30_34.getValue();
 		}
 		else if(Operaciones.elValorEstaEnElRango(35, 44, edad)) {
 			return IdsEdad.EDADES_35_44.getValue();
@@ -67,17 +70,23 @@ public class EdadUtil {
 		else if(Operaciones.elValorEstaEnElRango(45, 54, edad)) {
 			return IdsEdad.EDADES_45_54.getValue();
 		}
-		else if(Operaciones.elValorEstaEnElRango(55, 69, edad)) {
-			return IdsEdad.EDADES_55_69.getValue();
+		else if(Operaciones.elValorEstaEnElRango(55, 64, edad)) {
+			return IdsEdad.EDADES_55_64.getValue();
 		}
-		else if(Operaciones.elValorEstaEnElRango(70, 79, edad)) {
-			return IdsEdad.EDADES_70_79.getValue();
+		else if(Operaciones.elValorEstaEnElRango(65, 69, edad)) {
+			return IdsEdad.EDADES_65_69.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(70, 74, edad)) {
+			return IdsEdad.EDADES_70_74.getValue();
+		}
+		else if(Operaciones.elValorEstaEnElRango(75, 79, edad)) {
+			return IdsEdad.EDADES_75_79.getValue();
 		}
 		else if(Operaciones.elValorEstaEnElRango(80, 84, edad)) {
 			return IdsEdad.EDADES_80_84.getValue();
 		}
 		else {
-			return IdsEdad.EDADES_85_89.getValue();
+			return IdsEdad.EDADES_85_90.getValue();
 		}
 	}
 	
