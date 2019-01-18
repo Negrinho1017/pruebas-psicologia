@@ -251,7 +251,8 @@ public class AdministradorPruebas {
 	
 	public Subprueba obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
-		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo("20:0-24:11");
+		String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo(idEdad);
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
@@ -260,8 +261,7 @@ public class AdministradorPruebas {
 	public Subprueba obtenerRetencionDeDigitos(int numeroRetencionDigitos, int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
 		String[] puntuacionesEscalares;
-		//String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
-		String idEdad = "20:0-24:11";
+		String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
 		if(numeroRetencionDigitos == RetencionDeDigitos.RDD.getValue()) {
 			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD(idEdad);
 		}else if(numeroRetencionDigitos == RetencionDeDigitos.RDI.getValue()) {
