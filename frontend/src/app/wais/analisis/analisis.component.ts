@@ -18,8 +18,8 @@ export class AnalisisComponent implements OnInit {
   puntuacion1: number[] = [];
   puntuacion2: number[] = [];
   diferencia: number[] = [];
-  valorCriticoRD_AR: number = 2.14;
-  valorCriticoBS_CL: number = 2.66;
+  valorCriticoRD_AR: number = 1.87;
+  valorCriticoBS_CL: number = 2.5;
   valoresCriticos: number[] = [];
   loading: boolean;
   hayDiferenciasSignificativas: String[] = [];
