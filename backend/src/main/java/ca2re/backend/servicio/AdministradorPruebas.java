@@ -251,7 +251,8 @@ public class AdministradorPruebas {
 	
 	public Subprueba obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
-		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo("20:0-24:11");
+		String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo(idEdad);
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
