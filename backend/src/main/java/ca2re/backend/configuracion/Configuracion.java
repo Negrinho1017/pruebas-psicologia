@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 import ca2re.backend.persistencia.CalificacionWISCDAO;
 import ca2re.backend.persistencia.mongo.CalificacionAnalisisProcesoMongoDAO;
@@ -30,7 +31,10 @@ public class Configuracion {
 	private int mongoPuerto;
 	
 	@Value("${nombreDB}") 
-	private String nombreDB;	
+	private String nombreDB;
+	
+//	@Value("${mongo.database.production.uri}")
+//	private MongoClientURI uri;
 	
 	@Bean
 	public CalificadorPrueba crearCalificadorPrueba() {
@@ -39,7 +43,7 @@ public class Configuracion {
 	
 	@Bean
 	public MongoClient crearMongoClient() {
-		return new MongoClient(mongoHost, mongoPuerto);
+		return new MongoClient(mongoHost,mongoPuerto);
 	}
 	
 	@Primary
@@ -47,6 +51,17 @@ public class Configuracion {
 	public MongoOperations crearMongoTemplate() {		
 		return new MongoTemplate(crearMongoClient(), nombreDB);
 	}
+	
+//	@Bean
+//	public MongoClient crearMongoClientProduccion() {
+//		return new MongoClient(uri);
+//	}
+//	
+//	@Primary
+//	@Bean
+//	public MongoOperations crearMongoTemplateProduccion() {		
+//		return new MongoTemplate(crearMongoClientProduccion(), nombreDB);
+//	}
 	
 	@Bean
 	public PruebaWaisMongoDAO crearPruebaWaisDAO(MongoOperations mongoOperations) {
