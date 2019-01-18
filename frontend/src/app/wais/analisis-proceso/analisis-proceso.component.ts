@@ -19,7 +19,7 @@ export class AnalisisProcesoComponent implements OnInit {
   puntuacionesNaturales1: number[] = [0,0,0,0];
   puntuacionesNaturales2: number[] = [0,0,0,0];
   diferencias: number[] = [];
-  valoresCriticos: number[] = [3.22, 3.8, 3.69, 3.88];
+  valoresCriticos: number[] = [3.13, 3.23, 2.83, 2.78];
   diferenciasSignificativos: String[] = [];
   loading: boolean;
   constructor(private analisisProcesoService: AnalisisProcesoService,
