@@ -1,5 +1,6 @@
 <div class="container col-md-5 cuerpo">
-
+<b><h3 *ngIf='this.tipoPrueba=="WAIS"'>Bienvenido a la prueba WAIS IV</h3></b>
+<b><h3 *ngIf='this.tipoPrueba=="WISC"'>Bienvenido a la prueba WISC IV</h3></b>
   <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <button class="btn" (click)="mostrarFormularioRealizarPrueba()">
       Realizar pruebas

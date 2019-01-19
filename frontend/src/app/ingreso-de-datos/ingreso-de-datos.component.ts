@@ -32,10 +32,12 @@ export class IngresoDeDatosComponent implements OnInit {
   mostrarCrearPrueba = true;
   mostrarConsultarPrueba = false;
   idExaminador: String;
+  tipoPrueba: string;
   constructor(private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private globals: Globals) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.tipoPrueba = localStorage.getItem('tipoPrueba');
     this.ingresoDatosForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),

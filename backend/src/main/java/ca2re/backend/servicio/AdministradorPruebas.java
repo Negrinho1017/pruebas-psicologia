@@ -80,16 +80,17 @@ public class AdministradorPruebas {
 
 	public Prueba ingresarPuntuacionCompuesta(String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		String tipoPrueba = prueba.getTipoPrueba();
 		List<RamaDelConocimiento> ramasDelConocimiento = prueba.getRamaDelConocimiento();
 		List<RamaDelConocimiento> ramasDelConocimientoActualizadas = new ArrayList<>();
 		int contador = 0;
 		for (RamaDelConocimiento ramaDelConocimiento : ramasDelConocimiento) {
 			ramaDelConocimiento.setIntervaloConfianza(
-					obtenerIntervaloConfianza(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+					obtenerIntervaloConfianza(buscarIdIndice(contador, tipoPrueba), ramaDelConocimiento.getPuntuacionTotal()));
 			ramaDelConocimiento.setRangoPercentil(
-					obtenerPercentil(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+					obtenerPercentil(buscarIdIndice(contador, tipoPrueba), ramaDelConocimiento.getPuntuacionTotal()));
 			ramaDelConocimiento.setPuntuacionCompuesta(
-					obtenerPuntuacionCompuesta(buscarIdIndice(contador), ramaDelConocimiento.getPuntuacionTotal()));
+					obtenerPuntuacionCompuesta(buscarIdIndice(contador, tipoPrueba), ramaDelConocimiento.getPuntuacionTotal()));
 			ramasDelConocimientoActualizadas.add(ramaDelConocimiento);
 			contador++;
 		}
@@ -97,8 +98,10 @@ public class AdministradorPruebas {
 		return prueba;
 	}
 
-	public String buscarIdIndice(int ramaDelConocimiento) {
-		if (ramaDelConocimiento == RamasDelConocimiento.COMPRENSION_VERBAL.getValue()) {
+	public String buscarIdIndice(int ramaDelConocimiento, String tipoPrueba) {
+		if(tipoPrueba.equals("WISC")) {
+			return buscarIdIndiceWISC(ramaDelConocimiento);
+		} else if (ramaDelConocimiento == RamasDelConocimiento.COMPRENSION_VERBAL.getValue()) {
 			return "ICV";
 		} else if (ramaDelConocimiento == RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue()) {
 			return "IRP";
@@ -106,6 +109,18 @@ public class AdministradorPruebas {
 			return "IMT";
 		} else {
 			return "IVP";
+		}
+	}
+	
+	public String buscarIdIndiceWISC(int ramaDelConocimiento) {
+		if (ramaDelConocimiento == RamasDelConocimiento.COMPRENSION_VERBAL.getValue()) {
+			return "ICV-WISC";
+		} else if (ramaDelConocimiento == RamasDelConocimiento.RAZONAMIENTO_PERCEPTUAL.getValue()) {
+			return "IRP-WISC";
+		} else if (ramaDelConocimiento == RamasDelConocimiento.MEMORIA_DE_TRABAJO.getValue()) {
+			return "IMT-WISC";
+		} else {
+			return "IVP-WISC";
 		}
 	}
 	
