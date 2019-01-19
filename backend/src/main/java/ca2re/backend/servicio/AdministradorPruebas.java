@@ -404,15 +404,15 @@ public class AdministradorPruebas {
 	
 	public SubpruebasAnalisisProceso obtenerSubpruebasAnalisisProcesoWISC(String idEvaluado) {
 		Prueba prueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		int verificadorNumeroRegistros = prueba.getRamaDelConocimiento().get(RamasDelConocimiento.VELOCIDAD_DE_PROCESAMIENTO.getValue()).getSubpruebas().get(0).getNumeroSubprueba();
 		if(VerificadorPruebas.estaDisenoDeCubos(prueba) && VerificadorPruebas.estaRetencionDeDigitos(prueba)){
 			Subprueba disenoCubos = prueba.getRamaDelConocimiento().get(1).getSubpruebas().get(0);
 			return new SubpruebasAnalisisProceso(obtenerRetencionDeDigitos(RetencionDeDigitos.RDD.getValue(), RETENCION_DIGITOS, idEvaluado),
 					obtenerRetencionDeDigitos(RetencionDeDigitos.RDI.getValue(), RETENCION_DIGITOS, idEvaluado), 
 					disenoCubos, 
 					obtenerDisenoCubosSinBonificacionDeTiempo(DISENO_CUBOS, idEvaluado),
-					//Hay que corregir esto
-					obtenerRegistros(1, 8, idEvaluado),
-					obtenerRegistros(2, 8, idEvaluado));
+					obtenerRegistros(1, verificadorNumeroRegistros == 12 ? 8 : 9, idEvaluado),
+					obtenerRegistros(2, verificadorNumeroRegistros == 12 ? 8 : 9, idEvaluado));
 		}
 		throw new PruebasPsicologiaException("No se encontraron pruebas de diseño de cubos o de retención de dígitos");
 	}
