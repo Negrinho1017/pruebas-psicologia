@@ -8,4 +8,8 @@ public interface CalificacionAnalisisProcesoDAO {
 	public String[] obtenerRDI(String idEdad);
 
 	public String[] obtenerRDS(String idEdad);
+	
+	public String[] obtenerRegistrosAleatorio(String idEdad);
+	
+	public String[] obtenerRegistrosEstructurado(String idEdad);
 }

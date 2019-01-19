@@ -6,7 +6,9 @@ public class AnalisisProcesoWAIS {
 	private String[] rdd;
 	private String[] rdi;
 	private String[] rds;
-
+	private String[] registrosAleatorio;
+	private String[] registrosEstructurado;
+ 
 	public String getIdEdad() {
 		return idEdad;
 	}
@@ -47,4 +49,19 @@ public class AnalisisProcesoWAIS {
 		this.rds = rds;
 	}
 
+	public String[] getRegistrosAleatorio() {
+		return registrosAleatorio;
+	}
+
+	public void setRegistrosAleatorio(String[] registrosAleatorio) {
+		this.registrosAleatorio = registrosAleatorio;
+	}
+
+	public String[] getRegistrosEstructurado() {
+		return registrosEstructurado;
+	}
+
+	public void setRegistrosEstructurado(String[] registrosEstructurado) {
+		this.registrosEstructurado = registrosEstructurado;
+	}
 }

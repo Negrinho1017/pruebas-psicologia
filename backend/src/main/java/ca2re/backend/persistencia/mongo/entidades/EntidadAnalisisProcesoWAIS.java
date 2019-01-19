@@ -6,7 +6,9 @@ public class EntidadAnalisisProcesoWAIS {
 	private String[] rdd;
 	private String[] rdi;
 	private String[] rds;
-
+	private String[] registrosAleatorio;
+	private String[] registrosEstructurado;
+	
 	public String getIdEdad() {
 		return idEdad;
 	}
@@ -45,5 +47,21 @@ public class EntidadAnalisisProcesoWAIS {
 
 	public void setRds(String[] rds) {
 		this.rds = rds;
-	}		
+	}
+
+	public String[] getRegistrosAleatorio() {
+		return registrosAleatorio;
+	}
+
+	public void setRegistrosAleatorio(String[] registrosAleatorio) {
+		this.registrosAleatorio = registrosAleatorio;
+	}
+
+	public String[] getRegistrosEstructurado() {
+		return registrosEstructurado;
+	}
+
+	public void setRegistrosEstructurado(String[] registrosEstructurado) {
+		this.registrosEstructurado = registrosEstructurado;
+	}	
 }

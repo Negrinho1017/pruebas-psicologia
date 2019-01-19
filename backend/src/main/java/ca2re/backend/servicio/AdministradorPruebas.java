@@ -266,7 +266,10 @@ public class AdministradorPruebas {
 	
 	public Subprueba obtenerDisenoCubosSinBonificacionDeTiempo(int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
-		String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String tipoPrueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getTipoPrueba();
+		int anios = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios();
+		int meses = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getMeses();
+		String idEdad = tipoPrueba.equals("WAIS") ? EdadUtil.obtenerIdEdad(anios) : EdadUtil.obtenerIdEdadWISC(anios, meses);
 		String[] puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerDisenoCubosSinBonificacionPorTiempo(idEdad);
 		int puntuacionNatural = CalculadoraDePuntuaciones.obtenerDisenoCubosSinBonificacionTiempo(reactivos);
 		int puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
@@ -276,7 +279,10 @@ public class AdministradorPruebas {
 	public Subprueba obtenerRetencionDeDigitos(int numeroRetencionDigitos, int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
 		String[] puntuacionesEscalares;
-		String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
+		String tipoPrueba = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getTipoPrueba();
+		int anios = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios();
+		int meses = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getMeses();
+		String idEdad = tipoPrueba.equals("WAIS") ? EdadUtil.obtenerIdEdad(anios) : EdadUtil.obtenerIdEdadWISC(anios, meses);
 		if(numeroRetencionDigitos == RetencionDeDigitos.RDD.getValue()) {
 			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD(idEdad);
 		}else if(numeroRetencionDigitos == RetencionDeDigitos.RDI.getValue()) {
@@ -292,18 +298,19 @@ public class AdministradorPruebas {
 	public Subprueba obtenerRegistros(int numeroRegistros, int numeroSubprueba, String idEvaluado) {
 		List<Reactivo> reactivos = obtenerListaReactivosPorSubprueba(numeroSubprueba, idEvaluado);
 		String[] puntuacionesEscalares;
-		//String idEdad = EdadUtil.obtenerIdEdad(pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios());
-		String idEdad = "20:0-24:11";
-		if(numeroRegistros == RetencionDeDigitos.RDD.getValue()) {
-			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDD(idEdad);
+		int meses = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getMeses();
+		int anios = pruebaWaisDAO.obtenerPruebaPorIdEvaluado(idEvaluado).get(0).getEdadEvaluado().getAnios();
+		String idEdad = EdadUtil.obtenerIdEdadWISC(anios,meses);
+		if(numeroRegistros == 1) {
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRegistrosAleatorio(idEdad);
 		}else {
-			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRDS(idEdad);
+			puntuacionesEscalares = calificacionAnalisisProcesoDAO.obtenerRegistrosEstructurado(idEdad);
 		}
 		int puntuacionNatural = 0;
 		int puntuacionEscalar = 0;
 		if(reactivos.size()>0) {
 			puntuacionNatural = numeroRegistros == 1 ? reactivos.get(0).getPuntuacion() : reactivos.get(1).getPuntuacion();
-			/*puntuacionEscalar = 0;*/
+			puntuacionEscalar = CalculadoraDePuntuaciones.obtenerPuntuacionEscalar(puntuacionesEscalares, puntuacionNatural);
 		}
 		return new Subprueba(puntuacionNatural,puntuacionEscalar);
 	}
@@ -403,6 +410,7 @@ public class AdministradorPruebas {
 					obtenerRetencionDeDigitos(RetencionDeDigitos.RDI.getValue(), RETENCION_DIGITOS, idEvaluado), 
 					disenoCubos, 
 					obtenerDisenoCubosSinBonificacionDeTiempo(DISENO_CUBOS, idEvaluado),
+					//Hay que corregir esto
 					obtenerRegistros(1, 8, idEvaluado),
 					obtenerRegistros(2, 8, idEvaluado));
 		}

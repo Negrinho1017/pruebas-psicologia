@@ -11,6 +11,8 @@ public class AnalisisProcesoWAISBuilder {
 		analisisProcesoWAIS.setRdd(entidadAnalisisProcesoWAIS.getRdd());
 		analisisProcesoWAIS.setRdi(entidadAnalisisProcesoWAIS.getRdi());
 		analisisProcesoWAIS.setRds(entidadAnalisisProcesoWAIS.getRds());
+		analisisProcesoWAIS.setRegistrosAleatorio(entidadAnalisisProcesoWAIS.getRegistrosAleatorio());
+		analisisProcesoWAIS.setRegistrosEstructurado(entidadAnalisisProcesoWAIS.getRegistrosEstructurado());
 		return analisisProcesoWAIS;
 	}
 }
