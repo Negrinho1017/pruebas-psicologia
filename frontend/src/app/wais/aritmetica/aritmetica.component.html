@@ -1,10 +1,12 @@
 <html>
-<body class = "cuerpo">
+<app-header></app-header>
+
+<body class="cuerpo">
   <table>
     <td>
       <p>
         <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        <b> Inicio:</b> <br> 
+        <b> Inicio:</b> <br>
         <b>Edad 16 a 90 años: </b><br>
         Reactivo muestra después del reactivo 6
       </p>
@@ -26,7 +28,7 @@
     <td>
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
-        <b> Puntuación:</b> <br> 
+        <b> Puntuación:</b> <br>
         Otorgue 0, 1 punto<br>
       </p>
     </td>
@@ -34,8 +36,7 @@
   <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
-  <input type="button" *ngIf="seCambiaraLaSubprueba" 
-  (click)="cambiarSubprueba()" class="btn btn-secondary" value="Sucesión de números y letras">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Sucesión de números y letras">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">
   <div class="table-responsive">
@@ -49,37 +50,40 @@
         <th>0</th>
         <th>1</th>
       </tr>
-      <tr *ngFor="let item of reactivos; let i = index"
-          [ngClass]="{'positive' : i == getReactivoSiguiente()}"
-          id = "checksreactivo{{i}}">
-        <td><p *ngIf="i==6">16-90</p></td>
+      <tr *ngFor="let item of reactivos; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}" id="checksreactivo{{i}}">
+        <td>
+          <p *ngIf="i==6">16-90</p>
+        </td>
         <td>{{item}}</td>
-        <td><app-cronometro></app-cronometro></td>
+        <td>
+          <app-cronometro></app-cronometro>
+        </td>
         <td>{{respuestasCorrectas[i]}}</td>
         <td>
           <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
           <!--<textarea></textarea>-->
         </td>
-        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)" *ngIf="i>0"></td>
-        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>0"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
+            *ngIf="i>0"></td>
+        <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
+            [checked]="checkear(i)" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>
   <table>
-      <td>
-        * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
-        como se sugiere en el manual de aplicación.<br>
-        + Si el examinado da la respuesta en horas, solicitar el equivalente en minutos.
-      </td>
-      <td>
-        Puntuación natural total para Aritmética: <br>
-        <b id = "checksreactivo23">{{this.subprueba.puntuacionNatural}}</b>
-      </td>
+    <td>
+      * Si el examinado no obtiene puntuación perfecta, hay que darle una retroalimentación correctiva<br>
+      como se sugiere en el manual de aplicación.<br>
+      + Si el examinado da la respuesta en horas, solicitar el equivalente en minutos.
+    </td>
+    <td>
+      Puntuación natural total para Aritmética: <br>
+      <b id="checksreactivo23">{{this.subprueba.puntuacionNatural}}</b>
+    </td>
   </table>
 </body>
 <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
   <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
 </button>
+
 </html>

@@ -1,5 +1,7 @@
 <html>
-<body class = "cuerpo">
+<app-header></app-header>
+
+<body class="cuerpo">
   <table>
     <td width="36%">
       <p>
@@ -30,7 +32,7 @@
     <td>
       <p>
         <span class="glyphicon glyphicon-pencil"></span>
-        <b> Puntuación:</b> <br> Otorgue 0 o 1 punto.<br> 
+        <b> Puntuación:</b> <br> Otorgue 0 o 1 punto.<br>
         Las respuestas correctas están en un tipo de letra distinto
       </p>
     </td>
@@ -38,7 +40,8 @@
   <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
-  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarPorFigurasIncompletas()" class="btn btn-secondary" value="Figuras incompletas">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarPorFigurasIncompletas()" class="btn btn-secondary"
+    value="Figuras incompletas">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">
   <div class="table-responsive">
@@ -50,25 +53,24 @@
         <th>0</th>
         <th>1</th>
       </tr>
-      <tr *ngFor="let item of respuestasCorrectas; let i = index"
-          [ngClass]="{'positive' : i == getReactivoSiguiente()}"
-          id="checksreactivo{{i}}">
+      <tr *ngFor="let item of respuestasCorrectas; let i = index" [ngClass]="{'positive' : i == getReactivoSiguiente()}"
+        id="checksreactivo{{i}}">
         <td>
           <p *ngIf="i==0">6-16</p>
           <p *ngIf="i==6">6-8</p>
           <p *ngIf="i==9">9-11</p>
           <p *ngIf="i==13">12-16</p>
         </td>
-        <td><p *ngIf="i>2">{{i-2}}</p>
+        <td>
+          <p *ngIf="i>2">{{i-2}}</p>
           <p *ngIf="i==0">A</p>
           <p *ngIf="i==1">B</p>
           <p *ngIf="i==2">C</p>
         </td>
         <td><b>{{item}}</b></td>
-        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)" *ngIf="i>2"></td>
-        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>2"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)" *ngIf="i>2"></td>
+        <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)" [checked]="checkear(i)"
+            *ngIf="i>2"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
@@ -77,6 +79,7 @@
   </div>
   <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
-</button>
+  </button>
 </body>
+
 </html>

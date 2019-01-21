@@ -1,4 +1,5 @@
 <html>
+<app-header></app-header>
 
 <body class="cuerpo">
   <table>
@@ -12,7 +13,8 @@
     <td>
       <p>
         <i class="fa fa-refresh"></i>
-        <b>Inversión:</b> <br> Si obtiene una puntuación de 0 en los dos primeros reactivos <br>dados aplique los reactivos anteriores
+        <b>Inversión:</b> <br> Si obtiene una puntuación de 0 en los dos primeros reactivos <br>dados aplique los
+        reactivos anteriores
         en orden inverso hasta<br> obtener dos puntuaciones perfectas consecutivas.
       </p>
     </td>
@@ -39,7 +41,8 @@
   <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
-  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarPorFigurasIncompletas()" class="btn btn-secondary" value="Figuras incompletas">
+  <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarPorFigurasIncompletas()" class="btn btn-secondary"
+    value="Figuras incompletas">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">
   <div class="table-responsive">
@@ -124,7 +127,8 @@
               <td *ngIf="i > 3">
                 <h6 *ngIf="i > 10">76-120</h6>
                 <h6 *ngIf="i > 8 && i < 11">31-60</h6>
-                4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)" [disabled]="habilitarReactivo(i)" [checked]="checkear(i)">
+                4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)" [disabled]="habilitarReactivo(i)"
+                  [checked]="checkear(i)">
               </td>
             </tr>
             <tr *ngIf="i > 8">
@@ -154,7 +158,8 @@
   </button>
   <p id="puntuacion">Puntuación natural total para Diseño de cubos: <br>
     <b id="checksreactivo14">{{this.subprueba.puntuacionNatural}}</b></p>
-  <p id="puntuacionSinBonificacionDeTiempo">Puntuación natural total para Diseño de cubos sin bonificación de tiempo: <br>
+  <p id="puntuacionSinBonificacionDeTiempo">Puntuación natural total para Diseño de cubos sin bonificación de tiempo:
+    <br>
     <b id="checksreactivo14">{{this.puntuacionSinBonificacionDeTiempo}}</b></p>
 </body>
 

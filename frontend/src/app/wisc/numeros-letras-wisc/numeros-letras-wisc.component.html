@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<app-header></app-header>
 
 <body class="cuerpo">
   <table>
@@ -33,25 +34,25 @@
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Aritmética">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar"><br>
-    <div class="table-responsive">
-      <table class="table">
-        <tr>
-          <th></th>
-          <th>Reactivos de verificación de aptitudes</th>
-          <th>Respuesta correcta</th>
-        </tr>
-        <tr>
-          <td>6-7</td>
-          <td>Enumeración</td>
-          <td>El niño cuenta hasta 3</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Abecedario</td>
-          <td>El niño dice el abecedario hasta la letra C</td>
-          </tr>
-      </table>
-    </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Reactivos de verificación de aptitudes</th>
+        <th>Respuesta correcta</th>
+      </tr>
+      <tr>
+        <td>6-7</td>
+        <td>Enumeración</td>
+        <td>El niño cuenta hasta 3</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Abecedario</td>
+        <td>El niño dice el abecedario hasta la letra C</td>
+      </tr>
+    </table>
+  </div>
   <div class="table-responsive">
     <table class="table">
       <tr>

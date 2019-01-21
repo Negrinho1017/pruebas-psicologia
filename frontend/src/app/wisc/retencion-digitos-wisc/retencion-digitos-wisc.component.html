@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<app-header></app-header>
 
 <body class="cuerpo">
   <table>
@@ -97,13 +98,14 @@
             {{respuestasRDI[i]}}
           </td>
           <td><input type="radio" *ngIf="i>=2" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)">
-          <td><input type="radio" *ngIf="i>=2"id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
+          <td><input type="radio" *ngIf="i>=2" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>
         <b id="checksreactivo{{i}}">{{this.puntuacionRDI}}</b></p>
     </div>
-    <button type="button" class="btn btn-dark btn-lg" (click)="obtenerPuntuacionTotal()" id="btnPrueba"> Ver puntuación total
+    <button type="button" class="btn btn-dark btn-lg" (click)="obtenerPuntuacionTotal()" id="btnPrueba"> Ver puntuación
+      total
       <span class="glyphicon glyphicon-arrow-right"></span>
     </button>
   </div>
