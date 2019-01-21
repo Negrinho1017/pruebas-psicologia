@@ -92,7 +92,7 @@ export class FortalezasDebilidadesComponent implements OnInit {
 
   calcularConDiferenciasDeLaMedia(){
     var i = 0;
-    this.valoresCriticos = [2.19,2.03,null,2.22,2.17,null,null,2.23,2.03,null];
+    this.valoresCriticos = localStorage.getItem('tipoPrueba')=="WAIS" ? [2.19,2.03,null,2.22,2.17,null,null,2.23,2.03,null] : [2.22,2.23,null,2.38,2.11,null,null,2.09,2.41,null];
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       if(i==1 || i==4 || i==8){
         this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaCV;

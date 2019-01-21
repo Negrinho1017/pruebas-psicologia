@@ -81,7 +81,7 @@ export class AnalisisComponent implements OnInit {
   }
 
   obtenerDatos(){
-    this.analisisService.obtenerValorCritico(this.globals.edad)
+    this.analisisService.obtenerValorCritico(this.globals.edad, localStorage.getItem('tipoPrueba'))
     .subscribe(res => {
       this.valorCriticoWAIS = res;
       this.valoresCriticos=[this.valorCriticoWAIS.valorCriticoICV_IRP, this.valorCriticoWAIS.valorCriticoICV_IMT,

@@ -1,6 +1,6 @@
 package ca2re.backend.dominio;
 
-public class ValorCriticoWAIS {
+public class ValorCritico {
 	private int idRangoEdad;
 	private double valorCriticoICV_IRP;
 	private double valorCriticoICV_IMT;
@@ -8,8 +8,8 @@ public class ValorCriticoWAIS {
 	private double valorCriticoIRP_IMT;
 	private double valorCriticoIRP_IVP;
 	private double valorCriticoIMT_IVP;
-	public ValorCriticoWAIS() {}
-	public ValorCriticoWAIS(int idRangoEdad, double valorCriticoICV_IRP, double valorCriticoICV_IMT,
+	public ValorCritico() {}
+	public ValorCritico(int idRangoEdad, double valorCriticoICV_IRP, double valorCriticoICV_IMT,
 			double valorCriticoICV_IVP, double valorCriticoIRP_IMT, double valorCriticoIRP_IVP,
 			double valorCriticoIMT_IVP) {
 		super();

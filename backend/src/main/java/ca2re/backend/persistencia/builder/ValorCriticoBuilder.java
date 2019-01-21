@@ -1,11 +1,11 @@
 package ca2re.backend.persistencia.builder;
 
-import ca2re.backend.dominio.ValorCriticoWAIS;
-import ca2re.backend.persistencia.mongo.entidades.EntidadValorCriticoWAIS;
+import ca2re.backend.dominio.ValorCritico;
+import ca2re.backend.persistencia.mongo.entidades.EntidadValorCritico;
 
 public class ValorCriticoBuilder {
-	public static EntidadValorCriticoWAIS convertirAEntidad(ValorCriticoWAIS valorCriticoWAIS) {
-		EntidadValorCriticoWAIS entidadValorCriticoWAIS = new EntidadValorCriticoWAIS();
+	public static EntidadValorCritico convertirAEntidad(ValorCritico valorCriticoWAIS) {
+		EntidadValorCritico entidadValorCriticoWAIS = new EntidadValorCritico();
 		entidadValorCriticoWAIS.setIdRangoEdad(valorCriticoWAIS.getIdRangoEdad());
 		entidadValorCriticoWAIS.setValorCriticoICV_IMT(valorCriticoWAIS.getValorCriticoICV_IMT());
 		entidadValorCriticoWAIS.setValorCriticoICV_IRP(valorCriticoWAIS.getValorCriticoICV_IRP());
@@ -16,8 +16,8 @@ public class ValorCriticoBuilder {
 		return entidadValorCriticoWAIS;
 	}
 	
-	public static ValorCriticoWAIS convertirADominio(EntidadValorCriticoWAIS entidadValorCriticoWAIS) {
-		ValorCriticoWAIS valorCriticoWAIS = new ValorCriticoWAIS();
+	public static ValorCritico convertirADominio(EntidadValorCritico entidadValorCriticoWAIS) {
+		ValorCritico valorCriticoWAIS = new ValorCritico();
 		valorCriticoWAIS.setIdRangoEdad(entidadValorCriticoWAIS.getIdRangoEdad());
 		valorCriticoWAIS.setValorCriticoICV_IMT(entidadValorCriticoWAIS.getValorCriticoICV_IMT());
 		valorCriticoWAIS.setValorCriticoICV_IRP(entidadValorCriticoWAIS.getValorCriticoICV_IRP());

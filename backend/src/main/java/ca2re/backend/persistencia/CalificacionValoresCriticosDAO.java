@@ -1,7 +1,9 @@
 package ca2re.backend.persistencia;
 
-import ca2re.backend.dominio.ValorCriticoWAIS;
+import ca2re.backend.dominio.ValorCritico;
 
 public interface CalificacionValoresCriticosDAO {
-	ValorCriticoWAIS obtenerValoresCriticos(int idRangoEdad);
+	ValorCritico obtenerValoresCriticosWAIS(int idRangoEdad);
+	
+	ValorCritico obtenerValoresCriticosWISC(int edad);
 }

@@ -11,8 +11,8 @@ export class AnalisisService {
   private options = new RequestOptions({headers:this.headers});
   constructor( private _http: Http ) { }
 
-  obtenerValorCritico(edad: number) {
-    return this._http.get(this.url + '/valor-critico/valores-criticos?edad='+edad,
+  obtenerValorCritico(edad: number, tipoPrueba: String) {
+    return this._http.get(this.url + '/valor-critico/valores-criticos?edad='+edad+'&tipoPrueba='+tipoPrueba,
       this.options).
     pipe(map((response:Response)=>response.json()),
     catchError( error => {

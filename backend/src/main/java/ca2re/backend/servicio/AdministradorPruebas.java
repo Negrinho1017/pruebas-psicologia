@@ -10,7 +10,7 @@ import ca2re.backend.dominio.RamaDelConocimiento;
 import ca2re.backend.dominio.Reactivo;
 import ca2re.backend.dominio.Subprueba;
 import ca2re.backend.dominio.SubpruebasAnalisisProceso;
-import ca2re.backend.dominio.ValorCriticoWAIS;
+import ca2re.backend.dominio.ValorCritico;
 import ca2re.backend.dominio.constantes.RamasDelConocimiento;
 import ca2re.backend.dominio.constantes.RetencionDeDigitos;
 import ca2re.backend.dominio.constantes.TiposPrueba;
@@ -241,9 +241,12 @@ public class AdministradorPruebas {
 		return calificacionPuntuacionCompuestaDAO.obtenerIntervaloDeConfianza(id)[puntuacionTotal];
 	}
 	
-	public ValorCriticoWAIS obtenerValoresCriticos(int edad) {
-		int idRangoEdad = EdadUtil.obtenerRangoEdad(edad);
-		return calificacionValoresCriticosDAO.obtenerValoresCriticos(idRangoEdad);
+	public ValorCritico obtenerValoresCriticos(int edad, String tipoPrueba) {
+		if(tipoPrueba.equals(TiposPrueba.WAIS.getValue())) {
+			int idRangoEdad = EdadUtil.obtenerRangoEdad(edad);
+			return calificacionValoresCriticosDAO.obtenerValoresCriticosWAIS(idRangoEdad);
+		}
+		return calificacionValoresCriticosDAO.obtenerValoresCriticosWISC(edad);
 	}
 	
 	public List<Subprueba> obtenerTodasLasSubpruebasPorIdentificacion(String id){

@@ -75,12 +75,12 @@ public class CalificadorPruebaTest {
 	
 	@Test
 	public void getValoresCriticos() {	
-		double valorCriticoICV_IRP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IRP();
-		double valorCriticoICV_IMT = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IMT();
-		double valorCriticoICV_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoICV_IVP();
-		double valorCriticoIRP_IMT = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIRP_IMT();
-		double valorCriticoIRP_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIRP_IVP();
-		double valorCriticoIMT_IVP = administradorPruebas.obtenerValoresCriticos(1).getValorCriticoIMT_IVP();
+		double valorCriticoICV_IRP = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoICV_IRP();
+		double valorCriticoICV_IMT = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoICV_IMT();
+		double valorCriticoICV_IVP = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoICV_IVP();
+		double valorCriticoIRP_IMT = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoIRP_IMT();
+		double valorCriticoIRP_IVP = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoIRP_IVP();
+		double valorCriticoIMT_IVP = administradorPruebas.obtenerValoresCriticos(1,"WAIS").getValorCriticoIMT_IVP();
 		assertEquals(11.76, valorCriticoICV_IRP,0);
 		assertEquals(12.82, valorCriticoICV_IMT,0);
 		assertEquals(12.82, valorCriticoICV_IVP,0);

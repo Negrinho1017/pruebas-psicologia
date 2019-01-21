@@ -1,6 +1,6 @@
 package ca2re.backend.persistencia.mongo.entidades;
 
-public class EntidadValorCriticoWAIS {
+public class EntidadValorCritico {
 	private int idRangoEdad;
 	private double valorCriticoICV_IRP;
 	private double valorCriticoICV_IMT;
