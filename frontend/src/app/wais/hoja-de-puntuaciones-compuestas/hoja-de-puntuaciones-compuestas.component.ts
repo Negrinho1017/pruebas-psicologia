@@ -50,7 +50,8 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
   }
 
   obtenerPuntuacionCompuestaCIT(puntuacionTotal: number) {
-    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta("CIT", puntuacionTotal)
+
+    this.hojaDePuntuacionesCompuestasService.obtenerPuntuacionCompuesta(localStorage.getItem('tipoPrueba')=="WAIS" ? "CIT" : "CIT-WISC", puntuacionTotal)
       .subscribe(res => {
         this.puntuacionCompuestaCIT = res;
         this.globals.CITCompuesta = this.puntuacionCompuestaCIT.puntuacion;
