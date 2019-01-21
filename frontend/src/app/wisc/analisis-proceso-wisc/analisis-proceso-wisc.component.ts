@@ -19,7 +19,7 @@ export class AnalisisProcesoWiscComponent implements OnInit {
   puntuacionesNaturales1: number[] = [];
   puntuacionesNaturales2: number[] = [];
   diferencias: number[] = [];
-  valoresCriticos: number[] = [3.22, 3.8, 3.69, 3.88];
+  valoresCriticos: number[] = [3.26, 3.62, 4.4];
   diferenciasSignificativos: String[] = [];
   loading: boolean;
   constructor(private analisisProcesoService: AnalisisProcesoService,
@@ -62,7 +62,7 @@ export class AnalisisProcesoWiscComponent implements OnInit {
     var i = 0;
     for(let p1 of this.puntuacionesNaturales1){
       this.diferencias[i] = p1 - this.puntuacionesNaturales2[i];
-      if(this.diferencias[i]>this.valoresCriticos[i]){
+      if(Math.abs(this.diferencias[i])>this.valoresCriticos[i]){
         this.diferenciasSignificativos[i] = 'S';
       }else{
         this.diferenciasSignificativos[i] = 'N';

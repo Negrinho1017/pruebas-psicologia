@@ -81,7 +81,7 @@ export class FortalezasDebilidadesComponent implements OnInit {
 
   calcularConMediaTotal(){
     this.calcularPuntuacionEscalarMediaTotal();
-    this.valoresCriticos = [2.96,3.65,2.55,3.03,2.87,3.08,3.58,3.06,2.52,3.27];
+    this.valoresCriticos = localStorage.getItem('tipoPrueba')=="WAIS" ? [2.96,3.65,2.55,3.03,2.87,3.08,3.58,3.06,2.52,3.27] : [3.01,3.01,2.87,3.39,3.17,2.70,2.63,2.68,3.44,3.56];
     var i = 0;
     for (let calificacionSubprueba of this.puntuacionesEscalares) {
       this.diferenciasDeLaMedia[i] = calificacionSubprueba - this.puntuacionEscalarMediaTotal;
