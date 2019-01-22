@@ -1,5 +1,4 @@
 {
-    "_id" : ObjectId("5c3e5b8c635b1a46b128817e"),
     "idEdad" : "13:0-13:3",
     "disenioCubosDC" : [ 
         "0-6", 
