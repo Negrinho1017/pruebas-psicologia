@@ -170,6 +170,7 @@ export class SemejanzasComponent implements OnInit {
   }
 
   cambiarSubprueba(){
+    localStorage.setItem('siguientePrueba', 'rd');
     this.globals.rutas[1]="/comprension";
     this.globals.subpruebas[1] = "Comprensión";
     this.router.navigate([this.globals.rutas[1]]);

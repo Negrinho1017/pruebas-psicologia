@@ -189,6 +189,7 @@ export class MatricesComponent implements OnInit {
     if(this.globals.subpruebas[0]=="Peso figurado"){
       this.mensajeError("La subprueba peso figurado ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'vb');
       this.globals.rutas[3]="/peso-figurado";
       this.globals.subpruebas[3] = "Peso figurado";
       this.router.navigate([this.globals.rutas[3]]);
@@ -199,6 +200,7 @@ export class MatricesComponent implements OnInit {
     if(this.globals.subpruebas[0]=="Figuras incompletas"){
       this.mensajeError("La subprueba figuras incompletas ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'vb');
       this.globals.rutas[3]="/figuras-incompletas";
       this.globals.subpruebas[3] = "Figuras incompletas";
       this.router.navigate([this.globals.rutas[3]]);

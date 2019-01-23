@@ -188,6 +188,7 @@ export class RompecabezasVisualComponent implements OnInit {
     if(this.globals.subpruebas[0]=="Peso figurado" || this.globals.subpruebas[3] == "Peso figurado"){
       this.mensajeError("La subprueba peso figurado ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'in');
       this.globals.rutas[7]="/peso-figurado";
       this.globals.subpruebas[7] = "Peso figurado";
       this.router.navigate([this.globals.rutas[7]]);
@@ -198,6 +199,7 @@ export class RompecabezasVisualComponent implements OnInit {
     if(this.globals.subpruebas[0]=="Figuras incompletas" || this.globals.subpruebas[3] == "Figuras incompletas"){
       this.mensajeError("La subprueba figuras incompletas ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'in');
       this.globals.rutas[7]="/figuras-incompletas";
       this.globals.subpruebas[7] = "Figuras incompletas";
       this.router.navigate([this.globals.rutas[7]]);

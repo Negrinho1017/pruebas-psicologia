@@ -164,6 +164,7 @@ export class InformacionComponent implements OnInit {
     if(this.globals.subpruebas[1]=="Comprensión" || this.globals.subpruebas[4]=="Comprensión"){
       this.mensajeError("Comprensión ya fué realizada");
     }else{
+      localStorage.setItem('siguientePrueba', 'cl');
       this.globals.rutas[8]="/comprension";
       this.globals.subpruebas[8] = "Comprensión";
       this.router.navigate([this.globals.rutas[8]]);

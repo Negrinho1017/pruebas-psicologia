@@ -58,6 +58,7 @@ export class BusquedaSimbolosComponent implements OnInit {
   }
 
   cambiarSubprueba(){
+    localStorage.setItem('siguientePrueba', 'rv');
     this.globals.rutas[6]="/cancelacion";
     this.globals.subpruebas[6] = "Cancelación";
     this.router.navigate([this.globals.rutas[6]]);

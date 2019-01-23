@@ -181,6 +181,7 @@ export class VocabularioComponent implements OnInit {
     if(this.globals.subpruebas[1]=="Comprensión"){
       this.mensajeError("Comprensión ya fué realizada");
     }else{
+      localStorage.setItem('siguientePrueba', 'ar');
       this.globals.rutas[4]="/comprension";
       this.globals.subpruebas[4] = "Comprensión";
       this.router.navigate([this.globals.rutas[4]]);

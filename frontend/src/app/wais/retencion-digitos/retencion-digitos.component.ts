@@ -198,6 +198,7 @@ export class RetencionDigitosComponent implements OnInit {
   }
 
   cambiarSubprueba(){
+    localStorage.setItem('siguientePrueba', 'mt');
     this.globals.rutas[2]="/numeros-letras";
     this.globals.subpruebas[2] = "Sucesión de números y letras";
     this.router.navigate([this.globals.rutas[2]]);

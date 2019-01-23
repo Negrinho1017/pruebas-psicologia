@@ -184,6 +184,7 @@ export class AritmeticaComponent implements OnInit {
     if(this.globals.subpruebas[2]=="Sucesión de números y letras"){
       this.mensajeError("Sucesión de números y letras ya fué realizada");
     }else{
+      localStorage.setItem('siguientePrueba', 'bs');
       this.globals.rutas[5]="/numeros-letras";
       this.globals.subpruebas[5] = "Sucesión de números y letras";
       this.router.navigate([this.globals.rutas[5]]);
