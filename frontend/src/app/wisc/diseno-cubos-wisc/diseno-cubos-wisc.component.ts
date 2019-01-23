@@ -161,7 +161,7 @@ export class DisenoCubosWiscComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if ((puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2)) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha finalizado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -176,7 +176,7 @@ export class DisenoCubosWiscComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha finalizado la subprueba");
     }
     return discontinua;
   }
@@ -215,7 +215,7 @@ export class DisenoCubosWiscComponent implements OnInit {
 
   mensajeError(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba terminada',
       icon: "warning",
       text: mensaje,
     });
