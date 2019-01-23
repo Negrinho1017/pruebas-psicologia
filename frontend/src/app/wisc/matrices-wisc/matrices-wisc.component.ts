@@ -210,6 +210,7 @@ export class MatricesWiscComponent implements OnInit {
     if (this.globals.subpruebas[0] == "Figuras incompletas" || this.globals.subpruebas[3] == "Figuras incompletas") {
       this.mensajeError("La subprueba figuras incompletas ya fue realizada")
     } else {
+      localStorage.setItem('siguientePrueba', 'co');
       this.globals.rutas[7] = "/figuras-incompletas-wisc";
       this.globals.subpruebas[7] = "Figuras incompletas";
       this.router.navigate([this.globals.rutas[7]]);

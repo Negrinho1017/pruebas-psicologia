@@ -60,6 +60,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
     if(this.globals.subpruebas[4]=="Registros"){
       this.mensajeError("Registros ya fué realizada");
     }else{
+      localStorage.setItem('siguientePrueba', 'hr');
       this.globals.rutas[9]="/registros";
       this.globals.subpruebas[9] = "Registros";
       this.router.navigate([this.globals.rutas[9]]);

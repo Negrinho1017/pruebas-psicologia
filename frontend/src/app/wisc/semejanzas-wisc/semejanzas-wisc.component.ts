@@ -219,12 +219,14 @@ export class SemejanzasWiscComponent implements OnInit {
   }
 
   cambiarPorPistas(){
+    localStorage.setItem('siguientePrueba', 'rd');
     this.globals.rutas[1] = "/pistas";
     this.globals.subpruebas[1] = "Pistas";
     this.router.navigate([this.globals.rutas[1]]);
   }
 
   cambiarPorInformacion(){
+    localStorage.setItem('siguientePrueba', 'rd');
     this.globals.rutas[1] = "/informacion-wisc";
     this.globals.subpruebas[1] = "Información";
     this.router.navigate([this.globals.rutas[1]]);

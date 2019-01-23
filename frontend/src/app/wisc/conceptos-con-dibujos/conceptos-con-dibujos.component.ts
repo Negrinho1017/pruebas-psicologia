@@ -205,6 +205,7 @@ export class ConceptosConDibujosComponent implements OnInit {
     if(this.globals.subpruebas[0]=="Figuras incompletas"){
       this.mensajeError("La subprueba figuras incompletas ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'cl');
       this.globals.rutas[3]="/figuras-incompletas-wisc";
       this.globals.subpruebas[3] = "Figuras incompletas";
       this.router.navigate([this.globals.rutas[3]]);

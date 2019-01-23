@@ -200,6 +200,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
   }
 
   cambiarSubprueba(){
+    localStorage.setItem('siguientePrueba', 'cd');
     this.globals.rutas[2]="/aritmetica-wisc";
     this.globals.subpruebas[2] = "Aritmética";
     this.router.navigate([this.globals.rutas[2]]);

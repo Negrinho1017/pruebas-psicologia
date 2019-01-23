@@ -56,6 +56,7 @@ export class ClavesWiscComponent implements OnInit {
   }
 
   cambiarSubprueba(){
+    localStorage.setItem('siguientePrueba', 'vb');
     this.globals.rutas[4]="/registros";
     this.globals.subpruebas[4] = "Registros";
     this.router.navigate([this.globals.rutas[4]]);

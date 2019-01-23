@@ -154,6 +154,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
     if(this.globals.rutas[2] == "/aritmetica-wisc"){
       this.mensajeError("La subprueba aritmética ya fue realizada");
     }else{
+      localStorage.setItem('siguientePrueba', 'mt');
       this.globals.rutas[6]="/aritmetica-wisc";
       this.globals.subpruebas[6] = "Aritmética";
       this.router.navigate([this.globals.rutas[6]]);

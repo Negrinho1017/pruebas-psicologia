@@ -239,6 +239,7 @@ export class DisenoCubosWiscComponent implements OnInit {
   }
 
   cambiarPorFigurasIncompletas(){
+    localStorage.setItem('siguientePrueba', 'se');
     this.globals.rutas[0]="/figuras-incompletas-wisc";
     this.globals.subpruebas[0] = "Figuras incompletas";
     this.router.navigate([this.globals.rutas[0]]);

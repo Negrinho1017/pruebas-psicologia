@@ -214,6 +214,7 @@ export class VocabularioWiscComponent implements OnInit {
     if(this.globals.rutas[1] == "/pistas"){
       this.mensajeError("La subprueba pistas ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'nl');
       this.globals.rutas[5] = "/pistas";
       this.globals.subpruebas[5] = "Pistas";
       this.router.navigate([this.globals.rutas[5]]);
@@ -224,6 +225,7 @@ export class VocabularioWiscComponent implements OnInit {
     if(this.globals.rutas[1] == "/informacion-wisc"){
       this.mensajeError("La subprueba información ya fue realizada")
     }else{
+      localStorage.setItem('siguientePrueba', 'nl');
       this.globals.rutas[5] = "/informacion-wisc";
       this.globals.subpruebas[5] = "Información";
       this.router.navigate([this.globals.rutas[5]]);
