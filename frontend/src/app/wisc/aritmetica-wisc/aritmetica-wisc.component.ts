@@ -37,6 +37,9 @@ export class AritmeticaWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
@@ -203,10 +206,12 @@ export class AritmeticaWiscComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[2] == "/aritmetica-wisc") {
+    if (localStorage.getItem('siguientePrueba')=='cd') {
+      this.globals.rutas[3] = "/conceptos-con-dibujos";
       this.router.navigate([this.globals.rutas[3]]);
     }
-    else if (this.globals.rutas[6] == "/aritmetica-wisc") {
+    else if (localStorage.getItem('siguientePrueba')=='mt') {
+      this.globals.rutas[7] = "/matrices-wisc";
       this.router.navigate([this.globals.rutas[7]]);
     }
   }
