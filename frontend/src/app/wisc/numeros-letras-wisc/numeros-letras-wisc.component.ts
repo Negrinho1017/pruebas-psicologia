@@ -98,7 +98,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeAlerta("Se ha descontinuado la subprueba");
+      this.mensajeAlerta("Se ha finalizado la subprueba");
     }
     return discontinua;
   }
@@ -163,7 +163,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
 
   mensajeAlerta(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba terminada',
       icon: "warning",
       text: mensaje,
     });

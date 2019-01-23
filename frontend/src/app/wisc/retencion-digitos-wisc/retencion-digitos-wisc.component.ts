@@ -99,7 +99,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
     if (descontinuado) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");      
+      this.mensajeError("Se ha finalizado la subprueba");      
     }
     return descontinuado;
   }
@@ -184,7 +184,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
 
   mensajeError(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba terminada',
       icon: "warning",
       text: mensaje,
     });
