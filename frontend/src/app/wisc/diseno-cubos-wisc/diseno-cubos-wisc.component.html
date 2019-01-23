@@ -89,22 +89,22 @@
               <td style="padding: 0px; border: 0px;">
                 <img (click)="cambiarImg(i, 1)" src='/assets/Cubo ({{posicionCubos[i][1]}}).png' style="width:40px;">
               </td>
-              <td *ngIf="i > 10" style="padding: 0px; border: 0px;">
+              <td *ngIf="i > 9" style="padding: 0px; border: 0px;">
                 <img (click)="cambiarImg(i, 2)" src='/assets/Cubo ({{posicionCubos[i][2]}}).png' style="width:40px;">
               </td>
             </tr>
-            <tr *ngIf="i > 1">
+            <tr *ngIf="i > 0">
               <td style="padding: 0px; border: 0px; width: 40px;">
                 <img (click)="cambiarImg(i, 3)" src='/assets/Cubo ({{posicionCubos[i][3]}}).png' style="width:40px;">
               </td>
               <td style="padding: 0px; border: 0px;">
                 <img (click)="cambiarImg(i, 4)" src='/assets/Cubo ({{posicionCubos[i][4]}}).png' style="width:40px;">
               </td>
-              <td *ngIf="i > 10" style="padding: 0px; border: 0px;">
+              <td *ngIf="i > 9" style="padding: 0px; border: 0px;">
                 <img (click)="cambiarImg(i ,5)" src='/assets/Cubo ({{posicionCubos[i][5]}}).png' style="width:40px;">
               </td>
             </tr>
-            <tr *ngIf="i > 10">
+            <tr *ngIf="i > 9">
               <td style="padding: 0px; border: 0px; width: 40px;">
                 <img (click)="cambiarImg(i, 6)" src='/assets/Cubo ({{posicionCubos[i][6]}}).png' style="width:40px;">
               </td>

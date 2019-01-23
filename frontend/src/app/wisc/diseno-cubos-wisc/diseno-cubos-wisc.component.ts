@@ -31,7 +31,6 @@ export class DisenoCubosWiscComponent implements OnInit {
   puntuacionSinBonificacionDeTiempo: number = 0;
   posicionCubos: number[][] = [
     [0, 0],
-    [0, 0],
     [0, 0, 7, 0, 0],
     [0, 0, 7, 0, 0],
     [0, 0, 7, 0, 0],
@@ -41,6 +40,7 @@ export class DisenoCubosWiscComponent implements OnInit {
     [0, 0, 7, 0, 0],
     [0, 0, 7, 0, 0],
     [0, 0, 7, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
