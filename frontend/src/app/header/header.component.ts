@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   }
 
   salir(){
-    localStorage.removeItem('idEvaluado');
+    localStorage.clear();
   }
 
 }
