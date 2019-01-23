@@ -37,7 +37,7 @@
   <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
-  <input type="button" *ngIf="seCambiaraLaSubprueba" 
+  <input type="button" *ngIf="seCambiaraLaSubprueba && edadMaximaSubPruebas < 70" 
   (click)="cambiarSubprueba()" class="btn btn-secondary" value="Sucesión de números y letras">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">

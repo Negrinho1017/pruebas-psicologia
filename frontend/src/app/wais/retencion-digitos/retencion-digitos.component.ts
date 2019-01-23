@@ -48,6 +48,8 @@ export class RetencionDigitosComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean;
+  edadMaximaSubPruebas = Number(localStorage.getItem('anios'));
+  
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }

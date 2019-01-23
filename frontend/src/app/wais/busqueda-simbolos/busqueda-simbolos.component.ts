@@ -16,6 +16,8 @@ export class BusquedaSimbolosComponent implements OnInit {
   correctas: number = 0;
   incorrectas: number = 0;
   subprueba: Subprueba = new Subprueba();
+  edadMaximaSubPruebas = Number(localStorage.getItem('anios'));
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 

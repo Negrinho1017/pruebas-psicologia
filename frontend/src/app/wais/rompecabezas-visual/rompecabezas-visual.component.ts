@@ -26,6 +26,8 @@ export class RompecabezasVisualComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  edadMaximaSubPruebas = Number(localStorage.getItem('anios'));
+  
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 

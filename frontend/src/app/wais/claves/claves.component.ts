@@ -14,6 +14,8 @@ export class ClavesComponent implements OnInit {
   puntuacion: number = 0;
   subprueba: Subprueba = new Subprueba();
   seCambiaraLaSubprueba: boolean = false;
+  edadMaximaSubPruebas = Number(localStorage.getItem('anios'));
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 

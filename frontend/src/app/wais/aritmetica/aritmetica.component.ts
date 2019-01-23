@@ -29,6 +29,8 @@ export class AritmeticaComponent implements OnInit {
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
   puntuacion: number = 0;
+  edadMaximaSubPruebas = Number(localStorage.getItem('anios'));
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
