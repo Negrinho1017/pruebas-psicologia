@@ -88,7 +88,7 @@ export class InformacionComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha finalizado la subprueba");
     }
     return discontinua;
   }
@@ -145,7 +145,7 @@ export class InformacionComponent implements OnInit {
 
   mensajeWarning(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba terminada',
       icon: "warning",
       text: mensaje,
     });

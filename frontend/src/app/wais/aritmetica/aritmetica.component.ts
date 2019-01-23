@@ -67,7 +67,7 @@ export class AritmeticaComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha finalizado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -108,7 +108,7 @@ export class AritmeticaComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha finalizado la subprueba");
     }
     return discontinua;
   }
@@ -167,7 +167,7 @@ export class AritmeticaComponent implements OnInit {
 
   mensajeWarning(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba terminada',
       icon: "warning",
       text: mensaje,
     });
