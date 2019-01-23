@@ -45,6 +45,9 @@ export class NumerosLetrasWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.nombre = "Sucesión de números y letras";
     this.subprueba.numeroSubprueba = 7;
     this.crearRespuestas();
@@ -114,6 +117,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[7] = '/matrices-wisc';
         this.router.navigate([this.globals.rutas[7]]);
         console.log("escalar: " + this.subprueba.puntuacionEscalar);
         this.scrollToTop();

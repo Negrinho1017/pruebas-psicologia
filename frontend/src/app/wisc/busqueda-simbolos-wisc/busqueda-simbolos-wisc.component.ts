@@ -20,6 +20,9 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.nombre = "Búsqueda de símbolos";
     this.subprueba.numeroSubprueba = 10;
   }

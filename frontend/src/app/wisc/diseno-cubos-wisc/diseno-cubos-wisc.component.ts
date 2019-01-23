@@ -63,6 +63,9 @@ export class DisenoCubosWiscComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
@@ -89,6 +92,7 @@ export class DisenoCubosWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[1] = '/semejanzas-wisc';
         this.router.navigate([this.globals.rutas[1]]);
         this.scrollToTop();
       });

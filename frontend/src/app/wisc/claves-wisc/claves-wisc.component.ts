@@ -21,6 +21,9 @@ export class ClavesWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.numeroSubprueba = 5;
     this.subprueba.nombre = "Claves";
   }
@@ -33,6 +36,7 @@ export class ClavesWiscComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.clavesNatural = this.subprueba.puntuacionNatural;
       this.globals.claves = this.subprueba.puntuacionEscalar;
+      this.globals.rutas[5] = '/vocabulario-wisc';
       this.router.navigate([this.globals.rutas[5]]);
       this.scrollToTop();
     }, error => {

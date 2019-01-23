@@ -33,6 +33,9 @@ export class ComprensionWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
@@ -153,11 +156,11 @@ export class ComprensionWiscComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.reactivos = this.reactivosCalificados;
-    //ACarras se debe crear servicio para puntuacionEscalar
     this.puntuacionEscalarService.obtenerPuntuacionEscalarComprension(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[9] = '/busqueda-simbolos-wisc';
         this.router.navigate([this.globals.rutas[9]]);
         this.scrollToTop();
       });  

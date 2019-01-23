@@ -36,11 +36,26 @@ export class SemejanzasWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Semejanzas";
     this.subprueba.numeroSubprueba = 2;
+  }
+
+  finalizarSubprueba() {
+    this.subprueba.reactivos = this.reactivosCalificados;
+    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
+      .subscribe(res => {
+        this.subprueba.puntuacionEscalar = res;
+        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[2] = '/retencion-digitos-wisc';
+        this.router.navigate([this.globals.rutas[2]]);
+        this.scrollToTop();
+      });
   }
 
   criteriosDeInversion() {
@@ -60,18 +75,7 @@ export class SemejanzasWiscComponent implements OnInit {
       this.listaCalificaciones = [0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
   }
-
-  finalizarSubprueba() {
-    this.subprueba.reactivos = this.reactivosCalificados;
-    this.puntuacionEscalarService.obtenerPuntuacionEscalarSemejanzas(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
-      .subscribe(res => {
-        this.subprueba.puntuacionEscalar = res;
-        this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-        this.router.navigate([this.globals.rutas[2]]);
-        this.scrollToTop();
-      });
-  }
-
+  
   crearReactivos() {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {

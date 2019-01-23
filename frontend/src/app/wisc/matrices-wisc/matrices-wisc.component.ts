@@ -30,6 +30,9 @@ export class MatricesWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
@@ -170,6 +173,7 @@ export class MatricesWiscComponent implements OnInit {
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[8] = '/comprension-wisc';
         this.router.navigate([this.globals.rutas[8]]);
         this.scrollToTop();
       });

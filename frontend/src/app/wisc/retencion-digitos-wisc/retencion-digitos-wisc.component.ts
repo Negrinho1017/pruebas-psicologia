@@ -54,6 +54,9 @@ export class RetencionDigitosWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.construirRespuestasRDI();
     this.selectedRetencionDeDigitos = 1;
   }
@@ -153,6 +156,7 @@ export class RetencionDigitosWiscComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.retencionDigitos = this.subprueba.puntuacionEscalar;
+        this.globals.rutas[3] = '/conceptos-con-dibujos';
         this.router.navigate([this.globals.rutas[3]]);
         this.scrollToTop();
       });      
