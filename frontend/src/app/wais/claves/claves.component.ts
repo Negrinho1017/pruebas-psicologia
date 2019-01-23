@@ -18,11 +18,14 @@ export class ClavesComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.numeroSubprueba = 10;
     this.subprueba.nombre = "Claves";
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarClaves(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {

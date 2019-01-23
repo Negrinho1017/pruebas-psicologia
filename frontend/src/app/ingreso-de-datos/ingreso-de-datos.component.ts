@@ -120,6 +120,8 @@ export class IngresoDeDatosComponent implements OnInit {
       this.edad = res;
       this.globals.edad = this.edad.anios;
       this.globals.meses = this.edad.meses;
+      localStorage.setItem('anios', <string> this.globals.edad.toString());
+      localStorage.setItem('meses', <string> this.globals.meses.toString());
       this.fechas = true;
     });
   }

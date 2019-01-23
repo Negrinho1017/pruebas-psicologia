@@ -33,6 +33,7 @@ export class AritmeticaComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Aritmética";
     this.subprueba.numeroSubprueba = 6;
   }
@@ -130,6 +131,8 @@ export class AritmeticaComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarAritmetica(this.globals.edad,
     this.subprueba.puntuacionNatural)
@@ -137,6 +140,7 @@ export class AritmeticaComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.aritmetica = this.subprueba.puntuacionEscalar;
+      this.globals.rutas[6] = '/busqueda-simbolos';
       this.router.navigate([this.globals.rutas[6]]);
       this.scrollToTop();
     }); 

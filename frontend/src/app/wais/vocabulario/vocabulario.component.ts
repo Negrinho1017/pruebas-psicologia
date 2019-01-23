@@ -38,6 +38,7 @@ export class VocabularioComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Vocabulario";
     this.subprueba.numeroSubprueba = 5;
   }
@@ -137,11 +138,14 @@ export class VocabularioComponent implements OnInit {
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarVocabulario(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[5] = '/aritmetica';
         this.router.navigate([this.globals.rutas[5]]);
         this.scrollToTop();
       });

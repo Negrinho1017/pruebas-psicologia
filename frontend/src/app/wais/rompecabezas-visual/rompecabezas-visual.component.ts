@@ -30,6 +30,7 @@ export class RompecabezasVisualComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Rompecabezas visual";
     this.subprueba.numeroSubprueba = 8;
   }
@@ -126,11 +127,14 @@ export class RompecabezasVisualComponent implements OnInit {
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarRompecabezasVisual(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[8] = '/informacion'
         this.router.navigate([this.globals.rutas[8]]);
         this.scrollToTop();
       });

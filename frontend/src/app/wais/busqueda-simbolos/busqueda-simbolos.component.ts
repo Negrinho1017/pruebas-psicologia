@@ -20,6 +20,7 @@ export class BusquedaSimbolosComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Búsqueda de símbolos";
     this.subprueba.numeroSubprueba = 7;
   }
@@ -29,6 +30,8 @@ export class BusquedaSimbolosComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.puntuacionNatural = this.puntuacion;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad,
     this.subprueba.puntuacionNatural)
@@ -36,6 +39,7 @@ export class BusquedaSimbolosComponent implements OnInit {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
+      this.globals.rutas[7] = '/rompecabezas-visual';
       this.router.navigate([this.globals.rutas[7]]);
       this.scrollToTop();
     }, error => {

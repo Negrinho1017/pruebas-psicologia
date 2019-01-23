@@ -29,6 +29,7 @@ export class InformacionComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Información";
     this.subprueba.numeroSubprueba = 9;
   }
@@ -112,11 +113,14 @@ export class InformacionComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarInformacion(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+      this.globals.rutas[9] = '/claves';
       this.router.navigate([this.globals.rutas[9]]);
       this.scrollToTop();
     });    

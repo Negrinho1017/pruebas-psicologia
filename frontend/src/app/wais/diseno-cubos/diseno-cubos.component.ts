@@ -61,16 +61,20 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarDisenoCubos(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
+        this.globals.rutas[1] = '/semejanzas';
         this.router.navigate([this.globals.rutas[1]]);
         this.scrollToTop();
       });

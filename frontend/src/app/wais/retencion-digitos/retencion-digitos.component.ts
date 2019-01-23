@@ -53,6 +53,7 @@ export class RetencionDigitosComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.construirRespuestasRDI();
     this.selectedRetencionDeDigitos = 1;
   }
@@ -141,6 +142,8 @@ export class RetencionDigitosComponent implements OnInit {
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.crearReactivos();
     this.subprueba.reactivos = this.reactivosCalificados;
     this.subprueba.numeroSubprueba = 3;
@@ -151,6 +154,7 @@ export class RetencionDigitosComponent implements OnInit {
         this.subprueba.puntuacionEscalar = res;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.retencionDigitos = this.subprueba.puntuacionEscalar;
+        this.globals.rutas[3] = '/matrices';
         this.router.navigate([this.globals.rutas[3]]);
         this.scrollToTop();
       });      
