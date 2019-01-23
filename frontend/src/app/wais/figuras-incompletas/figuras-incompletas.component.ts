@@ -28,6 +28,7 @@ export class FigurasIncompletasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Figuras incompletas";
     this.subprueba.numeroSubprueba = 15;
   }
@@ -125,6 +126,8 @@ export class FigurasIncompletasComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarFigurasIncompletas(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
@@ -189,13 +192,16 @@ export class FigurasIncompletasComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[0] == "/figuras-incompletas") {
+    if (localStorage.getItem('siguientePrueba')=='se') {
+      this.globals.rutas[1] = '/semejanzas';
       this.router.navigate([this.globals.rutas[1]]);
     }
-    if (this.globals.rutas[3] == "/figuras-incompletas") {
+    if (localStorage.getItem('siguientePrueba')=='vb') {
+      this.globals.rutas[4] = '/vocabulario';
       this.router.navigate([this.globals.rutas[4]]);
     }
-    if (this.globals.rutas[7] == "/figuras-incompletas") {
+    if (localStorage.getItem('siguientePrueba')=='in') {
+      this.globals.rutas[8] = '/informacion';
       this.router.navigate([this.globals.rutas[8]]);
     }
   }

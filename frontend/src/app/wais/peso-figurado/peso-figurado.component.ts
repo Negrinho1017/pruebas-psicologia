@@ -28,12 +28,15 @@ export class PesoFiguradoComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Peso figurado";
     this.subprueba.numeroSubprueba = 12;
   }
 
   
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarPesoFigurado(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
@@ -169,13 +172,16 @@ export class PesoFiguradoComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[0] == "/peso-figurado") {
+    if (localStorage.getItem('siguientePrueba')=='se') {
+      this.globals.rutas[1] = "/semejanzas";
       this.router.navigate([this.globals.rutas[1]]);
     }
-    if (this.globals.rutas[3] == "/peso-figurado") {
+    if (localStorage.getItem('siguientePrueba')=='vb') {
+      this.globals.rutas[4] = "/vocabulario";
       this.router.navigate([this.globals.rutas[4]]);
     }
-    if (this.globals.rutas[7] == "/peso-figurado") {
+    if (localStorage.getItem('siguientePrueba')=='in') {
+      this.globals.rutas[8] = "/informacion";
       this.router.navigate([this.globals.rutas[8]]);
     }
   }

@@ -49,6 +49,7 @@ export class NumerosLetrasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Sucesión de números y letras";
     this.subprueba.numeroSubprueba = 11;
   }
@@ -102,6 +103,8 @@ export class NumerosLetrasComponent implements OnInit {
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarNumerosLetras(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
@@ -114,13 +117,16 @@ export class NumerosLetrasComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[2] == "/numeros-letras") {
+    if (localStorage.getItem('siguientePrueba')=='mt') {
+      this.globals.rutas[3] = '/matrices';
       this.router.navigate([this.globals.rutas[3]]);
     }
-    if (this.globals.rutas[5] == "/numeros-letras") {
+    if (localStorage.getItem('siguientePrueba')=='bs') {
+      this.globals.rutas[6] = '/busqueda-simbolos';
       this.router.navigate([this.globals.rutas[6]]);
     }
   }
+  
   scrollToTop() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {

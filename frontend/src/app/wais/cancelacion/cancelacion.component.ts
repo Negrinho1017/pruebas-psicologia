@@ -25,6 +25,7 @@ export class CancelacionComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Cancelación";
     this.subprueba.numeroSubprueba = 14;
   }
@@ -36,6 +37,8 @@ export class CancelacionComponent implements OnInit {
   }
 
   finalizarSubprueba(){
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.puntuacionNatural = this.puntuacionTotal;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarCancelacion(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
@@ -56,10 +59,11 @@ export class CancelacionComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[6] == "/cancelacion") {
+    if (localStorage.getItem('siguientePrueba')=='rv') {
+      this.globals.rutas[7] = '/rompecabezas-visual';
       this.router.navigate([this.globals.rutas[7]]);
     }
-    if (this.globals.rutas[9] == "/cancelacion") {
+    if (localStorage.getItem('siguientePrueba')=='hr') {
       this.globals.ultimaSubprueba = this.subprueba;
       this.router.navigate(['/hoja-resultados']);
     }

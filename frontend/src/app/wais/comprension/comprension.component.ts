@@ -27,13 +27,15 @@ export class ComprensionComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
     this.subprueba.nombre = "Comprension";
     this.subprueba.numeroSubprueba = 13;
   }
 
   finalizarSubprueba() {
+    this.globals.edad = Number(localStorage.getItem('anios'));
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.reactivos = this.reactivosCalificados;
-    //ACarras se debe crear servicio para puntuacionEscalar
     this.puntuacionEscalarService.obtenerPuntuacionEscalarComprension(this.globals.edad, this.subprueba.puntuacionNatural)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
@@ -151,13 +153,16 @@ export class ComprensionComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[1] == "/comprension") {
+    if (localStorage.getItem('siguientePrueba')=='rd') {
+      this.globals.rutas[2] = '/retencion-digitos';
       this.router.navigate([this.globals.rutas[2]]);
     }
-    if (this.globals.rutas[4] == "/comprension") {
+    if (localStorage.getItem('siguientePrueba')=='ar') {
+      this.globals.rutas[5] = '/aritmetica';
       this.router.navigate([this.globals.rutas[5]]);
     }
-    if (this.globals.rutas[8] == "/comprension") {
+    if (localStorage.getItem('siguientePrueba')=='cl') {
+      this.globals.rutas[9] = '/claves';
       this.router.navigate([this.globals.rutas[9]]);
     }
   }
