@@ -25,6 +25,9 @@ export class RegistrosComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.subprueba.nombre = "Registros";
     this.subprueba.numeroSubprueba = 12;
   }
@@ -62,10 +65,11 @@ export class RegistrosComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[4] == "/registros") {
+    if (localStorage.getItem('siguientePrueba')=='vb') {
+      this.globals.rutas[5] = "/vocabulario-wisc";
       this.router.navigate([this.globals.rutas[5]]);
     }
-    if (this.globals.rutas[9] == "/registros") {
+    if (localStorage.getItem('siguientePrueba')=='hr') {
       this.globals.ultimaSubprueba = this.subprueba;
       this.router.navigate(['/hoja-resultados-wisc']);
     }

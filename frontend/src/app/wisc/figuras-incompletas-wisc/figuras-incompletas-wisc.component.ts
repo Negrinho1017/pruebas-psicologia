@@ -30,6 +30,9 @@ export class FigurasIncompletasWiscComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.siguienteReactivo = this.reactivoDeInicio;
     this.anteriorReactivo = this.reactivoDeInicio;
@@ -205,13 +208,16 @@ export class FigurasIncompletasWiscComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[0] == "/figuras-incompletas-wisc") {
+    if (localStorage.getItem('siguientePrueba')=='se') {
+      this.globals.rutas[1] = "/semejanzas-wisc";
       this.router.navigate([this.globals.rutas[1]]);
     }
-    if (this.globals.rutas[3] == "/figuras-incompletas-wisc") {
+    if (localStorage.getItem('siguientePrueba')=='cl') {
+      this.globals.rutas[4] = "/claves-wisc";
       this.router.navigate([this.globals.rutas[4]]);
     }
-    if (this.globals.rutas[7] == "/figuras-incompletas-wisc") {
+    if (localStorage.getItem('siguientePrueba')=='co') {
+      this.globals.rutas[8] = "/comprension-wisc";
       this.router.navigate([this.globals.rutas[8]]);
     }
   }

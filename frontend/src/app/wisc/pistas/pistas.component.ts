@@ -49,6 +49,9 @@ export class PistasComponent implements OnInit {
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
+    this.globals.idEvaluado = localStorage.getItem('idEvaluado').toString();
+    this.globals.edad = Number(localStorage.getItem('anios'));     
+    this.globals.meses = Number(localStorage.getItem('meses'));
     this.criteriosDeInversion();
     this.anteriorReactivo = this.reactivoDeInicio;
     this.siguienteReactivo = this.reactivoDeInicio;
@@ -227,13 +230,16 @@ export class PistasComponent implements OnInit {
   }
 
   navegar() {
-    if (this.globals.rutas[1] == "/pistas") {
+    if (localStorage.getItem('siguientePrueba')=='rd') {
+      this.globals.rutas[2] = "/retencion-digitos-wisc";
       this.router.navigate([this.globals.rutas[2]]);
     }
-    if (this.globals.rutas[5] == "/pistas") {
+    if (localStorage.getItem('siguientePrueba')=='nl') {
+      this.globals.rutas[6] = "/numeros-letras-wisc";
       this.router.navigate([this.globals.rutas[6]]);
     }
-    if (this.globals.rutas[8] == "/pistas") {
+    if (localStorage.getItem('siguientePrueba')=='bs') {
+      this.globals.rutas[9] = "/busqueda-simbolos-wisc";
       this.router.navigate([this.globals.rutas[9]]);
     }
   }
