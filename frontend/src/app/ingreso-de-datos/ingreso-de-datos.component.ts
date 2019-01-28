@@ -223,4 +223,8 @@ export class IngresoDeDatosComponent implements OnInit {
 
   }
 
+  volver(){
+    this.router.navigate(['/']);
+  }
+
 }
