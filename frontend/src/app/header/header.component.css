@@ -11,7 +11,7 @@ body {
 
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: white;
   padding: 20px 10px;
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .header a:hover {
-  background-color: #ddd;
+  background-color:#ddd;
   color: black;
 }
 
