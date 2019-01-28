@@ -2,11 +2,14 @@
 <b><h3 *ngIf='this.tipoPrueba=="WAIS"'>Bienvenido a la prueba WAIS IV</h3></b>
 <b><h3 *ngIf='this.tipoPrueba=="WISC"'>Bienvenido a la prueba WISC IV</h3></b>
   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <button class="btn" (click)="mostrarFormularioRealizarPrueba()">
+    <button class="btn btn-dark" (click)="mostrarFormularioRealizarPrueba()">
       Realizar pruebas
     </button>
-    <button class="btn" (click)="mostrarFormularioConsultarPrueba()">
+    <button class="btn btn-dark" (click)="mostrarFormularioConsultarPrueba()">
       Consultar pruebas realizadas
+    </button>
+    <button class="btn btn-dark" (click)="volver()">
+      Página de inicio
     </button>
   </div>
 
@@ -27,8 +30,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="idExaminador" class="col-form-label">Ingrese su Identificación:</label>
-      <input type="text" class="form-control" formControlName="idExaminador"><br>
+      <label for="idExaminador" class="col-form-label">Clave de acceso:</label>
+      <input type="password" class="form-control" formControlName="idExaminador"><br>
     </div>
 
     <div>
@@ -45,10 +48,10 @@
         </small>
       </div>
 
-      <p *ngIf="this.fechas && !fechaInvalida" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses:
+      <h4 *ngIf="this.fechas && !fechaInvalida" id="edad"><b>Edad del evaluado: Años: {{this.edad.anios}}, Meses:
           {{this.edad.meses}},
           Días: {{this.edad.dias}}</b>
-      </p>
+      </h4>
     </div>
     
     <button type="submit" class="btn btn-dark btn-lg" [disabled]="ingresoDatosForm.invalid">Comenzar prueba</button>
@@ -61,8 +64,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="idExaminador" class="col-form-label">Ingrese su Identificación:</label>
-      <input type="text" class="form-control" formControlName="idExaminador"><br>
+      <label for="idExaminador" class="col-form-label">Clave de acceso:</label>
+      <input type="password" class="form-control" formControlName="idExaminador"><br>
     </div>
 
     <button type="submit" class="btn btn-dark btn-lg" [disabled]="consultarPruebaForm.invalid">Consultar Prueba</button>
