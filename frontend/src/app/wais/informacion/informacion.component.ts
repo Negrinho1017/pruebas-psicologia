@@ -151,7 +151,7 @@ mensajeExcepcion(mensaje: string) {
 
   mensajeWarning(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba finalizada',
       icon: "warning",
       text: mensaje,
     });
