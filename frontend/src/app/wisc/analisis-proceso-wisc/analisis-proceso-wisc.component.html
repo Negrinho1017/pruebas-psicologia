@@ -39,6 +39,9 @@
       <td>{{diferenciasSignificativos[i]}}</td>
     </tr>
   </table>
+  <button type="button" class="btn btn-dark btn-lg" (click)="anterior()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-left"></span> Anterior
+  </button>
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
 </body>
 

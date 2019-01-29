@@ -152,6 +152,12 @@ export class AnalisisWiscComponent implements OnInit {
       this.scrollToTop();
     });
   }
+
+  anterior(){
+    this.router.navigate(['/hoja-puntuaciones-compuestas']);
+    this.scrollToTop();
+  }
+
   edadEvaluado(){
     this.analisisService.edadEvaluado(this.globals.idEvaluado)
     .subscribe(res => {

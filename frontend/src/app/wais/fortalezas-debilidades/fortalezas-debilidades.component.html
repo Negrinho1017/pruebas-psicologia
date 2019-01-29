@@ -41,8 +41,12 @@
     </tr>
   </table>
   <br><br>
-  <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="siguiente()" id="btnPrueba"> Ver
-    Análisis de proceso
+  <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="anterior()" id="btnPrueba">
+    Anterior
+    <span class="glyphicon glyphicon-arrow-left"></span>
+  </button>
+  <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" style="float: right;" (click)="siguiente()" id="btnPrueba">
+    Siguiente
     <span class="glyphicon glyphicon-arrow-right"></span>
   </button>
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>

@@ -121,6 +121,16 @@ export class FortalezasDebilidadesComponent implements OnInit {
     this.scrollToTop();
   }
 
+  anterior(){
+    if(localStorage.getItem('tipoPrueba')=='WAIS'){
+      this.router.navigate(['/analisis']);
+    }else{
+      this.router.navigate(['/analisis-wisc']);
+    }
+    
+    this.scrollToTop();
+  }
+
   scrollToTop() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {

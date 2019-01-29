@@ -112,6 +112,16 @@ export class HojaDePuntuacionesCompuestasComponent implements OnInit {
     this.scrollToTop();
   }
 
+  anterior(){
+    if(this.prueba.tipoPrueba == "WAIS"){
+      this.router.navigate(['/hoja-resultados']);
+    }else{
+      this.router.navigate(['/hoja-resultados-wisc']);
+    }
+    
+    this.scrollToTop();
+  }
+
   scrollToTop() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop; if (currentScroll > 0) {

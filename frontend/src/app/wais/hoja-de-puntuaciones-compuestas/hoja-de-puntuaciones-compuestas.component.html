@@ -21,7 +21,10 @@
   <div>
     <div [chart]="grafica"></div>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" class="btn btn-dark btn-lg" (click)="anterior()" id="btnPrueba">
+    <span class="glyphicon glyphicon-arrow-left"></span> Anterior
+  </button>
+  <button type="button" class="btn btn-dark btn-lg" style="float: right;" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>

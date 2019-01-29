@@ -4,6 +4,7 @@ import { AnalisisProcesoService } from 'src/app/wais/analisis-proceso/analisis-p
 import { Globals } from 'src/app/globals';
 import { Router } from '@angular/router';
 import { FortalezasDebilidadesService } from 'src/app/wais/fortalezas-debilidades/fortalezas-debilidades.service';
+import { AnalisisService } from 'src/app/wais/analisis/analisis.service';
 
 @Component({
   selector: 'app-analisis-proceso-wisc',
@@ -22,9 +23,10 @@ export class AnalisisProcesoWiscComponent implements OnInit {
   valoresCriticos: number[] = [3.26, 3.62, 4.4];
   diferenciasSignificativos: String[] = [];
   loading: boolean;
+  sonLas10SubpruebasPrincipales: boolean = false;
   constructor(private analisisProcesoService: AnalisisProcesoService,
     private router: Router, private globals: Globals,
-    private fortalezasDebilidadesService: FortalezasDebilidadesService) { }
+    private fortalezasDebilidadesService: FortalezasDebilidadesService, private analisisService: AnalisisService) { }
 
   ngOnInit() {
     this.loading=true;
@@ -69,5 +71,17 @@ export class AnalisisProcesoWiscComponent implements OnInit {
       }
       i++;
     }
+  }
+
+  anterior(){
+    this.analisisService.sonLas10SubpruebasPrincipales(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.sonLas10SubpruebasPrincipales = res;
+      if(this.sonLas10SubpruebasPrincipales){
+        this.router.navigate(['/fortalezas-debilidades']);
+      }else{
+        this.router.navigate(['/analisis-wisc']);
+      }
+    });
   }
 }

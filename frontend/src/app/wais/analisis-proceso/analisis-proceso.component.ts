@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Globals } from 'src/app/globals';
 import { Subprueba } from 'src/app/model/Subprueba';
 import { FortalezasDebilidadesService } from '../fortalezas-debilidades/fortalezas-debilidades.service';
+import { AnalisisService } from '../analisis/analisis.service';
 
 @Component({
   selector: 'app-analisis-proceso',
@@ -22,9 +23,10 @@ export class AnalisisProcesoComponent implements OnInit {
   valoresCriticos: number[] = [3.13, 3.23, 2.83, 2.78];
   diferenciasSignificativos: String[] = [];
   loading: boolean;
+  sonLas10SubpruebasPrincipales: boolean = false;
   constructor(private analisisProcesoService: AnalisisProcesoService,
     private router: Router, private globals: Globals,
-    private fortalezasDebilidadesService: FortalezasDebilidadesService) { }
+    private fortalezasDebilidadesService: FortalezasDebilidadesService, private analisisService: AnalisisService) { }
 
   ngOnInit() {
     this.loading=true;
@@ -66,6 +68,18 @@ export class AnalisisProcesoComponent implements OnInit {
       }
       i++;
     }
+  }
+
+  anterior(){
+    this.analisisService.sonLas10SubpruebasPrincipales(this.globals.idEvaluado)
+    .subscribe(res => {
+      this.sonLas10SubpruebasPrincipales = res;
+      if(this.sonLas10SubpruebasPrincipales){
+        this.router.navigate(['/fortalezas-debilidades']);
+      }else{
+        this.router.navigate(['/analisis']);
+      }
+    });
   }
 
 }
