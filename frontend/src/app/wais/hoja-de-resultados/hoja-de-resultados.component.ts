@@ -55,6 +55,7 @@ export class HojaDeResultadosComponent implements OnInit {
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado)    
       .subscribe(res => {
         this.prueba = res;
+        localStorage.setItem('evaluado', <string>this.prueba.evaluado.nombreCompleto);
         if(this.prueba.tipoPrueba=="WAIS"){
           this.mostrarPrueba();
         }else{

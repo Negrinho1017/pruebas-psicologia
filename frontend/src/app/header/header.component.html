@@ -1,7 +1,10 @@
 <div class="header">
-  <img src='/assets/logoUCO.png' alt='image' style="width:12%;">
-  <div class="header-right">
-    <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Salir" [routerLinkActive]="'active-link'"
-      [routerLink]="['/']" (click)="salir()">
-  </div>
+  <nav class="navbar navbar-light" style="background-color: white">
+    <img src='/assets/logoUCO.png' alt='image' style="width:12%;">
+    <h2><b>Evaluado:</b> {{this.evaluado}}</h2>
+    <div class="header-right">
+      <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Salir" [routerLinkActive]="'active-link'"
+        [routerLink]="['/']" (click)="salir()">
+    </div>
+  </nav>
 </div>
