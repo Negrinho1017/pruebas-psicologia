@@ -90,7 +90,7 @@ export class AritmeticaWiscComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo + 1] == 0) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -132,7 +132,7 @@ export class AritmeticaWiscComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     return discontinua;
   }

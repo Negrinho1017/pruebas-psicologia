@@ -86,7 +86,7 @@ export class ComprensionWiscComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -127,7 +127,7 @@ export class ComprensionWiscComponent implements OnInit {
     if(discontinua){
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     return discontinua;
   }

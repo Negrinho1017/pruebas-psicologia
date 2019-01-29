@@ -97,7 +97,7 @@ export class VocabularioWiscComponent implements OnInit {
     if (puntuacionReactivo < this.maximaCalificacionPorReactivo[numeroReactivo] || 
     this.listaCalificaciones[numeroReactivo + 1] < this.maximaCalificacionPorReactivo[numeroReactivo + 1]) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio+2);
@@ -133,7 +133,7 @@ export class VocabularioWiscComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeWarning("Se ha descontinuado la subprueba");
+      this.mensajeWarning("Se ha terminado la subprueba");
     }
     return discontinua;
   }

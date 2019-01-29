@@ -154,7 +154,7 @@ export class SemejanzasWiscComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo < this.maximaPuntuacionPorReactivo[numeroReactivo] || this.listaCalificaciones[numeroReactivo + 1] < this.maximaPuntuacionPorReactivo[numeroReactivo+1]) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha terminado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, this.reactivoDeInicio + 2);
@@ -176,7 +176,7 @@ export class SemejanzasWiscComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha terminado la subprueba");
     }
     return discontinua;
   }
