@@ -88,7 +88,7 @@ export class NumerosLetrasComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha terminado la subprueba");
     }
     return discontinua;
   }

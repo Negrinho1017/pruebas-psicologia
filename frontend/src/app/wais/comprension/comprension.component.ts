@@ -92,7 +92,7 @@ export class ComprensionComponent implements OnInit {
   private determinarContinua(puntuacionReactivo: number, numeroReactivo: number) {
     if (puntuacionReactivo < 2 || this.listaCalificaciones[numeroReactivo + 1] < 2) {
       this.anteriorReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha terminado la subprueba");
     }
     else {
       this.cambiarFoco(numeroReactivo, 4);
@@ -121,7 +121,7 @@ export class ComprensionComponent implements OnInit {
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");
+      this.mensajeError("Se ha terminado la subprueba");
     }
     return discontinua;
   }

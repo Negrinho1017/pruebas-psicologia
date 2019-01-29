@@ -95,7 +95,7 @@ export class RetencionDigitosComponent implements OnInit {
     if (descontinuado) {
       this.anteriorReactivo = numeroReactivo;
       this.siguienteReactivo = numeroReactivo;
-      this.mensajeError("Se ha descontinuado la subprueba");      
+      this.mensajeError("Se ha terminado la subprueba");      
     }
     return descontinuado;
   }
