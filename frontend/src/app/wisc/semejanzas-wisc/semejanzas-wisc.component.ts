@@ -200,7 +200,7 @@ export class SemejanzasWiscComponent implements OnInit {
 
   mensajeError(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba finalizada',
       icon: "warning",
       text: mensaje,
     });

@@ -168,7 +168,7 @@ export class NumerosLetrasWiscComponent implements OnInit {
 
   mensajeAlerta(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba finalizada',
       icon: "warning",
       text: mensaje,
     });

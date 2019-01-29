@@ -175,8 +175,9 @@ export class DisenoCubosWiscComponent implements OnInit {
   }
 
   discontinuar(puntuacionReactivo: number, numeroReactivo: number): boolean {
-    const cantidadParaDescontinuar: number = 2;
+    const cantidadParaDescontinuar: number = 3;
     let discontinua: boolean = puntuacionReactivo == 0
+    && this.listaCalificaciones[numeroReactivo - 2] == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && numeroReactivo > this.reactivoDeInicio+cantidadParaDescontinuar;
     if (discontinua) {
@@ -221,7 +222,7 @@ export class DisenoCubosWiscComponent implements OnInit {
 
   mensajeError(mensaje: string) {
     swal({
-      title: 'Discontinación',
+      title: 'Prueba finalizada',
       icon: "warning",
       text: mensaje,
     });
