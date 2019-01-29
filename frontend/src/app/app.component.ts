@@ -15,7 +15,7 @@ export class AppComponent implements OnInit  {
 
   constructor(location: PlatformLocation, private globals: Globals, private router: Router) { 
     location.onPopState(() => {
-      this.mensajeError("No puedes volver atrás");
+      this.mensajeError("Acción no permitida");
       this.router.navigateByUrl('/diseno-cubos');
       history.forward();
       });
