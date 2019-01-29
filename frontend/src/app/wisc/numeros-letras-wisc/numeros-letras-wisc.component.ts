@@ -117,7 +117,17 @@ export class NumerosLetrasWiscComponent implements OnInit {
         this.router.navigate([this.globals.rutas[7]]);
         console.log("escalar: " + this.subprueba.puntuacionEscalar);
         this.scrollToTop();
+      }, error => {
+        this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
       });
+  }
+
+  mensajeExcepcion(mensaje: string) {
+    swal({
+      title: 'Error',
+      icon: "error",
+      text: mensaje,
+    });
   }
 
   navegar() {

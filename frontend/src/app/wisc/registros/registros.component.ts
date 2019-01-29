@@ -49,8 +49,18 @@ export class RegistrosComponent implements OnInit {
       //this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.navegar();
       this.scrollToTop();
+    }, error => {
+      this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
     });
-  }
+}
+
+mensajeExcepcion(mensaje: string) {
+  swal({
+    title: 'Error',
+    icon: "error",
+    text: mensaje,
+  });
+}
 
   scrollToTop() {
     (function smoothscroll() {

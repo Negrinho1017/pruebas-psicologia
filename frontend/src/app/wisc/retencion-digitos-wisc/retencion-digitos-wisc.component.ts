@@ -155,8 +155,18 @@ export class RetencionDigitosWiscComponent implements OnInit {
         this.globals.retencionDigitos = this.subprueba.puntuacionEscalar;
         this.router.navigate([this.globals.rutas[3]]);
         this.scrollToTop();
-      });      
-  }  
+      }, error => {
+        this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
+      });
+  }
+
+  mensajeExcepcion(mensaje: string) {
+    swal({
+      title: 'Error',
+      icon: "error",
+      text: mensaje,
+    });
+  }
 
   cambiarRD(num: number): void{
     this.selectedRetencionDeDigitos=num; 

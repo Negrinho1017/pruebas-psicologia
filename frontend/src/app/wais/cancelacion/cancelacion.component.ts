@@ -43,8 +43,18 @@ export class CancelacionComponent implements OnInit {
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.navegar();
       this.scrollToTop();
+    }, error => {
+      this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
     });
-  }
+}
+
+mensajeExcepcion(mensaje: string) {
+  swal({
+    title: 'Error',
+    icon: "error",
+    text: mensaje,
+  });
+}
 
   scrollToTop() {
     (function smoothscroll() {

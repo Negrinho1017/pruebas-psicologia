@@ -110,7 +110,17 @@ export class NumerosLetrasComponent implements OnInit {
         this.navegar();
         console.log("escalar: " + this.subprueba.puntuacionEscalar);
         this.scrollToTop();
+      }, error => {
+        this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
       });
+  }
+
+  mensajeExcepcion(mensaje: string) {
+    swal({
+      title: 'Error',
+      icon: "error",
+      text: mensaje,
+    });
   }
 
   navegar() {

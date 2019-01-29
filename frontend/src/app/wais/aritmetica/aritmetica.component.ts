@@ -139,8 +139,18 @@ export class AritmeticaComponent implements OnInit {
       this.globals.aritmetica = this.subprueba.puntuacionEscalar;
       this.router.navigate([this.globals.rutas[6]]);
       this.scrollToTop();
-    }); 
-  }
+    }, error => {
+      this.mensajeExcepcion("Ha ocurrido un error, es posible que no haya calificado ningún reactivo");
+    });
+}
+
+mensajeExcepcion(mensaje: string) {
+  swal({
+    title: 'Error',
+    icon: "error",
+    text: mensaje,
+  });
+}
 
   habilitarReactivo(i): boolean {    
     return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
