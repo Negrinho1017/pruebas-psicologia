@@ -17,93 +17,49 @@ export class PuntuacionEscalarService {
   private options = new RequestOptions({headers:this.headers});
   constructor( private _http: Http, private http: HttpClient ) { }
 
-  obtenerPuntuacionEscalarDisenoCubos(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/diseno-cubos?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarDisenoCubos(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/diseno-cubos?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarSemejanzas(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/semejanzas?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarSemejanzas(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/semejanzas?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarRetencionDigitos(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/retencion-digitos?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarRetencionDigitos(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/retencion-digitos?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarMatrices(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/matrices?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarMatrices(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/matrices?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarVocabulario(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/vocabulario?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarVocabulario(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/vocabulario?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarAritmetica(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/aritmetica?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarAritmetica(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/aritmetica?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
   public obtenerPuntuacionEscalarBusquedaSimbolos(edad: number, puntuacionNatural: number): Observable<any>{
     return this.http.get(this.url + '/puntuacion-escalar/busqueda-simbolos?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarRompecabezasVisual(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/rompecabezas-visual?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+
+  public obtenerPuntuacionEscalarRompecabezasVisual(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/rompecabezas-visual?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarInformacion(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/informacion?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarInformacion(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/informacion?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
   public obtenerPuntuacionEscalarClaves(edad: number, puntuacionNatural: number): Observable<any>{
     return this.http.get(this.url + '/puntuacion-escalar/claves?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
-  obtenerPuntuacionEscalarNumerosLetras(edad: number, puntuacionNatural: number) {
-    return this._http.get(this.url + '/puntuacion-escalar/numeros-letras?edad='
-    +edad+'&puntuacionNatural='+puntuacionNatural, this.options).
-    pipe(map((response:Response)=>response.json()),
-    catchError( error => {
-      return ("Error!!")
-    }));  
+  public obtenerPuntuacionEscalarNumerosLetras(edad: number, puntuacionNatural: number): Observable<number>{
+    return this.http.get<number>(this.url + '/puntuacion-escalar/numeros-letras?puntuacionNatural='+puntuacionNatural+'&edad='+edad, httpOptions);
   }
 
   public obtenerPuntuacionEscalarPesoFigurado(edad: number, puntuacionNatural: number): Observable<number>{
