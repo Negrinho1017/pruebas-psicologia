@@ -88,7 +88,7 @@ const routes: Routes = [
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
   { path: 'registros', component: RegistrosComponent, canActivate: [AuthGuard] },
   { path: 'pistas', component: PistasComponent, canActivate: [AuthGuard] },
-  { path: 'hoja-pruebas', component: HojaDePruebasComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'hoja-pruebas', component: HojaDePruebasComponent },
   { path: '', component: PaginaPrincipalComponent }
 ]
 
