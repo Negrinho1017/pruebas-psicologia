@@ -210,17 +210,8 @@ export class IngresoDeDatosComponent implements OnInit {
     this.mostrarConsultarPrueba = false;
   }
 
-  consultarPrueba() {        
-    this.globals.idEvaluado = this.consultarPruebaForm.controls['identificacion'].value;
-    localStorage.setItem('idEvaluado', <string> this.globals.idEvaluado);
-    this.globals.mostrarNavBar = true;
-    if(localStorage.getItem('tipoPrueba')=="WISC"){
-      this.router.navigate(['/hoja-resultados-wisc']);
-    }else{
-      this.router.navigate(['/hoja-resultados']);
-    }
-    //this.scrollToTop();
-
+  consultarPrueba() {   
+    this.router.navigate(['/hoja-pruebas']);
   }
 
   volver(){

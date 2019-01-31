@@ -47,8 +47,9 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 		return prueba;
 	}
 
-	public List<Prueba> obtenerTodasLasPruebasWais() {
-		return PruebaBuilder.convertirAListaDominio(mongoOperations.findAll(EntidadPrueba.class, COLLECTION_PRUEBA_WAIS));
+	public List<Prueba> obtenerTodasLasPruebas(String tipoPrueba) {
+		String coleccion = tipoPrueba.equals("WAIS") ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
+		return PruebaBuilder.convertirAListaDominio(mongoOperations.findAll(EntidadPrueba.class, coleccion));
 	}
 
 	public List<Prueba> obtenerPruebaPorIdEvaluado(String id) throws PruebasPsicologiaException {

@@ -91,4 +91,10 @@ public class MainController {
 	public Prueba eliminarPrueba(@PathVariable(value = "idEvaluado") String idEvaluado) {
 		return administradorPruebas.eliminarPrueba(idEvaluado);
 	}
+	
+	@RequestMapping(value = "/obtener-todas-las-pruebas", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Prueba> obtenerTodasLasPruebas(@RequestParam String tipoPrueba) {
+		return administradorPruebas.obtenerTodasLasPruebas(tipoPrueba);
+	}
 }

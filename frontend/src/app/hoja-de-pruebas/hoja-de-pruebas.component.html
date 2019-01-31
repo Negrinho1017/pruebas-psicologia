@@ -1,0 +1,16 @@
+<body class="cuerpo">
+  <table>
+    <tr>
+      <th>Identificación</th>
+      <th>Nombre</th>
+      <th>Tipo de prueba</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let item of pruebas; let i = index">
+      <td>{{item.evaluado.id}}</td>
+      <td>{{item.evaluado.nombreCompleto}}</td>
+      <td>{{item.tipoPrueba}}</td>
+      <td><button class="btn btn-dark" (click)="consultarPrueba(item.evaluado.id)">Consultar</button></td>
+    </tr>
+  </table>
+</body>

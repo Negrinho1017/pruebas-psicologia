@@ -52,6 +52,7 @@ import { PistasComponent } from './wisc/pistas/pistas.component';
 import { AnalisisWiscComponent } from './wisc/analisis-wisc/analisis-wisc.component';
 import { AnalisisProcesoWiscComponent } from './wisc/analisis-proceso-wisc/analisis-proceso-wisc.component';
 import { HeaderComponent } from './header/header.component';
+import { HojaDePruebasComponent } from './hoja-de-pruebas/hoja-de-pruebas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,8 @@ import { HeaderComponent } from './header/header.component';
     PistasComponent,
     AnalisisWiscComponent,
     AnalisisProcesoWiscComponent,
-    HeaderComponent
+    HeaderComponent,
+    HojaDePruebasComponent
   ],
   imports: [
     BrowserModule,

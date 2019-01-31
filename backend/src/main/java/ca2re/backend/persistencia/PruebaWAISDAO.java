@@ -11,7 +11,7 @@ public interface PruebaWAISDAO {
 	
 	Prueba eliminarPrueba(String idEvaluado);
 
-	List<Prueba> obtenerTodasLasPruebasWais();
+	List<Prueba> obtenerTodasLasPruebas(String tipoPrueba);
 
 	List<Prueba> obtenerPruebaPorIdEvaluado(String id);
 

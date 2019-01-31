@@ -423,4 +423,8 @@ public class AdministradorPruebas {
 	public Prueba eliminarPrueba(String idEvaluado) {
 		return pruebaWaisDAO.eliminarPrueba(idEvaluado);
 	}
+	
+	public List<Prueba> obtenerTodasLasPruebas(String tipoPrueba) {
+		return pruebaWaisDAO.obtenerTodasLasPruebas(tipoPrueba);
+	}
 }

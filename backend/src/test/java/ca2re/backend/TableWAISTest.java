@@ -75,7 +75,7 @@ public class TableWAISTest {
 	
 	@Test
 	public void getPruebaTest() {	
-		List<Prueba> pruebasWais = pruebaWaisDAO.obtenerTodasLasPruebasWais();
+		List<Prueba> pruebasWais = pruebaWaisDAO.obtenerTodasLasPruebas("WAIS");
 		assertEquals(pruebasWais.get(0).getTipoPrueba(),"WAIS");
 		assertEquals(pruebasWais.size(),1);
 		assertEquals(pruebasWais.get(0).getNombreExaminador(), "Carlos");

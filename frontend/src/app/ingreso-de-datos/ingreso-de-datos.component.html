@@ -58,17 +58,13 @@
   </form>
 
   <form novalidate [formGroup]="consultarPruebaForm" (ngSubmit)="verificarDatosConsultarPrueba()" *ngIf="mostrarConsultarPrueba">
-    <div class="form-group row">
-      <label for="identificacion" class="col-form-label">Ingrese la identificación del evaluado:</label>
-      <input type="text" class="form-control" formControlName="identificacion">
-    </div>
 
     <div class="form-group row">
       <label for="idExaminador" class="col-form-label">Clave de acceso:</label>
       <input type="password" class="form-control" formControlName="idExaminador"><br>
     </div>
 
-    <button type="submit" class="btn btn-dark btn-lg" [disabled]="consultarPruebaForm.invalid">Consultar Prueba</button>
+    <button type="submit" class="btn btn-dark btn-lg">Consultar Prueba</button>
   </form>
 
 </div>

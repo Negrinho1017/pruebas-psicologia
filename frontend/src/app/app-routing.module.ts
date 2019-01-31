@@ -44,6 +44,7 @@ import { HojaDeResultadosWiscComponent } from './wisc/hoja-de-resultados-wisc/ho
 import { PistasComponent } from './wisc/pistas/pistas.component';
 import { AnalisisWiscComponent } from './wisc/analisis-wisc/analisis-wisc.component';
 import { AnalisisProcesoWiscComponent } from './wisc/analisis-proceso-wisc/analisis-proceso-wisc.component';
+import { HojaDePruebasComponent } from './hoja-de-pruebas/hoja-de-pruebas.component';
 
 const routes: Routes = [
   { path: 'analisis-proceso', component: AnalisisProcesoComponent, canActivate: [AuthGuard] },
@@ -87,6 +88,7 @@ const routes: Routes = [
   { path: 'cancelacion', component: CancelacionComponent, canActivate: [AuthGuard] },
   { path: 'registros', component: RegistrosComponent, canActivate: [AuthGuard] },
   { path: 'pistas', component: PistasComponent, canActivate: [AuthGuard] },
+  { path: 'hoja-pruebas', component: HojaDePruebasComponent, /*canActivate: [AuthGuard]*/ },
   { path: '', component: PaginaPrincipalComponent }
 ]
 
