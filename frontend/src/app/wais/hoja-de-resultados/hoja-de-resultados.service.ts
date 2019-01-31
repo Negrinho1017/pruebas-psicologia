@@ -41,7 +41,11 @@ export class HojaDeResultadosService {
   };
   
   crearPrueba(prueba: Prueba) {
-    return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions)
+    return this.http.post(this.url + '/creacion-prueba', prueba, httpOptions);
+  }
+
+  eliminarPrueba(idEvaluado: String): Observable<Prueba>{
+    return this.http.delete<Prueba>(this.url + '/eliminar-prueba/'+idEvaluado, httpOptions);
   }
 
   crearSubprueba(subprueba: Subprueba, idEvaluado: String) {

@@ -84,6 +84,9 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 	@Override
 	public Prueba eliminarPrueba(String idEvaluado) {
 		Query pruebaPorNombre = query(where("evaluado.id").is(idEvaluado));
+		if(obtenerPruebaPorIdEvaluado(idEvaluado).size()==0) {
+			throw new PruebasPsicologiaException("Prueba no encontrada");
+		}
 		Prueba prueba = obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
 		String coleccionABuscar = prueba.getTipoPrueba().equals("WAIS") ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
 		mongoOperations.remove(pruebaPorNombre, EntidadPrueba.class, coleccionABuscar);
