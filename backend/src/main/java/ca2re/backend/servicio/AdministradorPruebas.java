@@ -419,4 +419,8 @@ public class AdministradorPruebas {
 		}
 		throw new PruebasPsicologiaException("No se encontraron pruebas de diseño de cubos o de retención de dígitos");
 	}
+	
+	public Prueba eliminarPrueba(String idEvaluado) {
+		return pruebaWaisDAO.eliminarPrueba(idEvaluado);
+	}
 }

@@ -85,4 +85,10 @@ public class MainController {
 	public boolean esPermitidoElUsuario(@RequestParam String idUsuario) {
 		return administradorPruebas.esPermitidoElUsuario(idUsuario);
 	}
+	
+	@RequestMapping(value = "/eliminar-prueba/{idEvaluado}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Prueba eliminarPrueba(@PathVariable(value = "idEvaluado") String idEvaluado) {
+		return administradorPruebas.eliminarPrueba(idEvaluado);
+	}
 }

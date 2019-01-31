@@ -80,4 +80,13 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 		mongoOperations.updateFirst(query, actualizacionEdadEvaluado, EntidadPrueba.class, coleccion);
 		return obtenerPruebaPorIdEvaluado(id).get(0);
 	}
+
+	@Override
+	public Prueba eliminarPrueba(String idEvaluado) {
+		Query pruebaPorNombre = query(where("evaluado.id").is(idEvaluado));
+		Prueba prueba = obtenerPruebaPorIdEvaluado(idEvaluado).get(0);
+		String coleccionABuscar = prueba.getTipoPrueba().equals("WAIS") ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
+		mongoOperations.remove(pruebaPorNombre, EntidadPrueba.class, coleccionABuscar);
+		return prueba;
+	}
 }

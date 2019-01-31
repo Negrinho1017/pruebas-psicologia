@@ -8,6 +8,8 @@ public interface PruebaWAISDAO {
 	Prueba guardarPruebaWais(Prueba prueba);
 
 	Prueba guardarPruebaWisc(Prueba prueba);
+	
+	Prueba eliminarPrueba(String idEvaluado);
 
 	List<Prueba> obtenerTodasLasPruebasWais();
 
