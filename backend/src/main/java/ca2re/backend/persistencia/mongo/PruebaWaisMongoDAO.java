@@ -6,6 +6,7 @@ import static org.springframework.data.mongodb.core.query.Update.update;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -92,5 +93,13 @@ public class PruebaWaisMongoDAO implements PruebaWAISDAO{
 		String coleccionABuscar = prueba.getTipoPrueba().equals("WAIS") ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
 		mongoOperations.remove(pruebaPorNombre, EntidadPrueba.class, coleccionABuscar);
 		return prueba;
+	}
+
+	@Override
+	public List<Prueba> obtenerPruebasPorNombre(String tipoPrueba, String nombre) {
+		Query pruebaPorNombre = query(where("evaluado.nombreCompleto").is(Pattern.compile(nombre, Pattern.CASE_INSENSITIVE)));
+		String coleccionABuscar = tipoPrueba.equals("WAIS") ? COLLECTION_PRUEBA_WAIS : COLLECTION_PRUEBA_WISC;
+		List<EntidadPrueba> pruebaEntidad = mongoOperations.find(pruebaPorNombre, EntidadPrueba.class, coleccionABuscar);
+		return PruebaBuilder.convertirAListaDominio(pruebaEntidad);
 	}
 }

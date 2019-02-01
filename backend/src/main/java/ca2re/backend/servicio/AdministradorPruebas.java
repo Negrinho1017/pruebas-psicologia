@@ -427,4 +427,8 @@ public class AdministradorPruebas {
 	public List<Prueba> obtenerTodasLasPruebas(String tipoPrueba) {
 		return pruebaWaisDAO.obtenerTodasLasPruebas(tipoPrueba);
 	}
+	
+	public List<Prueba> obtenerPruebasPorNombre(String tipoPrueba, String nombre) {
+		return pruebaWaisDAO.obtenerPruebasPorNombre(tipoPrueba, nombre);
+	}
 }

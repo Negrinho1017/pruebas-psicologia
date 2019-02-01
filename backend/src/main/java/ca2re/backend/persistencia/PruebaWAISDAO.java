@@ -14,6 +14,8 @@ public interface PruebaWAISDAO {
 	List<Prueba> obtenerTodasLasPruebas(String tipoPrueba);
 
 	List<Prueba> obtenerPruebaPorIdEvaluado(String id);
+	
+	List<Prueba> obtenerPruebasPorNombre(String tipoPrueba, String nombre);
 
 	Prueba actualizarPrueba(Prueba prueba, String id, String coleccion);
 	

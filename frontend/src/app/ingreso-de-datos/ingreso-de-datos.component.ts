@@ -211,6 +211,7 @@ export class IngresoDeDatosComponent implements OnInit {
   }
 
   consultarPrueba() {   
+    localStorage.setItem('idEvaluado','0');
     this.router.navigate(['/hoja-pruebas']);
   }
 

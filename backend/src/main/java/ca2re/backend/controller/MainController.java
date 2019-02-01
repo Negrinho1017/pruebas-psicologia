@@ -97,4 +97,10 @@ public class MainController {
 	public List<Prueba> obtenerTodasLasPruebas(@RequestParam String tipoPrueba) {
 		return administradorPruebas.obtenerTodasLasPruebas(tipoPrueba);
 	}
+	
+	@RequestMapping(value = "/obtener-pruebas-por-nombre", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Prueba> obtenerPruebasPorNombre(@RequestParam String tipoPrueba, @RequestParam String nombre) {
+		return administradorPruebas.obtenerPruebasPorNombre(tipoPrueba, nombre);
+	}
 }

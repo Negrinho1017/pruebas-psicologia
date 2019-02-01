@@ -11,25 +11,52 @@ import { Prueba } from '../model/Prueba';
 })
 export class HojaDePruebasComponent implements OnInit {
   pruebas: Prueba[];
-  constructor( private hojaDePruebasService: HojaDePruebasService, private globals: Globals,
+  nombreEvaluado: String;
+  eliminar: boolean = false;
+  consultaHecha: boolean = false;
+  constructor(private hojaDePruebasService: HojaDePruebasService, private globals: Globals,
     private router: Router) { }
 
   ngOnInit() {
-    this.hojaDePruebasService.obtenerTodasLasPruebas(localStorage.getItem('tipoPrueba'))    
-      .subscribe(res => {
-        this.pruebas = res;
-        this.globals.prueba.evaluado.nombreCompleto
-      }, error => {
-        this.mensajeError(error.error.mensaje);
-      });
   }
 
-  consultarPrueba(idEvaluado: String) {        
-    this.globals.idEvaluado = idEvaluado;
-    localStorage.setItem('idEvaluado', <string> this.globals.idEvaluado);
-    if(localStorage.getItem('tipoPrueba')=="WISC"){
-      this.router.navigate(['/hoja-resultados-wisc']);
+  obtenerPruebasPorNombre() {
+    if (this.nombreEvaluado.length > 2) {
+      this.hojaDePruebasService.obtenerPruebasPorNombre(localStorage.getItem('tipoPrueba'), <string>this.nombreEvaluado)
+        .subscribe(res => {
+          this.pruebas = res;
+          this.consultaHecha = true;
+        }, error => {
+          this.mensajeError(error.error.mensaje);
+        });
+    }
+  }
+
+  eliminarPrueba(idEvaluado: String){
+    this.hojaDePruebasService.eliminarPrueba(idEvaluado).subscribe( res => {
+      this.mensajeSuccess("Eliminada la prueba correspondiente a "+res.evaluado.nombreCompleto);
+      localStorage.clear();
+      this.router.navigate(['/']);
+    }, error => {
+      this.mensajeError(error.error.mensaje);
+    });
+    localStorage.clear();
+  }
+
+  activarODesactivarEliminar(){
+    if(this.eliminar){
+      this.eliminar=false;
     }else{
+      this.eliminar=true;
+    }
+  }
+
+  consultarPrueba(idEvaluado: String) {
+    this.globals.idEvaluado = idEvaluado;
+    localStorage.setItem('idEvaluado', <string>this.globals.idEvaluado);
+    if (localStorage.getItem('tipoPrueba') == "WISC") {
+      this.router.navigate(['/hoja-resultados-wisc']);
+    } else {
       this.router.navigate(['/hoja-resultados']);
     }
   }
@@ -38,6 +65,14 @@ export class HojaDePruebasComponent implements OnInit {
     swal({
       title: 'Error!',
       icon: "error",
+      text: mensaje,
+    });
+  }
+
+  mensajeSuccess(mensaje: string) {
+    swal({
+      title: 'Excelente',
+      icon: "success",
       text: mensaje,
     });
   }

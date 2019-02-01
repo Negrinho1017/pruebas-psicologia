@@ -1,16 +1,31 @@
+<nav class="navbar navbar-light" style="background-color: white">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" [(ngModel)]="nombreEvaluado" (keyup)="obtenerPruebasPorNombre()"
+        name="nombre" placeholder="Buscar por nombre" aria-label="Search">
+        <button type="button"[disabled]="!consultaHecha" id="btnAvanzar" class="btn btn-dark" (click)="activarODesactivarEliminar()" id="btnPrueba">Activar/Desactivar botones de eliminar
+        </button>
+    </form>
+  </div>
+</nav>
+
 <body class="cuerpo">
   <table>
     <tr>
       <th>Identificación</th>
       <th>Nombre</th>
       <th>Tipo de prueba</th>
-      <th></th>
+      <th>Número de subpruebas realizadas</th>
+      <th>Consultar</th>
+      <th>Eliminar</th>
     </tr>
     <tr *ngFor="let item of pruebas; let i = index">
       <td>{{item.evaluado.id}}</td>
       <td>{{item.evaluado.nombreCompleto}}</td>
       <td>{{item.tipoPrueba}}</td>
+      <td>{{item.ramaDelConocimiento[0].subpruebas.length+item.ramaDelConocimiento[1].subpruebas.length+item.ramaDelConocimiento[2].subpruebas.length+item.ramaDelConocimiento[3].subpruebas.length}}</td>
       <td><button class="btn btn-dark" (click)="consultarPrueba(item.evaluado.id)">Consultar</button></td>
+      <td><button class="btn btn-dark" [disabled]="!eliminar" (click)="eliminarPrueba(item.evaluado.id)">Eliminar</button></td>
     </tr>
   </table>
 </body>

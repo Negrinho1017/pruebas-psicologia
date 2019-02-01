@@ -22,5 +22,16 @@ export class HojaDePruebasService {
       params: new HttpParams().set('tipoPrueba', tipoPrueba)
     };
     return this.http.get<Prueba[]>(this.url + '/obtener-todas-las-pruebas', httpOptions);
-  };
+  }
+
+  public obtenerPruebasPorNombre(tipoPrueba: string, nombre: string): Observable<Prueba[]>{
+    const httpOptions = {
+      params: new HttpParams().set('tipoPrueba', tipoPrueba).set('nombre', nombre)
+    };
+    return this.http.get<Prueba[]>(this.url + '/obtener-pruebas-por-nombre', httpOptions);
+  }
+
+  eliminarPrueba(idEvaluado: String): Observable<Prueba>{
+    return this.http.delete<Prueba>(this.url + '/eliminar-prueba/'+idEvaluado, httpOptions);
+  }
 }
