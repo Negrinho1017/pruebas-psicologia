@@ -24,12 +24,17 @@ import ca2re.backend.servicio.CalificadorPrueba;
 
 @Configuration
 public class Configuracion {
+	@Value("${spring.data.mongodb.host}") 
+	private String mongoHost;
+	
+	@Value("${spring.data.mongodb.port}") 
+	private int mongoPuerto;
 	
 	@Value("${nombreDB}") 
 	private String nombreDB;
 	
-	@Value("${mongo.database.production.uri}")
-	private MongoClientURI uri;
+//	@Value("${mongo.database.production.uri}")
+//	private MongoClientURI uri;
 	
 	@Bean
 	public CalificadorPrueba crearCalificadorPrueba() {
@@ -37,15 +42,26 @@ public class Configuracion {
 	}
 	
 	@Bean
-	public MongoClient crearMongoClientProduccion() {
-		return new MongoClient(uri);
+	public MongoClient crearMongoClient() {
+		return new MongoClient(mongoHost,mongoPuerto);
 	}
 	
 	@Primary
 	@Bean
-	public MongoOperations crearMongoTemplateProduccion() {		
-		return new MongoTemplate(crearMongoClientProduccion(), nombreDB);
+	public MongoOperations crearMongoTemplate() {		
+		return new MongoTemplate(crearMongoClient(), nombreDB);
 	}
+	
+//	@Bean
+//	public MongoClient crearMongoClientProduccion() {
+//		return new MongoClient(uri);
+//	}
+//	
+//	@Primary
+//	@Bean
+//	public MongoOperations crearMongoTemplateProduccion() {		
+//		return new MongoTemplate(crearMongoClientProduccion(), nombreDB);
+//	}
 	
 	@Bean
 	public PruebaWaisMongoDAO crearPruebaWaisDAO(MongoOperations mongoOperations) {
