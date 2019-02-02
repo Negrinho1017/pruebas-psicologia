@@ -17,7 +17,7 @@ export class HojaDeSubpruebasComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.hojaDeSubpruebasService.obtenerPruebaPorIdDelEvaluado("12").subscribe(
+    this.hojaDeSubpruebasService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
       res => {
         this.numerosSubprueba = [res.ramaDelConocimiento[0].subpruebas[0].numeroSubprueba, res.ramaDelConocimiento[0].subpruebas[1].numeroSubprueba,
         res.ramaDelConocimiento[0].subpruebas[2].numeroSubprueba, res.ramaDelConocimiento[1].subpruebas[0].numeroSubprueba,
