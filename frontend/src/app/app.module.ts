@@ -53,6 +53,7 @@ import { AnalisisWiscComponent } from './wisc/analisis-wisc/analisis-wisc.compon
 import { AnalisisProcesoWiscComponent } from './wisc/analisis-proceso-wisc/analisis-proceso-wisc.component';
 import { HeaderComponent } from './header/header.component';
 import { HojaDePruebasComponent } from './hoja-de-pruebas/hoja-de-pruebas.component';
+import { HojaDeSubpruebasComponent } from './hoja-de-subpruebas/hoja-de-subpruebas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +100,8 @@ import { HojaDePruebasComponent } from './hoja-de-pruebas/hoja-de-pruebas.compon
     AnalisisWiscComponent,
     AnalisisProcesoWiscComponent,
     HeaderComponent,
-    HojaDePruebasComponent
+    HojaDePruebasComponent,
+    HojaDeSubpruebasComponent
   ],
   imports: [
     BrowserModule,

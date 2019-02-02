@@ -3,8 +3,10 @@
     <img src='/assets/logoUCO.png' alt='image' style="width:12%;">
     <h2><b>Evaluado:</b> {{this.evaluado}}</h2>
     <div class="header-right btn-group">
-      <input *ngIf="hay10Subpruebas == false" type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Terminar prueba" [routerLinkActive]="'active-link'"
-        [routerLink]="['/']" (click)="eliminarPrueba()">
+      <input *ngIf="hay10Subpruebas == false" type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Terminar prueba"
+        [routerLinkActive]="'active-link'" [routerLink]="['/']" (click)="eliminarPrueba()">
+      <input type="button" *ngIf="hay10Subpruebas == true" id="btnPrueba" class="btn btn-dark btn-lg" value="Ver subpruebas" [routerLinkActive]="'active-link'"
+        [routerLink]="['/hoja-subpruebas']">
       <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Salir" [routerLinkActive]="'active-link'"
         [routerLink]="['/']" (click)="salir()">
     </div>

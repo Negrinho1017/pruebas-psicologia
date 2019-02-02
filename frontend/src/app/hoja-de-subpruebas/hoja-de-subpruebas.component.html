@@ -1,0 +1,15 @@
+<app-header></app-header>
+<body class="cuerpo">
+  <table>
+    <tr>
+      <th>Nombre subprueba</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let item of nombreSubpruebasWAIS; let i = index">
+      <td>{{item}}</td>
+      <td><button class="btn btn-dark" [disabled]="!estaLaSubprueba(i+1)" (click)="redireccionar(i+1)">Consultar</button></td>
+    </tr>
+  </table>
+  <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Volver a hoja de resultados" [routerLinkActive]="'active-link'"
+        [routerLink]="['/hoja-resultados']">
+</body>
