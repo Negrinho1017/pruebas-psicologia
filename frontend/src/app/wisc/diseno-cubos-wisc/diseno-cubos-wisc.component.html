@@ -38,7 +38,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" id="btnAvanzar" *ngIf="!pruebaConsultada" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarPorFigurasIncompletas()" class="btn btn-secondary"
@@ -120,32 +120,37 @@
         <td>
           <table>
             <tr>
-              <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
-              <td *ngIf="i < 3">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"></td>
-              <td *ngIf="i < 3">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)" [disabled]="habilitarReactivo(i)"
-                  [checked]="checkear(i)"></td>
+              <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
+              <td *ngIf="i < 3">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 1"></td>
+              <td *ngIf="i < 3">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 2"></td>
               <td *ngIf="i > 2">
                 <h6 *ngIf="i > 9">71-120</h6>
                 <h6 *ngIf="i > 7 && i < 10">31-75</h6>
-                4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)" [disabled]="habilitarReactivo(i)"
-                  [checked]="checkear(i)">
+                4. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(4,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 4" [checked]="checkear(i)">
               </td>
             </tr>
             <tr *ngIf="i > 7">
               <td>
                 <h6 *ngIf="i > 9">51-70</h6>
                 <h6 *ngIf="i > 7 && i < 10">21-30</h6>
-                5. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(5,i)" [disabled]="habilitarReactivo(i)">
+                5. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(5,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 5">
               </td>
               <td>
                 <h6 *ngIf="i > 9">31-50</h6>
                 <h6 *ngIf="i > 7 && i < 10">11-20</h6>
-                6. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(6,i)" [disabled]="habilitarReactivo(i)">
+                6. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(6,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 6">
               </td>
               <td>
                 <h6 *ngIf="i > 9">1-30</h6>
                 <h6 *ngIf="i > 7 && i < 10">1-10</h6>
-                7. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(7,i)" [disabled]="habilitarReactivo(i)">
+                7. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(7,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+                  [checked]="reactivosFinalizadosPuntuacion[i] == 7">
               </td>
             </tr>
           </table>
@@ -153,14 +158,16 @@
       </tr>
     </table>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
   <p id="puntuacion">Puntuación natural total para Diseño de cubos: <br>
-    <b id="checksreactivo14">{{this.subprueba.puntuacionNatural}}</b></p>
+    <b *ngIf="!pruebaConsultada" id="checksreactivo14">{{this.subprueba.puntuacionNatural}}</b>
+    <b *ngIf="pruebaConsultada" id="checksreactivo14">{{this.puntuacionNaturalFinal}}</b></p>
   <p id="puntuacionSinBonificacionDeTiempo">Puntuación natural total para Diseño de cubos sin bonificación de tiempo:
     <br>
-    <b id="checksreactivo14">{{this.puntuacionSinBonificacionDeTiempo}}</b></p>
+    <b id="checksreactivo1" *ngIf="!pruebaConsultada">{{this.puntuacionSinBonificacionDeTiempo}}</b>
+    <b *ngIf="pruebaConsultada" id="checksreactivo14">{{this.puntuacionSinBonificacionPorTiempo}}</b></p>
 </body>
 
 </html>

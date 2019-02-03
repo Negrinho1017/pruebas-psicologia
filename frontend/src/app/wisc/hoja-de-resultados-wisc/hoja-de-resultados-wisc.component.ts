@@ -47,6 +47,7 @@ export class HojaDeResultadosWiscComponent implements OnInit {
   ngOnInit() {    
     this.loading=true;
     this.obtenerPrueba();
+    this.globals.pruebaTerminada = true;
   }
 
   private obtenerPrueba(){

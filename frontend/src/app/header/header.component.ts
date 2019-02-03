@@ -19,13 +19,13 @@ export class HeaderComponent implements OnInit {
       .subscribe(res => {
         this.prueba = res;
         this.evaluado = this.prueba.evaluado.nombreCompleto;
-        this.hay10Subpruebas =  this.prueba.ramaDelConocimiento[0].subpruebas.length + this.prueba.ramaDelConocimiento[1].subpruebas.length
-          + this.prueba.ramaDelConocimiento[2].subpruebas.length + this.prueba.ramaDelConocimiento[3].subpruebas.length >= 10
+        this.hay10Subpruebas = this.globals.pruebaTerminada;
       });
   }
 
   salir(){
     localStorage.clear();
+    this.globals.pruebaTerminada = false;
   }
   
   eliminarPrueba(){

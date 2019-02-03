@@ -49,6 +49,13 @@ export class DisenoCubosWiscComponent implements OnInit {
   imagenesCubos: any[] = ["Cubos_1.png","Cubos_2.png","Cubos_3.png","Cubos_4.png","Cubos_5.png","Cubos_6.png",
   "Cubos_7.png","Cubos_8.png","Cubos_9.png","Cubos_10.png","Cubos_11.png","Cubos_12.png","Cubos_13.png",
   "Cubos_14.png"];
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosPuntuacionSinBonificacionPorTiempo: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[];
+  puntuacionSinBonificacionPorTiempo: number;
   
   @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
@@ -68,6 +75,31 @@ export class DisenoCubosWiscComponent implements OnInit {
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[1].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+        this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacion.map(r => r>4 ? 4 : r);
+        this.puntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo.reduce((sum, current) => sum + current);
+      })
   }
 
   criteriosDeInversion() {
@@ -75,11 +107,13 @@ export class DisenoCubosWiscComponent implements OnInit {
       this.reactivoDeInicio = 0;
       this.habilitaReactivo = [];
       this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.primerosReactivos = [];
     }
     else{
       this.reactivoDeInicio = 2;
       this.habilitaReactivo = [true,true];
       this.listaCalificaciones = [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.primerosReactivos = [2,2];
     }
   }
 
