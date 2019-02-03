@@ -91,6 +91,7 @@ export class DisenoCubosWiscComponent implements OnInit {
           if(reactivo != null){
             this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
             this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            this.llenarPosicionCubo(i, reactivo.respuesta);
           }else{
             this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
             this.reactivosFinalizadosRespuesta[i] = "";
@@ -100,6 +101,12 @@ export class DisenoCubosWiscComponent implements OnInit {
         this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacion.map(r => r>4 ? 4 : r);
         this.puntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo.reduce((sum, current) => sum + current);
       })
+  }
+
+  llenarPosicionCubo(react: number, info: String){
+    for(var i = 0; i<info.length; i++){
+      this.posicionCubos[react][i] = Number(info[i]);
+    }      
   }
 
   criteriosDeInversion() {
