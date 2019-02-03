@@ -33,7 +33,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Comprensión">
@@ -55,13 +55,14 @@
         </td>
         <td>{{item}}</td>
         <td>
-          <input type="text" id="txtRespuesta{{i}}" placeholder="Escriba aqui..." class="form-control">
+          <input type="text" *ngIf="!pruebaConsultada" id="txtRespuesta{{i}}" placeholder="Escriba aqui..." class="form-control">
+          <p *ngIf="pruebaConsultada">{{reactivosFinalizadosRespuesta[i]}}</p>
         </td>
-        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)" [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="i < 3 && checkear(i)"></td>
+          [checked]="reactivosFinalizadosPuntuacion[i] == 1"></td>
         <td><input type="radio" *ngIf="i>2" id="p3" name="{{item}}" (click)="calificarReactivo(2,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 2"></td>
       </tr>
     </table>
   </div>
@@ -72,11 +73,12 @@
     </td>
     <td>
       Puntuación natural total para Vocabulario: <br>
-      <b>{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="!pruebaConsultada" id="checksreactivo15">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada" id="checksreactivo15">{{puntuacionPruebaConsultada}}</b>
     </td>
   </table>
 </body>
-<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+<button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
   <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
 </button>
 
