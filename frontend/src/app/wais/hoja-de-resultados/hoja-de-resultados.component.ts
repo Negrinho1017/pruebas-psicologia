@@ -49,6 +49,7 @@ export class HojaDeResultadosComponent implements OnInit {
   ngOnInit() {    
     this.loading=true;
     this.obtenerPrueba();
+    localStorage.setItem('pruebaConsultada', 'true');
   }
 
   private obtenerPrueba(){

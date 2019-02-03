@@ -28,11 +28,11 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Cancelación">
-  <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
+  <input type="button"  class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar">
   <table>
     <tr>
@@ -45,15 +45,15 @@
       <td>
         <app-cronometro></app-cronometro>
       </td>
-      <td><input type="number" id="txtRespuesta" [(ngModel)]="correctas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
-      <td><input type="number" id="txtRespuesta" [(ngModel)]="incorrectas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="number" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="correctas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="number" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="incorrectas" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
       <td>
         <b>{{this.puntuacion}}</b>
       </td>
     </tr>
   </table>
 
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </body>

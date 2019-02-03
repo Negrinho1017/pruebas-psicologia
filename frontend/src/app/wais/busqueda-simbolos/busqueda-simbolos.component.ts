@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
+import { Prueba } from 'src/app/model/Prueba';
 
 @Component({
   selector: 'app-busqueda-simbolos',
@@ -13,15 +14,24 @@ import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-es
 export class BusquedaSimbolosComponent implements OnInit {
   seCambiaraLaSubprueba: boolean = false;
   puntuacion: number = 0;
-  correctas: number = 0;
-  incorrectas: number = 0;
+  correctas: number;
+  incorrectas: number;
   subprueba: Subprueba = new Subprueba();
+  pruebaConsultada = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Búsqueda de símbolos";
     this.subprueba.numeroSubprueba = 7;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(res => {
+        this.puntuacion = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+      })
+    }
+    this.correctas = 0;
+    this.incorrectas = 0;
   }
 
   calcularPuntuacion(){

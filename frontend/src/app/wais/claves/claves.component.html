@@ -34,12 +34,12 @@
     </td>
   </table>
 </body>
-<button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+<button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
   Cambiar subprueba
 </button>
 <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Cancelación">
 <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
   value="Cancelar"><br>
-<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+<button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
   <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
 </button>

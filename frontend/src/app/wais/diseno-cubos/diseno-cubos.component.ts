@@ -6,6 +6,7 @@ import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultado
 import { Router } from '@angular/router';
 import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 import { CronometroComponent } from 'src/app/cronometro/cronometro.component';
+import { Prueba } from 'src/app/model/Prueba';
 
 @Component({
   selector: 'app-diseno-cubos',
@@ -47,6 +48,9 @@ export class DisenoCubosComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png", "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
+  pruebaConsultada = false;
+  reactivosPruebaConsultada: any[];
+  puntuacionPruebaConsultada: number;
   
   @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
@@ -63,6 +67,15 @@ export class DisenoCubosComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+        res => {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
+          this.reactivosPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[0].reactivos;
+        }
+      );
+    }
   }
 
   finalizarSubprueba() {
@@ -184,7 +197,12 @@ export class DisenoCubosComponent implements OnInit {
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if(this.pruebaConsultada){
+      return this.pruebaConsultada;
+    }
+    else{
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {

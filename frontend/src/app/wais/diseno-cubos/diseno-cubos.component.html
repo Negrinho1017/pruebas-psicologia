@@ -30,7 +30,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(1)" class="btn btn-secondary" value="Peso figurado">
@@ -106,7 +106,7 @@
         <td>
           <table *ngIf="i>0">
             <tr>
-              <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
+              <td>0. <input type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)" ></td>
               <td *ngIf="i < 5">1. <input type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"></td>
               <td *ngIf="i < 5">2. <input type="radio" id="p3" name="{{i}}" (click)="calificarReactivo(2,i)" [disabled]="habilitarReactivo(i)"
                   [checked]="checkear(i)"></td>
@@ -138,11 +138,13 @@
       </tr>
     </table>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
   <p id="puntuacion">Puntuación natural total para Diseño de cubos: <br>
-    <b id="checksreactivo15">{{this.subprueba.puntuacionNatural}}</b></p>
+    <b *ngIf="!pruebaConsultada" id="checksreactivo15">{{this.subprueba.puntuacionNatural}}</b>
+    <b *ngIf="pruebaConsultada" id="checksreactivo15">{{puntuacionPruebaConsultada}}</b>
+  </p>
   <p id="puntuacionSinBonificacionDeTiempo">Puntuación natural total para Diseño de cubos sin bonificación de tiempo:
     <br>
     <b id="checksreactivo15">{{this.puntuacionSinBonificacionDeTiempo}}</b></p>
