@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <body class="cuerpo">
   <table>
     <tr>
@@ -10,6 +11,8 @@
       <td><button class="btn btn-dark" [disabled]="!estaLaSubprueba(i+1)" (click)="redireccionar(i+1)">Consultar</button></td>
     </tr>
   </table>
-  <input type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Volver a hoja de resultados" [routerLinkActive]="'active-link'"
-        [routerLink]="['/hoja-resultados']">
+  <input *ngIf="tipoPrueba == 'WAIS'" type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Volver a hoja de resultados"
+    [routerLinkActive]="'active-link'" [routerLink]="['/hoja-resultados']">
+  <input *ngIf="tipoPrueba == 'WISC'" type="button" id="btnPrueba" class="btn btn-dark btn-lg" value="Volver a hoja de resultados"
+    [routerLinkActive]="'active-link'" [routerLink]="['/hoja-resultados-wisc']">
 </body>

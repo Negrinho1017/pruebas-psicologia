@@ -49,6 +49,14 @@ export class RetencionDigitosWiscComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[] = [];
+  rdd: number[] = [];
+  rdi: number[] = [];
+
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
@@ -56,6 +64,40 @@ export class RetencionDigitosWiscComponent implements OnInit {
   ngOnInit() {
     this.construirRespuestasRDI();
     this.selectedRetencionDeDigitos = 1;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[2].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+        i = 0;
+        for(let reactivo of this.reactivosFinalizadosPuntuacion){
+          if(i<16){
+            this.rdd[i] = reactivo;
+          }else if(i<32){
+            this.rdi[i-16] = reactivo;
+          }
+          i++;
+        }
+        this.puntuacionRDI = this.rdi.reduce((sum, current) => sum + current);
+        this.puntuacionRDD = this.rdd.reduce((sum, current) => sum + current);
+      })
   }
 
   construirRespuestasRDI() {
@@ -169,10 +211,17 @@ export class RetencionDigitosWiscComponent implements OnInit {
   }
 
   cambiarRD(num: number): void{
-    this.selectedRetencionDeDigitos=num; 
-    this.siguienteReactivo = this.reactivoDeInicioRDI;
-    this.anteriorReactivo = this.reactivoDeInicioRDI;
-    window.scroll(0,0);
+    if(this.globals.pruebaTerminada){
+      this.selectedRetencionDeDigitos=num; 
+      this.siguienteReactivo = -1;
+      this.anteriorReactivo = this.reactivoDeInicioRDI;
+      window.scroll(0,0);
+    }else{
+      this.selectedRetencionDeDigitos=num; 
+      this.siguienteReactivo = this.reactivoDeInicioRDI;
+      this.anteriorReactivo = this.reactivoDeInicioRDI;
+      window.scroll(0,0);
+    }
   }
 
   habilitarReactivo(i, n): boolean {

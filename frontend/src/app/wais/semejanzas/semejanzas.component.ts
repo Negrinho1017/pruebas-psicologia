@@ -21,7 +21,6 @@ export class SemejanzasComponent implements OnInit {
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  primerosReactivos: number[] = [0, 2, 2, 2];
   habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false];    
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
@@ -29,6 +28,7 @@ export class SemejanzasComponent implements OnInit {
   reactivosFinalizadosRespuesta: String[] = [];
   puntuacionNaturalFinal: number;
   pruebaConsultada: boolean;
+  primerosReactivos: number[] = [0, 2, 2, 2];
 
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
