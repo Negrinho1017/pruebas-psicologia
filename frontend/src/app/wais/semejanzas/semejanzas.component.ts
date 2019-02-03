@@ -59,7 +59,6 @@ export class SemejanzasComponent implements OnInit {
           }
           i++;
         }
-        console.log(this.reactivosFinalizadosPuntuacion);
       })
   }
 

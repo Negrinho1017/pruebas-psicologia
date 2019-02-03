@@ -48,9 +48,13 @@ export class DisenoCubosComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
   imagenesCubos: any[] = ["CubosReactivo0.png", "CubosReactivo1.png", "CubosReactivo2.png", "CubosReactivo3.png", "CubosReactivo4.png", "CubosReactivo5.png", "CubosReactivo6.png", "CubosReactivo7.png", "CubosReactivo8.png", "CubosReactivo9.png", "CubosReactivo10.png", "CubosReactivo11.png", "CubosReactivo12.png", "CubosReactivo13.png", "CubosReactivo14.png"];
-  pruebaConsultada = false;
-  reactivosPruebaConsultada: any[];
-  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosPuntuacionSinBonificacionPorTiempo: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[] = [0, 2, 2, 2, 2];
+  puntuacionSinBonificacionPorTiempo: number;
   
   @ViewChildren(CronometroComponent) cronometros !: QueryList<CronometroComponent>;
 
@@ -67,15 +71,31 @@ export class DisenoCubosComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Diseño de cubos";
     this.subprueba.numeroSubprueba = 1;
-    if(localStorage.getItem('pruebaConsultada') == 'true'){
+    if(this.globals.pruebaTerminada){
       this.pruebaConsultada = true;
-      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
-        res => {
-          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
-          this.reactivosPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[0].reactivos;
-        }
-      );
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
     }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[1].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+        this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacion.map(r => r>4 ? 4 : r);
+        this.puntuacionSinBonificacionPorTiempo = this.reactivosFinalizadosPuntuacionSinBonificacionPorTiempo.reduce((sum, current) => sum + current);
+      })
   }
 
   finalizarSubprueba() {
