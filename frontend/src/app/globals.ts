@@ -24,4 +24,5 @@ export class Globals {
     disenoCubos: number;
     disenoCubosSinBonificacionTiempo: number = 8;
     prueba: Prueba;
+    pruebaTerminada: boolean;
 }

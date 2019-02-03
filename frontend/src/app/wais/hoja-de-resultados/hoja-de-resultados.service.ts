@@ -33,11 +33,11 @@ export class HojaDeResultadosService {
     return this.http.get<boolean>(this.url + '/es-permitido-el-usuario', httpOptions);
   }
 
-  public obtenerPruebaPorIdDelEvaluado(idEvaluado: string): Observable<any>{
+  public obtenerPruebaPorIdDelEvaluado(idEvaluado: string): Observable<Prueba>{
     const httpOptions = {
       params: new HttpParams().set('idEvaluado', idEvaluado)
     };
-    return this.http.get(this.url + '/prueba-por-id', httpOptions);
+    return this.http.get<Prueba>(this.url + '/prueba-por-id', httpOptions);
   };
   
   crearPrueba(prueba: Prueba) {

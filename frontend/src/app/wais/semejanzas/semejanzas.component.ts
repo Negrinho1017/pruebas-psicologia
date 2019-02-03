@@ -21,17 +21,45 @@ export class SemejanzasComponent implements OnInit {
   puntuacion: number = 0;
   reactivosCalificados: Reactivo[] = [];
   listaCalificaciones: number[] = [0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  primerosReactivos: number[] = [0, 2, 2, 2];
   habilitaReactivo: boolean[] = [true, true, true, true, false, false, false, false];    
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
 
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
     this.subprueba.nombre = "Semejanzas";
     this.subprueba.numeroSubprueba = 2;
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[0].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+        console.log(this.reactivosFinalizadosPuntuacion);
+      })
   }
 
   finalizarSubprueba() {
