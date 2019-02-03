@@ -31,6 +31,12 @@ export class SemejanzasWiscComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   maximaPuntuacionPorReactivo: number[] = [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[];
+
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
@@ -41,6 +47,11 @@ export class SemejanzasWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Semejanzas";
     this.subprueba.numeroSubprueba = 2;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
   }
 
   criteriosDeInversion() {
@@ -48,17 +59,38 @@ export class SemejanzasWiscComponent implements OnInit {
       this.reactivoDeInicio = 1;
       this.habilitaReactivo = [];
       this.listaCalificaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.primerosReactivos = [];
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
       this.reactivoDeInicio = 3;
       this.habilitaReactivo = [true,true,true];
       this.listaCalificaciones = [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.primerosReactivos = [0, 1, 1];
     }
     else {
       this.reactivoDeInicio = 5;
       this.habilitaReactivo = [true,true,true,true,true];
       this.listaCalificaciones = [0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.primerosReactivos = [0, 1, 1, 2, 2];
     }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[0].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      })
   }
 
   finalizarSubprueba() {
@@ -86,6 +118,8 @@ export class SemejanzasWiscComponent implements OnInit {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.reactivoActual = new Reactivo();
+      this.reactivoActual.respuesta =
+      (document.getElementById("txtRespuesta" + i) as HTMLInputElement).value;
       this.reactivoActual.puntuacion = calificacionReactivo;
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
