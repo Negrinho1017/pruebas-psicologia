@@ -14,12 +14,21 @@ export class ClavesComponent implements OnInit {
   puntuacion: number = 0;
   subprueba: Subprueba = new Subprueba();
   seCambiaraLaSubprueba: boolean = false;
+  pruebaConsultada = false;
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.numeroSubprueba = 10;
     this.subprueba.nombre = "Claves";
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+        res => {
+          this.puntuacion = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
+        }
+      );
+    }
   }
 
   finalizarSubprueba(){

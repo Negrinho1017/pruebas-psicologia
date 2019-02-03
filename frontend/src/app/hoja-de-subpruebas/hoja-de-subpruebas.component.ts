@@ -9,14 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./hoja-de-subpruebas.component.css']
 })
 export class HojaDeSubpruebasComponent implements OnInit {
+  tipoPrueba: String;
   nombreSubpruebasWAIS: String[] = ["Diseño de cubos","Semejanzas","Retención de dígitos","Matrices",
   "Vocabulario","Aritmética","Búsqueda de símbolos","Rompecabezas visual","Información","Claves",
   "Sucesión de números y letras","Peso figurado","Comprensión","Cancelación","Figuras incompletas"];
+  nombreSubpruebasWISC: String[] = ["Diseño de cubos","Semejanzas","Retención de dígitos",
+  "Conceptos con dibujos","Claves","Vocabulario","Sucesión de números y letras","Matrices","Comprensión",
+  "Búsqueda de símbolos","Figuras incompletas","Registros","Información","Aritmética","Pistas"];
   numerosSubprueba: number[] = [];
   constructor( private hojaDeSubpruebasService : HojaDeSubpruebasService, private globals: Globals,
     private router: Router) { }
 
   ngOnInit() {
+    this.tipoPrueba = localStorage.getItem('tipoPrueba');
     this.hojaDeSubpruebasService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
       res => {
         this.numerosSubprueba = [res.ramaDelConocimiento[0].subpruebas[0].numeroSubprueba, res.ramaDelConocimiento[0].subpruebas[1].numeroSubprueba,
