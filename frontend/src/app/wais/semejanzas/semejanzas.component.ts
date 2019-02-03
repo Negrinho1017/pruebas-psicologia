@@ -38,6 +38,7 @@ export class SemejanzasComponent implements OnInit {
     if(this.globals.pruebaTerminada){
       this.pruebaConsultada = true;
       this.consultarResultados();
+      this.siguienteReactivo = -1;
     }
     this.subprueba.nombre = "Semejanzas";
     this.subprueba.numeroSubprueba = 2;
