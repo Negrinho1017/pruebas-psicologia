@@ -33,6 +33,11 @@ export class VocabularioComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  primerosReactivos: number[] = [1, 1, 1, 2];
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -40,6 +45,30 @@ export class VocabularioComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Vocabulario";
     this.subprueba.numeroSubprueba = 5;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
+        var i = 0;
+        for (let reactivo of res.ramaDelConocimiento[0].subpruebas[1].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
@@ -129,7 +158,12 @@ export class VocabularioComponent implements OnInit {
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if(this.pruebaConsultada){
+      return this.pruebaConsultada;
+    }
+    else{
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
