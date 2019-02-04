@@ -28,7 +28,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba(1)" class="btn btn-secondary" value="Peso figurado">
@@ -56,16 +56,17 @@
         </td>
         <td><b>{{item}}</b></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(0,i)"
-          [disabled]="habilitarReactivo(i)" *ngIf="i>=2"></td>
+          [disabled]="habilitarReactivo(i)" *ngIf="i>=2" [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input type="radio" name={{i}} (click)="calificarReactivo(1,i)"
-          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i)" *ngIf="i>=2"></td>
+          [disabled]="habilitarReactivo(i)" [checked] = "checkear(i) || reactivosFinalizadosPuntuacion[i] == 1" *ngIf="i>=2"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Matrices: <br>
-      <b>{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="!pruebaConsultada">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada">{{puntuacionPruebaConsultada}}</b>
     </p>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
 </button>
 </body>
