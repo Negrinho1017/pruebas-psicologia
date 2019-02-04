@@ -25,13 +25,13 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Registros">
   <input type="button" class="btn btn-secondary" *ngIf="seCambiaraLaSubprueba" (click)="seCambiaraLaSubprueba=false"
     value="Cancelar"><br>
-  <table>
+  <table *ngIf="!pruebaConsultada">
     <tr>
       <th></th>
       <th>Forma</th>
@@ -48,7 +48,7 @@
     </tr>
   </table>
   <br>
-  <table>
+  <table *ngIf="!pruebaConsultada">
     <tr>
       <th colspan="8">Puntuaciones con bonificación por tiempo en ejecución perfecta para claves A</th>
     </tr>
@@ -74,8 +74,8 @@
     </tr>
   </table>
   <br>
-  Puntuación natural total: <input type="number" id="txtRespuesta" [(ngModel)]="puntuacion" pattern="[0-9]*"><br><br>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  Puntuación natural total: <input type="number" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="puntuacion" pattern="[0-9]*"><br><br>
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </body>

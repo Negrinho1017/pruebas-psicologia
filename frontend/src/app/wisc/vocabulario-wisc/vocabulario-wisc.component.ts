@@ -31,6 +31,11 @@ export class VocabularioWiscComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[];
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
@@ -41,6 +46,30 @@ export class VocabularioWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Vocabulario";
     this.subprueba.numeroSubprueba = 6;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[0].subpruebas[1].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+        console.log(this.reactivosFinalizadosPuntuacion);
+      })
   }
 
   criteriosDeInversion() {
@@ -48,16 +77,19 @@ export class VocabularioWiscComponent implements OnInit {
       this.reactivoDeInicio = 4;
       this.habilitaReactivo = [true,true,true,true];
       this.listaCalificaciones = [1, 1, 1, 1];
+      this.primerosReactivos = [1, 1, 1, 1];
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
       this.reactivoDeInicio = 6;
       this.habilitaReactivo = [true,true,true,true,true,true];
       this.listaCalificaciones = [1, 1, 1, 1, 2, 2];
+      this.primerosReactivos = [1, 1, 1, 1, 2, 2]
     }
     else {
       this.reactivoDeInicio = 8;
       this.habilitaReactivo = [true,true,true,true,true,true,true,true];
       this.listaCalificaciones = [1, 1, 1, 1, 2, 2, 2, 2];
+      this.primerosReactivos = [1, 1, 1, 1, 2, 2, 2, 2]
     }
   }
 
