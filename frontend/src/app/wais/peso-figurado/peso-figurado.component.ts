@@ -56,7 +56,7 @@ export class PesoFiguradoComponent implements OnInit {
           }
         }
 
-        else if (res.ramaDelConocimiento[1].subpruebas[1].nombre === 'Peso figurado') {
+        else if (res.ramaDelConocimiento[1].subpruebas[1].nombre === "Peso figurado") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[1].puntuacionNatural;
           var i = 0;
           for (let reactivo of res.ramaDelConocimiento[1].subpruebas[1].reactivos) {
@@ -69,7 +69,7 @@ export class PesoFiguradoComponent implements OnInit {
           }
         }
 
-        else if (res.ramaDelConocimiento[1].subpruebas[2].nombre === 'Peso figurado') {
+        else if (res.ramaDelConocimiento[1].subpruebas[2].nombre === "Peso figurado") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural;
           var i = 0;
           for (let reactivo of res.ramaDelConocimiento[1].subpruebas[2].reactivos) {
