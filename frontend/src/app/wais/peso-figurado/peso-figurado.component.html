@@ -61,16 +61,18 @@
           <app-cronometro></app-cronometro>
         </td>
         <td>{{item}}</td>
-        <td><input *ngIf="i>2" type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
+        <td><input *ngIf="i>2" type="radio" id="p1" name="{{i}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
+            [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input *ngIf="i>2" type="radio" id="p2" name="{{i}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 1"></td>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para peso figurado: <br>
-      <b id="checksreactivo29">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada" id="checksreactivo29">{{this.puntuacionPruebaConsultada}}</b>
+      <b *ngIf="!pruebaConsultada" id="checksreactivo29">{{this.subprueba.puntuacionNatural}}</b>
     </p>
   </div>
-      <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+      <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
         <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
       </button>
 </div>

@@ -12,27 +12,80 @@ import { Router } from '@angular/router';
   styleUrls: ['./peso-figurado.component.css']
 })
 export class PesoFiguradoComponent implements OnInit {
-  
+
   siguienteReactivo: number = 6;
   anteriorReactivo: number = 6;
   respuestasCorrectas: String[] = ["1, 2, 6", "1, 3, 6", "2, 3, 5", "1, 2, 5", "1, 4, 6", "2, 3, 6", "3, 5, 6", "1, 3, 6", "2, 5, 6", "1, 3, 4", "1, 3, 6", "1, 2, 5", "1, 2, 5", "1, 4, 5", "3, 4, 6", "2, 3, 4", "1, 2, 6", "3, 4, 6", "1, 2, 6", "2, 3, 5", "1, 5, 6", "2, 3, 5", "1 ,3 ,4", "1, 5, 6", "3, 4, 6", "3, 4, 5", "1, 2, 3", "3, 4, 6", "3, 4"];
   puntuacion: number = 0;
   listaCalificaciones: number[] = [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  habilitaReactivo: boolean[] = [true, true, true, true, true, true, false, false, false];    
+  habilitaReactivo: boolean[] = [true, true, true, true, true, true, false, false, false];
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
-  
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  primerosReactivos: number[] = [0, 0, 1, 1, 1];
+
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Peso figurado";
     this.subprueba.numeroSubprueba = 12;
+    if (localStorage.getItem('pruebaConsultada') == 'true') {
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
   }
 
-  
+  consultarResultados() {
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
+      res => {
+        if (res.ramaDelConocimiento[1].subpruebas[0].nombre === "Peso figurado") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[0].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[1].subpruebas[0].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[1].subpruebas[1].nombre === 'Peso figurado') {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[1].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[1].subpruebas[1].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[1].subpruebas[2].nombre === 'Peso figurado') {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[1].subpruebas[2].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            }
+            i++;
+          }
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
+  }
+
   finalizarSubprueba() {
     this.subprueba.reactivos = this.reactivosCalificados;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarPesoFigurado(this.globals.edad, this.subprueba.puntuacionNatural)
@@ -64,7 +117,7 @@ export class PesoFiguradoComponent implements OnInit {
     if (numeroReactivo == 7 && (puntuacionReactivo == 0 || this.listaCalificaciones[numeroReactivo - 1] == 0)) {
       this.limpiarReactivosAnt(numeroReactivo);
     }
-    else if (numeroReactivo == 4 ) {
+    else if (numeroReactivo == 4) {
       this.reversarInversion(puntuacionReactivo, numeroReactivo);
     }
     else if (numeroReactivo == 5) {
@@ -145,7 +198,12 @@ export class PesoFiguradoComponent implements OnInit {
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if (this.pruebaConsultada) {
+      return this.pruebaConsultada;
+    }
+    else {
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
