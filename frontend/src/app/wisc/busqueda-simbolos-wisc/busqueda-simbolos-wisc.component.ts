@@ -30,7 +30,7 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
       this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(res => {
         this.puntuacion = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
         this.correctas = res.ramaDelConocimiento[3].subpruebas[1].reactivos[0] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[0].puntuacion : 0;
-        this.correctas = res.ramaDelConocimiento[3].subpruebas[1].reactivos[1] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[1].puntuacion : 0;
+        this.incorrectas = res.ramaDelConocimiento[3].subpruebas[1].reactivos[1] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[1].puntuacion : 0;
       })
     }
   }

@@ -5,6 +5,7 @@ import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { PuntuacionEscalarService } from '../../puntuacion-escalar/puntuacion-escalar.service';
 import { Prueba } from 'src/app/model/Prueba';
+import { Reactivo } from 'src/app/model/Reactivo';
 
 @Component({
   selector: 'app-busqueda-simbolos',
@@ -28,6 +29,8 @@ export class BusquedaSimbolosComponent implements OnInit {
       this.pruebaConsultada = true;
       this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(res => {
         this.puntuacion = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+        this.correctas = res.ramaDelConocimiento[3].subpruebas[0].reactivos[0] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[0].puntuacion : 0;
+        this.incorrectas = res.ramaDelConocimiento[3].subpruebas[0].reactivos[1] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[1].puntuacion : 0;
       })
     }
     this.correctas = 0;
@@ -44,6 +47,9 @@ export class BusquedaSimbolosComponent implements OnInit {
     this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
+      this.subprueba.reactivos = [new Reactivo(), new Reactivo()];
+      this.subprueba.reactivos[0].puntuacion = this.correctas;
+      this.subprueba.reactivos[1].puntuacion = this.incorrectas;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.router.navigate([this.globals.rutas[7]]);
