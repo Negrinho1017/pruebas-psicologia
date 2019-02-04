@@ -21,6 +21,11 @@ export class ComprensionComponent implements OnInit {
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   puntuacion: number = 0;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  primerosReactivos: number[] = [2,2];
 
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
@@ -29,6 +34,62 @@ export class ComprensionComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Comprension";
     this.subprueba.numeroSubprueba = 13;
+    if (localStorage.getItem('pruebaConsultada') == 'true') {
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados() {
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
+      res => {
+        if (res.ramaDelConocimiento[0].subpruebas[0].nombre === "Comprension") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[0].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[0].subpruebas[1].nombre === "Comprension") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[1].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[0].subpruebas[2].nombre === "Comprension") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[2].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   finalizarSubprueba() {
@@ -131,7 +192,12 @@ export class ComprensionComponent implements OnInit {
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if (this.pruebaConsultada) {
+      return this.pruebaConsultada;
+    }
+    else {
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   getReactivoSiguiente(): number {
