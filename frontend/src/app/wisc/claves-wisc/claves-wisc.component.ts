@@ -17,12 +17,22 @@ export class ClavesWiscComponent implements OnInit {
   rangoEdades: String[] = ["6 - 7","8 - 16"];
   subprueba: Subprueba = new Subprueba();
   seCambiaraLaSubprueba: boolean = false;
+  pruebaConsultada = false;
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
   ngOnInit() {
     this.subprueba.numeroSubprueba = 5;
     this.subprueba.nombre = "Claves";
+    if(this.globals.pruebaTerminada == true){
+      this.pruebaConsultada = true;
+      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+        res => {
+          this.puntuacion = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+        }
+      );
+    }
   }
 
   finalizarSubprueba(){
