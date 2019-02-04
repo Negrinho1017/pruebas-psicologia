@@ -25,7 +25,12 @@ export class MatricesWiscComponent implements OnInit {
   reactivosCalificados: Reactivo[] = [];
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
-  hayDiscontinuacion: boolean = false;
+  hayDiscontinuacion: boolean = false;reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[];
+
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
@@ -35,6 +40,29 @@ export class MatricesWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.numeroSubprueba = 8;
     this.subprueba.nombre = "Matrices";
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[1].subpruebas[2].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      })
   }
 
   criteriosDeInversion() {
@@ -42,16 +70,19 @@ export class MatricesWiscComponent implements OnInit {
       this.reactivoDeInicio = 6;
       this.habilitaReactivo = [true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1];
+      this.primerosReactivos = [0, 0, 0, 1, 1, 1]
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {
       this.reactivoDeInicio = 9;
       this.habilitaReactivo = [true, true, true, true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1];
+      this.primerosReactivos = [0, 0, 0, 1, 1, 1, 1, 1, 1]
     }
     else {
       this.reactivoDeInicio = 13;
       this.habilitaReactivo = [true, true, true, true, true, true, true, true, true, true, true, true, true];
       this.listaCalificaciones = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+      this.primerosReactivos = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     }
   }
 
