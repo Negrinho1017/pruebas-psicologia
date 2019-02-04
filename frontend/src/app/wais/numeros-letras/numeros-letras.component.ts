@@ -44,6 +44,10 @@ export class NumerosLetrasComponent implements OnInit {
     "2 - 6 - 7 - 9 - A - N - P - S, A - N - P - S - 2 - 6 - 7 - 9",
     "1 - 3 - 4 - 9 - K - R - U - X, K - R - U - X - 1 - 3 - 4 - 9",
     "2 - 6 - 7 - 9 - A - F - M - Y - T,  A - F - M - T - 2 - 6 - 7 - 9"];
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  primerosReactivos: number[];
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -51,10 +55,52 @@ export class NumerosLetrasComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Sucesión de números y letras";
     this.subprueba.numeroSubprueba = 11;
+    if (localStorage.getItem('pruebaConsultada') == 'true') {
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados() {
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
+      res => {
+        if (res.ramaDelConocimiento[2].subpruebas[0].nombre === "Sucesión de números y letras") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[2].subpruebas[0].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[2].subpruebas[1].nombre === "Sucesión de números y letras") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[2].subpruebas[1].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            }
+            i++;
+          }
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if (this.pruebaConsultada) {
+      return this.pruebaConsultada;
+    }
+    else {
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
@@ -83,7 +129,7 @@ export class NumerosLetrasComponent implements OnInit {
     let discontinua: boolean = puntuacionReactivo == 0
       && this.listaCalificaciones[numeroReactivo - 1] == 0
       && this.listaCalificaciones[numeroReactivo - 2] == 0
-      && numeroReactivo > 3  && ((numeroReactivo-1) % 3) == 0;
+      && numeroReactivo > 3 && ((numeroReactivo - 1) % 3) == 0;
 
     if (discontinua) {
       this.anteriorReactivo = numeroReactivo;
