@@ -43,8 +43,8 @@
       <td>
         <app-cronometro></app-cronometro>
       </td>
-      <td><input type="text" id="txtRespuesta" [(ngModel)]="correctas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
-      <td><input type="text" id="txtRespuesta" [(ngModel)]="incorrectas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="correctas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="incorrectas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
       <td>
         <b>{{this.puntuacion1}}</b>
       </td>
@@ -54,8 +54,8 @@
       <td>
         <app-cronometro></app-cronometro>
       </td>
-      <td><input type="text" id="txtRespuesta" [(ngModel)]="correctas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
-      <td><input type="text" id="txtRespuesta" [(ngModel)]="incorrectas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="correctas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="incorrectas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
       <td>
         <b>{{this.puntuacion2}}</b>
       </td>
@@ -63,7 +63,8 @@
     <tr>
       <td>
         Puntuación natural total: <br>
-        <b>{{this.puntuacionTotal}}</b>
+        <b *ngIf="!pruebaConsultada">{{this.puntuacionTotal}}</b>
+        <b *ngIf="pruebaConsultada">{{this.puntuacionPruebaConsultada}}</b>
       </td>
     </tr>
   </table>
@@ -71,7 +72,7 @@
 
 
 
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </div>

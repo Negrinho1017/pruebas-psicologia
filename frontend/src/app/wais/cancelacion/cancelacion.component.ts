@@ -21,12 +21,33 @@ export class CancelacionComponent implements OnInit {
   incorrectas1: number = 0;  
   incorrectas2: number = 0;
   subprueba: Subprueba = new Subprueba();
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Cancelación";
     this.subprueba.numeroSubprueba = 14;
+    if (localStorage.getItem('pruebaConsultada') == 'true') {
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados() {
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
+      res => {
+        if (res.ramaDelConocimiento[3].subpruebas[0].nombre === "Cancelación") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+        }
+
+        else if (res.ramaDelConocimiento[3].subpruebas[1].nombre === "Cancelación") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
+        }
+      }
+    );
   }
 
   calcularPuntuacion(){
