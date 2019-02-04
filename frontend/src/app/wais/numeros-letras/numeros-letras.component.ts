@@ -47,7 +47,7 @@ export class NumerosLetrasComponent implements OnInit {
   pruebaConsultada = false;
   puntuacionPruebaConsultada: number;
   reactivosFinalizadosPuntuacion: number[] = [];
-  primerosReactivos: number[];
+  primerosReactivosParaPruebaConsultada: number[] = [];
 
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -71,7 +71,8 @@ export class NumerosLetrasComponent implements OnInit {
             if (reactivo != null) {
               this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
             } else {
-              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivosParaPruebaConsultada[i] != null ? 
+                this.primerosReactivosParaPruebaConsultada[i] : 0;
             }
             i++;
           }
@@ -84,7 +85,8 @@ export class NumerosLetrasComponent implements OnInit {
             if (reactivo != null) {
               this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
             } else {
-              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivosParaPruebaConsultada[i] != null ? 
+                this.primerosReactivosParaPruebaConsultada[i] : 0;
             }
             i++;
           }
