@@ -67,16 +67,17 @@
           <app-cronometro></app-cronometro>
         </td>        
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">          
+          <input type="text" *ngIf="!pruebaConsultada" placeholder="Escriba aqui..." id="txtRespuesta{{i}}">
+          <p *ngIf="pruebaConsultada">{{reactivosFinalizadosRespuesta[i]}}</p>          
         </td>
         <td>
             <button type="button" class="btn btn-dark btn-separado" id="SC">SC</button>            
             <button type="button" class="btn btn-dark btn-separado" id="SX">SX</button>
           </td>   
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
-            *ngIf="i>0"></td>
+            *ngIf="i>0" [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)" *ngIf="i>0"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 1" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>
@@ -88,10 +89,11 @@
     </td>
     <td>
       Puntuación natural total para Figuras incompletas: <br>
-      <b id="checksreactivo25">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada" id="checksreactivo25">{{this.puntuacionPruebaConsultada}}</b>
+      <b *ngIf="!pruebaConsultada" id="checksreactivo25">{{this.subprueba.puntuacionNatural}}</b>
     </td>
   </table>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </div>
