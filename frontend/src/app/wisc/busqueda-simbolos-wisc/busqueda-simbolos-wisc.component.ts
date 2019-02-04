@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Globals } from '../../globals';
 import { HojaDeResultadosService } from '../../wais/hoja-de-resultados/hoja-de-resultados.service';
 import { PuntuacionEscalarWiscService } from 'src/app/puntuacion-escalar-wisc/puntuacion-escalar-wisc.service';
+import { Reactivo } from 'src/app/model/Reactivo';
 
 @Component({
   selector: 'app-busqueda-simbolos-wisc',
@@ -16,16 +17,26 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
   correctas: number = 0;
   incorrectas: number = 0;
   subprueba: Subprueba = new Subprueba();
+  pruebaConsultada = false;
+
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Búsqueda de símbolos";
     this.subprueba.numeroSubprueba = 10;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(res => {
+        this.puntuacion = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
+        this.correctas = res.ramaDelConocimiento[3].subpruebas[1].reactivos[0] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[0].puntuacion : 0;
+        this.correctas = res.ramaDelConocimiento[3].subpruebas[1].reactivos[1] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[1].puntuacion : 0;
+      })
+    }
   }
 
   calcularPuntuacion() {
-    this.puntuacion = this.correctas - this.incorrectas
+    this.puntuacion = this.correctas - this.incorrectas;
   }
 
   finalizarSubprueba() {
@@ -33,6 +44,9 @@ export class BusquedaSimbolosWiscComponent implements OnInit {
     this.puntuacionEscalarService.obtenerPuntuacionEscalarBusquedaSimbolos(this.globals.edad, this.subprueba.puntuacionNatural, this.globals.meses)
       .subscribe(res => {
         this.subprueba.puntuacionEscalar = res;
+        this.subprueba.reactivos = [new Reactivo(), new Reactivo()];
+        this.subprueba.reactivos[0].puntuacion = this.correctas;
+        this.subprueba.reactivos[1].puntuacion = this.incorrectas;
         this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
         this.globals.ultimaSubprueba = this.subprueba;
         this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
