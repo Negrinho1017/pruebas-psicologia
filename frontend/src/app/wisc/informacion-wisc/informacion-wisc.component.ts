@@ -30,6 +30,12 @@ export class InformacionWiscComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  primerosReactivos: number[] = [];
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
@@ -39,6 +45,62 @@ export class InformacionWiscComponent implements OnInit {
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Información";
     this.subprueba.numeroSubprueba = 13;
+    if (localStorage.getItem('pruebaConsultada') == 'true') {
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados() {
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
+      res => {
+        if (res.ramaDelConocimiento[0].subpruebas[0].nombre === "Información") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[0].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[0].subpruebas[1].nombre === "Información") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[1].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+
+        else if (res.ramaDelConocimiento[0].subpruebas[2].nombre === "Información") {
+          this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural;
+          var i = 0;
+          for (let reactivo of res.ramaDelConocimiento[0].subpruebas[2].reactivos) {
+            if (reactivo != null) {
+              this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+              this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+            } else {
+              this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+              this.reactivosFinalizadosRespuesta[i] = "";
+            }
+            i++;
+          }
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   criteriosDeInversion() {
@@ -149,6 +211,8 @@ export class InformacionWiscComponent implements OnInit {
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.reactivoActual = new Reactivo();
       this.reactivoActual.puntuacion=calificacionReactivo;
+      this.reactivoActual.respuesta =
+      (document.getElementById("txtRespuesta" + i) as HTMLInputElement).value;
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
     }
@@ -176,7 +240,12 @@ mensajeExcepcion(mensaje: string) {
 }
 
   habilitarReactivo(i): boolean {    
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if (this.pruebaConsultada) {
+      return this.pruebaConsultada;
+    }
+    else {
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
