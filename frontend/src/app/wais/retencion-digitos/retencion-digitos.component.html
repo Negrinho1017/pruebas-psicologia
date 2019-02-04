@@ -34,7 +34,7 @@
     </td>
   </table>
 
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" 
@@ -64,8 +64,8 @@
           <td>
             {{item}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)" [disabled]="habilitarReactivo(i, 1)"><br>
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)" [disabled]="habilitarReactivo(i, 1)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,1)" [disabled]="habilitarReactivo(i, 1)" [checked]="reactivosFinalizadosPuntuacion[i] == 0"><br>
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,1)" [disabled]="habilitarReactivo(i, 1)" [checked]="reactivosFinalizadosPuntuacion[i] == 1">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDD: <br>
@@ -102,8 +102,8 @@
           <td>
             {{respuestasRDI[i]}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,2)" [disabled]="habilitarReactivo(i, 2)" [checked]="reactivosFinalizadosPuntuacion[i+16] == 0">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,2)" [disabled]="habilitarReactivo(i, 2)" [checked]="reactivosFinalizadosPuntuacion[i+16] == 1">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDI: <br>
@@ -140,8 +140,8 @@
           <td>
             {{respuestasRDS[i]}}
           </td>
-          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)" [disabled]="habilitarReactivo(i, 3)">
-          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)" [disabled]="habilitarReactivo(i, 3)">
+          <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i,3)" [disabled]="habilitarReactivo(i, 3)" [checked]="reactivosFinalizadosPuntuacion[i+32] == 0">
+          <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i,3)" [disabled]="habilitarReactivo(i, 3)" [checked]="reactivosFinalizadosPuntuacion[i+32] == 1">
         </tr>
       </table>
       <p id="puntuacion">Puntuación natural total para RDS: <br>
@@ -156,9 +156,10 @@
     <table>
       <p id="puntuacion">
         Puntuación natural total para Retención de dígitos: <br>
-        <b id="checksreactivo{{i}}">{{this.puntuacion}}</b>
+        <b *ngIf="pruebaConsultada">{{this.puntuacionPruebaConsultada}}</b>
+        <b *ngIf="!pruebaConsultada" id="checksreactivo{{i}}">{{this.puntuacion}}</b>
       </p>
-      <button type="button" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+      <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
         Siguiente
         <span class="glyphicon glyphicon-arrow-right"></span>
       </button>

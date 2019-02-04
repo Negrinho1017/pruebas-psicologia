@@ -48,6 +48,11 @@ export class RetencionDigitosComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  primerosReactivos: number[] = [];
+
   constructor(private globals: Globals, private route: ActivatedRoute,
     private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
@@ -55,6 +60,28 @@ export class RetencionDigitosComponent implements OnInit {
   ngOnInit() {
     this.construirRespuestasRDI();
     this.selectedRetencionDeDigitos = 1;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        this.puntuacionPruebaConsultada = res.ramaDelConocimiento[2].subpruebas[0].puntuacionNatural;
+        var i = 0;
+        for (let reactivo of res.ramaDelConocimiento[2].subpruebas[0].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+          }
+          i++;
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   construirRespuestasRDI() {
@@ -167,6 +194,9 @@ export class RetencionDigitosComponent implements OnInit {
   }
 
   cambiarRD(num: number): void{
+    if(this.pruebaConsultada){
+      this.siguienteReactivo = -1;
+    }
     this.selectedRetencionDeDigitos=num; 
     this.siguienteReactivo = 0;
     this.anteriorReactivo = 0;
@@ -174,7 +204,12 @@ export class RetencionDigitosComponent implements OnInit {
   }
 
   habilitarReactivo(i, n): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if(this.pruebaConsultada){
+      return this.pruebaConsultada;
+    }
+    else{
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   getReactivoSiguiente(): number {
