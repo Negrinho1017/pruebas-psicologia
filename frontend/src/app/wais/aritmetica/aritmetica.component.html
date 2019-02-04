@@ -33,7 +33,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Sucesión de números y letras">
@@ -60,13 +60,13 @@
         </td>
         <td>{{respuestasCorrectas[i]}}</td>
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
-          <!--<textarea></textarea>-->
+          <input type="text" *ngIf="!pruebaConsultada" placeholder="Escriba aqui..." id="txtRespuesta{{i}}">
+          <p *ngIf="pruebaConsultada">{{reactivosFinalizadosRespuesta[i]}}</p>
         </td>
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
-            *ngIf="i>0"></td>
+            [checked]="reactivosFinalizadosPuntuacion[i] == 0" *ngIf="i>0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)" *ngIf="i>0"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 1" *ngIf="i>0"></td>
       </tr>
     </table>
   </div>
@@ -78,11 +78,12 @@
     </td>
     <td>
       Puntuación natural total para Aritmética: <br>
-      <b id="checksreactivo23">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="!pruebaConsultada" id="checksreactivo23">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada" id="checksreactivo23">{{puntuacionPruebaConsultada}}</b>
     </td>
   </table>
 </body>
-<button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+<button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
   <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
 </button>
 

@@ -25,13 +25,44 @@ export class InformacionComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  primerosReactivos: number[] = [1, 1];
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService ) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Información";
     this.subprueba.numeroSubprueba = 9;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
   }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural;
+        var i = 0;
+        for (let reactivo of res.ramaDelConocimiento[0].subpruebas[2].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
+  }
+
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number){
     this.listaCalificaciones[numeroReactivo] = (puntuacionReactivo); 
@@ -105,6 +136,8 @@ export class InformacionComponent implements OnInit {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.reactivoActual = new Reactivo();
+      this.reactivoActual.respuesta =
+      (document.getElementById("txtRespuesta" + i) as HTMLInputElement).value;
       this.reactivoActual.puntuacion=calificacionReactivo;
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;
@@ -133,7 +166,12 @@ mensajeExcepcion(mensaje: string) {
 }
 
   habilitarReactivo(i): boolean {    
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if(this.pruebaConsultada){
+      return this.pruebaConsultada;
+    }
+    else{
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
