@@ -28,7 +28,7 @@
       </p>
     </td>
   </table>
-  <button type="button" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
+  <button type="button" *ngIf="!pruebaConsultada" id="btnAvanzar" class="btn btn-secondary" id="btnPrueba" (click)="seCambiaraLaSubprueba = true">
     Cambiar subprueba
   </button>
   <input type="button" *ngIf="seCambiaraLaSubprueba" (click)="cambiarSubprueba()" class="btn btn-secondary" value="Aritmética">
@@ -81,15 +81,16 @@
           <td>
             {{respuestasPrimeroLetras[i]}}
           </td>
-          <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"><br>
-          <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)">
+          <td><input *ngIf="i>=2" type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada" [checked]="reactivosFinalizadosPuntuacion[i] == 0"><br>
+          <td><input *ngIf="i>=2" type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada" [checked]="reactivosFinalizadosPuntuacion[i] == 1">
         </ng-container>
       </tr>
     </table>
     <p id="puntuacion">Puntuación natural total para Sucesión de números y letras: <br>
-      <b id="checksreactivo35">{{this.subprueba.puntuacionNatural}}</b></p>
+      <b *ngIf="pruebaConsultada">{{this.puntuacionNaturalFinal}}</b>
+      <b id="checksreactivo35" *ngIf="!pruebaConsultada">{{this.subprueba.puntuacionNatural}}</b></p>
   </div>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     Siguiente
     <span class="glyphicon glyphicon-arrow-right"></span>
   </button>

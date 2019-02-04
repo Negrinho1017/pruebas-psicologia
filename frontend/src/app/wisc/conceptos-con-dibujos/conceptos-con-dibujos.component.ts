@@ -72,7 +72,7 @@ export class ConceptosConDibujosComponent implements OnInit {
     if (this.globals.edad >= 6 && this.globals.edad <= 8) {
       this.reactivoDeInicio = 2;
       this.habilitaReactivo = [];
-      this.listaCalificaciones = [];
+      this.listaCalificaciones = [0, 0];
       this.primerosReactivos = [];
     }
     else if (this.globals.edad >= 9 && this.globals.edad <= 11) {

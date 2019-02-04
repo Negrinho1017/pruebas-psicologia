@@ -68,7 +68,6 @@ export class VocabularioWiscComponent implements OnInit {
           }
           i++;
         }
-        console.log(this.reactivosFinalizadosPuntuacion);
       })
   }
 

@@ -41,6 +41,12 @@ export class NumerosLetrasWiscComponent implements OnInit {
   "K - S - T","G - J - L - Q","B - H - M - R","A - C - J - U","H - L - W - Z"];
   respuestasPrimeroNumeros: String[] = [];
   respuestasPrimeroLetras: String[] = [];
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos: number[] = [];
+
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService) { }
 
@@ -48,6 +54,29 @@ export class NumerosLetrasWiscComponent implements OnInit {
     this.subprueba.nombre = "Sucesión de números y letras";
     this.subprueba.numeroSubprueba = 7;
     this.crearRespuestas();
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        this.puntuacionNaturalFinal = res.ramaDelConocimiento[2].subpruebas[1].puntuacionNatural;
+        for (let reactivo of res.ramaDelConocimiento[2].subpruebas[1].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      })
   }
 
   crearRespuestas(){
