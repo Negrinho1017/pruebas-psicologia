@@ -26,12 +26,39 @@ export class RompecabezasVisualComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  pruebaConsultada = false;
+  puntuacionPruebaConsultada: number;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  primerosReactivos: number[] = [0, 0, 1, 1, 1];
+
   constructor(private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarService) { }
 
   ngOnInit() {
     this.subprueba.nombre = "Rompecabezas visual";
     this.subprueba.numeroSubprueba = 8;
+    if(localStorage.getItem('pruebaConsultada') == 'true'){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        this.puntuacionPruebaConsultada = res.ramaDelConocimiento[1].subpruebas[2].puntuacionNatural;
+        var i = 0;
+        for (let reactivo of res.ramaDelConocimiento[1].subpruebas[2].reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos[i] != null ? this.primerosReactivos[i] : 0;
+          }
+          i++;
+        }
+      }
+    );
+    this.siguienteReactivo = -1;
   }
 
   calificarReactivo(puntuacionReactivo: number, numeroReactivo: number) {
@@ -147,7 +174,12 @@ export class RompecabezasVisualComponent implements OnInit {
   }
 
   habilitarReactivo(i): boolean {
-    return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    if(this.pruebaConsultada){
+      return this.pruebaConsultada;
+    }
+    else{
+      return !(i == this.siguienteReactivo || i == this.anteriorReactivo);
+    }
   }
 
   checkear(i): boolean {
