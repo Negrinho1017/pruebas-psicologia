@@ -58,11 +58,13 @@
         </td>
         <td>{{item}}</td>
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
+          <input type="text" *ngIf="!pruebaConsultada" placeholder="Escriba aqui..." id="txtRespuesta{{i}}">
+          <p *ngIf="pruebaConsultada">{{reactivosFinalizadosRespuesta[i]}}</p>  
         </td>
-        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
+        <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
+            [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 0"></td>
       </tr>
     </table>
   </div>
@@ -75,10 +77,11 @@
     </td>
     <td>
       Puntuación natural total para Información: <br>
-      <b id="checksreactivo33">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada" id="checksreactivo33">{{this.puntuacionPruebaConsultada}}</b>
+      <b *ngIf="!pruebaConsultada" id="checksreactivo33">{{this.subprueba.puntuacionNatural}}</b>
     </td>
   </table>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </body>
