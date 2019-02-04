@@ -48,6 +48,7 @@ export class HojaDeResultadosWiscComponent implements OnInit {
     this.loading=true;
     this.obtenerPrueba();
     this.globals.pruebaTerminada = true;
+    localStorage.setItem('pruebaConsultada', 'true');
   }
 
   private obtenerPrueba(){
