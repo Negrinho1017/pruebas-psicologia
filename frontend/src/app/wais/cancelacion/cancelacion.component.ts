@@ -4,6 +4,7 @@ import { Globals } from 'src/app/globals';
 import { HojaDeResultadosService } from '../hoja-de-resultados/hoja-de-resultados.service';
 import { PuntuacionEscalarService } from 'src/app/puntuacion-escalar/puntuacion-escalar.service';
 import { Router } from '@angular/router';
+import { Reactivo } from 'src/app/model/Reactivo';
 
 @Component({
   selector: 'app-cancelacion',
@@ -41,10 +42,20 @@ export class CancelacionComponent implements OnInit {
       res => {
         if (res.ramaDelConocimiento[3].subpruebas[0].nombre === "Cancelación") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+          this.correctas1 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[2] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[2].puntuacion : 0;
+          this.incorrectas1 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[3] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[3].puntuacion : 0;
+          this.correctas2 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[4] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[4].puntuacion : 0;
+          this.incorrectas2 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[5] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[5].puntuacion : 0;
+          this.calcularPuntuacion();
         }
 
         else if (res.ramaDelConocimiento[3].subpruebas[1].nombre === "Cancelación") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
+          this.correctas1 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[2] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[2].puntuacion : 0;
+          this.incorrectas1 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[3] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[3].puntuacion : 0;
+          this.correctas2 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[4] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[4].puntuacion : 0;
+          this.incorrectas2 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[5] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[5].puntuacion : 0;
+          this.calcularPuntuacion();
         }
       }
     );
@@ -58,9 +69,22 @@ export class CancelacionComponent implements OnInit {
 
   finalizarSubprueba(){
     this.subprueba.puntuacionNatural = this.puntuacionTotal;
+    this.subprueba.reactivos = [];
+    this.subprueba.reactivos[0] = new Reactivo();
+    this.subprueba.reactivos[0].puntuacion = this.correctas1 - this.incorrectas1;
+    this.subprueba.reactivos[1] = new Reactivo();
+    this.subprueba.reactivos[1].puntuacion = this.correctas2 - this.incorrectas2;
     this.puntuacionEscalarService.obtenerPuntuacionEscalarCancelacion(this.globals.edad,this.subprueba.puntuacionNatural)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
+      this.subprueba.reactivos[2] = new Reactivo();
+      this.subprueba.reactivos[3] = new Reactivo();
+      this.subprueba.reactivos[4] = new Reactivo();
+      this.subprueba.reactivos[5] = new Reactivo();
+      this.subprueba.reactivos[2].puntuacion = this.correctas1;
+      this.subprueba.reactivos[3].puntuacion = this.incorrectas1;
+      this.subprueba.reactivos[4].puntuacion = this.correctas2;
+      this.subprueba.reactivos[5].puntuacion = this.incorrectas2;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
       this.navegar();
       this.scrollToTop();

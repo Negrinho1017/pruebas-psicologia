@@ -43,8 +43,14 @@
       <td>
         <app-cronometro></app-cronometro>
       </td>
-      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="correctas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
-      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="incorrectas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td>
+        <input type="text" *ngIf="!pruebaConsultada" id="txtRespuesta" [(ngModel)]="correctas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*">
+        <p *ngIf="pruebaConsultada">{{correctas1}}</p>
+      </td>
+      <td>
+        <input type="text" *ngIf="!pruebaConsultada" id="txtRespuesta" [(ngModel)]="incorrectas1" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*">
+        <p *ngIf="pruebaConsultada">{{incorrectas1}}</p>
+      </td>
       <td>
         <b>{{this.puntuacion1}}</b>
       </td>
@@ -54,8 +60,14 @@
       <td>
         <app-cronometro></app-cronometro>
       </td>
-      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="correctas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
-      <td><input type="text" disabled="{{pruebaConsultada}}" id="txtRespuesta" [(ngModel)]="incorrectas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*"></td>
+      <td>
+        <input type="text" *ngIf="!pruebaConsultada" id="txtRespuesta" [(ngModel)]="correctas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*">
+        <p *ngIf="pruebaConsultada">{{correctas2}}</p>
+      </td>
+      <td>
+        <input type="text" *ngIf="!pruebaConsultada" id="txtRespuesta" [(ngModel)]="incorrectas2" (ngModelChange)="calcularPuntuacion()" pattern="[0-9]*">
+        <p *ngIf="pruebaConsultada">{{incorrectas2}}</p>
+      </td>
       <td>
         <b>{{this.puntuacion2}}</b>
       </td>
