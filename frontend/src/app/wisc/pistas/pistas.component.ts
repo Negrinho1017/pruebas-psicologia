@@ -45,6 +45,12 @@ export class PistasComponent implements OnInit {
   subprueba: Subprueba = new Subprueba();
   reactivoActual: Reactivo;
   hayDiscontinuacion: boolean = false;
+  reactivosFinalizadosPuntuacion: number[] = [];
+  reactivosFinalizadosRespuesta: String[] = [];
+  puntuacionNaturalFinal: number;
+  pruebaConsultada: boolean;
+  primerosReactivos1: number[];
+
   constructor( private globals: Globals, private hojaDeResultadosService: HojaDeResultadosService,
     private router: Router, private puntuacionEscalarService: PuntuacionEscalarWiscService ) { }
 
@@ -54,6 +60,39 @@ export class PistasComponent implements OnInit {
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Pistas";
     this.subprueba.numeroSubprueba = 15;
+    if(this.globals.pruebaTerminada){
+      this.pruebaConsultada = true;
+      this.consultarResultados();
+      this.siguienteReactivo = -1;
+    }
+  }
+
+  consultarResultados(){
+    this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string> this.globals.idEvaluado).subscribe(
+      res => {
+        var i = 0;
+        var reactivos: Reactivo[];
+        if(res.ramaDelConocimiento[0].subpruebas[0].numeroSubprueba==15){
+          this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural
+          reactivos = res.ramaDelConocimiento[0].subpruebas[0].reactivos;
+        }else if(res.ramaDelConocimiento[0].subpruebas[1].numeroSubprueba==15){
+          this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural
+          reactivos = res.ramaDelConocimiento[0].subpruebas[1].reactivos;
+        }else{
+          this.puntuacionNaturalFinal = res.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural
+          reactivos = res.ramaDelConocimiento[0].subpruebas[2].reactivos;
+        }
+        for (let reactivo of reactivos) {
+          if(reactivo != null){
+            this.reactivosFinalizadosPuntuacion[i] = reactivo.puntuacion;
+            this.reactivosFinalizadosRespuesta[i] = reactivo.respuesta;
+          }else{
+            this.reactivosFinalizadosPuntuacion[i] = this.primerosReactivos1[i] != null ? this.primerosReactivos1[i] : 0;
+            this.reactivosFinalizadosRespuesta[i] = "";
+          }
+          i++;
+        }
+      })
   }
 
   criteriosDeInversion() {
@@ -61,10 +100,12 @@ export class PistasComponent implements OnInit {
       this.reactivoDeInicio = 2;
       this.habilitaReactivo = [true,true];
       this.listaCalificaciones = [0,0];
+      this.primerosReactivos1 = [0,0];
     } else {
       this.reactivoDeInicio = 6;
       this.habilitaReactivo = [true,true,true,true,true,true];
       this.listaCalificaciones = [0,0,1,1,1,1];
+      this.primerosReactivos1 = [0,0,1,1,1,1];
     }
   }
 
@@ -157,6 +198,8 @@ export class PistasComponent implements OnInit {
     var i = 0;
     for (let calificacionReactivo of this.listaCalificaciones) {
       this.reactivoActual = new Reactivo();
+      this.reactivoActual.respuesta =
+      (document.getElementById("txtRespuesta" + i) as HTMLInputElement).value;
       this.reactivoActual.puntuacion=calificacionReactivo;
       this.reactivosCalificados[i] = (this.reactivoActual);
       i++;

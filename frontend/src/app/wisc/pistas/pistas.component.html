@@ -47,8 +47,6 @@
         <th>Reactivo</th>
         <th>Pista</th>
         <th>Respuesta</th>
-        <!--<th>S</th>
-        <th>N</th>-->
         <th>0</th>
         <th>1</th>
       </tr>
@@ -70,13 +68,12 @@
           <p *ngIf='tercerosReactivos[i].length>0'>III. {{tercerosReactivos[i]}}</p>
         </td>
         <td>
-          <input type="text" placeholder="Escriba aqui..." id="txtRespuesta">
+          <input type="text" *ngIf="!pruebaConsultada" placeholder="Escriba aqui..." id="txtRespuesta{{i}}">
+          <p *ngIf="pruebaConsultada">{{reactivosFinalizadosRespuesta[i]}}</p>
         </td>
-        <!--<td><input type="radio" name="{{item}}{{i}}" [disabled]="habilitarReactivo(i)" [checked]="checkear(i)"></td>
-        <td><input type="radio" name="{{item}}{{i}}" [disabled]="habilitarReactivo(i)"></td>-->
-        <td><input type="radio" *ngIf="i>1" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"></td>
-        <td><input type="radio" *ngIf="i>1" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i)"></td>
+        <td><input type="radio" *ngIf="i>1" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada" [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
+        <td><input type="radio" *ngIf="i>1" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i) || pruebaConsultada"
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 1"></td>
       </tr>
     </table>
   </div>
@@ -89,10 +86,11 @@
     </td>
     <td>
       Puntuación natural total para Información: <br>
-      <b id="checksreactivo26">{{this.subprueba.puntuacionNatural}}</b>
+      <b *ngIf="pruebaConsultada">{{this.puntuacionNaturalFinal}}</b>
+      <b id="checksreactivo26" *ngIf="!pruebaConsultada">{{this.subprueba.puntuacionNatural}}</b>
     </td>
   </table>
-  <button type="button" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
+  <button type="button" *ngIf="!pruebaConsultada" class="btn btn-dark btn-lg" (click)="finalizarSubprueba()" id="btnPrueba">
     <span class="glyphicon glyphicon-arrow-right"></span> Siguiente
   </button>
 </body>
