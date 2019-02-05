@@ -40,7 +40,7 @@ export class FigurasIncompletasWiscComponent implements OnInit {
     this.anteriorReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Figuras incompletas";
     this.subprueba.numeroSubprueba = 11;
-    if (localStorage.getItem('pruebaConsultada') == 'true') {
+    if (this.globals.pruebaTerminada==true) {
       this.pruebaConsultada = true;
       this.consultarResultados();
     }

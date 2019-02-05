@@ -30,7 +30,7 @@ export class RegistrosComponent implements OnInit {
   ngOnInit() {
     this.subprueba.nombre = "Registros";
     this.subprueba.numeroSubprueba = 12;
-    if (localStorage.getItem('pruebaConsultada') == 'true') {
+    if (this.globals.pruebaTerminada==true) {
       this.pruebaConsultada = true;
       this.consultarResultados();
     }
@@ -41,11 +41,22 @@ export class RegistrosComponent implements OnInit {
       res => {
         if (res.ramaDelConocimiento[3].subpruebas[0].nombre === "Registros") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[0].puntuacionNatural;
+          this.correctas1 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[2] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[2].puntuacion : 0;
+          this.incorrectas1 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[3] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[3].puntuacion : 0;
+          this.correctas2 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[4] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[4].puntuacion : 0;
+          this.incorrectas2 = res.ramaDelConocimiento[3].subpruebas[0].reactivos[5] != null ? res.ramaDelConocimiento[3].subpruebas[0].reactivos[5].puntuacion : 0;
+          this.calcularPuntuacion();
         }
 
         else if (res.ramaDelConocimiento[3].subpruebas[1].nombre === "Registros") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[3].subpruebas[1].puntuacionNatural;
+          this.correctas1 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[2] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[2].puntuacion : 0;
+          this.incorrectas1 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[3] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[3].puntuacion : 0;
+          this.correctas2 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[4] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[4].puntuacion : 0;
+          this.incorrectas2 = res.ramaDelConocimiento[3].subpruebas[1].reactivos[5] != null ? res.ramaDelConocimiento[3].subpruebas[1].reactivos[5].puntuacion : 0;
+          this.calcularPuntuacion();
         }
+        
       }
     );
   }
@@ -66,8 +77,15 @@ export class RegistrosComponent implements OnInit {
     this.puntuacionEscalarService.obtenerPuntuacionEscalarRegistros(this.globals.edad,this.subprueba.puntuacionNatural,this.globals.meses)
     .subscribe(res => {
       this.subprueba.puntuacionEscalar = res;
+      this.subprueba.reactivos[2] = new Reactivo();
+      this.subprueba.reactivos[3] = new Reactivo();
+      this.subprueba.reactivos[4] = new Reactivo();
+      this.subprueba.reactivos[5] = new Reactivo();
+      this.subprueba.reactivos[2].puntuacion = this.correctas1;
+      this.subprueba.reactivos[3].puntuacion = this.incorrectas1;
+      this.subprueba.reactivos[4].puntuacion = this.correctas2;
+      this.subprueba.reactivos[5].puntuacion = this.incorrectas2;
       this.hojaDeResultadosService.crearSubprueba(this.subprueba, this.globals.idEvaluado);
-      //this.globals.busquedaSimbolos = this.subprueba.puntuacionEscalar;
       this.navegar();
       this.scrollToTop();
     }, error => {

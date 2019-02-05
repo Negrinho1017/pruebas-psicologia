@@ -64,7 +64,7 @@
         <td><input type="radio" id="p1" name="{{item}}" (click)="calificarReactivo(0,i)" [disabled]="habilitarReactivo(i)"
             [checked]="reactivosFinalizadosPuntuacion[i] == 0"></td>
         <td><input type="radio" id="p2" name="{{item}}" (click)="calificarReactivo(1,i)" [disabled]="habilitarReactivo(i)"
-            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 0"></td>
+            [checked]="checkear(i) || reactivosFinalizadosPuntuacion[i] == 1"></td>
       </tr>
     </table>
   </div>

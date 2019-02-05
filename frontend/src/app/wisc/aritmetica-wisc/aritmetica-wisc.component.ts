@@ -48,7 +48,7 @@ export class AritmeticaWiscComponent implements OnInit {
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Aritmética";
     this.subprueba.numeroSubprueba = 14;
-    if (localStorage.getItem('pruebaConsultada') == 'true') {
+    if (this.globals.pruebaTerminada==true) {
       this.pruebaConsultada = true;
       this.consultarResultados();
     }

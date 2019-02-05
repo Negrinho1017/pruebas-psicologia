@@ -45,7 +45,7 @@ export class InformacionWiscComponent implements OnInit {
     this.siguienteReactivo = this.reactivoDeInicio;
     this.subprueba.nombre = "Información";
     this.subprueba.numeroSubprueba = 13;
-    if (localStorage.getItem('pruebaConsultada') == 'true') {
+    if (this.globals.pruebaTerminada==true) {
       this.pruebaConsultada = true;
       this.consultarResultados();
     }
@@ -54,7 +54,7 @@ export class InformacionWiscComponent implements OnInit {
   consultarResultados() {
     this.hojaDeResultadosService.obtenerPruebaPorIdDelEvaluado(<string>this.globals.idEvaluado).subscribe(
       res => {
-        if (res.ramaDelConocimiento[0].subpruebas[0].nombre === "Información") {
+        if (res.ramaDelConocimiento[0].subpruebas[0].nombre == "Información") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[0].puntuacionNatural;
           var i = 0;
           for (let reactivo of res.ramaDelConocimiento[0].subpruebas[0].reactivos) {
@@ -69,7 +69,7 @@ export class InformacionWiscComponent implements OnInit {
           }
         }
 
-        else if (res.ramaDelConocimiento[0].subpruebas[1].nombre === "Información") {
+        else if (res.ramaDelConocimiento[0].subpruebas[1].nombre == "Información") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[1].puntuacionNatural;
           var i = 0;
           for (let reactivo of res.ramaDelConocimiento[0].subpruebas[1].reactivos) {
@@ -84,7 +84,7 @@ export class InformacionWiscComponent implements OnInit {
           }
         }
 
-        else if (res.ramaDelConocimiento[0].subpruebas[2].nombre === "Información") {
+        else if (res.ramaDelConocimiento[0].subpruebas[2].nombre == "Información") {
           this.puntuacionPruebaConsultada = res.ramaDelConocimiento[0].subpruebas[2].puntuacionNatural;
           var i = 0;
           for (let reactivo of res.ramaDelConocimiento[0].subpruebas[2].reactivos) {
